@@ -14,7 +14,7 @@ This project aims to provide an "Azure AI/ML Easy Button" for common scenarios. 
 | Maria Vrabie  | @MariaVrabie | mavrabie@microsoft.com | 
 | Victor Santana | @Welasco | vsantana@microsoft.com |
 | Alex Morales | @msalemor | alemor@microsoft.com |
-| Thiago Rotta |  | thiago.rotta@microsoft.com |
+| Thiago Rotta | @rottathiago | thiago.rotta@microsoft.com |
 
 ## Architecture
 
