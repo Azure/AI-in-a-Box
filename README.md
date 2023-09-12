@@ -1,33 +1,27 @@
-# Project
+## <img src="Assets/images/aiinabox.png" alt="FTA AI-in-a-Box: Deployment Accelerator" style="float: left; margin-right:10px;" />
+&nbsp;
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+Starting your AI/ML journey in Azure may seem daunting for some organizations and engineers, often leading to roadblocks in their initial scenarios. To address this challenge, providing a user-friendly and intuitive template becomes crucial. Such a template should serve as a guiding example, illustrating the complete AI/ML lifecycle, showcasing the integration of MLOps practices, detailing the setup of training pipelines, and offering insights into the processes of model training, deployment, and access. This ensures a smoother and more comprehensible transition into the world of Azure AI and M  
+This project aims to provide an "Azure AI/ML Easy Button" for common scenarios. Something that shows how the pieces fit together in easy to deploy templates. Using the **patterns** available here, engineers will be able to quickly setup a Synapse environment which optionally includes streaming & batch ingestion, Data Lake with zones, Delta tables as well as meta-driven pipelines.
 
-As the maintainer of this project, please make a few updates:
+| Key Contacts | GitHub ID | Email |
+|--------------|------|-----------|
+| Andrés Padilla | @AndresPad | andres.padilla@microsoft.com | 
+| Meer Alam | @msdpalam | meeral@microsoft.com | 
+| Neeraj Jhaveri | @neerajjhaveri | neeraj.jhaveri@microsoft.com |
+| Marco Aurélio Bigélli Cardoso  | @MarcoABCardoso | macardoso@microsoft.com | 
+| Maria Vrabie  | @MariaVrabie | mavrabie@microsoft.com | 
+| Victor Santana | @Welasco | vsantana@microsoft.com |
+| Alex Morales | @msalemor | alemor@microsoft.com |
+| Thiago Rotta |  | thiago.rotta@microsoft.com |
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+## Architecture
 
-## Contributing
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+## Available Patterns
+This repository contains several scenarios, or, 'patterns' for you to deploy into your own environment. Below is a summary:
+* **Pattern 1**: Azure ML Integration
+* **Pattern 2**: Edge AI from model creation to deployment on the Edge
+* **Pattern 3**: Cognitive Services
+* **Pattern 4**: OpenAI
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-## Trademarks
-
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
