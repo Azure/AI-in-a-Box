@@ -1,0 +1,23 @@
+<policies>
+    <inbound>
+        <base />
+        <set-backend-service backend-id="ptu-deployment" />
+        <authentication-managed-identity resource="https://cognitiveservices.azure.com" />
+    </inbound>
+    <backend>
+        <retry condition="@(context.Response.StatusCode == 429 || context.Response.StatusCode >= 500)" count="2" interval="1" first-fast-retry="false">
+            <choose>
+                <when condition="@(context.Response.StatusCode == 429 || context.Response.StatusCode >= 500)">
+                    <set-backend-service backend-id="tpm-deployment" />
+                </when>
+            </choose>
+            <forward-request buffer-request-body="true" />
+        </retry>
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
