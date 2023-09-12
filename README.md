@@ -7,10 +7,10 @@ This project aims to provide an "Azure AI/ML Easy Button" for common scenarios. 
 
 | Key Contacts | GitHub ID | Email |
 |--------------|------|-----------|
-| Andr�s Padilla | @AndresPad | andres.padilla@microsoft.com | 
+| Andrés Padilla | @AndresPad | andres.padilla@microsoft.com | 
 | Meer Alam | @msdpalam | meeral@microsoft.com | 
 | Neeraj Jhaveri | @neerajjhaveri | neeraj.jhaveri@microsoft.com |
-| Marco Aur�lio Big�lli Cardoso  | @MarcoABCardoso | macardoso@microsoft.com | 
+| Marco Aurélio Bigélli Cardoso  | @MarcoABCardoso | macardoso@microsoft.com | 
 | Maria Vrabie  | @MariaVrabie | mavrabie@microsoft.com | 
 | Victor Santana | @Welasco | vsantana@microsoft.com |
 | Alex Morales | @msalemor | alemor@microsoft.com |
