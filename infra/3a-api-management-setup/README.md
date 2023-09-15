@@ -82,7 +82,7 @@ Again here are the token limits for each model: Azure OpenAI Service models - Az
 		
 This table describes **a few of the common** HTTP Response Codes from AOAI
 
-** HTTP Response Code | Cause | Remediation | Notes**
+HTTP Response Code | Cause | Remediation | Notes
 --- | --- | --- | ---
 200 | Processed the prompt. Completion without error | N/A |
 429 (v0613 AOAI Models)	|  Server Busy (Rate limit reached for requests) | APIM - Retries with Exponential Backoff |	When the APIM interval, max-interval and delta are specified, an exponential interval retry algorithm is applied. 
@@ -90,7 +90,7 @@ This table describes **a few of the common** HTTP Response Codes from AOAI
 408  | Request timeout | APIM Retry with interval | Many reasons why a timeout could occur, such as a network connection error.
 50x |	Internal server error due to transient error or backend AOAI internal error |	APIM Retry with interval| See Retry Policy Link
 
-**Note**:https://learn.microsoft.com/en-us/azure/api-management/retry-policy	
+**Retry Policy**: https://learn.microsoft.com/en-us/azure/api-management/retry-policy	
 	
 	
 	### 2. Auto update to Default 
