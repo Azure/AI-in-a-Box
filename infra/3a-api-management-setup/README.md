@@ -1,10 +1,8 @@
-# API Management with Azure OpenAI
-## Welcome!
+# Azure OpenAI Using PTUs/TPMs With API Management
 ### You are here: https://github.com/Azure/AI-in-a-Box/tree/main/infra/3a-api-management-setup
 
-
-While there are already many reference architectures available for using Azure OpenAI, this article will focus on AOAI + APIM with deploying at scale using PTUs (Reserved Capacity) and TPM (Pay-As-You-Go)
-
+## Purpose
+While there are already a few reference architectures available for using Azure OpenAI, this article will focus on AOAI + APIM with deploying at scale using PTUs (Reserved Capacity) and TPM (Pay-As-You-Go)
 
 ## A Quick Review
 
@@ -20,20 +18,20 @@ You can read additional details on using APIM here From <https://learn.microsoft
 
 When using Azure OpenAI with API Management, this gives you the most flexibility in terms of both queing prompts (text sent to AOAI) as well as return code/error handling management. More in this article a bit later on using APIM with AOAI>
 
-## TPMs and PTU's
+## TPMs and PTUs
 As we continue understanding scaling AOAI, the standard default TPM, Tokens-per-Minutes , Microsoft also recently introduced a new quota management system along with the ability to use reserved capacity, Provisioned Throughput Units (PTU), for AOAI.  We will describe both TPMs and PTUs, as this is critical for scaling of services.
 
+### TPMs
 Typically, many organizations will test AOIA using the TPM's, or Tokens Per Minute, the standard default AOAI service. 
 Azure OpenAI's quota feature enables assignment of rate limits to your deployments, up-to a global limit called your “quota.” Quota is assigned to your subscription on a per-region, per-model basis in units of Tokens-per-Minute (TPM). When you onboard a subscription to Azure OpenAI, you'll receive default quota for most available models. Then, you'll assign TPM to each deployment as it is created, and the available quota for that model will be reduced by that amount. 
 
 From <https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota?tabs=rest> 
 
-It is important to note that although the billing for AOAI service is token-based (TPM), the actual trigger which throttles/limits the amount is on a per second basis. That is, if you are using a GPT-4 (8K) model with an 8K limit, and have concurrent users, the token limit is throttled at whatever the maximum is, based on the model
+It is important to note that although the billing for AOAI service is token-based (TPM), the actual triggers which throttle is on a per second basis. That is, if you are using a GPT-4 (8K) model with an 8K limit, and have concurrent users, the token limit is throttled at whatever the maximum is, based on the model
 
 https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota?tabs=rest
 
-• PTUs A new Azure OpenAI Service feature that lets customers reserve model processing capacity for running high-volume or latency-sensitive workloads
-
+### PTUs A new Azure OpenAI Service feature Provisioned Throughput Units (PTUs) define the model processing capacity reserved for processing prompts and generating completions.
 
 PTUs are purchased as a monthly commitment with an auto-renewal option
 
@@ -54,7 +52,7 @@ https://github.com/Azure-Samples/openai-python-enterprise-logging
 Image: https://github.com/Azure-Samples/openai-python-enterprise-logging/blob/main/assets/EnterpriseAOAI-Architecture.png
 
 
-## The Secret Sauce
+# The Secret Sauce
 
 So how do we control (or queue) messages when using multiple Azure OpenAI instances (accounts)
 As a best practice, Microsoft recommends the use of retry logic whenever using a service such as AOAI.  With APIM, this will allow us do this easily with the concept of retries with exponential backoff.
@@ -68,10 +66,10 @@ With this understanding,
 
 Note the above error is specifc to an response status code equal to '429', which is the return code for 'server busy', which states too many concurrent requests were sent to the model, and this 
 
-Multi-Region
+# Multi-Region
 
 
-## Best Practices
+# Best Practices
 
 	1. ### HTTP Return Codes/Errors:  As described in the Secret Sauce section above, you can use retries with exponential backoff for any 429 errors
 https://learn.microsoft.com/en-us/azure/api-management/retry-policy
@@ -82,16 +80,21 @@ As a best practice, ensure the prompt size does not exceed the max request token
 	
 Again here are the token limits for each model: Azure OpenAI Service models - Azure OpenAI | Microsoft Learn
 		
-	This table describes a few of the common HTTP Response Codes from AOAI
-	HTTP Response Code 	Cause 	Remediation	Notes
-	200	Processed the prompt/completion without error	N/A	
-	408	Request timeout	APIM Retry with interval 	Many reasons why a timeout could occur.
+This table describes a few of the common HTTP Response Codes from AOAI
+
+ HTTP Response Code | Cause | Remediation | Notes
+--- | --- | --- | ---
+200 | https://packages.microsoft.com/repos/azure-cli/pool/main/a/azure-cli/ | dpkg -i azure-cli_<version\>-1~<distro\>_all.deb
+408  | https://packages.microsoft.com/yumrepos/azure-cli/ | rpm -ivh --nodeps azure-cli-<version\>-*.rpm
+429 (v0613 AOAI Models)	| https://azurecliprod.blob.core.windows.net/msi/azure-cli-<version\>.msi | Start-Process msiexec.exe -Wait -ArgumentList '/I azure-cli-<version\>.msi'  
+424 (v0301 AOAI Models)	|
+**Note**:	
+|	  |  | 
+	       200 	   |	Processed the prompt. Completion without error |	N/A	
+	       408         |	Request timeout	APIM Retry with interval 	Many reasons why a timeout could occur.
 	429 (v0613 AOAI Models)	Server Busy (Rate limit reached for requests)	APIM - Retries with Exponential Backoff	When the APIM interval, max-interval and delta are specified, an exponential interval retry algorithm is applied.
 	424 (v0301 AOAI Models)	Server Busy (Rate limit reached for requests)	APIM - Retries with Exponential Backoff	Same as above
 	50x	Internal server error due to transient error or backend AOAI internal error	APIM Retry with interval 	https://learn.microsoft.com/en-us/azure/api-management/retry-policy
-	
-![image](https://github.com/Azure/AI-in-a-Box/assets/9942991/75d43335-2916-4b58-a1ca-bb700d2b0d5c)
-
 	
 	1. Auto update to Default 
 
