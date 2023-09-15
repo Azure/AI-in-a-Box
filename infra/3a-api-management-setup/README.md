@@ -27,13 +27,14 @@ Azure OpenAI's quota feature enables assignment of rate limits to your deploymen
 
 From <https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota?tabs=rest> 
 
-It is important to note that although the billing for AOAI service is token-based (TPM), the actual triggers which throttle is on a per second basis. That is, if you are using a GPT-4 (8K) model with an 8K limit, and have concurrent users, the token limit is throttled at whatever the maximum is, based on the model
+It is important to note that although the billing for AOAI service is token-based (TPM), the actual triggers which rate limit is based on a per second basis. That is, if you are using a GPT-4 (8K) model with an 8K limit, and have concurrent users, the token limit is throttled at whatever the maximum is, based on the model limit.
 
 https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota?tabs=rest
 
-### PTUs A new Azure OpenAI Service feature Provisioned Throughput Units (PTUs) define the model processing capacity reserved for processing prompts and generating completions.
+### PTUs 
+A new Azure OpenAI service feature, Provisioned Throughput Units (PTUs), define the model processing capacity reserved for processing prompts and generating completions.
 
-PTUs are purchased as a monthly commitment with an auto-renewal option
+PTUs are purchased as a monthly commitment with an auto-renewal option, which reserves AOAI capacity against an Azure subscription, in a specific Azure region.
 
 Throughput is highly dependent on your scenario, and will be affected by a few items including number and ratio of prompt and generation tokens, number of simultaneous requests,
 
@@ -46,11 +47,9 @@ https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resourc
 The maximum Azure OpenAI resources per region per Azure subscription is 30 at the time of this writing and depending on regional capacity availability. This limit may increase in the future.
 https://learn.microsoft.com/en-us/azure/ai-services/openai/quotas-limits
 
-There are other articles/repos which describe this basic scenario, and also provide configurations for the basic APIM setup used with AOAI, so we will not re-invent the wheel here.
-https://github.com/Azure-Samples/openai-python-enterprise-logging
+There are other articles/repos which describe this basic scenario, and also provide configurations for the basic APIM setup used with AOAI, so we will not re-invent the wheel here. Example: https://github.com/Azure-Samples/openai-python-enterprise-logging
 
-Image: https://github.com/Azure-Samples/openai-python-enterprise-logging/blob/main/assets/EnterpriseAOAI-Architecture.png
-
+![image](https://github.com/Azure/AI-in-a-Box/assets/9942991/fb524952-564b-4623-9d70-c54a1f5a869d)
 
 # The Secret Sauce
 
@@ -71,7 +70,7 @@ Note the above error is specifc to an response status code equal to '429', which
 
 # Best Practices
 
-	1. ### HTTP Return Codes/Errors:  As described in the Secret Sauce section above, you can use retries with exponential backoff for any 429 errors
+	### 1. HTTP Return Codes/Errors:  As described in the Secret Sauce section above, you can use retries with exponential backoff for any 429 errors
 https://learn.microsoft.com/en-us/azure/api-management/retry-policy
 
 	However, you should always configure error checking on the size of prompt vs the model this prompt is intended for.
@@ -84,13 +83,13 @@ This table describes a few of the common HTTP Response Codes from AOAI
 
  HTTP Response Code | Cause | Remediation | Notes
 --- | --- | --- | ---
-200 | https://packages.microsoft.com/repos/azure-cli/pool/main/a/azure-cli/ | dpkg -i azure-cli_<version\>-1~<distro\>_all.deb
+200 | Processed the prompt. Completion without error | N/A |
 408  | https://packages.microsoft.com/yumrepos/azure-cli/ | rpm -ivh --nodeps azure-cli-<version\>-*.rpm
 429 (v0613 AOAI Models)	| https://azurecliprod.blob.core.windows.net/msi/azure-cli-<version\>.msi | Start-Process msiexec.exe -Wait -ArgumentList '/I azure-cli-<version\>.msi'  
 424 (v0301 AOAI Models)	|
 **Note**:	
 |	  |  | 
-	       200 	   |	Processed the prompt. Completion without error |	N/A	
+	       200 	   |	 |		
 	       408         |	Request timeout	APIM Retry with interval 	Many reasons why a timeout could occur.
 	429 (v0613 AOAI Models)	Server Busy (Rate limit reached for requests)	APIM - Retries with Exponential Backoff	When the APIM interval, max-interval and delta are specified, an exponential interval retry algorithm is applied.
 	424 (v0301 AOAI Models)	Server Busy (Rate limit reached for requests)	APIM - Retries with Exponential Backoff	Same as above
