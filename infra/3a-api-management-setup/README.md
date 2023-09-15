@@ -6,14 +6,13 @@ While there are already a few reference architectures available for using Azure 
 
 ## A Quick Review
 
-Azure Open AI (AOAI) 
-Azure API Management (APIM):
+Azure OpenAI (AOAI) + API Management (APIM):
 ![image](https://github.com/Azure/AI-in-a-Box/assets/9942991/1c8ec063-4fd2-42bb-b8ac-db8772edec7e)
 
 APIs are the foundation of an API Management service instance. Each API represents a set of operations available to app developers.
-Each API contains a reference to the backend service that implements the API, and its operations map to backend operations.
+Each API contains a reference to the backend service that implements the API, and its operations map to backend operations. Azure OpenAI provides an API endpoint to consume the AOAI service, and APIM utilzies this AOAI endpoint.
 
-Operations in API Management are highly configurable, with control over URL mapping, query and path parameters, request and response content, and operation response caching. You can read additional details on using APIM here From <https://learn.microsoft.com/en-us/azure/api-management/api-management-key-concepts> 
+Operations in API Management are highly configurable, with control over URL mapping, query and path parameters, request and response content, and operation response caching. You can read additional details on using APIM here <https://learn.microsoft.com/en-us/azure/api-management/api-management-key-concepts> 
 
 When using Azure OpenAI with API Management, this gives you the most flexibility in terms of both queing prompts (text sent to AOAI) as well as return code/error handling management. More later in this repo on using APIM with AOAI.
 
