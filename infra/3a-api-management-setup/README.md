@@ -22,9 +22,7 @@ Microsoft also recently introduced a new quota management system
 along with the ability to use reserved capacity, Provisioned Throughput Units (PTU), for AOAI.  We will describe both TPMs and PTUs, as this is critical for scaling of services.
 
 ### TPMs
-	Typically, many organizations will test or scale Azure OpenAI using TPMs, or Tokens Per Minute, the standard default AOAI service. Azure OpenAI's quota feature enables assignment of rate limits to your deployments, up-to a global limit called your “quota.” Quota is assigned to your subscription on a per-region, per-model basis in units of Tokens-per-Minute (TPM), by default. When you onboard a subscription to Azure OpenAI, you'll receive default quota for most available models. Then, you'll assign TPM to each deployment as it is created, and the available quota for that model will be reduced by that amount. 
-
-From <https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota?tabs=rest> 
+Typically, many organizations will test or scale Azure OpenAI using TPMs, or Tokens Per Minute, the standard default AOAI service. Azure OpenAI's quota feature enables assignment of rate limits to your deployments, up-to a global limit called your “quota.” Quota is assigned to your subscription on a per-region, per-model basis in units of Tokens-per-Minute (TPM), by default. When you onboard a subscription to Azure OpenAI, you'll receive default quota for most available models. Then, you'll assign TPM to each deployment as it is created, and the available quota for that model will be reduced by that amount. You can learn more about AOAI quota managment here:  https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota?tabs=rest
 
 It is important to note that although the billing for AOAI service is token-based (TPM), the actual triggers which rate limit is based on a per second basis. That is, if you are using a GPT-4 (8K) model with an 8K limit, and have concurrent users, the token limit is throttled at whatever the maximum is, based on the model limit.
 
@@ -37,15 +35,13 @@ PTUs are purchased as a monthly commitment with an auto-renewal option, which re
 
 Throughput is highly dependent on your scenario, and will be affected by a few items including number and ratio of prompt and generation tokens, number of simultaneous requests,
 
-
-As organizations scale using Azure OpenAI, they may see rate limit on how fast tokens are processed, on their prompt+completion, There is a limit to how much text (prompts) can be sent due to the token limits  for each model that can be consumed in a single request+response from Azure OpenAI Service. It is important to note the overall size of tokens used include BOTH the prompt (text sent to the AOAI model) PLUS the return completion (response back from the model) and varies for each different AOIA model type. 
+As organizations scale using Azure OpenAI, they may see rate limit on how fast tokens are processed, in their prompt+completion. There is a limit to how much text (prompts) can be sent due to the token limits  for each model that can be consumed in a single request+response from Azure OpenAI Service. It is important to note the overall size of tokens used include BOTH the prompt (text sent to the AOAI model) PLUS the return completion (response back from the model), and also this token size and limt varies for each different AOIA model type. 
 For example,  with a quota of 240,000 TPM for GPT-35-Turbo in Azure East US region, you can have a single deployment of 240K TPM, 2 deployments of 120K TPM each, or any number of deployments in one or multiple deployments as long as the TPMs add up to 240K (or less) total in that region.
-As our customers are scaling, they can add an additional Azure OpenAI account in the same region, as described here:
-https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal
+As our customers are scaling, they can add an additional Azure OpenAI account in the same region, as described here: https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal
 
-The maximum Azure OpenAI resources per region per Azure subscription is 30 at the time of this writing and depending on regional capacity availability. This limit may increase in the future.
-https://learn.microsoft.com/en-us/azure/ai-services/openai/quotas-limits
+The maximum Azure OpenAI resources per region per Azure subscription is 30 (at the time of this writing) and also depending on regional capacity **availability.** This limit may increase in the future. https://learn.microsoft.com/en-us/azure/ai-services/openai/quotas-limits
 
+# Scaling
 There are other articles/repos which describe this basic scenario, and also provide configurations for the basic APIM setup used with AOAI, so we will not re-invent the wheel here. Example: https://github.com/Azure-Samples/openai-python-enterprise-logging
 
 ![image](https://github.com/Azure/AI-in-a-Box/assets/9942991/fb524952-564b-4623-9d70-c54a1f5a869d)
@@ -53,16 +49,17 @@ There are other articles/repos which describe this basic scenario, and also prov
 # The Secret Sauce
 
 So how do we control (or queue) messages when using multiple Azure OpenAI instances (accounts)
-As a best practice, Microsoft recommends the use of retry logic whenever using a service such as AOAI.  With APIM, this will allow us do this easily with the concept of retries with exponential backoff.
-Retries with exponential backoff is a technique that retries an operation, with an exponentially increasing wait time, up to a maximum retry count has been reached (the exponential backoff). This technique embraces the fact that cloud resources might intermittently be unavailable for more than a few seconds for any reason.
+As a best practice, Microsoft recommends the use of **retry logic** whenever using a service such as AOAI.  With APIM, this will allow us do this easily, but with some secret sauce added it... using the concept of _retries with exponential backoff_.
+Retries with exponential backoff is a technique that retries an operation, with an exponentially increasing wait time, up to a maximum retry count has been reached (the exponential backoff). This technique embraces the fact that cloud resources might intermittently be unavailable for more than a few seconds for any reason, or more likely using AOAI, if an error is returned due to too many tokens per second (or requests per second) in a large scale deployment.
 
-This can be accomplished 
-https://learn.microsoft.com/en-us/azure/api-management/retry-policy
+You can enable This can be accomplished via the APIM Retry Policy, https://learn.microsoft.com/en-us/azure/api-management/retry-policy
 
-With this understanding, 
-<retry condition="@(context.Response.StatusCode == 429 || context.Response.StatusCode >= 500)" interval="1" delta="1" max-interval="30" count="13">
+	<retry condition="@(context.Response.StatusCode == 429 || context.Response.StatusCode >= 500)" interval="1" delta="1" max-interval="30" count="13">
 
-Note the above error is specifc to an response status code equal to '429', which is the return code for 'server busy', which states too many concurrent requests were sent to the model, and this 
+Note the above error is specifc to an response status code equal to '429', which is the return code for 'server busy', which states too many concurrent requests were sent to the model.
+**And extremely important**: When the APIM **interval, max-interval and delta** parameters are specified, then an **exponential interval retry algorithm** is applied. 
+It is with this exponential retry are you able to scale many thousands of users with very low error responses.
+Without this secret sauce of ,  once the initial rate limts hit with concurrent users, the latency and error issues compound further and further. That is, 
 
 # Multi-Region
 
