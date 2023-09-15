@@ -4,7 +4,7 @@
 ## Introduction
 While there are already a few reference architectures available for using Azure OpenAI, this article will focus on AOAI + APIM with **deploying at scale** using PTUs (Reserved Capacity) and TPM (Pay-As-You-Go).
 
-## Brief Review of AOAI and APIM
+### Brief Review of AOAI and APIM
 
 Azure OpenAI (AOAI): Azure OpenAI Service provides generative AI technology for all using REST API access to OpenAI's powerful language models including the GPT-4, GPT-35-Turbo, and Embeddings model series and others. You can read additional details on using AOAI here: https://azure.microsoft.com/en-us/products/ai-services/openai-service
 
