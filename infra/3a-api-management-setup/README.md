@@ -89,36 +89,33 @@ HTTP Response Code | Cause | Remediation | Notes
 
 **Retry Policy**: https://learn.microsoft.com/en-us/azure/api-management/retry-policy	
 	
-	
-	### 2. Auto update to Default 
+2. Auto update to Default 
 
-	As versions of When Auto-update to default is selected your model deployment will be automatically updated within two weeks of a change in the default version.
+As versions of When Auto-update to default is selected your model deployment will be automatically updated within two weeks of a change in the default version.
 	
-	If you are still in the early testing phases for inference models, we recommend deploying models with auto-update to default set whenever it is available.
-	2. Latest + Default Model Deployments
-	3. Purchasing PTU's:
+If you are still in the early testing phases for inference models, we recommend deploying models with auto-update to default set whenever it is available.
+3.  Latest + Default Model Deployments
+4. Purchasing PTU's:
 		Billing is up-front for the entire month, starting on the day of purchase
 		
-		PTUs can be added to a commitment mid-month, but cannot be reduced
-		
-		If a commitment is not renewed, deployed PTUs will revert to per hour pricing
-		Single Region
+PTUs can be added to a commitment mid-month, but cannot be reduced
+If a commitment is not renewed, deployed PTUs will revert to per hour pricing
 		
 	
-	4. Multi-Region APIM:
+5.  Multi-Region APIM:
 	Azure API Management has 3 production level tiers - Basic, Standard, and Premium.
 Upgrade and scale an Azure API Management instance | Microsoft Learn
 	
-	The Premium tier enables you to distribute a single Azure API Management instance across any number of desired Azure regions. When you initially create an Azure API Management service, the instance contains only one unit and resides in a single Azure region (the primary region).
+The Premium tier enables you to distribute a single Azure API Management instance across any number of desired Azure regions. When you initially create an Azure API Management service, the instance contains only one unit and resides in a single Azure region (the primary region).
 What does this provide? If you have a multi-regional Azure OpenAI deployment, does this mean you are required to also have a multi-region (Premium) SKU of APIM? No, not necessarily!
 	What the Premium SKU gives you is the ability to have one region be the primary and any number of regions as seondar
 	
+How to deploy an Azure API Management service instance to multiple Azure regions.
 
-	How to deploy an Azure API Management service instance to multiple Azure regions.
-	
-	Rate Limits: Rate limit best practices From <https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota?tabs=rest> 
-	To minimize issues related to rate limits, it's a good idea to use the following techniques:
-		• Set max_tokens and best_of to the minimum values that serve the needs of your scenario. For example, don’t set a large max-tokens value if you expect your responses to be small as this may increase response times.
-		• Use quota management to increase TPM on deployments with high traffic, and to reduce TPM on deployments with limited needs.
-		• Avoid sharp changes in the workload. Increase the workload gradually.
-		• Test different load increase patterns.
+### Additional Best Practices 
+* Rate Limits: Rate limit best practices From <https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota?tabs=rest> 
+To minimize issues related to rate limits, it's a good idea to use the following techniques:
+* Set max_tokens and best_of to the minimum values that serve the needs of your scenario. For example, don’t set a large max-tokens value if you expect your responses to be small as this may increase response times.
+* Use quota management to increase TPM on deployments with high traffic, and to reduce TPM on deployments with limited needs.
+* Avoid sharp changes in the workload. Increase the workload gradually.
+* Test different load increase patterns.
