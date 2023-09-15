@@ -114,7 +114,8 @@ What does this provide? If you have a multi-regional Azure OpenAI deployment, do
 How to deploy an Azure API Management service instance to multiple Azure regions.
 
 ### Additional Best Practices 
-* Rate Limits: Rate limit best practices From <https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota?tabs=rest> 
+Rate limit best practices from <https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota?tabs=rest> 
+
 To minimize issues related to rate limits, it's a good idea to use the following techniques:
 * Set max_tokens and best_of to the minimum values that serve the needs of your scenario. For example, don’t set a large max-tokens value if you expect your responses to be small as this may increase response times.
 * Use quota management to increase TPM on deployments with high traffic, and to reduce TPM on deployments with limited needs.
