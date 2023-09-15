@@ -1,5 +1,3 @@
-# Azure OpenAI Using PTUs/TPMs With API Management
-### Using the _Scaling Secret Sauce_
 ![image](https://github.com/Azure/AI-in-a-Box/assets/9942991/b858188e-76fd-4e60-853c-c1f9ac3fadf7)
 
 
