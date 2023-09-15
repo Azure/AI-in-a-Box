@@ -1,4 +1,5 @@
 # Azure OpenAI Using PTUs/TPMs With API Management
+# The _Scaling Secret Sauce_
 ### You are here: https://github.com/Azure/AI-in-a-Box/tree/main/infra/3a-api-management-setup
 
 ## Introduction
@@ -46,7 +47,7 @@ There are other articles/repos which describe this basic scenario, and also prov
 
 ![image](https://github.com/Azure/AI-in-a-Box/assets/9942991/fb524952-564b-4623-9d70-c54a1f5a869d)
 
-# The Secret Sauce
+# The Scaling Secret Sauce (yes you heard it hear first)
 
 So how do we control (or queue) messages when using multiple Azure OpenAI instances (accounts)
 As a best practice, Microsoft recommends the use of **retry logic** whenever using a service such as AOAI.  With APIM, this will allow us do this easily, but with some secret sauce added it... using the concept of _retries with exponential backoff_.
