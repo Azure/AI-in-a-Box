@@ -3,7 +3,7 @@
 # Azure OpoenAI Using PTUs/TPMs With API Management - Using The Secret Sauce
 
 ## Introduction
-While there are already a few reference architectures available for using Azure OpenAI, this article will focus on AOAI + APIM with **deploying at scale** using PTUs (Reserved Capacity) and TPM (Pay-As-You-Go).
+While there are already a few reference architectures available for using Azure OpenAI, this article will focus on AOAI + APIM, **deploying at scale** using PTUs (Reserved Capacity) and TPM (Pay-As-You-Go).
 
 ### Brief Review of AOAI and APIM
 
