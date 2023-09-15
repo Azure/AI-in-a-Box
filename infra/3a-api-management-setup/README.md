@@ -1,8 +1,8 @@
 # Azure OpenAI Using PTUs/TPMs With API Management
 ### You are here: https://github.com/Azure/AI-in-a-Box/tree/main/infra/3a-api-management-setup
 
-## Purpose
-While there are already a few reference architectures available for using Azure OpenAI, this article will focus on AOAI + APIM with deploying at scale using PTUs (Reserved Capacity) and TPM (Pay-As-You-Go)
+## Introduction
+While there are already a few reference architectures available for using Azure OpenAI, this article will focus on AOAI + APIM with **deploying at scale** using PTUs (Reserved Capacity) and TPM (Pay-As-You-Go).
 
 ## A Quick Review
 
@@ -13,17 +13,18 @@ Azure API Management (APIM):
 APIs are the foundation of an API Management service instance. Each API represents a set of operations available to app developers.
 Each API contains a reference to the backend service that implements the API, and its operations map to backend operations.
 
-Operations in API Management are highly configurable, with control over URL mapping, query and path parameters, request and response content, and operation response caching.
-You can read additional details on using APIM here From <https://learn.microsoft.com/en-us/azure/api-management/api-management-key-concepts> 
+Operations in API Management are highly configurable, with control over URL mapping, query and path parameters, request and response content, and operation response caching. You can read additional details on using APIM here From <https://learn.microsoft.com/en-us/azure/api-management/api-management-key-concepts> 
 
-When using Azure OpenAI with API Management, this gives you the most flexibility in terms of both queing prompts (text sent to AOAI) as well as return code/error handling management. More in this article a bit later on using APIM with AOAI>
+When using Azure OpenAI with API Management, this gives you the most flexibility in terms of both queing prompts (text sent to AOAI) as well as return code/error handling management. More later in this repo on using APIM with AOAI.
 
 ## TPMs and PTUs
-As we continue understanding scaling AOAI, the standard default TPM, Tokens-per-Minutes , Microsoft also recently introduced a new quota management system along with the ability to use reserved capacity, Provisioned Throughput Units (PTU), for AOAI.  We will describe both TPMs and PTUs, as this is critical for scaling of services.
+First, let's define TPMs and PTUs.  As we continue understanding scaling of the Azure OpenAI service, we Azure OpenAI's quota feature enables assignment of rate limits to your deployments, and also used for billing purposes.
+Microsoft also recently introduced a new quota management system 
+along with the ability to use reserved capacity, Provisioned Throughput Units (PTU), for AOAI.  We will describe both TPMs and PTUs, as this is critical for scaling of services.
 
 ### TPMs
-Typically, many organizations will test AOIA using the TPM's, or Tokens Per Minute, the standard default AOAI service. 
-Azure OpenAI's quota feature enables assignment of rate limits to your deployments, up-to a global limit called your “quota.” Quota is assigned to your subscription on a per-region, per-model basis in units of Tokens-per-Minute (TPM). When you onboard a subscription to Azure OpenAI, you'll receive default quota for most available models. Then, you'll assign TPM to each deployment as it is created, and the available quota for that model will be reduced by that amount. 
+Typically, many organizations will test or scale Azure OpenAI using TPMs, or Tokens Per Minute, the standard default AOAI service.
+Azure OpenAI's quota feature enables assignment of rate limits to your deployments, up-to a global limit called your “quota.” Quota is assigned to your subscription on a per-region, per-model basis in units of Tokens-per-Minute (TPM), by default. When you onboard a subscription to Azure OpenAI, you'll receive default quota for most available models. Then, you'll assign TPM to each deployment as it is created, and the available quota for that model will be reduced by that amount. 
 
 From <https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota?tabs=rest> 
 
@@ -32,7 +33,7 @@ It is important to note that although the billing for AOAI service is token-base
 https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota?tabs=rest
 
 ### PTUs 
-A new Azure OpenAI service feature, Provisioned Throughput Units (PTUs), define the model processing capacity reserved for processing prompts and generating completions.
+Beyond the default TPMs described above, a new Azure OpenAI service feature called Provisioned Throughput Units (PTUs), define the model processing capacity, **using reserved resources**, for processing prompts and generating completions.
 
 PTUs are purchased as a monthly commitment with an auto-renewal option, which reserves AOAI capacity against an Azure subscription, in a specific Azure region.
 
