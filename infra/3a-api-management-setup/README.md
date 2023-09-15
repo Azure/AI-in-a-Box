@@ -1,6 +1,6 @@
 ![image](https://github.com/Azure/AI-in-a-Box/assets/9942991/b858188e-76fd-4e60-853c-c1f9ac3fadf7)
 
-# Azure OpoenAI Using PTUs/TPMs With API Management - Using The Secret Sauce
+# Azure OpenAI Using PTUs/TPMs With API Management - Using The Secret Sauce
 
 ## Introduction
 While there are already a few reference architectures available for using Azure OpenAI, this article will focus on AOAI + APIM, **deploying at scale** using PTUs (Reserved Capacity) and TPM (Pay-As-You-Go).
