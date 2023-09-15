@@ -49,7 +49,7 @@ There are other articles/repos which describe this basic scenario, and also prov
 
 ![image](https://github.com/Azure/AI-in-a-Box/assets/9942991/fb524952-564b-4623-9d70-c54a1f5a869d)
 
-# The Scaling Secret Sauce (yes term you heard it here first!)
+# The Scaling Special Sauce
 
 So how do we control (or queue) messages when using multiple Azure OpenAI instances (accounts)? How do we manage return error codes highly efficently to optimize the AOAI experience?
 
@@ -70,14 +70,14 @@ Without this secret sauce of ,  once the initial rate limts hit with concurrent 
 
 # Best Practices
 
-	### 1. HTTP Return Codes/Errors:  As described in the Secret Sauce section above, you can use retries with exponential backoff for any 429 errors
+	### 1. HTTP Return Codes/Errors:  As described in the Special Sauce section above, you can use retries with exponential backoff for any 429 errors
 https://learn.microsoft.com/en-us/azure/api-management/retry-policy
 
 	However, you should always configure error checking on the size of prompt vs the model this prompt is intended for.
-For example, for GPT-4 (8k), this model supports a max request token limit of 8,192.  If your prompt is 10K in size, then this will fail, AND ALSO any subsequent retries would fail as well, as the token limit was already reached.
-As a best practice, ensure the prompt size does not exceed the max request token limit immediately, prior to sending the prompt across the wire to the AOAI service.
+For example, for GPT-4 (8k), this model supports a max request token limit of 8,192.  If your prompt is 10K in size, then this will fail, AND ALSO any subsequent retries would fail as well, as the token limit size was already exceeded.
+As a best practice, ensure the size of the prompt does not exceed the max request token limit immediately, prior to sending the prompt across the wire to the AOAI service.
 	
-Again here are the token limits for each model: Azure OpenAI Service models - Azure OpenAI | Microsoft Learn
+Again here are the token size limits for each model: Azure OpenAI Service models - https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models
 		
 This table describes **a few of the common** HTTP Response Codes from AOAI
 
