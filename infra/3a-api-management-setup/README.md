@@ -79,23 +79,20 @@ As a best practice, ensure the prompt size does not exceed the max request token
 	
 Again here are the token limits for each model: Azure OpenAI Service models - Azure OpenAI | Microsoft Learn
 		
-This table describes a few of the common HTTP Response Codes from AOAI
+This table describes **a few of the common** HTTP Response Codes from AOAI
 
- HTTP Response Code | Cause | Remediation | Notes
+** HTTP Response Code | Cause | Remediation | Notes**
 --- | --- | --- | ---
 200 | Processed the prompt. Completion without error | N/A |
-408  | https://packages.microsoft.com/yumrepos/azure-cli/ | rpm -ivh --nodeps azure-cli-<version\>-*.rpm
-429 (v0613 AOAI Models)	| https://azurecliprod.blob.core.windows.net/msi/azure-cli-<version\>.msi | Start-Process msiexec.exe -Wait -ArgumentList '/I azure-cli-<version\>.msi'  
-424 (v0301 AOAI Models)	|
-**Note**:	
-|	  |  | 
-	       200 	   |	 |		
-	       408         |	Request timeout	APIM Retry with interval 	Many reasons why a timeout could occur.
-	429 (v0613 AOAI Models)	Server Busy (Rate limit reached for requests)	APIM - Retries with Exponential Backoff	When the APIM interval, max-interval and delta are specified, an exponential interval retry algorithm is applied.
-	424 (v0301 AOAI Models)	Server Busy (Rate limit reached for requests)	APIM - Retries with Exponential Backoff	Same as above
-	50x	Internal server error due to transient error or backend AOAI internal error	APIM Retry with interval 	https://learn.microsoft.com/en-us/azure/api-management/retry-policy
+429 (v0613 AOAI Models)	|  Server Busy (Rate limit reached for requests) | APIM - Retries with Exponential Backoff |	When the APIM interval, max-interval and delta are specified, an exponential interval retry algorithm is applied. 
+424 (v0301 AOAI Models)	| Server Busy (Rate limit reached for requests) | APIM - Retries with Exponential Backoff | Same as above
+408  | Request timeout | APIM Retry with interval | Many reasons why a timeout could occur, such as a network connection error.
+50x |	Internal server error due to transient error or backend AOAI internal error |	APIM Retry with interval| See Retry Policy Link
+
+**Note**:https://learn.microsoft.com/en-us/azure/api-management/retry-policy	
 	
-	1. Auto update to Default 
+	
+	### 2. Auto update to Default 
 
 	As versions of When Auto-update to default is selected your model deployment will be automatically updated within two weeks of a change in the default version.
 	
