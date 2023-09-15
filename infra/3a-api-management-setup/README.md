@@ -50,7 +50,8 @@ There are other articles/repos which describe this basic scenario, and also prov
 
 # The Scaling Secret Sauce (yes term you heard it here first!)
 
-So how do we control (or queue) messages when using multiple Azure OpenAI instances (accounts)
+So how do we control (or queue) messages when using multiple Azure OpenAI instances (accounts)? How do we manage return error codes highly efficently to optimize the AOAI experience?
+
 As a best practice, Microsoft recommends the use of **retry logic** whenever using a service such as AOAI.  With APIM, this will allow us do this easily, but with some secret sauce added it... using the concept of _retries with exponential backoff_.
 Retries with exponential backoff is a technique that retries an operation, with an exponentially increasing wait time, up to a maximum retry count has been reached (the exponential backoff). This technique embraces the fact that cloud resources might intermittently be unavailable for more than a few seconds for any reason, or more likely using AOAI, if an error is returned due to too many tokens per second (or requests per second) in a large scale deployment.
 
