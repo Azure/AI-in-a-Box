@@ -19,3 +19,10 @@ This is a low code option, and as such requires very little coding knowledge, at
 
 ## Deployment
 
+**Step 1**: 
+
+**Step 2**: 
+
+## Results
+
+Start Bot Framework Composer and open the project located in [./src](./src)

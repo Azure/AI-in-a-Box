@@ -1,0 +1,35 @@
+#PARAMETERS
+#region Login
+    $TenantID          = "YOUR-TENANT-ID"
+    $appID             = "YOUR-ServicePrincipal-ClientID"
+    $password          = "YOUR-ServicePrincipal-CLIENTSECRET"
+    $location          = "eastus"
+    $rgName            = "AI1-AIIntegration-RG"
+    $DeploymentName    = "AIIntegration"
+    $BicepFile         = "main.bicep"
+    $parameterFile     = "main.parameters.json" 
+#endregion
+
+#Login with Service Principal - Make sure you login and run deployment with a user that has a high enough RBAC to create role assignments (Owner Role). 
+az login --service-principal --username $appID --password $password --tenant $TenantID 
+
+#1. Create your Resource Group where you are going to land all your OpenAI Resources and Dependencies
+az group create --name $rgName --location $location
+
+#2. Build and convert your Bicep file to an Azure Resource Manager template (ARM template)
+#(Make sure that you run the below command within the src/bicep-deployment directory. So change directory (cd) at the command prompt)
+az bicep build --file main.bicep
+
+#3. Deploy your Bicep template to Azure 
+az deployment group create --resource-group $rgName --template-file $BicepFile --parameters $parameterFile --verbose
+
+#4. Clean Up the Resources and Delete the Resource Group
+#az group delete --name $rgName
+
+#5. Decompile ARM template
+#az bicep decompile --file template.json
+
+#Note - RUN THE FOLLOWING AZURE CLI COMMAND. You are going to need to GET your Service Principal ID If you run the deployment with Azure DevOps. 
+#The service principal ID is different. You can get your Service Principal Application ID and Service Principal Object ID from the Portal but not the ID. 
+#So you need to get your Service Principal ID if you run the deployment through Azure DevOps
+#az ad sp show --id <YourServicePrincipalAppID>
