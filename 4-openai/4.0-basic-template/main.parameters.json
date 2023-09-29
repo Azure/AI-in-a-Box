@@ -1,18 +1,43 @@
 {
-    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "vNetIPAddressPrefixes": {
-          "value": ["10.0.0.0/16"]
-        },
-        "prefix": {
-          "value": "aitoolkit"
-        },
-        "resourceLocation": {
-          "value": "eastus"
-        },
-        "storageAccountType":{
-          "value": "Standard_LRS"
-        }
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "hubCIDR": {
+      "value": [
+        "10.0.0.0/16"
+      ]
+    },
+    "spokeCIDR": {
+      "value": [
+        "10.1.0.0/16"
+      ]
+    },
+    "hubName": {
+      "value": "hub"
+    },
+    "spokeName": {
+      "value": "spoke"
+    },
+    "prefix": {
+      "value": "dev"
+    },
+    "resourceLocation": {
+      "value": "eastus"
+    },
+    "storageAccountType": {
+      "value": "Standard_LRS"
+    },
+    "coreNetworkResourceGroup": {
+      "value": "core-nw-rg"
+    },
+    "spokeNetworkResourceGroup": {
+      "value": "spoke-nw-rg"
+    },
+    "aiResourceGroup": {
+      "value": "ai-rg"
+    },
+    "storageResourceGroup": {
+      "value": "stg-rg"
     }
+  }
 }

@@ -22,7 +22,7 @@
       7 - Create OpenAI Deployments
 */
 
-// targetScope = 'subscription'
+targetScope = 'subscription'
 
 //********************************************************
 // Workload Deployment Control Parameters
@@ -37,11 +37,8 @@ param utcValue string = utcNow()
 @description('Unique Prefix')
 param prefix string = 'aitoolkit'
 
-@description('Unique Suffix')
-param uniqueSuffix string = substring(toLower(replace(uniqueString(subscription().id, resourceGroup().id, utcValue), '-', '')), 1, 3) 
-
 @description('Resource Location')
-param resourceLocation string = resourceGroup().location
+param resourceLocation string
 
 param env string = 'Dev'
 
@@ -53,8 +50,15 @@ param tags object = {
   Name: prefix
 }
 
+param hubCIDR array
+param spokeCIDR array
+param hubName string
+param spokeName string
 
-param vNetIPAddressPrefixes array
+param coreNetworkResourceGroup string
+param spokeNetworkResourceGroup string
+param aiResourceGroup string
+param storageResourceGroup string
 
 //********************************************************
 // Resource Config Parameters
@@ -70,60 +74,149 @@ param storageAccountType string
 //********************************************************
 // Variables
 //********************************************************
-var vNetName = '${prefix}vnet${uniqueSuffix}'
-var vNetSubnetName = '${prefix}subnet${uniqueSuffix}'
-var openAiAccountName = '${prefix}openai${uniqueSuffix}'
-var storageAccountName = '${prefix}stg${uniqueSuffix}'
-var searchAccountName = '${prefix}search${uniqueSuffix}'
+var vNetSubnetName = '${prefix}subnet'
+var openaiAccountName = '${prefix}openai'
+var storageAccountName = '${prefix}stg'
+var searchAccountName = '${prefix}search'
+var docIntelAccountName = '${prefix}docIntel'
+
+var coreNetworkResourceGroupFull = '${prefix}-${coreNetworkResourceGroup}'
+var spokeNetworkResourceGroupFull = '${prefix}-${spokeNetworkResourceGroup}'
+var aiResourceGroupFull = '${prefix}-${aiResourceGroup}'
+var storageResourceGroupFull = '${prefix}-${storageResourceGroup}'
+
+resource coreNetworkRG 'Microsoft.Resources/resourceGroups@2022-09-01' = {
+  name: coreNetworkResourceGroupFull
+  location: resourceLocation
+}
+
+resource spokeNetworkRG 'Microsoft.Resources/resourceGroups@2022-09-01' = {
+  name: spokeNetworkResourceGroupFull
+  location: resourceLocation
+}
+
+resource aiRG 'Microsoft.Resources/resourceGroups@2022-09-01' = {
+  name: aiResourceGroupFull
+  location: resourceLocation
+}
+
+resource storageRG 'Microsoft.Resources/resourceGroups@2022-09-01' = {
+  name: storageResourceGroupFull
+  location: resourceLocation
+}
 
 //********************************************************
 // Deploy Core Platform Services 
 //********************************************************
-module m_vnet 'modules/deploy_1_vnet.bicep' = {
-  name: 'deploy_vnet'
+module m_hub 'modules/deploy_0_hub.bicep' = {
+  name: 'deploy_hub'
+  scope: resourceGroup(coreNetworkResourceGroupFull)
+  dependsOn: [
+    spokeNetworkRG
+  ]
   params: {
     resourceLocation: resourceLocation
-    vNetIPAddressPrefixes: vNetIPAddressPrefixes
-    vNetName: vNetName
-    vNetSubnetName: vNetSubnetName
+    hubCIDR: hubCIDR
+    hubName: hubName
+  }
+}
+
+module m_spoke 'modules/deploy_1_spoke.bicep' = {
+  name: 'deploy_spoke'
+  scope: resourceGroup(spokeNetworkResourceGroupFull)
+  dependsOn: [
+    spokeNetworkRG
+  ]
+  params: {
+    resourceLocation: resourceLocation
+    coreRG: coreNetworkResourceGroupFull
+    spokeCIDR: spokeCIDR
+    spokeName: spokeName
+    defaultSubnetName: 'default'
+    hubName: hubName
+  }
+}
+
+module m_peerings 'modules/deploy_2_peering.bicep' = {
+  name: 'deploy_peering'
+  scope: resourceGroup(coreNetworkResourceGroupFull)
+  dependsOn: [
+    m_hub, m_spoke
+  ]
+  params: {
+    hubName: hubName
+    spokeID: m_spoke.outputs.spokeID
   }
 }
 
 
-module m_openai 'modules/deploy_2_openai.bicep' = {
-  name: 'deploy_openai'
+module m_ai_services 'modules/deploy_3_ai_services.bicep' = {
+  name: 'deploy_ai_services'
+  scope: resourceGroup(aiResourceGroupFull)
+  dependsOn: [
+    aiRG
+  ]
   params: {
     resourceLocation: resourceLocation
-    vnetID: m_vnet.outputs.vNetID
-    subnetID: m_vnet.outputs.subnetID
-    openAiAccountName: openAiAccountName
-    tags: tags
-  }
-}
-
-
-module m_storage 'modules/deploy_3_storage.bicep' = {
-  name: 'deploy_storage'
-  params: {
-    resourceLocation: resourceLocation
-    vnetID: m_vnet.outputs.vNetID
-    subnetID: m_vnet.outputs.subnetID
-    storageAccountName: storageAccountName
-    tags: tags
-  }
-}
-
-
-module m_search 'modules/deploy_4_search.bicep' = {
-  name: 'deploy_search'
-  params: {
-    resourceLocation: resourceLocation
-    vnetID: m_vnet.outputs.vNetID
-    subnetID: m_vnet.outputs.subnetID
+    openaiAccountName: openaiAccountName
     searchAccountName: searchAccountName
-    tags: tags
+    docIntelAccountName: docIntelAccountName
   }
 }
+
+
+module m_storage 'modules/deploy_4_storage.bicep' = {
+  name: 'deploy_storage'
+  scope: resourceGroup(storageResourceGroupFull)
+  dependsOn: [
+    storageRG
+  ]
+  params: {
+    resourceLocation: resourceLocation
+    storageAccountName: storageAccountName
+  }
+}
+
+module m_private_endpoints 'modules/deploy_5_private_endpoints.bicep' = {
+  name: 'deploy_dns'
+  scope: resourceGroup(spokeNetworkResourceGroupFull)
+  dependsOn: [
+    coreNetworkRG
+  ]
+  params: {
+    resourceLocation: resourceLocation
+    subnetID: m_spoke.outputs.subnetID
+    openaiAccountID: m_ai_services.outputs.openaiAccountID
+    searchAccountID: m_ai_services.outputs.searchAccountID
+    docIntelAccountID: m_ai_services.outputs.docIntelAccountID
+    storageAccountID: m_storage.outputs.storageAccountID
+    openaiAccountName: openaiAccountName
+    searchAccountName: searchAccountName
+    docIntelAccountName: docIntelAccountName
+    storageAccountName: storageAccountName
+    openaiPrivateDnsZoneID: m_hub.outputs.openaiPrivateDnsZoneId
+    searchPrivateDnsZoneID: m_hub.outputs.searchPrivateDnsZoneId
+    cogServicesPrivateDnsZoneID: m_hub.outputs.cogServicesPrivateDnsZoneId
+    storagePrivateDnsZoneID: m_hub.outputs.storagePrivateDnsZoneId
+  }
+}
+
+// module m_dns 'modules/deploy_6_dns.bicep' = {
+//   name: 'deploy_dns'
+//   scope: resourceGroup(coreNetworkResourceGroupFull)
+//   dependsOn: [
+//     coreNetworkRG
+//   ]
+//   params: {
+//     vnetID: m_spoke.outputs.vNetID
+//     subnetID: m_spoke.outputs.subnetID
+//     spokeRG: spokeNetworkResourceGroupFull
+//     openaiPrivateEndpointName: m_private_endpoints.outputs.openaiPrivateEndpointName
+//     storagePrivateEndpointName: m_private_endpoints.outputs.storagePrivateEndpointName
+//     searchPrivateEndpointName: m_private_endpoints.outputs.searchPrivateEndpointName
+//     tags: tags
+//   }
+// }
 
 //********************************************************
 // RBAC Role Assignments

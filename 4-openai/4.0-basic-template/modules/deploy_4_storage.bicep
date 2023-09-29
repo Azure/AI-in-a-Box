@@ -9,9 +9,6 @@
 param resourceLocation string
 param storageAccountName string
 param storageAccountType string = 'Standard_LRS'
-param vnetID string
-param subnetID string
-param tags object
 
 //Create Resources----------------------------------------------------------------------------------------------------------------------------
 
@@ -65,58 +62,4 @@ resource storageAccount_default 'Microsoft.Storage/storageAccounts/blobServices@
   }
 }
 
-resource storagePrivateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
-  name: '${storageAccountName}pe'
-  location: resourceLocation
-  properties: {
-    subnet: {
-      id: subnetID
-    }
-    privateLinkServiceConnections: [
-      {
-        name: 'storage-private-endpoint'
-        properties: {
-          privateLinkServiceId: storageAccount.id
-          groupIds: [
-            'blob'
-          ]
-        }
-      }
-    ]
-  }
-}
-
-resource privateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
-  name: 'privatelink.blob.core.windows.net'
-  location: 'global'
-  tags: tags
-  properties: {}
-}
-
-resource virtualNetworkLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
-  name: 'default'
-  location: 'global'
-  tags: tags
-  parent: privateDnsZone
-  properties: {
-    registrationEnabled: false
-    virtualNetwork: {
-      id: vnetID
-    }
-  }
-}
-
-resource privateDnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2023-04-01' = {
-  name: 'default'
-  parent: storagePrivateEndpoint
-  properties: {
-    privateDnsZoneConfigs: [
-      {
-        name: 'default'
-        properties: {
-          privateDnsZoneId: privateDnsZone.id
-        }
-      }
-    ]
-  }
-}
+output storageAccountID string = storageAccount.id
