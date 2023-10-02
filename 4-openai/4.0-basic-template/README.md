@@ -1,4 +1,4 @@
-# [WIP] Pattern 4. Azure OpenAI Landing Zone
+# <img src ='https://airsblobstorage.blob.core.windows.net/airstream/bicep.png' alt="[WIP] Pattern 4. Azure OpenAI Landing Zone" width="50px" style="float: left; margin-right:10px;"> [WIP] Pattern 4. Azure OpenAI Landing Zone
 
 ## Use case scenario
 
@@ -7,13 +7,18 @@ This is the basic setup for any Azure OpenAI use case. It will deploy an Applica
 ## Solution Architecture
 
 ## Preparation
-
-1. Install Azure CLI
-2. Install Bicep
-3. Ensure your subscription is enabled for Azure OpenAI
+1. Install Azure CLI  
+https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
+1. Install bicep  
+https://aka.ms/bicep-install
+1. Ensure Microsoft.CognitiveServices Resource Provider is registered within Azure  
+[Register a Resource Provider](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types)
+1. Ensure your subscription is enabled for Azure OpenAI
 4. Clone repository / copy files locally
 
+5. Edit the parameter file 'main.parameters.json'
 
+    - spObjectId: Your Service Principal ID from Azure AD. Make sure your Service Principal has Ownership role on the subscription. (Format should be xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
 ## Deployment
 
 **Step 1**: 
