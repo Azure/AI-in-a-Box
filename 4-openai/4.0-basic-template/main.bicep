@@ -32,23 +32,18 @@ param ctrlDeployCognitiveSearch bool = true         // Controls whether to creat
 //********************************************************
 // Global Parameters
 //********************************************************
-param utcValue string = utcNow()
-
 @description('Unique Prefix')
 param prefix string = 'aitoolkit'
 
 @description('Resource Location')
 param resourceLocation string
 
-param env string = 'Dev'
-
-param tags object = {
-  Owner: 'aitoolkit'
-  Project: 'aitoolkit'
-  Environment: env
-  Toolkit: 'bicep'
-  Name: prefix
-}
+//********************************************************
+// Resource Config Parameters
+//********************************************************
+param coreNetworkingTags object
+param spokeNetworkingTags object
+param projectTags object
 
 param hubCIDR array
 param spokeCIDR array
@@ -58,15 +53,6 @@ param spokeName string
 param coreNetworkResourceGroup string
 param spokeNetworkResourceGroup string
 param aiResourceGroup string
-param storageResourceGroup string
-
-//********************************************************
-// Resource Config Parameters
-//********************************************************
-
-//Storage Account Module Parameters - Data Lake Storage Account for Synapse Workspace
-@description('Storage Account Type')
-param storageAccountType string
 
 //----------------------------------------------------------------------
 
@@ -74,72 +60,62 @@ param storageAccountType string
 //********************************************************
 // Variables
 //********************************************************
-var vNetSubnetName = '${prefix}subnet'
 var openaiAccountName = '${prefix}openai'
 var storageAccountName = '${prefix}stg'
 var searchAccountName = '${prefix}search'
 var docIntelAccountName = '${prefix}docIntel'
 
-var coreNetworkResourceGroupFull = '${prefix}-${coreNetworkResourceGroup}'
-var spokeNetworkResourceGroupFull = '${prefix}-${spokeNetworkResourceGroup}'
-var aiResourceGroupFull = '${prefix}-${aiResourceGroup}'
-var storageResourceGroupFull = '${prefix}-${storageResourceGroup}'
-
 resource coreNetworkRG 'Microsoft.Resources/resourceGroups@2022-09-01' = {
-  name: coreNetworkResourceGroupFull
+  name: coreNetworkResourceGroup
   location: resourceLocation
 }
 
 resource spokeNetworkRG 'Microsoft.Resources/resourceGroups@2022-09-01' = {
-  name: spokeNetworkResourceGroupFull
+  name: spokeNetworkResourceGroup
   location: resourceLocation
 }
 
 resource aiRG 'Microsoft.Resources/resourceGroups@2022-09-01' = {
-  name: aiResourceGroupFull
+  name: aiResourceGroup
   location: resourceLocation
 }
 
-resource storageRG 'Microsoft.Resources/resourceGroups@2022-09-01' = {
-  name: storageResourceGroupFull
-  location: resourceLocation
-}
-
-//********************************************************
-// Deploy Core Platform Services 
-//********************************************************
-module m_hub 'modules/deploy_0_hub.bicep' = {
+// 1. Deploy Hub Vnet and Private DNS Zones
+module m_hub 'modules/deploy_1_hub.bicep' = {
   name: 'deploy_hub'
-  scope: resourceGroup(coreNetworkResourceGroupFull)
+  scope: resourceGroup(coreNetworkResourceGroup)
   dependsOn: [
-    spokeNetworkRG
+    coreNetworkRG
   ]
   params: {
     resourceLocation: resourceLocation
     hubCIDR: hubCIDR
     hubName: hubName
+    tags: coreNetworkingTags
   }
 }
 
-module m_spoke 'modules/deploy_1_spoke.bicep' = {
+// 2. Deploy Spoke VNet and Spoke-To-Hub peering
+module m_spoke 'modules/deploy_2_spoke.bicep' = {
   name: 'deploy_spoke'
-  scope: resourceGroup(spokeNetworkResourceGroupFull)
+  scope: resourceGroup(spokeNetworkResourceGroup)
   dependsOn: [
-    spokeNetworkRG
+    m_hub, spokeNetworkRG
   ]
   params: {
     resourceLocation: resourceLocation
-    coreRG: coreNetworkResourceGroupFull
     spokeCIDR: spokeCIDR
     spokeName: spokeName
     defaultSubnetName: 'default'
-    hubName: hubName
+    hubID: m_hub.outputs.hubID
+    tags: spokeNetworkingTags
   }
 }
 
-module m_peerings 'modules/deploy_2_peering.bicep' = {
+// 3. Deploy Hub-to-Spoke peering
+module m_peerings 'modules/deploy_3_peering.bicep' = {
   name: 'deploy_peering'
-  scope: resourceGroup(coreNetworkResourceGroupFull)
+  scope: resourceGroup(coreNetworkResourceGroup)
   dependsOn: [
     m_hub, m_spoke
   ]
@@ -149,10 +125,10 @@ module m_peerings 'modules/deploy_2_peering.bicep' = {
   }
 }
 
-
-module m_ai_services 'modules/deploy_3_ai_services.bicep' = {
+// 4. Deploy AI Services
+module m_ai_services 'modules/deploy_4_ai_services.bicep' = {
   name: 'deploy_ai_services'
-  scope: resourceGroup(aiResourceGroupFull)
+  scope: resourceGroup(aiResourceGroup)
   dependsOn: [
     aiRG
   ]
@@ -161,25 +137,16 @@ module m_ai_services 'modules/deploy_3_ai_services.bicep' = {
     openaiAccountName: openaiAccountName
     searchAccountName: searchAccountName
     docIntelAccountName: docIntelAccountName
-  }
-}
-
-
-module m_storage 'modules/deploy_4_storage.bicep' = {
-  name: 'deploy_storage'
-  scope: resourceGroup(storageResourceGroupFull)
-  dependsOn: [
-    storageRG
-  ]
-  params: {
-    resourceLocation: resourceLocation
     storageAccountName: storageAccountName
+    tags: projectTags
   }
 }
 
+
+// 6. Deploy private endpoints for all services
 module m_private_endpoints 'modules/deploy_5_private_endpoints.bicep' = {
-  name: 'deploy_dns'
-  scope: resourceGroup(spokeNetworkResourceGroupFull)
+  name: 'deploy_private_endpoints'
+  scope: resourceGroup(spokeNetworkResourceGroup)
   dependsOn: [
     coreNetworkRG
   ]
@@ -189,34 +156,14 @@ module m_private_endpoints 'modules/deploy_5_private_endpoints.bicep' = {
     openaiAccountID: m_ai_services.outputs.openaiAccountID
     searchAccountID: m_ai_services.outputs.searchAccountID
     docIntelAccountID: m_ai_services.outputs.docIntelAccountID
-    storageAccountID: m_storage.outputs.storageAccountID
-    openaiAccountName: openaiAccountName
-    searchAccountName: searchAccountName
-    docIntelAccountName: docIntelAccountName
-    storageAccountName: storageAccountName
+    storageAccountID: m_ai_services.outputs.storageAccountID
     openaiPrivateDnsZoneID: m_hub.outputs.openaiPrivateDnsZoneId
     searchPrivateDnsZoneID: m_hub.outputs.searchPrivateDnsZoneId
     cogServicesPrivateDnsZoneID: m_hub.outputs.cogServicesPrivateDnsZoneId
     storagePrivateDnsZoneID: m_hub.outputs.storagePrivateDnsZoneId
+    tags: spokeNetworkingTags
   }
 }
-
-// module m_dns 'modules/deploy_6_dns.bicep' = {
-//   name: 'deploy_dns'
-//   scope: resourceGroup(coreNetworkResourceGroupFull)
-//   dependsOn: [
-//     coreNetworkRG
-//   ]
-//   params: {
-//     vnetID: m_spoke.outputs.vNetID
-//     subnetID: m_spoke.outputs.subnetID
-//     spokeRG: spokeNetworkResourceGroupFull
-//     openaiPrivateEndpointName: m_private_endpoints.outputs.openaiPrivateEndpointName
-//     storagePrivateEndpointName: m_private_endpoints.outputs.storagePrivateEndpointName
-//     searchPrivateEndpointName: m_private_endpoints.outputs.searchPrivateEndpointName
-//     tags: tags
-//   }
-// }
 
 //********************************************************
 // RBAC Role Assignments

@@ -7,10 +7,6 @@
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
 param resourceLocation string
-param openaiAccountName string
-param searchAccountName string
-param docIntelAccountName string
-param storageAccountName string
 param subnetID string
 param openaiAccountID string
 param searchAccountID string
@@ -22,12 +18,19 @@ param openaiPrivateDnsZoneID string
 param searchPrivateDnsZoneID string
 param cogServicesPrivateDnsZoneID string
 
+param tags object = {}
+
+// Variables - get resource names from IDs
+var openaiAccountName = last(split(openaiAccountID, '/'))
+var searchAccountName = last(split(searchAccountID, '/'))
+var docIntelAccountName = last(split(docIntelAccountID, '/'))
+var storageAccountName = last(split(storageAccountID, '/'))
+
 //Create Resources----------------------------------------------------------------------------------------------------------------------------
-
-
 resource openaiPrivateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
   name: '${openaiAccountName}pe'
   location: resourceLocation
+  tags: tags
   properties: {
     subnet: {
       id: subnetID
@@ -49,6 +52,7 @@ resource openaiPrivateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' =
 resource searchPrivateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
   name: '${searchAccountName}pe'
   location: resourceLocation
+  tags: tags
   properties: {
     subnet: {
       id: subnetID
@@ -70,6 +74,7 @@ resource searchPrivateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' =
 resource docIntelPrivateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
   name: '${docIntelAccountName}pe'
   location: resourceLocation
+  tags: tags
   properties: {
     subnet: {
       id: subnetID
@@ -91,6 +96,7 @@ resource docIntelPrivateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01'
 resource storagePrivateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
   name: '${storageAccountName}pe'
   location: resourceLocation
+  tags: tags
   properties: {
     subnet: {
       id: subnetID

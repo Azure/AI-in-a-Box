@@ -1,24 +1,17 @@
 /*region Header
       Module Steps 
-      1 - Deploy VNet
-      2 - Deploy Subnets using a loop
-      3 - Output back to master module the following params (spokeID, subnetID)
+      1 - Deploy Spoke VNet with a default subnet
+      2 - Peer Spoke with Hub Vnet
+      3 - Output back to main module the following params (spokeID, subnetID)
 */
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
 param resourceLocation string
-param coreRG string
-param hubName string
+param hubID string
 param spokeName string
 param defaultSubnetName string
 param spokeCIDR array
-
-//Existing Resources----------------------------------------------------------------------------------------------------------------------------
-
-resource hub 'Microsoft.Network/virtualNetworks@2020-11-01' existing = {
-  name: hubName
-  scope: resourceGroup(coreRG)
-}
+param tags object = {}
 
 //Create Resources----------------------------------------------------------------------------------------------------------------------------
 //https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks
@@ -27,6 +20,7 @@ resource hub 'Microsoft.Network/virtualNetworks@2020-11-01' existing = {
 resource spoke 'Microsoft.Network/virtualNetworks@2020-11-01' = {
   name: spokeName
   location: resourceLocation
+  tags: tags
   properties:{
     addressSpace:{
       addressPrefixes: spokeCIDR
@@ -47,7 +41,7 @@ resource destinationToSourcePeering 'Microsoft.Network/virtualNetworks/virtualNe
     allowForwardedTraffic: true
     allowGatewayTransit: true
     remoteVirtualNetwork: {
-      id: hub.id
+      id: hubID
     }
   }
 }

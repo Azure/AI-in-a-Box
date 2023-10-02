@@ -2,42 +2,65 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+
+    "resourceLocation": {
+      "value": "eastus"
+    },
+
+    "coreNetworkResourceGroup": {
+      "value": "aitoolkit-core-nw-rg"
+    },
+    "spokeNetworkResourceGroup": {
+      "value": "aitoolkit-spoke-nw-rg"
+    },
+    "aiResourceGroup": {
+      "value": "aitoolkit-ai-rg"
+    },
+
+    "coreNetworkingTags": {
+      "value": {
+        "Owner": "Core Networking Team",
+        "Project": "Enterprise Landing Zone",
+        "Environment": "Core",
+        "Toolkit": "Bicep"
+      }
+    },
+    "spokeNetworkingTags": {
+      "value": {
+        "Owner": "Core Networking Team",
+        "Project": "AI Core",
+        "Environment": "Dev",
+        "Toolkit": "Bicep"
+      }
+    },
+    "projectTags": {
+      "value": {
+        "Owner": "AI Team",
+        "Project": "AI Project 1",
+        "Environment": "Dev",
+        "Toolkit": "Bicep"
+      }
+    },
+
     "hubCIDR": {
       "value": [
         "10.0.0.0/16"
       ]
     },
+    "hubName": {
+      "value": "hub"
+    },
+
     "spokeCIDR": {
       "value": [
         "10.1.0.0/16"
       ]
     },
-    "hubName": {
-      "value": "hub"
-    },
     "spokeName": {
       "value": "spoke"
     },
     "prefix": {
-      "value": "dev"
-    },
-    "resourceLocation": {
-      "value": "eastus"
-    },
-    "storageAccountType": {
-      "value": "Standard_LRS"
-    },
-    "coreNetworkResourceGroup": {
-      "value": "core-nw-rg"
-    },
-    "spokeNetworkResourceGroup": {
-      "value": "spoke-nw-rg"
-    },
-    "aiResourceGroup": {
-      "value": "ai-rg"
-    },
-    "storageResourceGroup": {
-      "value": "stg-rg"
+      "value": "aitoolkit"
     }
   }
 }

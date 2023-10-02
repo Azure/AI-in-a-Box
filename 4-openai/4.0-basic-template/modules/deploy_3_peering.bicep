@@ -2,7 +2,7 @@
       Module Steps 
       1 - Deploy VNet
       2 - Deploy Subnets using a loop
-      3 - Output back to master module the following params (spokeID, subnetID)
+      3 - Output back to main module the following params (spokeID, subnetID)
 */
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
