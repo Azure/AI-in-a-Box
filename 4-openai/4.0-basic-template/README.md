@@ -5,6 +5,7 @@
 This is the basic setup for any Azure OpenAI use case. It will deploy an Application Landing Zone that can support multiple use cases.
 
 ## Solution Architecture
+## <img src="/Assets/images/Pattern4.A.png" alt="Pattern 4. Azure OpenAI Landing Zone" style="float: left; margin-right:10px;" />
 
 ## Preparation
 1. Install Azure CLI  

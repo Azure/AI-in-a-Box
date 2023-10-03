@@ -3,8 +3,11 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
 
+   "prefix": {
+      "value": "aitoolkit" // This value must be provided.
+    },
     "resourceLocation": {
-      "value": "eastus"
+      "value": "eastus" // This value must be provided.
     },
 
     "coreNetworkResourceGroup": {
@@ -59,8 +62,8 @@
     "spokeName": {
       "value": "spoke"
     },
-    "prefix": {
-      "value": "aitoolkit"
+     "spObjectId":{
+          "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" //Service Principal ID or your own User Object ID (Please make sure that this user has high enough Role (Owner) to deploy the solution)
     }
   }
 }

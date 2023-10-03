@@ -1,7 +1,7 @@
 /*region Header
       =========================================================================================================
-      Created by:       Author: Marco Cardoso | macardoso@microsoft.com 
-      Created on:       09/13/2023
+      Created by:       Author: Your Name | your.name@azurestream.io 
+      Created on:       10/04/2023
       Description:      Pattern 4 OpenAI
       =========================================================================================================
 
