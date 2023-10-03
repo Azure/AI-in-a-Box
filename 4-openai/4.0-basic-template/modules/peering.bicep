@@ -6,25 +6,28 @@
 */
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
-param hubName string
-param spokeID string
+param from string
+param to string
 
-//Existing Resources----------------------------------------------------------------------------------------------------------------------------
 
-resource hub 'Microsoft.Network/virtualNetworks@2020-11-01' existing = {
-  name: hubName
+//Variables--------------------------------------------------------------------------------------------------------------------------
+var fromName = last(split(from, '/'))
+var toName = last(split(to, '/'))
+
+resource fromVnet 'Microsoft.Network/virtualNetworks@2020-11-01' existing = {
+  name: fromName
 }
 
 //Create Resources----------------------------------------------------------------------------------------------------------------------------
 
 resource destinationToSourcePeering 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2022-07-01' = {
-  name: 'hub-to-spoke'
-  parent: hub
+  name: '${fromName}-to-${toName}'
+  parent: fromVnet
   properties: {
     allowForwardedTraffic: true
     allowGatewayTransit: true
     remoteVirtualNetwork: {
-      id: spokeID
+      id: to
     }
   }
 }
