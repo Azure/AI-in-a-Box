@@ -13,7 +13,7 @@
 #Login with Service Principal - Make sure you login and run deployment with a user that has a high enough RBAC to create role assignments (Owner Role). 
 az login --service-principal --username $appID --password $password --tenant $TenantID 
 
-#1. Create your Resource Group where you are going to land all your Synapse Resources and Dependencies
+#1. Create your Resource Group where you are going to land all your Azure Applied AI Services Resources and Dependencies
 az group create --name $rgName --location $location
 
 #2. Build and convert your Bicep file to an Azure Resource Manager template (ARM template)

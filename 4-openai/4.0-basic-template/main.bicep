@@ -49,11 +49,9 @@ param deployDnsZones array = [
   'privatelink.documents.azure.com'
 ]
 
-
 param coreNetworkResourceGroup string
 param spokeNetworkResourceGroup string
 param appResourceGroup string
-
 
 param existingHubName string
 param existingSpokeName string
