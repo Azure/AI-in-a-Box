@@ -8,9 +8,9 @@ This is the basic setup for any Azure OpenAI use case. It will deploy an Applica
 ## <img src="/Assets/images/Pattern4.A.png" alt="Pattern 4. Azure OpenAI Landing Zone" style="float: left; margin-right:10px;" />
 
 ## Preparation
-1. Install Azure CLI  (Make sure you are running the latest version of Azure CLI))
+1. Install Azure CLI  (Make sure you are running the latest version of Azure CLI)
 https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-1. Install bicep (Make sure you are running the latest version of Azure CLI)  
+1. Install bicep (Make sure you are running the latest version of Bicep CLI)  
 https://aka.ms/bicep-install
 1. Ensure Microsoft.CognitiveServices Resource Provider is registered within Azure  
 [Register a Resource Provider](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types)
