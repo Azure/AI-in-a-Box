@@ -12,7 +12,9 @@ This project aims to provide an "Azure AI/ML Easy Button" for common scenarios. 
 | Neeraj Jhaveri | @neerajjhaveri | neeraj.jhaveri@microsoft.com |
 | Marco Aurélio Bigélli Cardoso  | @MarcoABCardoso | macardoso@microsoft.com | 
 | Maria Vrabie  | @MariaVrabie | mavrabie@microsoft.com | 
+| Jean Hayes | @jehayesms | jean.hayes@microsoft.com |
 | Victor Santana | @Welasco | vsantana@microsoft.com |
+| Chris Ayers | @codebytes | chrisayers@microsoft.com |
 | Alex Morales | @msalemor | alemor@microsoft.com |
 | Thiago Rotta | @rottathiago | thiago.rotta@microsoft.com |
 
@@ -21,8 +23,8 @@ This project aims to provide an "Azure AI/ML Easy Button" for common scenarios. 
 
 ## Available Patterns
 This repository contains several scenarios, or, 'patterns' for you to deploy into your own environment. Below is a summary:
-* **Pattern 1**: Azure ML Integration
-* **Pattern 2**: Edge AI from model creation to deployment on the Edge
-* **Pattern 3**: Cognitive Services
-* **Pattern 4**: OpenAI
+* **Pattern 1**: AI-in-a-Box (ML) Azure ML Integration - Outer Loop (Landing) and Model Inner Loop (MLOps)
+* **Pattern 2**: AI-in-a-Box (EdgeAI) Edge AI from model creation (MLOps) to deployment on Edge Devices (IoT Edge and Azure IoT Operations)
+* **Pattern 3**: AI-in-a-Box (AI Services) Azure AI Services (Document Intelligence, Vision AI, Anomaly Detection, Speech) and AOAI Integration
+* **Pattern 4**: AI-in-a-Box (AOAI) - Landing with RAG Patter
 
