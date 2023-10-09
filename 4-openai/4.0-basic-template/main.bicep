@@ -153,9 +153,6 @@ module m_spoke 'modules/spoke.bicep' = {
 module m_peer_hub_to_spoke 'modules/peering.bicep' = {
   name: 'deploy_peer_hub_to_spoke'
   scope: resourceGroup(coreNetworkResourceGroup)
-  dependsOn: [
-    m_hub, m_spoke
-  ]
   params: {
     from: m_hub.outputs.hubID
     to: m_spoke.outputs.spokeID
@@ -165,9 +162,6 @@ module m_peer_hub_to_spoke 'modules/peering.bicep' = {
 module m_peer_spoke_to_hub 'modules/peering.bicep' = {
   name: 'deploy_peer_spoke_to_hub'
   scope: resourceGroup(spokeNetworkResourceGroup)
-  dependsOn: [
-    m_hub, m_spoke
-  ]
   params: {
     from: m_spoke.outputs.spokeID
     to: m_hub.outputs.hubID

@@ -14,16 +14,15 @@ param subnetID string
 param privateDnsZoneId string
 param tags object = {}
 
-
 //Variables--------------------------------------------------------------------------------------------------------------------------
-var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup().id), 1, 3) 
+var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup().id), 1, 3)
 var openaiAccountName = '${prefix}-openai-${uniqueSuffix}'
 
 //Create Resources----------------------------------------------------------------------------------------------------------------------------
 
 // 1. Create Azure OpenAI Instance
 // https://learn.microsoft.com/en-us/azure/templates/microsoft.cognitiveservices/accounts
-resource openaiAccount 'Microsoft.CognitiveServices/accounts@2021-10-01' = {
+resource openaiAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   name: openaiAccountName
   location: resourceLocation
   tags: tags
@@ -37,7 +36,45 @@ resource openaiAccount 'Microsoft.CognitiveServices/accounts@2021-10-01' = {
     apiProperties: {
       statisticsEnabled: false
     }
+    networkAcls: {
+      defaultAction: 'Allow'
+    }
   }
+}
+
+resource gpt35deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openaiAccount
+  name: 'gpt-35-turbo'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'gpt-35-turbo'
+      version: '0613'
+    }
+  }
+  sku: {
+    capacity: 50
+    name: 'Standard'
+  }
+}
+
+resource gpt4deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openaiAccount
+  name: 'gpt-4'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'gpt-4'
+      version: '0613'
+    }
+  }
+  sku: {
+    capacity: 10
+    name: 'Standard'
+  }
+  dependsOn: [
+    gpt35deployment
+  ]
 }
 
 resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
@@ -53,7 +90,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
         name: 'private-endpoint-connection'
         properties: {
           privateLinkServiceId: openaiAccount.id
-          groupIds: ['account']
+          groupIds: [ 'account' ]
         }
       }
     ]

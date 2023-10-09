@@ -19,7 +19,7 @@ var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup().id)
 var spokeName = !empty(existingSpokeName) ? existingSpokeName : '${prefix}-ai-vnet-${uniqueSuffix}'
 var privateEndpointSubnetName = !empty(existingPrivateEndpointSubnetName) ? existingPrivateEndpointSubnetName : 'private-endpoints-subnet'
 var spokeCIDR = ['10.1.0.0/16']
-var privateEndpointSubnetCIDR = '10.1.0.0/16'
+var privateEndpointSubnetCIDR = '10.1.0.0/24'
 
 //Create Resources----------------------------------------------------------------------------------------------------------------------------
 //https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks
@@ -42,12 +42,14 @@ resource spoke 'Microsoft.Network/virtualNetworks@2020-11-01' = if (empty(existi
     addressSpace:{
       addressPrefixes: spokeCIDR
     }
-    subnets: [{
-      name: privateEndpointSubnetName
-      properties: {
-        addressPrefix: privateEndpointSubnetCIDR
+    subnets: [
+      {
+        name: privateEndpointSubnetName
+        properties: {
+          addressPrefix: privateEndpointSubnetCIDR
+        }
       }
-    }]
+  ]
     dhcpOptions: {
       dnsServers: [
         dnsIp
