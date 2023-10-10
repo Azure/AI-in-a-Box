@@ -9,9 +9,14 @@ on:
           default: 'rg-dev-mlops' 
           type: string
       aml_workspace:
-        description: 'Azure Machine Learning workspace name'
+          description: 'Azure Machine Learning workspace name'
+          required: true
+          default: 'mlw-dev-mlops' 
+          type: string
+      compute:
+        description: "Azure ML Compute"
         required: true
-        default: 'mlw-dev-mlops' 
+        default: "mlopsv2ci"
         type: string
 
 jobs:
@@ -34,4 +39,7 @@ jobs:
       run: |
         cd src
         az ml job create --file job.yml --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
-
+    - name: Register Model
+      run: |
+        az ml model create -n diabetes-data-example -p runs:/tender_island_p8p24ypsrj/model --type mlflow_model -w "${{ github.event.inputs.aml_workspace }}" -g "${{ github.event.inputs.resource_group }}"
+  
