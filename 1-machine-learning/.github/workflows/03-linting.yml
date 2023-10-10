@@ -1,6 +1,11 @@
 name: Linting
 
 on:
+  push:
+    branches:
+     - 'main'
+    paths:
+    - 'src/model/*'
   workflow_dispatch:
 
 jobs:
@@ -10,19 +15,24 @@ jobs:
     steps:
     - name: Check out repo
       uses: actions/checkout@main
+
     - name: Use Python version 3.7
       uses: actions/setup-python@v3
       with:
         python-version: '3.8'
+
     - name: Install Flake8
       run: |
         python -m pip install flake8
+
     - name: Install Pytest
       run: |
         python -m pip install -r requirements.txt
+
     - name: Run linting tests
-      run: | 
+      run: |
         flake8 src/model/
+
     - name: Run unit test
       run: |
         pytest tests/
