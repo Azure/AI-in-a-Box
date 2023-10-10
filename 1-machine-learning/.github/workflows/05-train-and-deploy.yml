@@ -1,0 +1,69 @@
+name: 05-Train and Deploy
+on:
+  workflow_dispatch:
+    inputs:
+      resource_group:
+        description: 'Resource group name'
+        required: true
+        default: 'rg-dev-mlops'
+        type: string
+      aml_workspace:
+        description: 'Azure Machine Learning workspace name'
+        required: true
+        default: 'mlw-dev-mlops'
+        type: string
+      compute:
+        description: 'Azure Machine Learning compute instance name'
+        required: true
+        default: 'dev-vm'
+        type: string
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+        name: dev
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Set Azure ML workspace as default
+      run: |
+        az configure --defaults group="${{ github.event.inputs.resource_group }}"
+        az configure --defaults workspace="${{ github.event.inputs.aml_workspace }}"
+    - name: Submit Training Job
+      run: |
+            az ml job create --file src/job.yml -w "${{ github.event.inputs.aml_workspace }}" -g "${{ github.event.inputs.resource_group }}"
+    - name: Register model
+      run: |
+            az ml model create -n diabetes-data-example -p runs:/red_curtain_50l4y4gz8f/model --type mlflow_model -w "${{ github.event.inputs.aml_workspace }}" -g "${{ github.event.inputs.resource_group }}"
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+        name: prod
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Set Azure ML workspace as default
+      run: |
+        az configure --defaults group="${{ github.event.inputs.resource_group }}"
+        az configure --defaults workspace="${{ github.event.inputs.aml_workspace }}"
+    - name: List models
+      run: |
+            az ml model list -w "${{ github.event.inputs.aml_workspace }}" -g "${{ github.event.inputs.resource_group }}"
+    - name: Deploy model
+      run: |
+            cd src
+            az ml online-endpoint create --name diabetes-mlflow-mma --file create-endpoint.yml
+            az ml online-deployment create --name mlflow-deployment --endpoint diabetes-mlflow-mma --file mlflow-deployment.yml --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops

@@ -1,0 +1,66 @@
+name: Create Execute Job through ml
+
+on:
+  workflow_dispatch:
+    inputs:
+      resource_group:
+          description: 'Resource group name'
+          required: true
+          default: 'rg-dev-mlops' 
+          type: string
+      aml_workspace:
+          description: 'Azure Machine Learning workspace name'
+          required: true
+          default: 'mlw-dev-mlops' 
+          type: string
+      compute:
+        description: "Azure ML Compute"
+        required: true
+        default: "mlopsv2ci"
+        type: string
+      
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Set Azure ML workspace as default
+      run: |
+        az configure --defaults group="${{ github.event.inputs.resource_group }}"
+        az configure --defaults workspace="${{ github.event.inputs.aml_workspace }}"
+    - name: Submit Training Job
+      run: |
+        cd src
+        az ml job create --file job.yml --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+    - name: Register Model
+      run: |
+        az ml model create -n diabetes-data-example -p runs:/tender_island_p8p24ypsrj/model --type mlflow_model -w "${{ github.event.inputs.aml_workspace }}" -g "${{ github.event.inputs.resource_group }}"
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Set Azure ML workspace as default
+      run: |
+        az configure --defaults group="${{ github.event.inputs.resource_group }}"
+        az configure --defaults workspace="${{ github.event.inputs.aml_workspace }}"
+    - name: Submit Training Job
+      run: |
+        cd src
+        az ml job create --file job.yml --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+  

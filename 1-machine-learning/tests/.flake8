@@ -1,0 +1,27 @@
+[flake8]
+ignore = 
+    W504,
+    C901,
+    E41,
+    E722,
+    W,
+    D,
+    F,
+    N,
+    C,
+    I
+max-line-length = 79
+exclude = 
+    .tox,
+    .git,
+    __pycache__,
+    *.pyc,
+    *.egg-info,
+    .cache,
+    .eggs,
+    develop
+per-file-ignores =
+    src/__init__.py:D104
+    src/*/__init__.py:D104
+max-complexity = 10
+import-order-style = pep8

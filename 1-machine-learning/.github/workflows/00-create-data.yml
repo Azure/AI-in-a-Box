@@ -1,0 +1,37 @@
+name: Create data asset
+
+on:
+  workflow_dispatch:
+    inputs:
+      resource_group:
+        description: 'Resource group name'
+        required: true
+        default: 'rg-dev-mlops' 
+        type: string
+      aml_workspace:
+        description: 'Azure Machine Learning workspace name'
+        required: true
+        default: 'mlw-dev-mlops' 
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Set Azure ML workspace as default
+      run: |
+        az configure --defaults group="${{ github.event.inputs.resource_group }}"
+        az configure --defaults workspace="${{ github.event.inputs.aml_workspace }}"
+    - name: Create dataset in Azure ML workspace
+      run: |
+        cd experimentation
+        az ml data create --name diabetes-folder --version 1 --path data
+

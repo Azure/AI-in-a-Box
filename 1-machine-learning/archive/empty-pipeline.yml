@@ -1,0 +1,38 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+
+display_name: display-name
+experiment_name: experiment-name
+jobs:
+
+  prep_job:
+    type: command
+    inputs:
+      raw_data: 
+          type: uri_folder 
+          path: azureml:diabetes-folder:1
+    outputs:
+      prep_data: 
+        mode: upload
+    code: folder-to-code
+    environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
+    compute: azureml:compute-cluster-name
+    command: >-
+      python file-name.py 
+      --input_data ${{inputs.raw_data}} 
+      --output_data ${{outputs.prep_data}}
+  
+  train_job:
+    type: command
+    inputs:
+      training_data: ${{parent.jobs.prep_job.outputs.prep_data}}
+    outputs:
+      model_output: 
+        mode: upload
+    code: folder-to-code
+    environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
+    compute: azureml:compute-cluster-name
+    command: >-
+      python file-name.py 
+      --training_data ${{inputs.training_data}} 
+      --model_output ${{outputs.model_output}}

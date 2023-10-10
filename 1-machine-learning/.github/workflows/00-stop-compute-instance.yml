@@ -1,0 +1,36 @@
+name: Stop compute instance
+
+on:
+  workflow_dispatch:
+    inputs:
+      resource_group:
+        description: 'Resource group name'
+        required: true
+        default: 'rg-dev-mlops' 
+        type: string
+      aml_workspace:
+        description: 'Azure Machine Learning workspace name'
+        required: true
+        default: 'mlw-dev-mlops' 
+        type: string
+      compute:
+        description: 'Azure Machine Learning compute instance name'
+        required: true
+        default: 'dev-vm' 
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Stop Azure Machine Learning compute instance
+      run: |
+        az ml compute stop -n "${{ github.event.inputs.compute }}" -w "${{ github.event.inputs.aml_workspace }}" -g "${{ github.event.inputs.resource_group }}"
