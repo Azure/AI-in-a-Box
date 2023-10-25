@@ -26,5 +26,5 @@ This repository contains several scenarios, or, 'patterns' for you to deploy int
 * **Pattern 1**: AI-in-a-Box (ML) Azure ML Integration - Outer Loop (Landing) and Model Inner Loop (MLOps)
 * **Pattern 2**: AI-in-a-Box (EdgeAI) Edge AI from model creation (MLOps) to deployment on Edge Devices (IoT Edge and Azure IoT Operations)
 * **Pattern 3**: AI-in-a-Box (AI Services) Azure AI Services (Document Intelligence, Vision AI, Anomaly Detection, Speech) and AOAI Integration
-* **Pattern 4**: AI-in-a-Box (AOAI) - Landing with RAG Patter
+* **Pattern 4**: AI-in-a-Box (AOAI) - Landing with RAG Pattern
 

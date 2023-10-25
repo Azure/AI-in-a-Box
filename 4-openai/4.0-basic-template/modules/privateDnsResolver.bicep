@@ -44,6 +44,4 @@ resource resolver 'Microsoft.Network/dnsResolvers@2022-07-01' = {
 }
 
 
-
-
 output dnsIp string = resolver::inEndpoint.properties.ipConfigurations[0].privateIpAddress

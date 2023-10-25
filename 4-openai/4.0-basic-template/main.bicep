@@ -2,7 +2,7 @@
       =========================================================================================================
       Created by:       Author: Your Name | your.name@azurestream.io 
       Created on:       10/04/2023
-      Description:      Pattern 4 OpenAI
+      Description:      Pattern 4: AI-in-a-Box (AOAI) - Landing Zone
       =========================================================================================================
 
       Dependencies:
@@ -69,8 +69,9 @@ param deployCosmos bool
 //********************************************************
 
 //********************************************************
-// Resource Groups
+// Resource Groups - Create your Resource Groups
 //********************************************************
+//https://learn.microsoft.com/en-us/azure/templates/microsoft.resources/2022-09-01/resourcegroups?pivots=deployment-language-bicep
 resource coreNetworkRG 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: coreNetworkResourceGroup
   location: resourceLocation
