@@ -50,4 +50,5 @@ jobs:
 
     - name: Create Azure Machine Learning workspace
       run: |
-        az ml workspace create --name "${{ env.amlw }}" --resource-group "${{ env.rg }}"
+        #az ml workspace create --name "${{ env.amlw }}" --resource-group "${{ env.rg }}"
+        az deployment group create --resource-group "${{ env.rg }}" --template-file ../../templates/main.bicep --parameters ../../templates/@ml_ws_deploy.json --parameters amlworkspace="${{ env.amlw }}"

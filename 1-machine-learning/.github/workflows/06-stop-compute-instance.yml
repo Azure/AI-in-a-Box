@@ -21,7 +21,7 @@ on:
       compute:
         description: 'Azure Machine Learning compute instance name'
         required: true
-        default: 'dev-vm'
+        default: 'aml-cluster'
         type: string
 
 env:

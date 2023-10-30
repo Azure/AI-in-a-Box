@@ -2,27 +2,25 @@
 param name string
 @description('Specifies the name of the environment.')
 param environment string
+@description('Specifies the name of the Azure Machine Learning workspace Name.')
+param amlworkspace string
 @description('Specifies the location of the Azure Machine Learning workspace and dependent resources.')
 param location string = resourceGroup().location
+param amlcomputename string = 'aml-cluster'
 @description('Specifies whether to reduce telemetry collection and enable additional encryption.')
 param hbi_workspace bool = false
 
 
 var tenantId = subscription().tenantId
-var storageAccountName_var = 'st${name}${environment}'
-var keyVaultName_var = 'kv-${name}-${environment}'
-var applicationInsightsName_var = 'appi-${name}-${environment}'
+var storageAccountName = 'st${name}${environment}${uniqueString(resourceGroup().id)}'
+var keyVaultName = 'kv-${name}-${environment}${uniqueString(resourceGroup().id)}'
+var applicationInsightsName = 'appi-${name}-${environment}'
 
-var workspaceName_var = 'mlw${name}${environment}'
+//var workspaceName = 'mlw${name}${environment}'
+var workspaceName = amlworkspace
 
-
-var storageAccount = storageAccountName.id
-var keyVault = keyVaultName.id
-var applicationInsights = applicationInsightsName.id
-
-
-resource storageAccountName 'Microsoft.Storage/storageAccounts@2022-09-01' = {
-  name: storageAccountName_var
+resource stg 'Microsoft.Storage/storageAccounts@2022-09-01' = {
+  name: storageAccountName
   location: location
   sku: {
       name: 'Standard_LRS'
@@ -44,8 +42,8 @@ resource storageAccountName 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   }
 }
 
-resource applicationInsightsName 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName_var
+resource aisn 'Microsoft.Insights/components@2020-02-02' = {
+  name: applicationInsightsName
   location: (((location == 'eastus2') || (location == 'westcentralus')) ? 'southcentralus' : location)
   kind: 'web'
   properties: {
@@ -53,8 +51,8 @@ resource applicationInsightsName 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-resource keyVaultName 'Microsoft.KeyVault/vaults@2022-07-01' = {
-  name: keyVaultName_var
+resource kvn 'Microsoft.KeyVault/vaults@2022-07-01' = {
+  name: keyVaultName
   location: location
   properties: {
     tenantId: tenantId
@@ -67,22 +65,35 @@ resource keyVaultName 'Microsoft.KeyVault/vaults@2022-07-01' = {
   }
 }
 
-resource workspaceName 'Microsoft.MachineLearningServices/workspaces@2023-06-01-preview' = {
+resource amlwn 'Microsoft.MachineLearningServices/workspaces@2023-06-01-preview' = {
   identity: {
     type: 'SystemAssigned'
   }
-  name: workspaceName_var
+  name: workspaceName
   location: location
   properties: {
-    friendlyName: workspaceName_var
-    storageAccount: storageAccount
-    keyVault: keyVault
-    applicationInsights: applicationInsights
+    friendlyName: workspaceName
+    storageAccount: stg.id
+    keyVault: kvn.id
+    applicationInsights: aisn.id
     hbiWorkspace: hbi_workspace
   }
-  dependsOn: [
-    storageAccountName
-    keyVaultName
-    applicationInsightsName
-  ]
+}
+
+resource amlwcompute 'Microsoft.MachineLearningServices/workspaces/computes@2023-06-01-preview' = {
+  parent: amlwn
+  name: amlcomputename
+  location: location
+  properties: {
+    computeType: 'AmlCompute'
+    properties: {
+      scaleSettings: {
+        minNodeCount: 0
+        maxNodeCount: 1
+        nodeIdleTimeBeforeScaleDown: 'PT120S'
+      }
+      vmPriority: 'Dedicated'
+      vmSize: 'Standard_DS3_v2'
+    }
+  }
 }

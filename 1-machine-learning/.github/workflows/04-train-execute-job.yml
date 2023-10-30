@@ -18,15 +18,11 @@ on:
           required: true
           default: 'mlw-dev-mlops'
           type: string
-      compute:
-        description: "Azure ML Compute"
-        required: true
-        default: "mlopsv2ci"
-        type: string
 
 env:
   rg: '****'
   amlw: '****'
+  runname: ''
 
 jobs:
   build:
@@ -57,11 +53,14 @@ jobs:
         az configure --defaults group="${{ env.rg }}"
         az configure --defaults workspace="${{ env.amlw }}"
 
+    # Need to create compute target first
+
     - name: Submit Training Job
       run: |
         cd src
-        az ml job create --file job.yml --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+        runname=$(az ml job create --file job.yml --resource-group "${{ env.rg }}" --workspace-name "${{ env.amlw }}" | jq -r .name)
+        echo "runname=$runname" >> $GITHUB_OUTPUT
 
     - name: Register Model
       run: |
-        az ml model create -n diabetes-data-example -p runs:/tender_island_p8p24ypsrj/model --type mlflow_model -w "${{ env.amlw }}" -g "${{ env.rg }}"
+        az ml model create -n diabetes-data-example -p "runs:/${{ env.runname }}/model" --type mlflow_model -w "${{ env.amlw }}" -g "${{ env.rg }}"

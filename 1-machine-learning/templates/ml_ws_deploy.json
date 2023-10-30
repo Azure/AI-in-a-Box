@@ -3,13 +3,16 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "value": "ftd" 
+            "value": "ftd"
+        },
+        "amlworkspace": {
+            "value": "amlworkspace"
         },
         "environment": {
-            "value": "fte" 
+            "value": "fte"
         },
         "location": {
-            "value": "westus" 
+            "value": "eastus"
         }
     }
 }

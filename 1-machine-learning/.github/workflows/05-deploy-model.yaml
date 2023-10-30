@@ -18,11 +18,6 @@ on:
         required: true
         default: 'mlw-dev-mlops'
         type: string
-      compute:
-        description: 'Azure Machine Learning compute instance name'
-        required: true
-        default: 'dev-vm'
-        type: string
 
 env:
   rg: '****'
@@ -31,8 +26,6 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-        name: prod
     steps:
     - name: Define rg and amlw
       run: |
@@ -62,10 +55,10 @@ jobs:
 
     - name: List models
       run: |
-            az ml model list -w "${{ env.amlw }}" -g "${{ env.rg }}"
+        az ml model list -w "${{ env.amlw }}" -g "${{ env.rg }}"
 
     - name: Deploy model
       run: |
-            cd src
-            az ml online-endpoint create --name diabetes-mlflow-mma --file create-endpoint.yml
-            az ml online-deployment create --name mlflow-deployment --endpoint diabetes-mlflow-mma --file mlflow-deployment.yml --resource-group "${{ env.rg }}" --workspace-name "${{ env.amlw }}"
+        cd src
+        az ml online-endpoint create --name diabetes-mlflow-mma --file create-endpoint.yml
+        az ml online-deployment create --name mlflow-deployment --endpoint diabetes-mlflow-mma --file mlflow-deployment.yml --resource-group "${{ env.rg }}" --workspace-name "${{ env.amlw }}"
