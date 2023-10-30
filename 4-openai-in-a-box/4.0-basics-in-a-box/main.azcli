@@ -18,7 +18,7 @@ az login --service-principal --username $appID --password $password --tenant $Te
 az account set --subscription $SubscriptionID
 
 #Create your Resource Group where you are going to land all your OpenAI Resources and Dependencies
-az group create --name $rgName --location $location
+#az group create --name $rgName --location $location
 
 #Build and convert your Bicep file to an Azure Resource Manager template (ARM template)
 #(Make sure that you run the below command within the \4-openai\4.0-basic-template directory. So change directory (cd) at the command prompt)
@@ -33,7 +33,7 @@ az deployment sub what-if --location $location --template-file $BicepFile --para
 
 #Deploy the Bicep template to Azure
 az deployment sub create --location $location --template-file $BicepFile --parameters $parameterFile --verbose
-az deployment sub create -l $location -f main.bicep -p main.bicepparam --verbose
+az deployment sub create -l $location -f $BicepFile -p $parameterFile --verbose
 
 #Clean Up the Resources and Delete the Resource Group
 #az group delete --name $rgName
