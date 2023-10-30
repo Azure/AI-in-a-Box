@@ -23,6 +23,9 @@ on:
         required: true
         default: 'aml-cluster'
         type: string
+  workflow_run:
+    workflows: [Deploy Model to a target]
+    types: [completed]
 
 env:
   rg: '****'
@@ -32,6 +35,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion != 'failure' }}
     steps:
     - name: Define rg and amlw
       run: |
