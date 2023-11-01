@@ -1,8 +1,8 @@
 /*region Header
       =========================================================================================================
       Created by:       Author: Your Name | your.name@azurestream.io 
-      Created on:       11/13/2023
-      Description:      Pattern 1 Azure ML
+      Created on:       11/30/2023
+      Description:      Pattern 4: AI-in-a-Box (ML) - MLOPs
       =========================================================================================================
 
       Dependencies:
@@ -23,24 +23,33 @@
 //********************************************************
 // Global Parameters
 //********************************************************
+@description('Unique Prefix')
+param prefix string = 'aibox'
 
-@description('Specifies the name of the deployment.')
-param name string
-@description('Specifies the name of the environment.')
-param environment string
+@description('Unique Suffix')
+param uniqueSuffix string = substring(uniqueString(resourceGroup().id),0,3)
+
+@description('Specifies the location of the Azure Machine Learning workspace and dependent resources.')
+param resourceLocation string = resourceGroup().location
+
+// @description('Specifies the name of the deployment.')
+// param deploymentName string = 'aibox'   
+// @description('Specifies the name of the environment.')
+// param environment string = 'dev'
+
 @description('Specifies the name of the Azure Machine Learning workspace Name.')
 param amlworkspace string
-@description('Specifies the location of the Azure Machine Learning workspace and dependent resources.')
-param location string = resourceGroup().location
 param amlcomputename string = 'aml-cluster'
 @description('Specifies whether to reduce telemetry collection and enable additional encryption.')
 param hbi_workspace bool = false
 
-
+//********************************************************
+// Resource Config Parameters
+//********************************************************
 var tenantId = subscription().tenantId
-var storageAccountName = 'st${name}${environment}${uniqueString(resourceGroup().id)}'
-var keyVaultName = 'kv-${name}-${environment}${uniqueString(resourceGroup().id)}'
-var applicationInsightsName = 'appi-${name}-${environment}'
+var storageAccountName = 'stg${prefix}${uniqueSuffix}'
+var applicationInsightsName = 'appi-${prefix}${uniqueSuffix}'
+var keyVaultName = 'kv-${prefix}${uniqueSuffix}'
 
 //var workspaceName = 'mlw${name}${environment}'
 var workspaceName = amlworkspace
@@ -51,9 +60,10 @@ var workspaceName = amlworkspace
 
 //1. Deploy Required Storage Account(s)
 //Deploy Storage Accounts (Create your Storage Account (ADLS Gen2 & HNS Enabled) for your ML Workspace)
+//https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts?tabs=bicep
 resource stg 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: storageAccountName
-  location: location
+  location: resourceLocation
   sku: {
       name: 'Standard_LRS'
   }
@@ -75,9 +85,10 @@ resource stg 'Microsoft.Storage/storageAccounts@2022-09-01' = {
 }
 
 //2. Deploy Application Insights Instance
+//https://learn.microsoft.com/en-us/azure/templates/microsoft.insights/components?pivots=deployment-language-bicep
 resource aisn 'Microsoft.Insights/components@2020-02-02' = {
   name: applicationInsightsName
-  location: (((location == 'eastus2') || (location == 'westcentralus')) ? 'southcentralus' : location)
+  location: (((resourceLocation == 'eastus2') || (resourceLocation == 'westcentralus')) ? 'southcentralus' : resourceLocation)
   kind: 'web'
   properties: {
     Application_Type: 'web'
@@ -85,9 +96,10 @@ resource aisn 'Microsoft.Insights/components@2020-02-02' = {
 }
 
 //3. Deploy Required Key Vault
+//https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults
 resource kvn 'Microsoft.KeyVault/vaults@2022-07-01' = {
   name: keyVaultName
-  location: location
+  location: resourceLocation
   properties: {
     tenantId: tenantId
     sku: {
@@ -99,13 +111,14 @@ resource kvn 'Microsoft.KeyVault/vaults@2022-07-01' = {
   }
 }
 
-//4. Deploy Machine Learning Instance
+//4. Deploy Machine Learning Workspace
+//https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces?pivots=deployment-language-bicep
 resource amlwn 'Microsoft.MachineLearningServices/workspaces@2023-06-01-preview' = {
   identity: {
     type: 'SystemAssigned'
   }
   name: workspaceName
-  location: location
+  location: resourceLocation
   properties: {
     friendlyName: workspaceName
     storageAccount: stg.id
@@ -116,10 +129,11 @@ resource amlwn 'Microsoft.MachineLearningServices/workspaces@2023-06-01-preview'
 }
 
 //5. Deploy ML Workspace Compute Instance
+//https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces/computes?pivots=deployment-language-bicep
 resource amlwcompute 'Microsoft.MachineLearningServices/workspaces/computes@2023-06-01-preview' = {
   parent: amlwn
   name: amlcomputename
-  location: location
+  location: resourceLocation
   properties: {
     computeType: 'AmlCompute'
     properties: {

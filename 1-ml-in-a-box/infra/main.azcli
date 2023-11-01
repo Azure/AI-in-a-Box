@@ -33,6 +33,7 @@ az ad sp create-for-rbac --name github-aml-sp --role contributor --scopes /subsc
 #Build and convert your Bicep file to an Azure Resource Manager template (ARM template)
 #(Make sure that you run the below command within the \1-ml-in-a-box/templates directory. So change directory (cd) at the command prompt)
 az bicep build --file $BicepFile
+az bicep build-params --file $parameterFile
 
 #Preview the changes that will happen. Azure Resource Manager provides the what-if operation to let you see how resources will change if you deploy the template.
 az deployment sub what-if --location $location --template-file $BicepFile --parameters $parameterFile --verbose
