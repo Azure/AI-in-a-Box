@@ -1,3 +1,29 @@
+/*region Header
+      =========================================================================================================
+      Created by:       Author: Your Name | your.name@azurestream.io 
+      Created on:       11/13/2023
+      Description:      Pattern 1 Azure ML
+      =========================================================================================================
+
+      Dependencies:
+        Install Azure CLI
+        https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest 
+
+        Install Latest version of Bicep
+        https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install
+
+      SCRIPT STEPS 
+      1 - Create Storage Accounts
+      2 - Create Application Insights
+      3 - Create Key Vault
+      4 - Create ML Workspace
+      5 - Create ML Workspace Compute
+*/
+
+//********************************************************
+// Global Parameters
+//********************************************************
+
 @description('Specifies the name of the deployment.')
 param name string
 @description('Specifies the name of the environment.')
@@ -19,6 +45,12 @@ var applicationInsightsName = 'appi-${name}-${environment}'
 //var workspaceName = 'mlw${name}${environment}'
 var workspaceName = amlworkspace
 
+//********************************************************
+// Deploy Core Platform Services 
+//********************************************************
+
+//1. Deploy Required Storage Account(s)
+//Deploy Storage Accounts (Create your Storage Account (ADLS Gen2 & HNS Enabled) for your ML Workspace)
 resource stg 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: storageAccountName
   location: location
@@ -42,6 +74,7 @@ resource stg 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   }
 }
 
+//2. Deploy Application Insights Instance
 resource aisn 'Microsoft.Insights/components@2020-02-02' = {
   name: applicationInsightsName
   location: (((location == 'eastus2') || (location == 'westcentralus')) ? 'southcentralus' : location)
@@ -51,6 +84,7 @@ resource aisn 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
+//3. Deploy Required Key Vault
 resource kvn 'Microsoft.KeyVault/vaults@2022-07-01' = {
   name: keyVaultName
   location: location
@@ -65,6 +99,7 @@ resource kvn 'Microsoft.KeyVault/vaults@2022-07-01' = {
   }
 }
 
+//4. Deploy Machine Learning Instance
 resource amlwn 'Microsoft.MachineLearningServices/workspaces@2023-06-01-preview' = {
   identity: {
     type: 'SystemAssigned'
@@ -80,6 +115,7 @@ resource amlwn 'Microsoft.MachineLearningServices/workspaces@2023-06-01-preview'
   }
 }
 
+//5. Deploy ML Workspace Compute Instance
 resource amlwcompute 'Microsoft.MachineLearningServices/workspaces/computes@2023-06-01-preview' = {
   parent: amlwn
   name: amlcomputename
