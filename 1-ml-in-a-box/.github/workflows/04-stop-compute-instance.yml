@@ -23,9 +23,9 @@ on:
         required: true
         default: 'aml-cluster'
         type: string
-  workflow_run:
-    workflows: [Deploy Model to a target]
-    types: [completed]
+  # workflow_run:
+  #   workflows: [Deploy Model to a target]
+  #   types: [completed]
 
 env:
   rg: '****'
