@@ -5,8 +5,8 @@
     $appID             = "YOUR-ServicePrincipal-ClientID"
     $password          = "YOUR-ServicePrincipal-CLIENTSECRET"
     $location          = "eastus"
-    $rgName            = "aibx-ml-rg"
-    $DeploymentName    = "AI-in-a-Box-ML"
+    $rgName            = "aibx-edge-rg"
+    $DeploymentName    = "AI-in-a-Box-Edge"
     $BicepFile         = "main.bicep"
     $parameterFile     = "main.parameters.json" 
 #endregion

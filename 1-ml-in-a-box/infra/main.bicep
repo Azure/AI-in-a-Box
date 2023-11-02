@@ -51,7 +51,7 @@ var storageAccountName = 'stg${prefix}${uniqueSuffix}'
 var applicationInsightsName = 'appi-${prefix}${uniqueSuffix}'
 var keyVaultName = 'kv-${prefix}${uniqueSuffix}'
 
-//var workspaceName = 'mlw${name}${environment}'
+//var workspaceName = 'aml${prefix}${uniqueSuffix}'
 var workspaceName = amlworkspace
 
 //********************************************************
