@@ -5,11 +5,11 @@ command: >-
   --training_data ${{inputs.training_data}}
   --reg_rate ${{inputs.reg_rate}}
 inputs:
-  training_data: 
-    type: uri_folder 
-    path: azureml:diabetes-folder:1
+  training_data:
+    type: uri_folder
+    path: azureml:<<amldataset>>:1
   reg_rate: 0.001
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-compute: azureml:aml-cluster
+compute: azureml:<<amlcluster>>
 experiment_name: diabetes-mlops-challenge1
 description: "test"

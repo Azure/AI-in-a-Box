@@ -57,8 +57,6 @@ jobs:
         az configure --defaults group="${{ env.rg }}"
         az configure --defaults workspace="${{ env.amlw }}"
 
-    # Need to create compute target first
-
     - name: Submit Training Job
       run: |
         cd src

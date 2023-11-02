@@ -18,6 +18,11 @@ on:
         required: true
         default: 'mlw-dev-mlops'
         type: string
+      aml_dataset:
+        description: 'Azure Machine Learning Dataset name'
+        required: true
+        default: 'diabetes-folder'
+        type: string
   workflow_run:
     workflows: [Create Azure Machine Learning workspace]
     types: [completed]
@@ -25,6 +30,7 @@ on:
 env:
   rg: '****'
   amlw: '****'
+  amldataset: 'diabetes-folder'
 
 jobs:
   build:
@@ -60,4 +66,4 @@ jobs:
     - name: Create dataset in Azure ML workspace
       run: |
         cd experimentation
-        az ml data create --name diabetes-folder --version 1 --path data
+        az ml data create --name "${{ env.amldataset }}" --version 1 --path data

@@ -1,11 +1,11 @@
 name: Create Azure Machine Learning workspace
 
 on:
-  push:
-    branches:
-     - 'main'
-    paths:
-    - 'src/model/*'
+  # push:
+  #   branches:
+  #    - 'main'
+  #   paths:
+  #   - 'src/model/*'
   workflow_dispatch:
     inputs:
       resource_group:
