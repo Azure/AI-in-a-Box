@@ -15,8 +15,8 @@ This project aims to provide an "Azure AI/ML Easy Button" for common scenarios. 
 |---|---|---|
 |[Cognitive Services Landing Zone in-a-box](https://github.com/Azure/cognitive-services-landing-zone-in-a-box)|Minimal enterprise-ready networking and AI services setup to support most Cognitive Services scenarios in a secure environment|<li>Hub-and-Spoke Vnet setup and peering <br> <li>Cognitive Service deployment <br> <li>Private endpoint setup <br> <li>Private DNS integration with PaaS DNS resolver|
 |[Semantic Kernel Bot in-a-box](https://github.com/Azure/semantic-kernel-bot-in-a-box)|Extendable solution accelerator for advanced Azure OpenAI Bots|<li>Deploy Azure OpenAI bot to multiple channels (Web, Teams, Slack, etc) <br> <li>Built-in Retrieval-Augmented Generation (RAG) support <br> <li>Implement custom AI Plugins|
-|[Azure ML Operationalization in-a-box (WIP)](https://github.com/Azure/mlops-in-a-box)|Boilerplate Data Science project from model development to deployment and monitoring|<li>End-to-end MLOps project template <li>Outer Loop (infrastructure setup) <br> <li>Inner Loop (model creation and deployment lifecycle)|
-|[Edge AI in-a-box (WIP)](https://github.com/Azure/edge-ai-in-a-box)|Edge AI from model creation (MLOps) to deployment on Edge Devices|<li>End-to-end MLOps project template <li>Outer Loop (infrastructure setup) <br> <li>Inner Loop (model creation and deployment lifecycle)|
+|[Azure ML Operationalization in-a-box (WIP)](./mlops-in-a-box)|Boilerplate Data Science project from model development to deployment and monitoring|<li>End-to-end MLOps project template <li>Outer Loop (infrastructure setup) <br> <li>Inner Loop (model creation and deployment lifecycle)|
+|[Edge AI in-a-box (WIP)](./edge-ai-in-a-box)|Edge AI from model creation (MLOps) to deployment on Edge Devices|<li>End-to-end MLOps project template <li>Outer Loop (infrastructure setup) <br> <li>Inner Loop (model creation and deployment lifecycle)|
 
 ## Key contacts
 
