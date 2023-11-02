@@ -1,4 +1,5 @@
-name: Create Azure Machine Learning workspace
+name: 01-Create Azure ML Workspace
+run-name: ${{ github.actor }} is executing 01-create-workspace.yml
 
 on:
   # push:
@@ -11,12 +12,12 @@ on:
       resource_group:
         description: 'Resource group name'
         required: true
-        default: 'rg-dev-mlops'
+        default: 'aibx-ml-rg'
         type: string
       aml_workspace:
         description: 'Azure Machine Learning workspace name'
         required: true
-        default: 'mlw-dev-mlops'
+        default: 'aibx-mlw'
         type: string
 
 env:
@@ -27,28 +28,30 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Define rg and amlw
-      run: |
-        if [[ "${{ github.event_name }}" == "push" ]]; then
-          echo "rg=${{ env.rg }}" >> "$GITHUB_ENV"
-          echo "amlw=${{ env.amlw }}" >> "$GITHUB_ENV"
-        else
-          echo "rg=${{ github.event.inputs.resource_group }}" >> "$GITHUB_ENV"
-          echo "amlw=${{ github.event.inputs.aml_workspace }}" >> "$GITHUB_ENV"
-        fi
+      - name: Define Resource Group and Azure ML Workspace
+        run: |
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            echo "rg=${{ env.rg }}" >> "$GITHUB_ENV"
+            echo "amlw=${{ env.amlw }}" >> "$GITHUB_ENV"
+          else
+            rg="${{ github.event.inputs.resource_group }}"
+            amlw="${{ github.event.inputs.aml_workspace }}"
+            echo "rg=${{ github.event.inputs.resource_group }}" >> "$GITHUB_ENV"
+            echo "amlw=${{ github.event.inputs.aml_workspace }}" >> "$GITHUB_ENV"
+          fi 
 
-    - name: Check out repo
-      uses: actions/checkout@main
+      - name: Check out repo
+        uses: actions/checkout@main
 
-    - name: Install az ml extension
-      run: az extension add -n ml -y
+      - name: Install az ml extension
+        run: az extension add -n ml -y
 
-    - name: Azure login
-      uses: azure/login@v1
-      with:
-        creds: ${{secrets.AZURE_CREDENTIALS}}
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
 
-    - name: Create Azure Machine Learning workspace
-      run: |
-        #az ml workspace create --name "${{ env.amlw }}" --resource-group "${{ env.rg }}"
-        az deployment group create --resource-group "${{ env.rg }}" --template-file ../../templates/main.bicep --parameters ../../templates/@ml_ws_deploy.json --parameters amlworkspace="${{ env.amlw }}"
+      - name: Create Azure ML Workspace
+        run: |
+          #az ml workspace create --name "${{ env.amlw }}" --resource-group "${{ env.rg }}"
+          az deployment group create --resource-group "${{ env.rg }}" --template-file ./infra/main.bicep --parameters ./infra/main.parameters.json --parameters amlworkspace="${{ env.amlw }}"
