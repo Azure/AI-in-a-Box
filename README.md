@@ -11,11 +11,6 @@ This project aims to provide an "Azure AI/ML Easy Button" for common scenarios. 
 
 ## Available Patterns
 
-<p align="center">
-  <img src="Assets/images/AI-in-a-Box-Patterns.png" alt="FTA AI-in-a-Box: Deployment Accelerator" style="width: 100%" />
-</p>
-
-
 |Pattern|Description|Supported Use Cases and Features|
 |---|---|---|
 |[Cognitive Services Landing Zone in-a-box](https://github.com/Azure/cognitive-services-landing-zone-in-a-box)|Minimal enterprise-ready networking and AI services setup to support most Cognitive Services scenarios in a secure environment|<li>Hub-and-Spoke Vnet setup and peering <br> <li>Cognitive Service deployment <br> <li>Private endpoint setup <br> <li>Private DNS integration with PaaS DNS resolver|
