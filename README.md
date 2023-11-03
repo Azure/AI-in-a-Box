@@ -12,7 +12,7 @@ This project aims to provide an "Azure AI/ML Easy Button" for common scenarios. 
 ## Available Patterns
 
 <p align="center">
-  <img src="Assets/images/AI-in-a-Box-Patterns.png" alt="FTA AI-in-a-Box: Deployment Accelerator" style="width: 50%" />
+  <img src="Assets/images/AI-in-a-Box-Patterns.png" alt="FTA AI-in-a-Box: Deployment Accelerator" style="width: 90%" />
 </p>
 
 
