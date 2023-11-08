@@ -38,11 +38,11 @@ on:
     types: [completed]
 
 env:
-  rg: '****'
-  amlw: '****'
-  amlcomputecluster: '****'
-  amldataset: 'diabetes-folder'
-  amlmodelname: '****'
+  rg: 'Replace with the name of the Azure Resource Group'
+  amlw: 'Replace with the name of the AzureML Workspace Name'
+  amlcomputecluster: Replace with the name of the AzureML Workspace Compute Cluster Name
+  amldataset: 'Replace with the name of the AzureML Workspace Data set Name Ex: diabetes-folder'
+  amlmodelname: 'Replace with the name of the AzureML Workspace Model Name'
   runname: ''
 
 jobs:

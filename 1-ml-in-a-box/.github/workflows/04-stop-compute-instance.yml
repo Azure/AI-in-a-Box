@@ -28,9 +28,9 @@ on:
   #   types: [completed]
 
 env:
-  rg: '****'
-  amlw: '****'
-  compute: '****'
+  rg: 'Replace with the name of the Azure Resource Group'
+  amlw: 'Replace with the name of the AzureML Workspace Name'
+  compute: 'Replace with the name of the AzureML Workspace Compute Cluster Name'
 
 jobs:
   build:

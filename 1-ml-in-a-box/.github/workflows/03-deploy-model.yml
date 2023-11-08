@@ -1,11 +1,11 @@
 name: Deploy Model to a target
 
 on:
-  push:
-    branches:
-     - 'main'
-    paths:
-    - 'src/model/*'
+  # push:
+  #   branches:
+  #    - 'main'
+  #   paths:
+  #   - 'src/model/*'
   workflow_dispatch:
     inputs:
       resource_group:
@@ -33,16 +33,18 @@ on:
         required: true
         default: 'diabetes-data-example'
         type: string
-  workflow_run:
-    workflows: [Create Execute Job through ml]
-    types: [completed]
+  repository_dispatch:
+    types: [deploy-model]
+  # workflow_run:
+  #   workflows: [Create Execute Job through ml]
+  #   types: [completed]
 
 env:
-  rg: '****'
-  amlw: '****'
-  amlflowdeploymentname: '****'
-  amlendpointname: '****'
-  amlmodelname: '****'
+  rg: 'Replace with the name of the Azure Resource Group'
+  amlw: 'Replace with the name of the AzureML Workspace Name'
+  amlflowdeploymentname: 'Replace with the name of the AzureML Workspace Deployment Name'
+  amlendpointname: 'Replace with the name of the AzureML Workspace Endpoint Name'
+  amlmodelname: 'Replace with the name of the AzureML Workspace Model Name'
 
 jobs:
   deploy:

@@ -21,8 +21,8 @@ on:
         type: string
 
 env:
-  rg: '****'
-  amlw: '****'
+  rg: 'Replace with the name of the Azure Resource Group'
+  amlw: 'Replace with the name of the AzureML Workspace Name'
 
 jobs:
   build:
@@ -38,7 +38,7 @@ jobs:
             amlw="${{ github.event.inputs.aml_workspace }}"
             echo "rg=${{ github.event.inputs.resource_group }}" >> "$GITHUB_ENV"
             echo "amlw=${{ github.event.inputs.aml_workspace }}" >> "$GITHUB_ENV"
-          fi 
+          fi
 
       - name: Check out repo
         uses: actions/checkout@main
