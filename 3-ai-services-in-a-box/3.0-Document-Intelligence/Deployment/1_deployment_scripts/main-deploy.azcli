@@ -1,0 +1,187 @@
+# ============================================================================================
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT license.
+# ============================================================================================
+#
+# Developed by Dr. Gaiye "Gail" Zhou, Sr Architect @ Microsoft.  
+# August 2022
+#
+# ============================================================================================
+# Azure resource naming rules can be found here: 
+# https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules
+#
+# quick cheat sheet: scope, length, naming rules 
+# azure key vault:         global, len 3-24, Alphanumerics and hyphens, start with letter
+# azure storage account:   global, len 3-24, Lowercase letters and numbers.
+# azure cosmos db account: global, len 3-44, Lowercase letters, numbers, and hyphens, 
+#                                      stars with lowercase letter or number
+# azure logic app workflow:        len 1-43   Alphanumerics, hyphens, underscores, periods, 
+#                                             and parenthesis.
+# azure functions app web sites (azure functions app name): 
+#                                  len 2-60, Alphanumeric, hyphens and Unicode characters 
+#                                            that can be mapped to Punycode. 
+#                                             Can't start or end with hyphen.
+#
+################################################################################################
+#
+# !!!!!!!!!!!!!   Important: User Configuration Section Start !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Set up naming structure for the SA: Change the values of the variables below to your own
+#
+################################################################################################
+# replace with your own azure subscription id 
+$subscriptionId = 'fill-in-your-azure-subscription-id-here'
+# replace with region of your choice
+$location = 'eastus' # change it to your own 
+# change this to your own resource group name 
+$resourceGroupName = 'fill-in-your-resource-group-name-here' 
+# change this to your email id registered in azure active directory
+# for example: userid@contoso.com 
+$aadEmail = 'userid@yourcompany.com' 
+# CHANGE this to your own. This will set up the rest of the resource names as desired.
+# Provide a good Resource Name Prefix that will help to create unique names in Azure
+#   Alphanumerics 2-5 length. examples: fm29, pdf38, zd176
+$resourceNamePrefix = 'yourownprefixhere'
+# !!!!!!!!!!!!!   Important: User Configuration Section Complete !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+################################################################################################
+#
+#
+################################################################################################
+# Login and specify the azure subscription to deploy resources to 
+################################################################################################
+az login
+
+# get list of subscriptions in tabular format
+# az account list -o table
+
+# Set current active subscription
+az account set --subscription $subscriptionId 
+# To see result:
+# az account show 
+
+################################################################################################
+# Set up azure resource naming structure with resource name prefix received from user
+# Do not need to modify below naming structure unless you run into conflicts.
+# To avoid that situation, provide a better $resourceNamePrefix value in previous section
+################################################################################################
+# Resource names with prefix 
+$keyVaultName =  $resourceNamePrefix + 'fa-kv'
+$midName = $resourceNamePrefix + '_fa_MID' 
+$storageAccountName = $resourceNamePrefix + 'formrepository' 
+$formRecognierName = $resourceNamePrefix + 'formrecognizer' 
+$cosmosAccountName = $resourceNamePrefix + 'cosmosdb' 
+$azureFunctionsAppName = $resourceNamePrefix + 'funcapp'
+$logicAppOutlookName = $resourceNamePrefix + 'lapp-outlook'
+$logicAppFormProcName = $resourceNamePrefix + 'lapp-formproc'
+
+
+# Create resource group if it does not exist
+az group create --location $location --resource-group $resourceGroupName 
+
+# powershell script example:
+# $resourceGroup = az group exists -n $resourcegroupName
+# if ($resourceGroup -eq $false) {
+#   az group create `
+#    --location $location `
+#    --name $resourceGroupName `
+#    --subscription $subscriptionId
+# }
+#
+# bash script example: 
+# if [ $(az group exists --name $resourceGroupName) = false ]; then
+#   az group create --name $resourceGroupName --location $location
+# fi
+
+################################################################################################
+# Step 1: Create or Reuse Key Vault 
+#         It will use your AAD email to get AAD objectId to grant you Key vault permission
+################################################################################################
+$objectId = az ad user show --id $aadEmail --query id  
+# Optionally you can use below line with your actual AAD object ID:
+# $objectId ='your-aad-object-id'
+az deployment group create --resource-group $resourceGroupName `
+    --parameters location=$location `
+    --parameters objectId=$objectId `
+    --parameters resourceGroupName=$resourceGroupName `
+    --parameters keyVaultName=$keyVaultName `
+    --parameters @params-kv.json `
+    --template-file deploy-key-vault.bicep `
+    --name deploy-kv `
+    --query properties.outputs
+
+# examine the results: 
+# az keyvault show --name $keyVaultName --query id --output tsv
+
+################################################################################################
+# Step 2: Create resources, assign privileges and save secrets into key vault 
+#         A: create a group of resources: 
+#            resource level managed identity
+#            azure data lake storage
+#            azure cosmos db
+#            azure form recognizer
+#         B: assign the right permissions for the above resources. 
+#         C: save various keys and form recognizer end point into key vault 
+################################################################################################
+az deployment group create --resource-group $resourceGroupName `
+    --parameters location=$location `
+    --parameters resourceGroupName=$resourceGroupName `
+    --parameters keyVaultName=$keyVaultName `
+    --parameters midName=$midName `
+    --parameters storageAccountName=$storageAccountName `
+    --parameters formRecognierName=$formRecognierName `
+    --parameters cosmosAccountName=$cosmosAccountName `
+    --template-file deploy-resources.bicep `
+    --name deploy-resources `
+    --query properties.outputs
+   
+################################################################################################
+# Step 3: Create and set up azure functions and deploy  python code 
+#         Create Azure Functions App with its own storage and enable App Insight for monitoring 
+# Note: Code is not deployed yet until Step 5
+################################################################################################
+# 
+az deployment group create --resource-group $resourceGroupName `
+    --parameters location=$location `
+    --parameters resourceGroupName=$resourceGroupName `
+    --parameters keyVaultName=$keyVaultName `
+    --parameters midName=$midName `
+    --parameters azureFunctionsAppName=$azureFunctionsAppName `
+    --template-file deploy-functionsapp.bicep `
+    --name deploy-functionsapp `
+    --query properties.outputs
+
+################################################################################################
+# Step 4: Deploy Logic Apps with valid api connections to azire storage, cosmos db, and outlook 
+################################################################################################
+az deployment group create --resource-group $resourceGroupName `
+    --parameters location=$location `
+    --parameters resourceGroupName=$resourceGroupName `
+    --parameters keyVaultName=$keyVaultName `
+    --parameters resourceNamePrefix=$resourceNamePrefix `
+    --parameters azureFunctionsAppName=$azureFunctionsAppName `
+    --parameters midName=$midName `
+    --parameters storageAccountName=$storageAccountName `
+    --parameters cosmosAccountName=$cosmosAccountName `
+    --parameters logicAppOutlookName=$logicAppOutlookName `
+    --parameters logicAppFormProcName=$logicAppFormProcName `
+    --template-file deploy-logicapps-hostkey.bicep `
+    --name deploy-logicapps-hostkey `
+    --query properties.outputs
+
+################################################################################################
+# Step 5: Deploy Python Code to the Azure Functions Infrastructure created by 3 
+################################################################################################
+# go to the location where code resides: 
+cd ..\code
+# Publish code to Azure Functions App 
+func azure functionapp publish $azureFunctionsAppName --python    
+# cd back to directory 1_deployment_scripts to continue deployment step 4
+cd ..\1_deployment_scripts
+
+################################################################################################
+# After Deployment:
+# You need to authorize the outlookConnection with valid outlook email id and password. 
+# Find this api resource in azure portal and authorize it. Additional information
+# can be found in the deployment guide - solution configuration section
+################################################################################################
+
+

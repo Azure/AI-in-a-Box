@@ -1,0 +1,37 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": 
+    {
+      "location": {
+        "value": "eastus"
+      },
+      "resourceGroupName": {
+        "value": "fmproc-automation-rg"
+      },
+      "keyVaultName": {
+        "value": "fmproc-automation-kv"
+      },
+      "resourcePrefix": {
+        "value": "fmpasa1"
+      },
+      "storageAccountName": {
+        "value": "fmpasa1repository"
+      },
+      "formRecognierName": {
+        "value": "fmpasa1formrecognizer"
+      },
+      "cosmosAccountName": {
+        "value": "fmpas1cosmosdb"
+      },
+      "azureFunctionsAppName": {
+        "value": "fmpsa1funapp"
+      },
+      "logicAppOutlookName": {
+        "value": "fmpsa1laemail"
+      },
+      "logicAppFormProcName": {
+        "value": "fmpsa1laform"
+      }
+    }
+}
