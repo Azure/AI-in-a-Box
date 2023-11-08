@@ -1,0 +1,5362 @@
+{
+	"status": "succeeded",
+	"createdDateTime": "2022-06-09T21:32:39Z",
+	"lastUpdatedDateTime": "2022-06-09T21:32:42Z",
+	"analyzeResult": {
+		"apiVersion": "2022-06-30-preview",
+		"modelId": "prebuilt-layout",
+		"stringIndexType": "textElements",
+		"content": "Contoso Safety 360\n☒Hazardous Condition\n☐At Risk Behavior\n☐Safety Suggestion\n☐Safety Recognition\n☒Equipment\n☐Material Handling\n☐Slips, Trips, Falls,\n☐Spill, Release, Environmental ☐PPE\n☐Electrical\n☐Ergonomics\n☒Other Safety\n☒Significant\n☐Not Significant\nFindings: Mold plate was thrown out of CNC. Magnetic Plate was being used\nMold went through Plexi Glass Roof.\nSuggested Solutions:\nFix the equipment ab1, exam equipment room to make sure that\nall safety conditions be met.\nSubmitter: Daleen du Plessis\nDepartment: Tower Room\nDate: July 26, 2021\nOwner: Etleva Hysa\nSolutions: Maintenance accident prevention team to work on solutions\nTarget Date: July 30, 2021\nClose Date: July 29, 2021\nSubmitter Approval: :selected: :unselected: :unselected: :unselected: :selected: :unselected: :unselected: :unselected: :unselected: :unselected: :unselected: :selected: :selected: :unselected:",
+		"pages": [
+			{
+				"pageNumber": 1,
+				"angle": 0,
+				"width": 8.5,
+				"height": 11,
+				"unit": "inch",
+				"words": [
+					{
+						"content": "Contoso",
+						"polygon": [
+							2.8292,
+							1.119,
+							4.0373,
+							1.119,
+							4.0373,
+							1.373,
+							2.8292,
+							1.373
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 0,
+							"length": 7
+						}
+					},
+					{
+						"content": "Safety",
+						"polygon": [
+							4.1467,
+							1.1008,
+							5.0403,
+							1.1008,
+							5.0403,
+							1.439,
+							4.1467,
+							1.439
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 8,
+							"length": 6
+						}
+					},
+					{
+						"content": "360",
+						"polygon": [
+							5.1447,
+							1.1179,
+							5.6849,
+							1.1179,
+							5.6849,
+							1.373,
+							5.1447,
+							1.373
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 15,
+							"length": 3
+						}
+					},
+					{
+						"content": "☒Hazardous",
+						"polygon": [
+							1.1046,
+							1.8455,
+							2.1016,
+							1.8455,
+							2.1016,
+							1.9908,
+							1.1046,
+							1.9908
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 19,
+							"length": 10
+						}
+					},
+					{
+						"content": "Condition",
+						"polygon": [
+							1.0878,
+							2.0997,
+							1.8351,
+							2.0997,
+							1.8351,
+							2.2335,
+							1.0878,
+							2.2335
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 30,
+							"length": 9
+						}
+					},
+					{
+						"content": "☐At",
+						"polygon": [
+							2.7279,
+							1.8433,
+							3.0694,
+							1.8433,
+							3.0694,
+							1.99,
+							2.7279,
+							1.99
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 40,
+							"length": 3
+						}
+					},
+					{
+						"content": "Risk",
+						"polygon": [
+							3.1355,
+							1.856,
+							3.4301,
+							1.856,
+							3.4301,
+							1.9902,
+							3.1355,
+							1.9902
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 44,
+							"length": 4
+						}
+					},
+					{
+						"content": "Behavior",
+						"polygon": [
+							2.7183,
+							2.0993,
+							3.3998,
+							2.0993,
+							3.3998,
+							2.2335,
+							2.7183,
+							2.2335
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 49,
+							"length": 8
+						}
+					},
+					{
+						"content": "☐Safety",
+						"polygon": [
+							4.3516,
+							1.8433,
+							5.0105,
+							1.8433,
+							5.0105,
+							2.0231,
+							4.3516,
+							2.0231
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 58,
+							"length": 7
+						}
+					},
+					{
+						"content": "Suggestion",
+						"polygon": [
+							4.3325,
+							2.1056,
+							5.1737,
+							2.1056,
+							5.1737,
+							2.2665,
+							4.3325,
+							2.2665
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 66,
+							"length": 10
+						}
+					},
+					{
+						"content": "☐Safety",
+						"polygon": [
+							5.9752,
+							1.8433,
+							6.6341,
+							1.8433,
+							6.6341,
+							2.0231,
+							5.9752,
+							2.0231
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 77,
+							"length": 7
+						}
+					},
+					{
+						"content": "Recognition",
+						"polygon": [
+							5.9657,
+							2.1056,
+							6.8756,
+							2.1056,
+							6.8756,
+							2.2665,
+							5.9657,
+							2.2665
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 85,
+							"length": 11
+						}
+					},
+					{
+						"content": "☒Equipment",
+						"polygon": [
+							1.1046,
+							2.5871,
+							2.1336,
+							2.5871,
+							2.1336,
+							2.7648,
+							1.1046,
+							2.7648
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 97,
+							"length": 10
+						}
+					},
+					{
+						"content": "☐Material",
+						"polygon": [
+							4.3516,
+							2.585,
+							5.1788,
+							2.585,
+							5.1788,
+							2.7318,
+							4.3516,
+							2.7318
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 108,
+							"length": 9
+						}
+					},
+					{
+						"content": "Handling",
+						"polygon": [
+							5.2539,
+							2.5977,
+							5.9331,
+							2.5977,
+							5.9331,
+							2.7648,
+							5.2539,
+							2.7648
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 118,
+							"length": 8
+						}
+					},
+					{
+						"content": "☐Slips,",
+						"polygon": [
+							1.1046,
+							2.8367,
+							1.6664,
+							2.8367,
+							1.6664,
+							3.0165,
+							1.1046,
+							3.0165
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 127,
+							"length": 7
+						}
+					},
+					{
+						"content": "Trips,",
+						"polygon": [
+							1.7245,
+							2.8556,
+							2.1445,
+							2.8556,
+							2.1445,
+							3.0165,
+							1.7245,
+							3.0165
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 135,
+							"length": 6
+						}
+					},
+					{
+						"content": "Falls,",
+						"polygon": [
+							2.2177,
+							2.8493,
+							2.5847,
+							2.8493,
+							2.5847,
+							3.0094,
+							2.2177,
+							3.0094
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 142,
+							"length": 6
+						}
+					},
+					{
+						"content": "☐Spill,",
+						"polygon": [
+							4.3516,
+							2.8367,
+							4.8824,
+							2.8367,
+							4.8824,
+							3.0165,
+							4.3516,
+							3.0165
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 149,
+							"length": 7
+						}
+					},
+					{
+						"content": "Release,",
+						"polygon": [
+							4.9553,
+							2.8493,
+							5.584,
+							2.8493,
+							5.584,
+							3.0094,
+							4.9553,
+							3.0094
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 157,
+							"length": 8
+						}
+					},
+					{
+						"content": "Environmental",
+						"polygon": [
+							5.6568,
+							2.8493,
+							6.7848,
+							2.8493,
+							6.7848,
+							2.9835,
+							5.6568,
+							2.9835
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 166,
+							"length": 13
+						}
+					},
+					{
+						"content": "☐PPE",
+						"polygon": [
+							4.3516,
+							3.0883,
+							4.8057,
+							3.0883,
+							4.8057,
+							3.234,
+							4.3516,
+							3.234
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 180,
+							"length": 4
+						}
+					},
+					{
+						"content": "☐Electrical",
+						"polygon": [
+							1.1046,
+							3.0883,
+							1.9753,
+							3.0883,
+							1.9753,
+							3.2352,
+							1.1046,
+							3.2352
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 185,
+							"length": 11
+						}
+					},
+					{
+						"content": "☐Ergonomics",
+						"polygon": [
+							1.1046,
+							3.3417,
+							2.1863,
+							3.3417,
+							2.1863,
+							3.5215,
+							1.1046,
+							3.5215
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 197,
+							"length": 11
+						}
+					},
+					{
+						"content": "☒Other",
+						"polygon": [
+							4.3516,
+							3.3438,
+							4.9789,
+							3.3438,
+							4.9789,
+							3.4891,
+							4.3516,
+							3.4891
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 209,
+							"length": 6
+						}
+					},
+					{
+						"content": "Safety",
+						"polygon": [
+							5.0322,
+							3.3536,
+							5.5136,
+							3.3536,
+							5.5136,
+							3.5215,
+							5.0322,
+							3.5215
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 216,
+							"length": 6
+						}
+					},
+					{
+						"content": "☒Significant",
+						"polygon": [
+							1.1046,
+							3.8659,
+							2.087,
+							3.8659,
+							2.087,
+							4.0435,
+							1.1046,
+							4.0435
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 223,
+							"length": 12
+						}
+					},
+					{
+						"content": "☐Not",
+						"polygon": [
+							4.3516,
+							3.8638,
+							4.8091,
+							3.8638,
+							4.8091,
+							4.0106,
+							4.3516,
+							4.0106
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 236,
+							"length": 4
+						}
+					},
+					{
+						"content": "Significant",
+						"polygon": [
+							4.8662,
+							3.8756,
+							5.6704,
+							3.8756,
+							5.6704,
+							4.0435,
+							4.8662,
+							4.0435
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 241,
+							"length": 11
+						}
+					},
+					{
+						"content": "Findings:",
+						"polygon": [
+							1.0917,
+							4.4935,
+							1.7672,
+							4.4935,
+							1.7672,
+							4.6602,
+							1.0917,
+							4.6602
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 253,
+							"length": 9
+						}
+					},
+					{
+						"content": "Mold",
+						"polygon": [
+							1.9632,
+							4.4814,
+							2.2678,
+							4.4814,
+							2.2678,
+							4.5869,
+							1.9632,
+							4.5869
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 263,
+							"length": 4
+						}
+					},
+					{
+						"content": "plate",
+						"polygon": [
+							2.3246,
+							4.4814,
+							2.6205,
+							4.4814,
+							2.6205,
+							4.6128,
+							2.3246,
+							4.6128
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 268,
+							"length": 5
+						}
+					},
+					{
+						"content": "was",
+						"polygon": [
+							2.6656,
+							4.513,
+							2.8985,
+							4.513,
+							2.8985,
+							4.5869,
+							2.6656,
+							4.5869
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 274,
+							"length": 3
+						}
+					},
+					{
+						"content": "thrown",
+						"polygon": [
+							2.9422,
+							4.4814,
+							3.3838,
+							4.4814,
+							3.3838,
+							4.5869,
+							2.9422,
+							4.5869
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 278,
+							"length": 6
+						}
+					},
+					{
+						"content": "out",
+						"polygon": [
+							3.4344,
+							4.4961,
+							3.636,
+							4.4961,
+							3.636,
+							4.5869,
+							3.4344,
+							4.5869
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 285,
+							"length": 3
+						}
+					},
+					{
+						"content": "of",
+						"polygon": [
+							3.681,
+							4.4808,
+							3.8044,
+							4.4808,
+							3.8044,
+							4.5869,
+							3.681,
+							4.5869
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 289,
+							"length": 2
+						}
+					},
+					{
+						"content": "CNC.",
+						"polygon": [
+							3.8447,
+							4.4876,
+							4.127,
+							4.4876,
+							4.127,
+							4.5868,
+							3.8447,
+							4.5868
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 292,
+							"length": 4
+						}
+					},
+					{
+						"content": "Magnetic",
+						"polygon": [
+							4.184,
+							4.4863,
+							4.7492,
+							4.4863,
+							4.7492,
+							4.6128,
+							4.184,
+							4.6128
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 297,
+							"length": 8
+						}
+					},
+					{
+						"content": "Plate",
+						"polygon": [
+							4.8004,
+							4.4814,
+							5.0965,
+							4.4814,
+							5.0965,
+							4.5869,
+							4.8004,
+							4.5869
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 306,
+							"length": 5
+						}
+					},
+					{
+						"content": "was",
+						"polygon": [
+							5.1411,
+							4.513,
+							5.3728,
+							4.513,
+							5.3728,
+							4.5869,
+							5.1411,
+							4.5869
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 312,
+							"length": 3
+						}
+					},
+					{
+						"content": "being",
+						"polygon": [
+							5.4251,
+							4.4814,
+							5.7534,
+							4.4814,
+							5.7534,
+							4.6128,
+							5.4251,
+							4.6128
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 316,
+							"length": 5
+						}
+					},
+					{
+						"content": "used",
+						"polygon": [
+							5.8029,
+							4.4817,
+							6.0779,
+							4.4817,
+							6.0779,
+							4.5869,
+							5.8029,
+							4.5869
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 322,
+							"length": 4
+						}
+					},
+					{
+						"content": "Mold",
+						"polygon": [
+							1.0882,
+							4.7248,
+							1.3929,
+							4.7248,
+							1.3929,
+							4.8303,
+							1.0882,
+							4.8303
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 327,
+							"length": 4
+						}
+					},
+					{
+						"content": "went",
+						"polygon": [
+							1.4407,
+							4.7395,
+							1.7497,
+							4.7395,
+							1.7497,
+							4.8303,
+							1.4407,
+							4.8303
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 332,
+							"length": 4
+						}
+					},
+					{
+						"content": "through",
+						"polygon": [
+							1.7903,
+							4.7248,
+							2.2756,
+							4.7248,
+							2.2756,
+							4.8562,
+							1.7903,
+							4.8562
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 337,
+							"length": 7
+						}
+					},
+					{
+						"content": "Plexi",
+						"polygon": [
+							2.3324,
+							4.7248,
+							2.601,
+							4.7248,
+							2.601,
+							4.8303,
+							2.3324,
+							4.8303
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 345,
+							"length": 5
+						}
+					},
+					{
+						"content": "Glass",
+						"polygon": [
+							2.6524,
+							4.7248,
+							2.9632,
+							4.7248,
+							2.9632,
+							4.8303,
+							2.6524,
+							4.8303
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 351,
+							"length": 5
+						}
+					},
+					{
+						"content": "Roof.",
+						"polygon": [
+							3.0168,
+							4.7241,
+							3.3234,
+							4.7241,
+							3.3234,
+							4.8303,
+							3.0168,
+							4.8303
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 357,
+							"length": 5
+						}
+					},
+					{
+						"content": "Suggested",
+						"polygon": [
+							1.0822,
+							5.2985,
+							1.8733,
+							5.2985,
+							1.8733,
+							5.4652,
+							1.0822,
+							5.4652
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 363,
+							"length": 9
+						}
+					},
+					{
+						"content": "Solutions:",
+						"polygon": [
+							1.9388,
+							5.2981,
+							2.6998,
+							5.2981,
+							2.6998,
+							5.4323,
+							1.9388,
+							5.4323
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 373,
+							"length": 10
+						}
+					},
+					{
+						"content": "Fix",
+						"polygon": [
+							2.9352,
+							5.2913,
+							3.0906,
+							5.2913,
+							3.0906,
+							5.391,
+							2.9352,
+							5.391
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 384,
+							"length": 3
+						}
+					},
+					{
+						"content": "the",
+						"polygon": [
+							3.1314,
+							5.2864,
+							3.3298,
+							5.2864,
+							3.3298,
+							5.3919,
+							3.1314,
+							5.3919
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 388,
+							"length": 3
+						}
+					},
+					{
+						"content": "equipment",
+						"polygon": [
+							3.3775,
+							5.2913,
+							4.0468,
+							5.2913,
+							4.0468,
+							5.4178,
+							3.3775,
+							5.4178
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 392,
+							"length": 9
+						}
+					},
+					{
+						"content": "ab1,",
+						"polygon": [
+							4.0937,
+							5.2864,
+							4.3461,
+							5.2864,
+							4.3461,
+							5.4123,
+							4.0937,
+							5.4123
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 402,
+							"length": 4
+						}
+					},
+					{
+						"content": "exam",
+						"polygon": [
+							4.3965,
+							5.318,
+							4.7164,
+							5.318,
+							4.7164,
+							5.3919,
+							4.3965,
+							5.3919
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 407,
+							"length": 4
+						}
+					},
+					{
+						"content": "equipment",
+						"polygon": [
+							4.7682,
+							5.2913,
+							5.4393,
+							5.2913,
+							5.4393,
+							5.4178,
+							4.7682,
+							5.4178
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 412,
+							"length": 9
+						}
+					},
+					{
+						"content": "room",
+						"polygon": [
+							5.4889,
+							5.318,
+							5.8026,
+							5.318,
+							5.8026,
+							5.3919,
+							5.4889,
+							5.3919
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 422,
+							"length": 4
+						}
+					},
+					{
+						"content": "to",
+						"polygon": [
+							5.8513,
+							5.3011,
+							5.9732,
+							5.3011,
+							5.9732,
+							5.3919,
+							5.8513,
+							5.3919
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 427,
+							"length": 2
+						}
+					},
+					{
+						"content": "make",
+						"polygon": [
+							6.0275,
+							5.2864,
+							6.3495,
+							5.2864,
+							6.3495,
+							5.3919,
+							6.0275,
+							5.3919
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 430,
+							"length": 4
+						}
+					},
+					{
+						"content": "sure",
+						"polygon": [
+							6.3981,
+							5.318,
+							6.6549,
+							5.318,
+							6.6549,
+							5.3919,
+							6.3981,
+							5.3919
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 435,
+							"length": 4
+						}
+					},
+					{
+						"content": "that",
+						"polygon": [
+							6.6977,
+							5.2864,
+							6.947,
+							5.2864,
+							6.947,
+							5.3919,
+							6.6977,
+							5.3919
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 440,
+							"length": 4
+						}
+					},
+					{
+						"content": "all",
+						"polygon": [
+							1.0822,
+							5.5298,
+							1.2078,
+							5.5298,
+							1.2078,
+							5.6353,
+							1.0822,
+							5.6353
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 445,
+							"length": 3
+						}
+					},
+					{
+						"content": "safety",
+						"polygon": [
+							1.2595,
+							5.5291,
+							1.627,
+							5.5291,
+							1.627,
+							5.6612,
+							1.2595,
+							5.6612
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 449,
+							"length": 6
+						}
+					},
+					{
+						"content": "conditions",
+						"polygon": [
+							1.6715,
+							5.5301,
+							2.3071,
+							5.5301,
+							2.3071,
+							5.6353,
+							1.6715,
+							5.6353
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 456,
+							"length": 10
+						}
+					},
+					{
+						"content": "be",
+						"polygon": [
+							2.3577,
+							5.5298,
+							2.4957,
+							5.5298,
+							2.4957,
+							5.6353,
+							2.3577,
+							5.6353
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 467,
+							"length": 2
+						}
+					},
+					{
+						"content": "met.",
+						"polygon": [
+							2.5479,
+							5.5445,
+							2.8134,
+							5.5445,
+							2.8134,
+							5.6353,
+							2.5479,
+							5.6353
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 470,
+							"length": 4
+						}
+					},
+					{
+						"content": "Submitter:",
+						"polygon": [
+							1.0822,
+							6.36,
+							1.9025,
+							6.36,
+							1.9025,
+							6.4942,
+							1.0822,
+							6.4942
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 475,
+							"length": 10
+						}
+					},
+					{
+						"content": "Daleen",
+						"polygon": [
+							2.3183,
+							6.36,
+							2.8419,
+							6.36,
+							2.8419,
+							6.4942,
+							2.3183,
+							6.4942
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 486,
+							"length": 6
+						}
+					},
+					{
+						"content": "du",
+						"polygon": [
+							2.9092,
+							6.3604,
+							3.0895,
+							6.3604,
+							3.0895,
+							6.4942,
+							2.9092,
+							6.4942
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 493,
+							"length": 2
+						}
+					},
+					{
+						"content": "Plessis",
+						"polygon": [
+							3.1644,
+							6.36,
+							3.6549,
+							6.36,
+							3.6549,
+							6.4942,
+							3.1644,
+							6.4942
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 496,
+							"length": 7
+						}
+					},
+					{
+						"content": "Department:",
+						"polygon": [
+							1.0917,
+							6.6127,
+							2.0778,
+							6.6127,
+							2.0778,
+							6.7705,
+							1.0917,
+							6.7705
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 504,
+							"length": 11
+						}
+					},
+					{
+						"content": "Tower",
+						"polygon": [
+							2.3033,
+							6.6127,
+							2.8013,
+							6.6127,
+							2.8013,
+							6.7375,
+							2.3033,
+							6.7375
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 516,
+							"length": 5
+						}
+					},
+					{
+						"content": "Room",
+						"polygon": [
+							2.8651,
+							6.6127,
+							3.3007,
+							6.6127,
+							3.3007,
+							6.7375,
+							2.8651,
+							6.7375
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 522,
+							"length": 4
+						}
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							4.3371,
+							6.6127,
+							4.7338,
+							6.6127,
+							4.7338,
+							6.7375,
+							4.3371,
+							6.7375
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 527,
+							"length": 5
+						}
+					},
+					{
+						"content": "July",
+						"polygon": [
+							4.9516,
+							6.6034,
+							5.2454,
+							6.6034,
+							5.2454,
+							6.7705,
+							4.9516,
+							6.7705
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 533,
+							"length": 4
+						}
+					},
+					{
+						"content": "26,",
+						"polygon": [
+							5.3037,
+							6.611,
+							5.5251,
+							6.611,
+							5.5251,
+							6.7635,
+							5.3037,
+							6.7635
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 538,
+							"length": 3
+						}
+					},
+					{
+						"content": "2021",
+						"polygon": [
+							5.5917,
+							6.611,
+							5.9648,
+							6.611,
+							5.9648,
+							6.7375,
+							5.5917,
+							6.7375
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 542,
+							"length": 4
+						}
+					},
+					{
+						"content": "Owner:",
+						"polygon": [
+							1.2097,
+							7.2293,
+							1.7746,
+							7.2293,
+							1.7746,
+							7.3559,
+							1.2097,
+							7.3559
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 547,
+							"length": 6
+						}
+					},
+					{
+						"content": "Etleva",
+						"polygon": [
+							2.01,
+							7.2217,
+							2.4626,
+							7.2217,
+							2.4626,
+							7.3559,
+							2.01,
+							7.3559
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 554,
+							"length": 6
+						}
+					},
+					{
+						"content": "Hysa",
+						"polygon": [
+							2.5367,
+							7.2305,
+							2.8859,
+							7.2305,
+							2.8859,
+							7.3888,
+							2.5367,
+							7.3888
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 561,
+							"length": 4
+						}
+					},
+					{
+						"content": "Solutions:",
+						"polygon": [
+							1.2072,
+							7.4667,
+							1.9686,
+							7.4667,
+							1.9686,
+							7.6009,
+							1.2072,
+							7.6009
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 566,
+							"length": 10
+						}
+					},
+					{
+						"content": "Maintenance",
+						"polygon": [
+							2.1848,
+							7.4599,
+							2.9857,
+							7.4599,
+							2.9857,
+							7.5605,
+							2.1848,
+							7.5605
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 577,
+							"length": 11
+						}
+					},
+					{
+						"content": "accident",
+						"polygon": [
+							3.0351,
+							7.4553,
+							3.5481,
+							7.4553,
+							3.5481,
+							7.5605,
+							3.0351,
+							7.5605
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 589,
+							"length": 8
+						}
+					},
+					{
+						"content": "prevention",
+						"polygon": [
+							3.5992,
+							7.4599,
+							4.2574,
+							7.4599,
+							4.2574,
+							7.5864,
+							3.5992,
+							7.5864
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 598,
+							"length": 10
+						}
+					},
+					{
+						"content": "team",
+						"polygon": [
+							4.3051,
+							7.4698,
+							4.6142,
+							7.4698,
+							4.6142,
+							7.5605,
+							4.3051,
+							7.5605
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 609,
+							"length": 4
+						}
+					},
+					{
+						"content": "to",
+						"polygon": [
+							4.6618,
+							7.4698,
+							4.7837,
+							7.4698,
+							4.7837,
+							7.5605,
+							4.6618,
+							7.5605
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 614,
+							"length": 2
+						}
+					},
+					{
+						"content": "work",
+						"polygon": [
+							4.8298,
+							7.455,
+							5.1365,
+							7.455,
+							5.1365,
+							7.5605,
+							4.8298,
+							7.5605
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 617,
+							"length": 4
+						}
+					},
+					{
+						"content": "on",
+						"polygon": [
+							5.1791,
+							7.4866,
+							5.3237,
+							7.4866,
+							5.3237,
+							7.5605,
+							5.1791,
+							7.5605
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 622,
+							"length": 2
+						}
+					},
+					{
+						"content": "solutions",
+						"polygon": [
+							5.3737,
+							7.455,
+							5.9245,
+							7.455,
+							5.9245,
+							7.5605,
+							5.3737,
+							7.5605
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 625,
+							"length": 9
+						}
+					},
+					{
+						"content": "Target",
+						"polygon": [
+							1.2017,
+							7.7194,
+							1.7048,
+							7.7194,
+							1.7048,
+							7.8772,
+							1.2017,
+							7.8772
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 635,
+							"length": 6
+						}
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							1.7699,
+							7.7194,
+							2.1664,
+							7.7194,
+							2.1664,
+							7.8442,
+							1.7699,
+							7.8442
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 642,
+							"length": 5
+						}
+					},
+					{
+						"content": "July",
+						"polygon": [
+							2.3875,
+							7.71,
+							2.6814,
+							7.71,
+							2.6814,
+							7.8772,
+							2.3875,
+							7.8772
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 648,
+							"length": 4
+						}
+					},
+					{
+						"content": "30,",
+						"polygon": [
+							2.7385,
+							7.7176,
+							2.961,
+							7.7176,
+							2.961,
+							7.8701,
+							2.7385,
+							7.8701
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 653,
+							"length": 3
+						}
+					},
+					{
+						"content": "2021",
+						"polygon": [
+							3.0277,
+							7.7176,
+							3.4007,
+							7.7176,
+							3.4007,
+							7.8442,
+							3.0277,
+							7.8442
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 657,
+							"length": 4
+						}
+					},
+					{
+						"content": "Close",
+						"polygon": [
+							4.3349,
+							7.71,
+							4.7412,
+							7.71,
+							4.7412,
+							7.8442,
+							4.3349,
+							7.8442
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 662,
+							"length": 5
+						}
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							4.8103,
+							7.7194,
+							5.2067,
+							7.7194,
+							5.2067,
+							7.8442,
+							4.8103,
+							7.8442
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 668,
+							"length": 5
+						}
+					},
+					{
+						"content": "July",
+						"polygon": [
+							5.4516,
+							7.71,
+							5.7454,
+							7.71,
+							5.7454,
+							7.8772,
+							5.4516,
+							7.8772
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 674,
+							"length": 4
+						}
+					},
+					{
+						"content": "29,",
+						"polygon": [
+							5.8037,
+							7.7176,
+							6.0251,
+							7.7176,
+							6.0251,
+							7.8701,
+							5.8037,
+							7.8701
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 679,
+							"length": 3
+						}
+					},
+					{
+						"content": "2021",
+						"polygon": [
+							6.0917,
+							7.7176,
+							6.4648,
+							7.7176,
+							6.4648,
+							7.8442,
+							6.0917,
+							7.8442
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 683,
+							"length": 4
+						}
+					},
+					{
+						"content": "Submitter",
+						"polygon": [
+							1.2072,
+							7.955,
+							1.9864,
+							7.955,
+							1.9864,
+							8.0892,
+							1.2072,
+							8.0892
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 688,
+							"length": 9
+						}
+					},
+					{
+						"content": "Approval:",
+						"polygon": [
+							2.0371,
+							7.955,
+							2.7839,
+							7.955,
+							2.7839,
+							8.1222,
+							2.0371,
+							8.1222
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 698,
+							"length": 9
+						}
+					}
+				],
+				"selectionMarks": [
+					{
+						"state": "selected",
+						"polygon": [
+							1.1046,
+							1.8455,
+							1.2477,
+							1.8455,
+							1.2477,
+							1.9908,
+							1.1046,
+							1.9908
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 708,
+							"length": 10
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							2.7279,
+							1.8433,
+							2.8718,
+							1.8433,
+							2.8718,
+							1.9886,
+							2.7279,
+							1.9886
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 719,
+							"length": 12
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							4.3516,
+							1.8433,
+							4.4955,
+							1.8433,
+							4.4955,
+							1.9886,
+							4.3516,
+							1.9886
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 732,
+							"length": 12
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							5.9752,
+							1.8433,
+							6.1192,
+							1.8433,
+							6.1192,
+							1.9886,
+							5.9752,
+							1.9886
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 745,
+							"length": 12
+						}
+					},
+					{
+						"state": "selected",
+						"polygon": [
+							1.1046,
+							2.5871,
+							1.2477,
+							2.5871,
+							1.2477,
+							2.7324,
+							1.1046,
+							2.7324
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 758,
+							"length": 10
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							4.3516,
+							2.585,
+							4.4955,
+							2.585,
+							4.4955,
+							2.7303,
+							4.3516,
+							2.7303
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 769,
+							"length": 12
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							1.1046,
+							2.8367,
+							1.2485,
+							2.8367,
+							1.2485,
+							2.9819,
+							1.1046,
+							2.9819
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 782,
+							"length": 12
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							4.3516,
+							2.8367,
+							4.4955,
+							2.8367,
+							4.4955,
+							2.9819,
+							4.3516,
+							2.9819
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 795,
+							"length": 12
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							1.1046,
+							3.0883,
+							1.2485,
+							3.0883,
+							1.2485,
+							3.2336,
+							1.1046,
+							3.2336
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 808,
+							"length": 12
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							4.3516,
+							3.0883,
+							4.4955,
+							3.0883,
+							4.4955,
+							3.2336,
+							4.3516,
+							3.2336
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 821,
+							"length": 12
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							1.1046,
+							3.3417,
+							1.2485,
+							3.3417,
+							1.2485,
+							3.4869,
+							1.1046,
+							3.4869
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 834,
+							"length": 12
+						}
+					},
+					{
+						"state": "selected",
+						"polygon": [
+							4.3516,
+							3.3438,
+							4.4948,
+							3.3438,
+							4.4948,
+							3.4891,
+							4.3516,
+							3.4891
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 847,
+							"length": 10
+						}
+					},
+					{
+						"state": "selected",
+						"polygon": [
+							1.1046,
+							3.8659,
+							1.2477,
+							3.8659,
+							1.2477,
+							4.0112,
+							1.1046,
+							4.0112
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 858,
+							"length": 10
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							4.3516,
+							3.8638,
+							4.4955,
+							3.8638,
+							4.4955,
+							4.009,
+							4.3516,
+							4.009
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 869,
+							"length": 12
+						}
+					}
+				],
+				"lines": [
+					{
+						"content": "Contoso Safety 360",
+						"polygon": [
+							2.8292,
+							1.1008,
+							5.6849,
+							1.1008,
+							5.6849,
+							1.439,
+							2.8292,
+							1.439
+						],
+						"spans": [
+							{
+								"offset": 0,
+								"length": 18
+							}
+						]
+					},
+					{
+						"content": "☒Hazardous",
+						"polygon": [
+							1.1046,
+							1.8455,
+							2.1016,
+							1.8455,
+							2.1016,
+							1.9908,
+							1.1046,
+							1.9908
+						],
+						"spans": [
+							{
+								"offset": 19,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Condition",
+						"polygon": [
+							1.0878,
+							2.0997,
+							1.8351,
+							2.0997,
+							1.8351,
+							2.2335,
+							1.0878,
+							2.2335
+						],
+						"spans": [
+							{
+								"offset": 30,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "☐At Risk",
+						"polygon": [
+							2.7279,
+							1.8433,
+							3.4301,
+							1.8433,
+							3.4301,
+							1.9902,
+							2.7279,
+							1.9902
+						],
+						"spans": [
+							{
+								"offset": 40,
+								"length": 8
+							}
+						]
+					},
+					{
+						"content": "Behavior",
+						"polygon": [
+							2.7183,
+							2.0993,
+							3.3998,
+							2.0993,
+							3.3998,
+							2.2335,
+							2.7183,
+							2.2335
+						],
+						"spans": [
+							{
+								"offset": 49,
+								"length": 8
+							}
+						]
+					},
+					{
+						"content": "☐Safety",
+						"polygon": [
+							4.3516,
+							1.8433,
+							5.0105,
+							1.8433,
+							5.0105,
+							2.0231,
+							4.3516,
+							2.0231
+						],
+						"spans": [
+							{
+								"offset": 58,
+								"length": 7
+							}
+						]
+					},
+					{
+						"content": "Suggestion",
+						"polygon": [
+							4.3325,
+							2.1056,
+							5.1737,
+							2.1056,
+							5.1737,
+							2.2665,
+							4.3325,
+							2.2665
+						],
+						"spans": [
+							{
+								"offset": 66,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "☐Safety",
+						"polygon": [
+							5.9752,
+							1.8433,
+							6.6341,
+							1.8433,
+							6.6341,
+							2.0231,
+							5.9752,
+							2.0231
+						],
+						"spans": [
+							{
+								"offset": 77,
+								"length": 7
+							}
+						]
+					},
+					{
+						"content": "Recognition",
+						"polygon": [
+							5.9657,
+							2.1056,
+							6.8756,
+							2.1056,
+							6.8756,
+							2.2665,
+							5.9657,
+							2.2665
+						],
+						"spans": [
+							{
+								"offset": 85,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "☒Equipment",
+						"polygon": [
+							1.1046,
+							2.5871,
+							2.1336,
+							2.5871,
+							2.1336,
+							2.7648,
+							1.1046,
+							2.7648
+						],
+						"spans": [
+							{
+								"offset": 97,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "☐Material Handling",
+						"polygon": [
+							4.3516,
+							2.585,
+							5.9331,
+							2.585,
+							5.9331,
+							2.7648,
+							4.3516,
+							2.7648
+						],
+						"spans": [
+							{
+								"offset": 108,
+								"length": 18
+							}
+						]
+					},
+					{
+						"content": "☐Slips, Trips, Falls,",
+						"polygon": [
+							1.1046,
+							2.8367,
+							2.5847,
+							2.8367,
+							2.5847,
+							3.0165,
+							1.1046,
+							3.0165
+						],
+						"spans": [
+							{
+								"offset": 127,
+								"length": 21
+							}
+						]
+					},
+					{
+						"content": "☐Spill, Release, Environmental",
+						"polygon": [
+							4.3516,
+							2.8367,
+							6.7848,
+							2.8367,
+							6.7848,
+							3.0165,
+							4.3516,
+							3.0165
+						],
+						"spans": [
+							{
+								"offset": 149,
+								"length": 30
+							}
+						]
+					},
+					{
+						"content": "☐PPE",
+						"polygon": [
+							4.3516,
+							3.0883,
+							4.8057,
+							3.0883,
+							4.8057,
+							3.234,
+							4.3516,
+							3.234
+						],
+						"spans": [
+							{
+								"offset": 180,
+								"length": 4
+							}
+						]
+					},
+					{
+						"content": "☐Electrical",
+						"polygon": [
+							1.1046,
+							3.0883,
+							1.9753,
+							3.0883,
+							1.9753,
+							3.2352,
+							1.1046,
+							3.2352
+						],
+						"spans": [
+							{
+								"offset": 185,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "☐Ergonomics",
+						"polygon": [
+							1.1046,
+							3.3417,
+							2.1863,
+							3.3417,
+							2.1863,
+							3.5215,
+							1.1046,
+							3.5215
+						],
+						"spans": [
+							{
+								"offset": 197,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "☒Other Safety",
+						"polygon": [
+							4.3516,
+							3.3438,
+							5.5136,
+							3.3438,
+							5.5136,
+							3.5215,
+							4.3516,
+							3.5215
+						],
+						"spans": [
+							{
+								"offset": 209,
+								"length": 13
+							}
+						]
+					},
+					{
+						"content": "☒Significant",
+						"polygon": [
+							1.1046,
+							3.8659,
+							2.087,
+							3.8659,
+							2.087,
+							4.0435,
+							1.1046,
+							4.0435
+						],
+						"spans": [
+							{
+								"offset": 223,
+								"length": 12
+							}
+						]
+					},
+					{
+						"content": "☐Not Significant",
+						"polygon": [
+							4.3516,
+							3.8638,
+							5.6704,
+							3.8638,
+							5.6704,
+							4.0435,
+							4.3516,
+							4.0435
+						],
+						"spans": [
+							{
+								"offset": 236,
+								"length": 16
+							}
+						]
+					},
+					{
+						"content": "Findings:",
+						"polygon": [
+							1.0917,
+							4.4935,
+							1.7672,
+							4.4935,
+							1.7672,
+							4.6602,
+							1.0917,
+							4.6602
+						],
+						"spans": [
+							{
+								"offset": 253,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "Mold plate was thrown out of CNC. Magnetic Plate was being used",
+						"polygon": [
+							1.9632,
+							4.4808,
+							6.0779,
+							4.4808,
+							6.0779,
+							4.6128,
+							1.9632,
+							4.6128
+						],
+						"spans": [
+							{
+								"offset": 263,
+								"length": 63
+							}
+						]
+					},
+					{
+						"content": "Mold went through Plexi Glass Roof.",
+						"polygon": [
+							1.0882,
+							4.7241,
+							3.3234,
+							4.7241,
+							3.3234,
+							4.8562,
+							1.0882,
+							4.8562
+						],
+						"spans": [
+							{
+								"offset": 327,
+								"length": 35
+							}
+						]
+					},
+					{
+						"content": "Suggested Solutions:",
+						"polygon": [
+							1.0822,
+							5.2981,
+							2.6998,
+							5.2981,
+							2.6998,
+							5.4652,
+							1.0822,
+							5.4652
+						],
+						"spans": [
+							{
+								"offset": 363,
+								"length": 20
+							}
+						]
+					},
+					{
+						"content": "Fix the equipment ab1, exam equipment room to make sure that",
+						"polygon": [
+							2.9352,
+							5.2864,
+							6.947,
+							5.2864,
+							6.947,
+							5.4178,
+							2.9352,
+							5.4178
+						],
+						"spans": [
+							{
+								"offset": 384,
+								"length": 60
+							}
+						]
+					},
+					{
+						"content": "all safety conditions be met.",
+						"polygon": [
+							1.0822,
+							5.5291,
+							2.8134,
+							5.5291,
+							2.8134,
+							5.6612,
+							1.0822,
+							5.6612
+						],
+						"spans": [
+							{
+								"offset": 445,
+								"length": 29
+							}
+						]
+					},
+					{
+						"content": "Submitter:",
+						"polygon": [
+							1.0822,
+							6.36,
+							1.9025,
+							6.36,
+							1.9025,
+							6.4942,
+							1.0822,
+							6.4942
+						],
+						"spans": [
+							{
+								"offset": 475,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Daleen du Plessis",
+						"polygon": [
+							2.3183,
+							6.36,
+							3.6549,
+							6.36,
+							3.6549,
+							6.4942,
+							2.3183,
+							6.4942
+						],
+						"spans": [
+							{
+								"offset": 486,
+								"length": 17
+							}
+						]
+					},
+					{
+						"content": "Department:",
+						"polygon": [
+							1.0917,
+							6.6127,
+							2.0778,
+							6.6127,
+							2.0778,
+							6.7705,
+							1.0917,
+							6.7705
+						],
+						"spans": [
+							{
+								"offset": 504,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "Tower Room",
+						"polygon": [
+							2.3033,
+							6.6127,
+							3.3007,
+							6.6127,
+							3.3007,
+							6.7375,
+							2.3033,
+							6.7375
+						],
+						"spans": [
+							{
+								"offset": 516,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							4.3371,
+							6.6127,
+							4.7338,
+							6.6127,
+							4.7338,
+							6.7375,
+							4.3371,
+							6.7375
+						],
+						"spans": [
+							{
+								"offset": 527,
+								"length": 5
+							}
+						]
+					},
+					{
+						"content": "July 26, 2021",
+						"polygon": [
+							4.9516,
+							6.6034,
+							5.9648,
+							6.6034,
+							5.9648,
+							6.7705,
+							4.9516,
+							6.7705
+						],
+						"spans": [
+							{
+								"offset": 533,
+								"length": 13
+							}
+						]
+					},
+					{
+						"content": "Owner:",
+						"polygon": [
+							1.2097,
+							7.2293,
+							1.7746,
+							7.2293,
+							1.7746,
+							7.3559,
+							1.2097,
+							7.3559
+						],
+						"spans": [
+							{
+								"offset": 547,
+								"length": 6
+							}
+						]
+					},
+					{
+						"content": "Etleva Hysa",
+						"polygon": [
+							2.01,
+							7.2217,
+							2.8859,
+							7.2217,
+							2.8859,
+							7.3888,
+							2.01,
+							7.3888
+						],
+						"spans": [
+							{
+								"offset": 554,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "Solutions:",
+						"polygon": [
+							1.2072,
+							7.4667,
+							1.9686,
+							7.4667,
+							1.9686,
+							7.6009,
+							1.2072,
+							7.6009
+						],
+						"spans": [
+							{
+								"offset": 566,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Maintenance accident prevention team to work on solutions",
+						"polygon": [
+							2.1848,
+							7.455,
+							5.9245,
+							7.455,
+							5.9245,
+							7.5864,
+							2.1848,
+							7.5864
+						],
+						"spans": [
+							{
+								"offset": 577,
+								"length": 57
+							}
+						]
+					},
+					{
+						"content": "Target Date:",
+						"polygon": [
+							1.2017,
+							7.7194,
+							2.1664,
+							7.7194,
+							2.1664,
+							7.8772,
+							1.2017,
+							7.8772
+						],
+						"spans": [
+							{
+								"offset": 635,
+								"length": 12
+							}
+						]
+					},
+					{
+						"content": "July 30, 2021",
+						"polygon": [
+							2.3875,
+							7.71,
+							3.4007,
+							7.71,
+							3.4007,
+							7.8772,
+							2.3875,
+							7.8772
+						],
+						"spans": [
+							{
+								"offset": 648,
+								"length": 13
+							}
+						]
+					},
+					{
+						"content": "Close Date:",
+						"polygon": [
+							4.3349,
+							7.71,
+							5.2067,
+							7.71,
+							5.2067,
+							7.8442,
+							4.3349,
+							7.8442
+						],
+						"spans": [
+							{
+								"offset": 662,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "July 29, 2021",
+						"polygon": [
+							5.4516,
+							7.71,
+							6.4648,
+							7.71,
+							6.4648,
+							7.8772,
+							5.4516,
+							7.8772
+						],
+						"spans": [
+							{
+								"offset": 674,
+								"length": 13
+							}
+						]
+					},
+					{
+						"content": "Submitter Approval:",
+						"polygon": [
+							1.2072,
+							7.955,
+							2.7839,
+							7.955,
+							2.7839,
+							8.1222,
+							1.2072,
+							8.1222
+						],
+						"spans": [
+							{
+								"offset": 688,
+								"length": 19
+							}
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 0,
+						"length": 881
+					}
+				],
+				"kind": "document"
+			}
+		],
+		"tables": [
+			{
+				"rowCount": 19,
+				"columnCount": 5,
+				"cells": [
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 0,
+						"content": "☒Hazardous Condition\n:selected:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9732,
+									1.7906,
+									2.6427,
+									1.784,
+									2.6427,
+									2.2809,
+									0.9797,
+									2.2743
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 19,
+								"length": 20
+							},
+							{
+								"offset": 708,
+								"length": 10
+							}
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 1,
+						"content": "☐At Risk Behavior\n:unselected:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									2.6427,
+									1.784,
+									3.8867,
+									1.784,
+									3.8867,
+									2.2809,
+									2.6427,
+									2.2809
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 40,
+								"length": 17
+							},
+							{
+								"offset": 719,
+								"length": 12
+							}
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 2,
+						"content": "☐Safety Suggestion\n:unselected:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8867,
+									1.784,
+									5.7986,
+									1.784,
+									5.7986,
+									2.2809,
+									3.8867,
+									2.2809
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 58,
+								"length": 18
+							},
+							{
+								"offset": 732,
+								"length": 12
+							}
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 3,
+						"columnSpan": 2,
+						"content": "☐Safety Recognition\n:unselected:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.7986,
+									1.784,
+									7.4878,
+									1.784,
+									7.4943,
+									2.2875,
+									5.7986,
+									2.2809
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 77,
+								"length": 19
+							},
+							{
+								"offset": 745,
+								"length": 12
+							}
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 0,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9797,
+									2.2743,
+									2.6427,
+									2.2809,
+									2.6493,
+									2.5261,
+									0.9797,
+									2.5261
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 1,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									2.6427,
+									2.2809,
+									3.8867,
+									2.2809,
+									3.8867,
+									2.5261,
+									2.6493,
+									2.5261
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8867,
+									2.2809,
+									5.7986,
+									2.2809,
+									5.7986,
+									2.5261,
+									3.8867,
+									2.5261
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 3,
+						"columnSpan": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.7986,
+									2.2809,
+									7.4943,
+									2.2875,
+									7.4943,
+									2.5261,
+									5.7986,
+									2.5261
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 0,
+						"content": "☒Equipment\n:selected:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9797,
+									2.5261,
+									2.6493,
+									2.5261,
+									2.6493,
+									2.7911,
+									0.9797,
+									2.7911
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 97,
+								"length": 10
+							},
+							{
+								"offset": 758,
+								"length": 10
+							}
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 1,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									2.6493,
+									2.5261,
+									3.8867,
+									2.5261,
+									3.8867,
+									2.7977,
+									2.6493,
+									2.7911
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 2,
+						"columnSpan": 3,
+						"content": "☐Material Handling\n:unselected:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8867,
+									2.5261,
+									7.4943,
+									2.5261,
+									7.4943,
+									2.7977,
+									3.8867,
+									2.7977
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 108,
+								"length": 18
+							},
+							{
+								"offset": 769,
+								"length": 12
+							}
+						]
+					},
+					{
+						"rowIndex": 3,
+						"columnIndex": 0,
+						"content": "☐Slips, Trips, Falls,\n:unselected:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9797,
+									2.7911,
+									2.6493,
+									2.7911,
+									2.6493,
+									3.0494,
+									0.9863,
+									3.0494
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 127,
+								"length": 21
+							},
+							{
+								"offset": 782,
+								"length": 12
+							}
+						]
+					},
+					{
+						"rowIndex": 3,
+						"columnIndex": 1,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									2.6493,
+									2.7911,
+									3.8867,
+									2.7977,
+									3.8867,
+									3.0494,
+									2.6493,
+									3.0494
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 3,
+						"columnIndex": 2,
+						"rowSpan": 2,
+						"columnSpan": 3,
+						"content": "☐Spill, Release, Environmental ☐PPE\n:unselected:\n:unselected:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8867,
+									2.7977,
+									7.4943,
+									2.7977,
+									7.4943,
+									3.2813,
+									3.8867,
+									3.288
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 149,
+								"length": 35
+							},
+							{
+								"offset": 795,
+								"length": 12
+							},
+							{
+								"offset": 821,
+								"length": 12
+							}
+						]
+					},
+					{
+						"rowIndex": 4,
+						"columnIndex": 0,
+						"content": "☐Electrical\n:unselected:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9863,
+									3.0494,
+									2.6493,
+									3.0494,
+									2.6558,
+									3.2946,
+									0.9863,
+									3.288
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 185,
+								"length": 11
+							},
+							{
+								"offset": 808,
+								"length": 12
+							}
+						]
+					},
+					{
+						"rowIndex": 4,
+						"columnIndex": 1,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									2.6493,
+									3.0494,
+									3.8867,
+									3.0494,
+									3.8867,
+									3.288,
+									2.6558,
+									3.2946
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 5,
+						"columnIndex": 0,
+						"content": "☐Ergonomics\n:unselected:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9863,
+									3.288,
+									2.6558,
+									3.2946,
+									2.6558,
+									3.5463,
+									0.9863,
+									3.5397
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 197,
+								"length": 11
+							},
+							{
+								"offset": 834,
+								"length": 12
+							}
+						]
+					},
+					{
+						"rowIndex": 5,
+						"columnIndex": 1,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									2.6558,
+									3.2946,
+									3.8867,
+									3.288,
+									3.8867,
+									3.5397,
+									2.6558,
+									3.5463
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 5,
+						"columnIndex": 2,
+						"content": "☒Other Safety\n:selected:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8867,
+									3.288,
+									5.7986,
+									3.2747,
+									5.7986,
+									3.5463,
+									3.8867,
+									3.5397
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 209,
+								"length": 13
+							},
+							{
+								"offset": 847,
+								"length": 10
+							}
+						]
+					},
+					{
+						"rowIndex": 5,
+						"columnIndex": 3,
+						"columnSpan": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.7986,
+									3.2747,
+									7.4943,
+									3.2813,
+									7.4943,
+									3.5463,
+									5.7986,
+									3.5463
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 6,
+						"columnIndex": 0,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9863,
+									3.5397,
+									2.6558,
+									3.5463,
+									2.6624,
+									3.8047,
+									0.9863,
+									3.8047
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 6,
+						"columnIndex": 1,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									2.6558,
+									3.5463,
+									3.8867,
+									3.5397,
+									3.8867,
+									3.8047,
+									2.6624,
+									3.8047
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 6,
+						"columnIndex": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8867,
+									3.5397,
+									5.7986,
+									3.5463,
+									5.7986,
+									3.8047,
+									3.8867,
+									3.8047
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 6,
+						"columnIndex": 3,
+						"columnSpan": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.7986,
+									3.5463,
+									7.4943,
+									3.5463,
+									7.4943,
+									3.8047,
+									5.7986,
+									3.8047
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 7,
+						"columnIndex": 0,
+						"content": "☒Significant\n:selected:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9863,
+									3.8047,
+									2.6624,
+									3.8047,
+									2.6624,
+									4.0697,
+									0.9928,
+									4.0565
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 223,
+								"length": 12
+							},
+							{
+								"offset": 858,
+								"length": 10
+							}
+						]
+					},
+					{
+						"rowIndex": 7,
+						"columnIndex": 1,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									2.6624,
+									3.8047,
+									3.8867,
+									3.8047,
+									3.8867,
+									4.0697,
+									2.6624,
+									4.0697
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 7,
+						"columnIndex": 2,
+						"content": "☐Not Significant\n:unselected:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8867,
+									3.8047,
+									5.7986,
+									3.8047,
+									5.7986,
+									4.0697,
+									3.8867,
+									4.0697
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 236,
+								"length": 16
+							},
+							{
+								"offset": 869,
+								"length": 12
+							}
+						]
+					},
+					{
+						"rowIndex": 7,
+						"columnIndex": 3,
+						"columnSpan": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.7986,
+									3.8047,
+									7.4943,
+									3.8047,
+									7.4943,
+									4.0697,
+									5.7986,
+									4.0697
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 8,
+						"columnIndex": 0,
+						"columnSpan": 5,
+						"content": "Findings: Mold plate was thrown out of CNC. Magnetic Plate was being used",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9928,
+									4.0565,
+									7.4943,
+									4.0697,
+									7.4943,
+									4.6726,
+									0.9928,
+									4.6793
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 253,
+								"length": 73
+							}
+						]
+					},
+					{
+						"rowIndex": 9,
+						"columnIndex": 0,
+						"columnSpan": 2,
+						"content": "Mold went through Plexi Glass Roof.",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9928,
+									4.6793,
+									3.8867,
+									4.6726,
+									3.8867,
+									4.8714,
+									0.9994,
+									4.8714
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 327,
+								"length": 35
+							}
+						]
+					},
+					{
+						"rowIndex": 9,
+						"columnIndex": 2,
+						"columnSpan": 3,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8867,
+									4.6726,
+									7.4943,
+									4.6726,
+									7.4943,
+									4.8714,
+									3.8867,
+									4.8714
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 10,
+						"columnIndex": 0,
+						"content": "Suggested Solutions:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9994,
+									4.8714,
+									2.6689,
+									4.8714,
+									2.6755,
+									5.4876,
+									0.9994,
+									5.4876
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 363,
+								"length": 20
+							}
+						]
+					},
+					{
+						"rowIndex": 10,
+						"columnIndex": 1,
+						"content": "Fix the equipment",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									2.6689,
+									4.8714,
+									3.8867,
+									4.8714,
+									3.8867,
+									5.4809,
+									2.6755,
+									5.4876
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 384,
+								"length": 17
+							}
+						]
+					},
+					{
+						"rowIndex": 10,
+						"columnIndex": 2,
+						"columnSpan": 3,
+						"content": "ab1, exam equipment room to make sure that",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8867,
+									4.8714,
+									7.4943,
+									4.8714,
+									7.4943,
+									5.4809,
+									3.8867,
+									5.4809
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 402,
+								"length": 42
+							}
+						]
+					},
+					{
+						"rowIndex": 11,
+						"columnIndex": 0,
+						"content": "all safety conditions be",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9994,
+									5.4876,
+									2.6755,
+									5.4876,
+									2.6755,
+									5.6731,
+									0.9994,
+									5.6731
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 445,
+								"length": 24
+							}
+						]
+					},
+					{
+						"rowIndex": 11,
+						"columnIndex": 1,
+						"content": "met.",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									2.6755,
+									5.4876,
+									3.8867,
+									5.4809,
+									3.8867,
+									5.6797,
+									2.6755,
+									5.6731
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 470,
+								"length": 4
+							}
+						]
+					},
+					{
+						"rowIndex": 11,
+						"columnIndex": 2,
+						"columnSpan": 3,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8867,
+									5.4809,
+									7.4943,
+									5.4809,
+									7.4943,
+									5.6797,
+									3.8867,
+									5.6797
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 12,
+						"columnIndex": 0,
+						"content": "Submitter: Daleen",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9994,
+									5.6731,
+									2.6755,
+									5.6731,
+									2.6886,
+									6.5343,
+									1.0059,
+									6.5277
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 475,
+								"length": 17
+							}
+						]
+					},
+					{
+						"rowIndex": 12,
+						"columnIndex": 1,
+						"content": "du Plessis",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									2.6755,
+									5.6731,
+									3.8867,
+									5.6797,
+									3.8933,
+									6.541,
+									2.6886,
+									6.5343
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 493,
+								"length": 10
+							}
+						]
+					},
+					{
+						"rowIndex": 12,
+						"columnIndex": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8867,
+									5.6797,
+									5.7986,
+									5.6797,
+									5.8051,
+									6.541,
+									3.8933,
+									6.541
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 12,
+						"columnIndex": 3,
+						"columnSpan": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.7986,
+									5.6797,
+									7.4943,
+									5.6797,
+									7.5009,
+									6.541,
+									5.8051,
+									6.541
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 13,
+						"columnIndex": 0,
+						"content": "Department: Tower",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.0059,
+									6.5277,
+									2.6886,
+									6.5343,
+									2.6886,
+									6.7729,
+									1.0125,
+									6.7662
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 504,
+								"length": 17
+							}
+						]
+					},
+					{
+						"rowIndex": 13,
+						"columnIndex": 1,
+						"content": "Room",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									2.6886,
+									6.5343,
+									3.8933,
+									6.541,
+									3.8933,
+									6.7861,
+									2.6886,
+									6.7729
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 522,
+								"length": 4
+							}
+						]
+					},
+					{
+						"rowIndex": 13,
+						"columnIndex": 2,
+						"columnSpan": 3,
+						"content": "Date: July 26, 2021",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8933,
+									6.541,
+									7.5009,
+									6.541,
+									7.5009,
+									6.7861,
+									3.8933,
+									6.7861
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 527,
+								"length": 19
+							}
+						]
+					},
+					{
+						"rowIndex": 14,
+						"columnIndex": 0,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.0125,
+									6.7662,
+									2.6886,
+									6.7729,
+									2.6886,
+									7.1637,
+									1.0125,
+									7.1571
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 14,
+						"columnIndex": 1,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									2.6886,
+									6.7729,
+									3.8933,
+									6.7861,
+									3.8933,
+									7.1637,
+									2.6886,
+									7.1637
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 14,
+						"columnIndex": 2,
+						"columnSpan": 3,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8933,
+									6.7861,
+									7.5009,
+									6.7861,
+									7.5009,
+									7.1704,
+									3.8933,
+									7.1637
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 15,
+						"columnIndex": 0,
+						"columnSpan": 2,
+						"content": "Owner: Etleva Hysa",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.0125,
+									7.1571,
+									3.8933,
+									7.1637,
+									3.8933,
+									7.4089,
+									1.0125,
+									7.4221
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 547,
+								"length": 18
+							}
+						]
+					},
+					{
+						"rowIndex": 15,
+						"columnIndex": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8933,
+									7.1637,
+									5.8051,
+									7.1637,
+									5.8051,
+									7.4089,
+									3.8933,
+									7.4089
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 15,
+						"columnIndex": 3,
+						"columnSpan": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.8051,
+									7.1637,
+									7.5009,
+									7.1704,
+									7.5009,
+									7.4089,
+									5.8051,
+									7.4089
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 16,
+						"columnIndex": 0,
+						"columnSpan": 2,
+						"content": "Solutions: Maintenance accident",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.0125,
+									7.4221,
+									3.8933,
+									7.4089,
+									3.8933,
+									7.6474,
+									1.0125,
+									7.654
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 566,
+								"length": 31
+							}
+						]
+					},
+					{
+						"rowIndex": 16,
+						"columnIndex": 2,
+						"columnSpan": 3,
+						"content": "prevention team to work on solutions",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8933,
+									7.4089,
+									7.5009,
+									7.4089,
+									7.5009,
+									7.6474,
+									3.8933,
+									7.6474
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 598,
+								"length": 36
+							}
+						]
+					},
+					{
+						"rowIndex": 17,
+						"columnIndex": 0,
+						"content": "Target Date: July",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.0125,
+									7.654,
+									2.6951,
+									7.6474,
+									2.6951,
+									7.8925,
+									1.019,
+									7.8859
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 635,
+								"length": 17
+							}
+						]
+					},
+					{
+						"rowIndex": 17,
+						"columnIndex": 1,
+						"content": "30, 2021",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									2.6951,
+									7.6474,
+									3.8933,
+									7.6474,
+									3.8933,
+									7.8992,
+									2.6951,
+									7.8925
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 653,
+								"length": 8
+							}
+						]
+					},
+					{
+						"rowIndex": 17,
+						"columnIndex": 2,
+						"content": "Close Date: July",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8933,
+									7.6474,
+									5.8051,
+									7.6474,
+									5.8051,
+									7.8992,
+									3.8933,
+									7.8992
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 662,
+								"length": 16
+							}
+						]
+					},
+					{
+						"rowIndex": 17,
+						"columnIndex": 3,
+						"columnSpan": 2,
+						"content": "29, 2021",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.8051,
+									7.6474,
+									7.5009,
+									7.6474,
+									7.5009,
+									7.8992,
+									5.8051,
+									7.8992
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 679,
+								"length": 8
+							}
+						]
+					},
+					{
+						"rowIndex": 18,
+						"columnIndex": 0,
+						"columnSpan": 2,
+						"content": "Submitter Approval:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.019,
+									7.8859,
+									3.8933,
+									7.8992,
+									3.8933,
+									8.1443,
+									1.019,
+									8.1377
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 688,
+								"length": 19
+							}
+						]
+					},
+					{
+						"rowIndex": 18,
+						"columnIndex": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.8933,
+									7.8992,
+									5.8051,
+									7.8992,
+									5.8051,
+									8.1443,
+									3.8933,
+									8.1443
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 18,
+						"columnIndex": 3,
+						"columnSpan": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.8051,
+									7.8992,
+									7.5009,
+									7.8992,
+									7.5009,
+									8.1443,
+									5.8051,
+									8.1443
+								]
+							}
+						],
+						"spans": []
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0381,
+							1.7002,
+							7.3452,
+							1.7108,
+							7.3446,
+							8.0896,
+							1.0363,
+							8.0803
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 19,
+						"length": 20
+					},
+					{
+						"offset": 708,
+						"length": 10
+					},
+					{
+						"offset": 40,
+						"length": 17
+					},
+					{
+						"offset": 719,
+						"length": 12
+					},
+					{
+						"offset": 58,
+						"length": 18
+					},
+					{
+						"offset": 732,
+						"length": 12
+					},
+					{
+						"offset": 77,
+						"length": 19
+					},
+					{
+						"offset": 745,
+						"length": 12
+					},
+					{
+						"offset": 97,
+						"length": 10
+					},
+					{
+						"offset": 758,
+						"length": 10
+					},
+					{
+						"offset": 108,
+						"length": 18
+					},
+					{
+						"offset": 769,
+						"length": 12
+					},
+					{
+						"offset": 127,
+						"length": 21
+					},
+					{
+						"offset": 782,
+						"length": 12
+					},
+					{
+						"offset": 149,
+						"length": 35
+					},
+					{
+						"offset": 795,
+						"length": 12
+					},
+					{
+						"offset": 821,
+						"length": 12
+					},
+					{
+						"offset": 185,
+						"length": 11
+					},
+					{
+						"offset": 808,
+						"length": 12
+					},
+					{
+						"offset": 197,
+						"length": 11
+					},
+					{
+						"offset": 834,
+						"length": 12
+					},
+					{
+						"offset": 209,
+						"length": 13
+					},
+					{
+						"offset": 847,
+						"length": 10
+					},
+					{
+						"offset": 223,
+						"length": 12
+					},
+					{
+						"offset": 858,
+						"length": 10
+					},
+					{
+						"offset": 236,
+						"length": 16
+					},
+					{
+						"offset": 869,
+						"length": 12
+					},
+					{
+						"offset": 253,
+						"length": 454
+					}
+				]
+			}
+		],
+		"paragraphs": [
+			{
+				"spans": [
+					{
+						"offset": 0,
+						"length": 18
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.8292,
+							1.1008,
+							5.6849,
+							1.1008,
+							5.6849,
+							1.439,
+							2.8292,
+							1.439
+						]
+					}
+				],
+				"content": "Contoso Safety 360"
+			},
+			{
+				"spans": [
+					{
+						"offset": 19,
+						"length": 20
+					},
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9732,
+							1.7906,
+							2.6427,
+							1.784,
+							2.6427,
+							2.2809,
+							0.9797,
+							2.2743
+						]
+					}
+				],
+				"content": "☒Hazardous Condition\nContoso"
+			},
+			{
+				"spans": [
+					{
+						"offset": 40,
+						"length": 17
+					},
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.6427,
+							1.784,
+							3.8867,
+							1.784,
+							3.8867,
+							2.2809,
+							2.6427,
+							2.2809
+						]
+					}
+				],
+				"content": "☐At Risk Behavior\nContoso"
+			},
+			{
+				"spans": [
+					{
+						"offset": 58,
+						"length": 18
+					},
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.8867,
+							1.784,
+							5.7986,
+							1.784,
+							5.7986,
+							2.2809,
+							3.8867,
+							2.2809
+						]
+					}
+				],
+				"content": "☐Safety Suggestion\nContoso"
+			},
+			{
+				"spans": [
+					{
+						"offset": 77,
+						"length": 19
+					},
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.7986,
+							1.784,
+							7.4878,
+							1.784,
+							7.4943,
+							2.2875,
+							5.7986,
+							2.2809
+						]
+					}
+				],
+				"content": "☐Safety Recognition\nContoso"
+			},
+			{
+				"spans": [
+					{
+						"offset": 97,
+						"length": 10
+					},
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9797,
+							2.5261,
+							2.6493,
+							2.5261,
+							2.6493,
+							2.7911,
+							0.9797,
+							2.7911
+						]
+					}
+				],
+				"content": "☒Equipment\nContoso"
+			},
+			{
+				"spans": [
+					{
+						"offset": 108,
+						"length": 18
+					},
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.8867,
+							2.5261,
+							7.4943,
+							2.5261,
+							7.4943,
+							2.7977,
+							3.8867,
+							2.7977
+						]
+					}
+				],
+				"content": "☐Material Handling\nContoso"
+			},
+			{
+				"spans": [
+					{
+						"offset": 127,
+						"length": 21
+					},
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9797,
+							2.7911,
+							2.6493,
+							2.7911,
+							2.6493,
+							3.0494,
+							0.9863,
+							3.0494
+						]
+					}
+				],
+				"content": "☐Slips, Trips, Falls,\nContoso"
+			},
+			{
+				"spans": [
+					{
+						"offset": 149,
+						"length": 35
+					},
+					{
+						"offset": 0,
+						"length": 7
+					},
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.8867,
+							2.7977,
+							7.4943,
+							2.7977,
+							7.4943,
+							3.2813,
+							3.8867,
+							3.288
+						]
+					}
+				],
+				"content": "☐Spill, Release, Environmental ☐PPE\nContoso\nContoso"
+			},
+			{
+				"spans": [
+					{
+						"offset": 185,
+						"length": 11
+					},
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9863,
+							3.0494,
+							2.6493,
+							3.0494,
+							2.6558,
+							3.2946,
+							0.9863,
+							3.288
+						]
+					}
+				],
+				"content": "☐Electrical\nContoso"
+			},
+			{
+				"spans": [
+					{
+						"offset": 197,
+						"length": 11
+					},
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9863,
+							3.288,
+							2.6558,
+							3.2946,
+							2.6558,
+							3.5463,
+							0.9863,
+							3.5397
+						]
+					}
+				],
+				"content": "☐Ergonomics\nContoso"
+			},
+			{
+				"spans": [
+					{
+						"offset": 209,
+						"length": 13
+					},
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.8867,
+							3.288,
+							5.7986,
+							3.2747,
+							5.7986,
+							3.5463,
+							3.8867,
+							3.5397
+						]
+					}
+				],
+				"content": "☒Other Safety\nContoso"
+			},
+			{
+				"spans": [
+					{
+						"offset": 223,
+						"length": 12
+					},
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9863,
+							3.8047,
+							2.6624,
+							3.8047,
+							2.6624,
+							4.0697,
+							0.9928,
+							4.0565
+						]
+					}
+				],
+				"content": "☒Significant\nContoso"
+			},
+			{
+				"spans": [
+					{
+						"offset": 236,
+						"length": 16
+					},
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.8867,
+							3.8047,
+							5.7986,
+							3.8047,
+							5.7986,
+							4.0697,
+							3.8867,
+							4.0697
+						]
+					}
+				],
+				"content": "☐Not Significant\nContoso"
+			},
+			{
+				"spans": [
+					{
+						"offset": 253,
+						"length": 73
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9928,
+							4.0565,
+							7.4943,
+							4.0697,
+							7.4943,
+							4.6726,
+							0.9928,
+							4.6793
+						]
+					}
+				],
+				"content": "Findings: Mold plate was thrown out of CNC. Magnetic Plate was being used"
+			},
+			{
+				"spans": [
+					{
+						"offset": 327,
+						"length": 35
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9928,
+							4.6793,
+							3.8867,
+							4.6726,
+							3.8867,
+							4.8714,
+							0.9994,
+							4.8714
+						]
+					}
+				],
+				"content": "Mold went through Plexi Glass Roof."
+			},
+			{
+				"spans": [
+					{
+						"offset": 363,
+						"length": 20
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9994,
+							4.8714,
+							2.6689,
+							4.8714,
+							2.6755,
+							5.4876,
+							0.9994,
+							5.4876
+						]
+					}
+				],
+				"content": "Suggested Solutions:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 384,
+						"length": 17
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.6689,
+							4.8714,
+							3.8867,
+							4.8714,
+							3.8867,
+							5.4809,
+							2.6755,
+							5.4876
+						]
+					}
+				],
+				"content": "Fix the equipment"
+			},
+			{
+				"spans": [
+					{
+						"offset": 402,
+						"length": 42
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.8867,
+							4.8714,
+							7.4943,
+							4.8714,
+							7.4943,
+							5.4809,
+							3.8867,
+							5.4809
+						]
+					}
+				],
+				"content": "ab1, exam equipment room to make sure that"
+			},
+			{
+				"spans": [
+					{
+						"offset": 445,
+						"length": 24
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9994,
+							5.4876,
+							2.6755,
+							5.4876,
+							2.6755,
+							5.6731,
+							0.9994,
+							5.6731
+						]
+					}
+				],
+				"content": "all safety conditions be"
+			},
+			{
+				"spans": [
+					{
+						"offset": 470,
+						"length": 4
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.6755,
+							5.4876,
+							3.8867,
+							5.4809,
+							3.8867,
+							5.6797,
+							2.6755,
+							5.6731
+						]
+					}
+				],
+				"content": "met."
+			},
+			{
+				"spans": [
+					{
+						"offset": 475,
+						"length": 17
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9994,
+							5.6731,
+							2.6755,
+							5.6731,
+							2.6886,
+							6.5343,
+							1.0059,
+							6.5277
+						]
+					}
+				],
+				"content": "Submitter: Daleen"
+			},
+			{
+				"spans": [
+					{
+						"offset": 493,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.6755,
+							5.6731,
+							3.8867,
+							5.6797,
+							3.8933,
+							6.541,
+							2.6886,
+							6.5343
+						]
+					}
+				],
+				"content": "du Plessis"
+			},
+			{
+				"spans": [
+					{
+						"offset": 504,
+						"length": 17
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0059,
+							6.5277,
+							2.6886,
+							6.5343,
+							2.6886,
+							6.7729,
+							1.0125,
+							6.7662
+						]
+					}
+				],
+				"content": "Department: Tower"
+			},
+			{
+				"spans": [
+					{
+						"offset": 522,
+						"length": 4
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.6886,
+							6.5343,
+							3.8933,
+							6.541,
+							3.8933,
+							6.7861,
+							2.6886,
+							6.7729
+						]
+					}
+				],
+				"content": "Room"
+			},
+			{
+				"spans": [
+					{
+						"offset": 527,
+						"length": 19
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.8933,
+							6.541,
+							7.5009,
+							6.541,
+							7.5009,
+							6.7861,
+							3.8933,
+							6.7861
+						]
+					}
+				],
+				"content": "Date: July 26, 2021"
+			},
+			{
+				"spans": [
+					{
+						"offset": 547,
+						"length": 18
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0125,
+							7.1571,
+							3.8933,
+							7.1637,
+							3.8933,
+							7.4089,
+							1.0125,
+							7.4221
+						]
+					}
+				],
+				"content": "Owner: Etleva Hysa"
+			},
+			{
+				"spans": [
+					{
+						"offset": 566,
+						"length": 31
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0125,
+							7.4221,
+							3.8933,
+							7.4089,
+							3.8933,
+							7.6474,
+							1.0125,
+							7.654
+						]
+					}
+				],
+				"content": "Solutions: Maintenance accident"
+			},
+			{
+				"spans": [
+					{
+						"offset": 598,
+						"length": 36
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.8933,
+							7.4089,
+							7.5009,
+							7.4089,
+							7.5009,
+							7.6474,
+							3.8933,
+							7.6474
+						]
+					}
+				],
+				"content": "prevention team to work on solutions"
+			},
+			{
+				"spans": [
+					{
+						"offset": 635,
+						"length": 17
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0125,
+							7.654,
+							2.6951,
+							7.6474,
+							2.6951,
+							7.8925,
+							1.019,
+							7.8859
+						]
+					}
+				],
+				"content": "Target Date: July"
+			},
+			{
+				"spans": [
+					{
+						"offset": 653,
+						"length": 8
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.6951,
+							7.6474,
+							3.8933,
+							7.6474,
+							3.8933,
+							7.8992,
+							2.6951,
+							7.8925
+						]
+					}
+				],
+				"content": "30, 2021"
+			},
+			{
+				"spans": [
+					{
+						"offset": 662,
+						"length": 16
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.8933,
+							7.6474,
+							5.8051,
+							7.6474,
+							5.8051,
+							7.8992,
+							3.8933,
+							7.8992
+						]
+					}
+				],
+				"content": "Close Date: July"
+			},
+			{
+				"spans": [
+					{
+						"offset": 679,
+						"length": 8
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.8051,
+							7.6474,
+							7.5009,
+							7.6474,
+							7.5009,
+							7.8992,
+							5.8051,
+							7.8992
+						]
+					}
+				],
+				"content": "29, 2021"
+			},
+			{
+				"spans": [
+					{
+						"offset": 688,
+						"length": 19
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.019,
+							7.8859,
+							3.8933,
+							7.8992,
+							3.8933,
+							8.1443,
+							1.019,
+							8.1377
+						]
+					}
+				],
+				"content": "Submitter Approval:"
+			}
+		],
+		"styles": []
+	}
+}
