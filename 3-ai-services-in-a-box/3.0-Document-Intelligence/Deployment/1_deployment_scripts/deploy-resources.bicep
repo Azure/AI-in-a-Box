@@ -66,7 +66,7 @@ resource resourceId 'Microsoft.Resources/deployments@2020-10-01' = {
 //=====================================================================================
 
 
-module userAssignedMid 'user-mid.bicep' = {
+module userAssignedMid 'modules/user-mid.bicep' = {
   name : 'module-user-mid'
   scope : resourceGroup
   params : {
@@ -75,7 +75,7 @@ module userAssignedMid 'user-mid.bicep' = {
   }
 }
 
-module datalakev2 'datalake.bicep' = {
+module datalakev2 'modules/datalake.bicep' = {
   name : 'module-datalakev2'
   scope: resourceGroup
   params: {
@@ -92,7 +92,7 @@ module datalakev2 'datalake.bicep' = {
   }
 }
 
-module cosmosdb 'cosmos-db.bicep' = {
+module cosmosdb 'modules/cosmos-db.bicep' = {
   name: 'module-cosmos-db'
   scope: resourceGroup
   params:{
@@ -104,7 +104,7 @@ module cosmosdb 'cosmos-db.bicep' = {
   }
 }
 
-module formrecognizer 'form-recognier.bicep' = {
+module formrecognizer 'modules/form-recognier.bicep' = {
   name:'module-formrecognizer'
   scope: resourceGroup
   params:{
@@ -114,7 +114,7 @@ module formrecognizer 'form-recognier.bicep' = {
   }
 }
 
-module assignBlobContributorRoleToMid 'assign-blobcontributor.bicep' = {
+module assignBlobContributorRoleToMid 'modules/assign-blobcontributor.bicep' = {
   name: 'module-assignBlobContributorRoleToMid'
   scope: resourceGroup
   params:{
@@ -124,7 +124,7 @@ module assignBlobContributorRoleToMid 'assign-blobcontributor.bicep' = {
   }
 }
 
-module assignBlobContributorRoleToFR 'assign-blobcontributor.bicep' = {
+module assignBlobContributorRoleToFR 'modules/assign-blobcontributor.bicep' = {
   name: 'module-assignBlobContributorRoleToFR'
   scope: resourceGroup
   params:{

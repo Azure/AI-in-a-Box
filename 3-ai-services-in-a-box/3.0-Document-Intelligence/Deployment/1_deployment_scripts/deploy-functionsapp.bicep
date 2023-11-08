@@ -51,7 +51,7 @@ resource userAssignedMid 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-
 }
 
 
-module azureFunctionsApp 'azure-functionsapp.bicep' = {
+module azureFunctionsApp 'modules/azure-functionsapp.bicep' = {
   name: 'module-azure-functionsapp'
   scope: resourceGroup
   params:{

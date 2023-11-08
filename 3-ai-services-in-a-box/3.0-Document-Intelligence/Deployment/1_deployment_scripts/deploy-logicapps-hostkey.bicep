@@ -71,7 +71,7 @@ resource userAssignedMid 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-
 // Create APIs for Logic APPs 
 //*************************************************************************************
 
-module apiAdls 'api-adls.bicep' = {
+module apiAdls 'modules/api-adls.bicep' = {
   name: 'module-apiAdls'
   scope: resourceGroup
   params: {
@@ -82,7 +82,7 @@ module apiAdls 'api-adls.bicep' = {
   }
 }
 
-module apiCosmosDb 'api-cosmosdb.bicep' = {
+module apiCosmosDb 'modules/api-cosmosdb.bicep' = {
   name: 'module-apiCosmosDb'
   scope: resourceGroup
   params: {
@@ -93,7 +93,7 @@ module apiCosmosDb 'api-cosmosdb.bicep' = {
   }
 }
 
-module apiOutlook 'api-outlook.bicep' = {
+module apiOutlook 'modules/api-outlook.bicep' = {
   name: 'module-apiOutlook'
   scope: resourceGroup
   params: {
@@ -109,7 +109,7 @@ module apiOutlook 'api-outlook.bicep' = {
 // use the working API connection created above 
 //*************************************************************************************
 
-module logicAppOutlook'logicapp-outlook.bicep' = {
+module logicAppOutlook 'modules/logicapp-outlook.bicep' = {
   name : 'module-logicAppOutlookName'
   scope: resourceGroup
   params: {
@@ -128,7 +128,7 @@ module logicAppOutlook'logicapp-outlook.bicep' = {
 //*************************************************************************************
 // Create form processing logic app that uses azure functions app's host key
 //*************************************************************************************
-module logicAppFormProc'logicapp-formproc-hostkey.bicep' = {
+module logicAppFormProc 'modules/logicapp-formproc-hostkey.bicep' = {
   name : 'module-logicAppFormProc'
   scope: resourceGroup
   params: {

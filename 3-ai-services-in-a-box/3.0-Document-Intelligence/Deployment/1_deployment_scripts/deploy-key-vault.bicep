@@ -31,7 +31,7 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' existing 
   scope:subscription()
 }
 
-module deployKeyVault 'key-vault.bicep' = {
+module deployKeyVault 'modules/key-vault.bicep' = {
   name : 'module-deployKeyVault'
   scope : resourceGroup
   params : {
