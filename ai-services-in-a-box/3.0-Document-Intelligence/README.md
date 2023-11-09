@@ -1,16 +1,13 @@
----
-page_type: sample
-languages:
-- python
-products:
-- azure data lake storage
-- azure-form-recognizer
-- azure-logic-apps
-- azure-functions-app
-- azure cosmos db
-- power-bi
----
+<p align="center">
+  <img src="../../Assets/images/aiservices-in-a-box.svg" alt="FTA AI Services-in-a-Box: Deployment Accelerator" style="width: 15%" />
+</p>
 
+# Doc-Intelligence-in-a-Box
+
+## Solution Architecture
+Below architecture diagram illustrates the main components and information flow of this solution accelerator. For the work flow details, please refer to the page for [Architecture Description](./Deployment/Architecture_Description/README.md). 
+
+![Architecture Diagram](./Deployment/Images/Arch-SA-PDF-Form-Processing-Automation-AAC.png "PDF Form Processing Automation Architecture Diagram")
 
 # Azure PDF Form Processing Automation Solution Accelerator
 
@@ -56,11 +53,6 @@ For additional training and support, please review:
 
 ## Getting Started
 Get started by deploying the solution accelerator to a specified resource group in your own subscription. Go to the [Deployment Guide](./Deployment/README.md) to set up your Azure environment, create necessary Azure resources, and test the solution. 
-
-## Architecture
-Below architecture diagram illustrates the main components and information flow of this solution accelerator. For the work flow details, please refer to the page for [Architecture Description](./Deployment/Architecture_Description/README.md). 
-
-![Architecture Diagram](./Deployment/Images/Arch-SA-PDF-Form-Processing-Automation-AAC.png "PDF Form Processing Automation Architecture Diagram")
 
 ## Power BI Dashboard
 

@@ -1,13 +1,17 @@
 # AI-in-a-Box
 
 <p align="center">
-  <img src="Assets/images/logo.png" alt="FTA AI-in-a-Box: Deployment Accelerator" style="width: 50%" />
+  <img src="Assets/images/ai-in-a-box.svg" alt="FTA AI-in-a-Box: Deployment Accelerator" style="width: 15%" />
 </p>
 
 
 Starting your AI/ML journey in Azure may seem daunting for some organizations and engineers, often leading to roadblocks in their initial scenarios. To address this challenge, providing a user-friendly and intuitive template becomes crucial. Such a template should serve as a guiding example, illustrating the complete AI/ML lifecycle, showcasing the integration of MLOps practices, detailing the setup of training pipelines, and offering insights into the processes of model training, deployment, and access. This ensures a smoother and more comprehensible transition into the world of Azure AI and ML.
 
 This project aims to provide an "Azure AI/ML Easy Button" for common scenarios. Something that shows how the pieces fit together in easy to deploy templates. Using the **patterns** available here, engineers will be able to quickly setup a Azure ML/AI/Edge environment which optionally includes streaming & batch ingestion, Model training and creation, Scaling patterns and edge deployments.
+
+<p align="center">
+  <img src="Assets/images/aibxtable.svg" alt="FTA AI-in-a-Box: Deployment Accelerator" />
+</p>
 
 ## Available Patterns
 
@@ -23,14 +27,14 @@ This project aims to provide an "Azure AI/ML Easy Button" for common scenarios. 
 
 | Contact | GitHub ID | Email |
 |--------------|------|-----------|
+| Alex Morales | @msalemor | alemor@microsoft.com |
 | Andrés Padilla | @AndresPad | andres.padilla@microsoft.com | 
-| Meer Alam | @msdpalam | meeral@microsoft.com | 
-| Neeraj Jhaveri | @neerajjhaveri | neeraj.jhaveri@microsoft.com |
+| Chris Ayers | @codebytes | chrisayers@microsoft.com |
+| Eduardo Noriega | @EduardoN | ednorieg@microsoft.com |
+| Jean Hayes | @jehayesms | jean.hayes@microsoft.com |
 | Marco Aurélio Bigélli Cardoso  | @MarcoABCardoso | macardoso@microsoft.com | 
 | Maria Vrabie  | @MariaVrabie | mavrabie@microsoft.com | 
-| Jean Hayes | @jehayesms | jean.hayes@microsoft.com |
-| Victor Santana | @Welasco | vsantana@microsoft.com |
-| Chris Ayers | @codebytes | chrisayers@microsoft.com |
-| Alex Morales | @msalemor | alemor@microsoft.com |
+| Meer Alam | @msdpalam | meeral@microsoft.com | 
+| Neeraj Jhaveri | @neerajjhaveri | neeraj.jhaveri@microsoft.com |
 | Thiago Rotta | @rottathiago | thiago.rotta@microsoft.com |
-
+| Victor Santana | @Welasco | vsantana@microsoft.com |
