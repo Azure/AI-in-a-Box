@@ -87,6 +87,12 @@ jobs:
       run: |
         az ml model list -w "${{ env.amlw }}" -g "${{ env.rg }}"
 
+    - name: Register Model
+      run: |
+        az ml job list --resource-group OpenAI --workspace-name amlworkspace
+        runname=$(az ml job list --resource-group "${{ env.rg }}" --workspace-name "${{ env.amlw }}" --query "([?contains(status, 'Completed')][])[0]" | jq -r .name)
+        az ml model create -n "${{ env.amlmodelname }}" -p "runs:/$runname/model" --type mlflow_model -w "${{ env.amlw }}" -g "${{ env.rg }}"
+
     - name: Deploy model
       run: |
         cd src

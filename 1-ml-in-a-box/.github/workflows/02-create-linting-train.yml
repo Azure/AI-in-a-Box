@@ -122,6 +122,6 @@ jobs:
         runname=$(az ml job create --file job.yml --resource-group "${{ env.rg }}" --workspace-name "${{ env.amlw }}" | jq -r .name)
         echo "runname=$runname" >> $GITHUB_OUTPUT
 
-    - name: Register Model
-      run: |
-        az ml model create -n "${{ env.amlmodelname }}" -p "runs:/${{ env.runname }}/model" --type mlflow_model -w "${{ env.amlw }}" -g "${{ env.rg }}"
+    # - name: Register Model
+    #   run: |
+    #     az ml model create -n "${{ env.amlmodelname }}" -p "runs:/${{ env.runname }}/model" --type mlflow_model -w "${{ env.amlw }}" -g "${{ env.rg }}"
