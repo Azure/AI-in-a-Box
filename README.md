@@ -27,14 +27,14 @@ This project aims to provide an "Azure AI/ML Easy Button" for common scenarios. 
 
 | Contact | GitHub ID | Email |
 |--------------|------|-----------|
+| Alex Morales | @msalemor | alemor@microsoft.com |
 | Andrés Padilla | @AndresPad | andres.padilla@microsoft.com | 
-| Meer Alam | @msdpalam | meeral@microsoft.com | 
-| Neeraj Jhaveri | @neerajjhaveri | neeraj.jhaveri@microsoft.com |
+| Chris Ayers | @codebytes | chrisayers@microsoft.com |
+| Eduardo Noriega | @EduardoN | ednorieg@microsoft.com |
+| Jean Hayes | @jehayesms | jean.hayes@microsoft.com |
 | Marco Aurélio Bigélli Cardoso  | @MarcoABCardoso | macardoso@microsoft.com | 
 | Maria Vrabie  | @MariaVrabie | mavrabie@microsoft.com | 
-| Jean Hayes | @jehayesms | jean.hayes@microsoft.com |
-| Victor Santana | @Welasco | vsantana@microsoft.com |
-| Chris Ayers | @codebytes | chrisayers@microsoft.com |
-| Alex Morales | @msalemor | alemor@microsoft.com |
+| Meer Alam | @msdpalam | meeral@microsoft.com | 
+| Neeraj Jhaveri | @neerajjhaveri | neeraj.jhaveri@microsoft.com |
 | Thiago Rotta | @rottathiago | thiago.rotta@microsoft.com |
-
+| Victor Santana | @Welasco | vsantana@microsoft.com |
