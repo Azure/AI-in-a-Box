@@ -54,4 +54,4 @@ jobs:
       - name: Create Azure ML Workspace
         run: |
           #az deployment group create --resource-group "${{ env.rg }}" --template-file ./infra/main.bicep --parameters ./infra/main.parameters.json --parameters amlworkspace="${{ env.amlw }}"
-          az deployment group create --resource-group "${{ env.rg }}" --template-file ./infra/main.bicep --parameters ./infra/main.parameters.json --parameters gitHub_PAT="${{ secrets.gitHub_PAT }}"
+          az deployment group create --resource-group "${{ env.rg }}" --template-file ./infra/main.bicep --parameters ./infra/main.parameters.json --parameters gitHub_PAT="${{ secrets.gitHubPAT }}"
