@@ -34,7 +34,7 @@ on:
         default: 'diabetes-data-example'
         type: string
   workflow_run:
-    workflows: [Create Azure Machine Learning workspace]
+    workflows: [Create Azure ML Workspace]
     types: [completed]
 
 env:
@@ -118,7 +118,7 @@ jobs:
       run: |
         cd src
         sed -i "s/<<amldataset>>/${{ env.amldataset }}/" job.yml
-        sed -i "s/<<amlcomputecluster>>/${{ env.amlcomputecluster }}/" job.yml
+        sed -i "s/<<amlcluster>>/${{ env.amlcomputecluster }}/" job.yml
         runname=$(az ml job create --file job.yml --resource-group "${{ env.rg }}" --workspace-name "${{ env.amlw }}" | jq -r .name)
         echo "runname=$runname" >> $GITHUB_OUTPUT
 
