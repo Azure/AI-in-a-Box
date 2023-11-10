@@ -53,3 +53,10 @@ Use the following reference to create you GitHub Personal Access token: (Managin
 - Read and Write access to actions, code, repository hooks, and workflows
 
 After you have created the GitHub Personal Access Token you must create a [secrets](https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables) in the GitHub repository and then use them in the workflow. The name must be **gitHubPAT**.
+
+## GitHub Actions replacements
+It's required to change the specifics of your environment in the GitHub Actions we are providing.
+Here is where you have to look to be replaced:
+
+- Update the main.parameters.json with all the specifics of your environment.
+-
