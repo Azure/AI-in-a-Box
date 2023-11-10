@@ -21,7 +21,7 @@ resource discoveryStorage 'Microsoft.Storage/storageAccounts@2023-01-01' existin
   name: existingStorageAccountName
 }
 
-resource serverfarm 'Microsoft.Web/serverfarms@2021-03-01' = {
+resource serverfarm 'Microsoft.Web/serverfarms@2022-09-01' = {
   name: '${functionname}-farm'
   location: location
   sku: {
@@ -110,7 +110,9 @@ resource azfunctionsiteconfig 'Microsoft.Web/sites/config@2021-03-01' = {
   name: 'appsettings'
   parent: azfunctionsite
   properties: {
+    WEBSITE_CONTENTAZUREFILECONNECTIONSTRING:'DefaultEndpointsProtocol=https;AccountName=${discoveryStorage.name};AccountKey=${listKeys(discoveryStorage.id, discoveryStorage.apiVersion).keys[0].value};EndpointSuffix=${environment().suffixes.storage}'
     AzureWebJobsStorage:'DefaultEndpointsProtocol=https;AccountName=${discoveryStorage.name};AccountKey=${listKeys(discoveryStorage.id, discoveryStorage.apiVersion).keys[0].value};EndpointSuffix=${environment().suffixes.storage}'
+    WEBSITE_CONTENTSHARE : discoveryStorage.name
     FUNCTIONS_WORKER_RUNTIME:'powershell'
     FUNCTIONS_EXTENSION_VERSION:'~4'
     gitHub_repoOwnerName: gitHub_repoOwnerName
@@ -125,12 +127,12 @@ resource azfunctionsiteconfig 'Microsoft.Web/sites/config@2021-03-01' = {
   }
 }
 
-resource deployfunctions 'Microsoft.Web/sites/extensions@2021-02-01' = {
+resource deployfunctions 'Microsoft.Web/sites/extensions@2022-09-01' = {
   parent: azfunctionsite
   dependsOn: [
     azfunctionsiteconfig
   ]
-  name: 'MSDeploy'
+  name: 'ZipDeploy'
   properties: {
     //packageUri: '${discoveryStorage.properties.primaryEndpoints.blob}${discoveryContainerName}/${filename}?${(discoveryStorage.listAccountSAS(discoveryStorage.apiVersion, sasConfig).accountSasToken)}'
     // https://github.com/Azure/AI-in-a-Box/raw/main/ml-in-a-box/infra/PSAzureMLAlertWebhook/AzureMLAlertWebhook.zip
@@ -138,5 +140,16 @@ resource deployfunctions 'Microsoft.Web/sites/extensions@2021-02-01' = {
   }
 }
 
+module functionAppRetrieveKeys './functionAppRetrieveKeys.bicep' = {
+  name: 'functionAppRetrieveKeys'
+  params: {
+    functionname: functionname
+    functionAppName: functionAppName
+  }
+  dependsOn: [
+    deployfunctions
+  ]
+}
+
 output functionAppId string = azfunctionsite.id
-output functionAppUrl string = 'https://${azfunctionsite.properties.defaultHostName}/api/${toLower(functionAppName)}?code=${listKeys('${azfunctionsite.id}/functions/${functionAppName}', azfunctionsite.apiVersion).default}'
+output functionAppUrl string = functionAppRetrieveKeys.outputs.functionAppUrl

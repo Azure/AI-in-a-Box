@@ -169,7 +169,7 @@ module ag './modules/action_group.bicep' = {
     functionappresourceid: functionApp.outputs.functionAppId
     groupshortname: length('ag-${amlworkspace}') <= 12 ? 'ag-${amlworkspace}' : take('ag-${amlworkspace}', 12)
     httpTriggerUrl: functionApp.outputs.functionAppUrl
-    resourceLocation: resourceLocation
+    resourceLocation: 'global'
   }
 }
 
