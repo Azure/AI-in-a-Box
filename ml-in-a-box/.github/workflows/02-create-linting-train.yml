@@ -86,10 +86,7 @@ jobs:
     - name: Create dataset in Azure ML workspace
       run: |
         cd experimentation
-        #############
-        ### TODO: Need to increate the version number each time you run this workflow
-        #############
-        az ml data create --name "${{ env.amldataset }}" --version 1 --path data
+        az ml data create --name "${{ env.amldataset }}" --path data
 
 # Test phase
     - name: Use Python version 3.7
