@@ -1,4 +1,4 @@
-name: 01-Create Azure ML Workspace
+name: Create Azure ML Workspace
 run-name: ${{ github.actor }} is executing 01-create-workspace.yml
 
 on:
