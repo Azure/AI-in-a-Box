@@ -95,9 +95,17 @@ jobs:
     - name: Deploy model
       run: |
         cd src
-        sed -i "s/<<amlendpointname>>/${{ env.amlendpointname }}/" create-endpoint.yml
-        az ml online-endpoint create --name "${{ env.amlendpointname }}" --file create-endpoint.yml
-        sed -i "s/<<amlflowdeploymentname>>/${{ env.amlflowdeploymentname }}/" mlflow-deployment.yml
-        sed -i "s/<<amlendpointname>>/${{ env.amlendpointname }}/" mlflow-deployment.yml
-        sed -i "s/<<amlmodelname>>/${{ env.amlmodelname }}/" mlflow-deployment.yml
-        az ml online-deployment create --name "${{ env.amlflowdeploymentname }}" --endpoint "${{ env.amlendpointname }}" --file mlflow-deployment.yml --resource-group "${{ env.rg }}" --workspace-name "${{ env.amlw }}"
+        endpointexistname=$(az ml online-endpoint list -g "${{ env.rg }}" --workspace-name "${{ env.amlw }}" --query "([?contains(name, '${{ env.amlendpointname }}')].name)" -o tsv)
+        if [[ "$endpointexistname" == "${{ env.amlendpointname }}" ]]; then
+          sed -i "s/<<amlflowdeploymentname>>/${{ env.amlflowdeploymentname }}/" mlflow-deployment.yml
+          sed -i "s/<<amlendpointname>>/${{ env.amlendpointname }}/" mlflow-deployment.yml
+          sed -i "s/<<amlmodelname>>/${{ env.amlmodelname }}/" mlflow-deployment.yml
+          az ml online-deployment update --name "${{ env.amlflowdeploymentname }}" --endpoint "${{ env.amlendpointname }}" --file mlflow-deployment.yml --resource-group "${{ env.rg }}" --workspace-name "${{ env.amlw }}"
+        else
+          sed -i "s/<<amlendpointname>>/${{ env.amlendpointname }}/" create-endpoint.yml
+          az ml online-endpoint create --name "${{ env.amlendpointname }}" --file create-endpoint.yml
+          sed -i "s/<<amlflowdeploymentname>>/${{ env.amlflowdeploymentname }}/" mlflow-deployment.yml
+          sed -i "s/<<amlendpointname>>/${{ env.amlendpointname }}/" mlflow-deployment.yml
+          sed -i "s/<<amlmodelname>>/${{ env.amlmodelname }}/" mlflow-deployment.yml
+          az ml online-deployment create --name "${{ env.amlflowdeploymentname }}" --endpoint "${{ env.amlendpointname }}" --file mlflow-deployment.yml --resource-group "${{ env.rg }}" --workspace-name "${{ env.amlw }}"
+        fi
