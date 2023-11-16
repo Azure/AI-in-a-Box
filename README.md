@@ -11,7 +11,7 @@ Embarking on an Azure AI/ML journey can appear challenging for certain organizat
 
 
 <p align="center">
-  <img src="Assets/images/aibxtable.svg" alt="FTA AI-in-a-Box: Deployment Accelerator" />
+  <img src="Assets/images/aibxtable.png" alt="FTA AI-in-a-Box: Deployment Accelerator" />
 </p>
 
 ## Available Patterns
