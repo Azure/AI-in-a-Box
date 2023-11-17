@@ -1,16 +1,23 @@
-#### End-to-end operationalization of ML model through Azure ML and GitHub actions leveraging Azure ML CLI V2
+# MLOps in-a-box
+![Banner](./readme_assets/banner-mlops-in-a-box.png)
 
-##### Architecture Diagram
-<img src="./images/mlops_simplified.jpg" />
+## Use Case
+ End-to-end operationalization of ML model through Azure ML and GitHub actions leveraging Azure ML CLI V2
 
+## Solution Architecture
+<img src="./readme_assets/mlops_simplified.jpg" />
 
-# Points that require review
-## OIDC GitHub with Azure
-Convert the workflow to use OIDC and add the reference link here in the README with the explanation in how to set it up.
+## Pre-requisites
+1. Access to a GitHub Repo (You'll need to create a GitHub repo with the necessary artifacts)
+1. Ensure **Microsoft.MachineLearningServices** Resource Provider is registered within Azure  
+[Register a Resource Provider](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types)
+1. Ensure you have a have a high enough user with enough access to deploy Azure resources (Contributor or Owner).
+1. Clone repository / copy files locally
+1. Start working your way through the [setup instructions](./documentation/00-set-up.md)  here >> [Set-up](./documentation/00-set-up.md)
 
-# Steps to make GitHub Actions to work
+## Steps to make GitHub Actions to work
 
-## Azure Authentication
+### Azure Authentication
 The GitHub Actions are using some actions that requires Azure Authentication. It's required to generate a Service Principal and save the credentias as a secret in GitHub repository settings or setup GitHub OIDC authentication. **It's always recommended to use GitHub OIDC**.
 
 Here is the steps using Azure Service Principals and saving them as [secrets](https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables) in the GitHub repository and then use them in the workflow.
@@ -56,7 +63,6 @@ After you have created the GitHub Personal Access Token you must create a [secre
 
 ## GitHub Actions replacements
 It's required to change the specifics of your environment in the GitHub Actions we are providing.
-Here is where you have to look to be replaced:
+Here is where you have to look to replace:
 
 - Update the main.parameters.json with all the specifics of your environment.
--
