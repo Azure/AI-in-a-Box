@@ -8,15 +8,21 @@ The solution architecture is described in the diagram below.
 ![Solution Architecture](./readme_assets/architecture.png)
 
 ## Pre-requisites
+1. Install Azure CLI (Make sure you are running the latest version of Azure CLI)  
+https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
+1. Install bicep (Make sure you are running the latest version of Bicep CLI)  
+https://aka.ms/bicep-install
+1. Ensure Microsoft.CognitiveServices Resource Provider is registered within Azure  
+[Register a Resource Provider](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types)
+1. Ensure your subscription is enabled for Azure OpenAI
+1. Clone repository / copy files locally
+1. Edit the parameter file 'main.bicepparam'
 
-- Install Azure CLI
-- Log into your Azure subscription
+## Deploy to Azure
 
 ```
 az login
 ```
-
-## Deploy to Azure
 
 ```
 az deployment sub create -f main.bicep --parameters main.bicepparam

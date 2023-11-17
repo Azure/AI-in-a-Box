@@ -1,5 +1,34 @@
+/*region Header
+      =========================================================================================================
+      Created by:       Author: Your Name | your.name@azurestream.io 
+      Created on:       11/30/2023
+      Description:      Pattern 4: AI-in-a-Box (AOAI) - Landing Zone
+      =========================================================================================================
+
+      Dependencies:
+        Install Azure CLI
+        https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest 
+
+        Install Latest version of Bicep
+        https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install
+
+      SCRIPT STEPS 
+      1 - Deploy Hub Vnet and Private DNS Zones
+      2 - Deploy Spoke VNet and Spoke-To-Hub peering
+      3 - Deploy Hub-to-Spoke peering
+      4 - Deploy OpenAI Instance(s)
+      5 - Deploy Cognitive Search
+      6 - Deploy Document Intelligence
+      7 - Deploy Storage Account
+      8 - Deploy Cosmos DB
+      9 - Apply necessary RBAC
+*/
+
 targetScope = 'subscription'
 
+//********************************************************
+// Global Parameters
+//********************************************************
 param resourceLocation string
 param prefix string
 
@@ -30,6 +59,11 @@ param deployCosmos bool
 
 //----------------------------------------------------------------------
 
+
+//********************************************************
+// Resource Groups - Create your Resource Groups
+//********************************************************
+//https://learn.microsoft.com/en-us/azure/templates/microsoft.resources/2022-09-01/resourcegroups?pivots=deployment-language-bicep
 resource coreNetworkRG 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: coreNetworkResourceGroup
   location: resourceLocation
@@ -201,11 +235,3 @@ module m_cosmos 'modules/cosmos.bicep' = if (deployCosmos) {
     tags: projectTags
   }
 }
-
-//********************************************************
-// RBAC Role Assignments
-//********************************************************
-
-//********************************************************
-// Post Deployment Scripts
-//********************************************************
