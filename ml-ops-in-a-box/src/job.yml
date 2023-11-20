@@ -9,7 +9,7 @@ inputs:
     type: uri_folder
     path: azureml:<<amldataset>>:1
   reg_rate: 0.001
-environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
+environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu@latest
 compute: azureml:<<amlcluster>>
 experiment_name: diabetes-mlops-challenge1
 description: "test"
