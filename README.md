@@ -1,7 +1,7 @@
 # AI-in-a-Box
 
 <p align="center">
-  <img src="Assets/images/ai-in-a-box.svg" alt="FTA AI-in-a-Box: Deployment Accelerator" style="width: 15%" />
+  <img src="Assets/images/ai-in-a-box.png" alt="FTA AI-in-a-Box: Deployment Accelerator" style="width: 15%" />
 </p>
 
 
