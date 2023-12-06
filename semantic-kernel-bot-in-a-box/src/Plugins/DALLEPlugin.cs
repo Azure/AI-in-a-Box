@@ -1,8 +1,6 @@
-using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Azure;
-using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
 using Microsoft.BotBuilderSamples;
 using Microsoft.Bot.Builder;
@@ -13,14 +11,12 @@ using System.Collections.Generic;
 namespace Plugins;
 public class DALLEPlugin
 {
-    private readonly OpenAIClient client;
+    private readonly OpenAIClient _aoaiClient;
     private ITurnContext<IMessageActivity> _turnContext;
 
-    public DALLEPlugin(IConfiguration config, ConversationData conversationData, ITurnContext<IMessageActivity> turnContext)
+    public DALLEPlugin(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext, OpenAIClient aoaiClient)
     {
-        var _aoaiApiKey = config.GetValue<string>("AOAI_API_KEY");
-        var _aoaiApiEndpoint = config.GetValue<string>("AOAI_API_ENDPOINT");
-        client = new(new Uri(_aoaiApiEndpoint), new AzureKeyCredential(_aoaiApiKey));
+        _aoaiClient = aoaiClient;
         _turnContext = turnContext;
     }
 
@@ -33,7 +29,7 @@ public class DALLEPlugin
     )
     {
         await _turnContext.SendActivityAsync($"Generating {n} images with the description \"{prompt}\"...");
-        Response<ImageGenerations> imageGenerations = await client.GetImageGenerationsAsync(
+        Response<ImageGenerations> imageGenerations = await _aoaiClient.GetImageGenerationsAsync(
             new ImageGenerationOptions()
             {
                 Prompt = prompt,

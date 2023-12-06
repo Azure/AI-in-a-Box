@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
 using Microsoft.BotBuilderSamples;
 using Microsoft.Bot.Builder;
@@ -12,12 +11,12 @@ namespace Plugins;
 
 public class SQLPlugin
 {
-    private readonly string connectionString;
+    private readonly SqlConnectionFactory _sqlConnectionFactory;
     private ITurnContext<IMessageActivity> _turnContext;
-    public SQLPlugin(IConfiguration config, ConversationData conversationData, ITurnContext<IMessageActivity> turnContext) 
+    public SQLPlugin(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext, SqlConnectionFactory sqlConnectionFactory) 
     {
-        connectionString = config.GetValue<string>("SQL_CONNECTION_STRING");
         _turnContext = turnContext;
+        _sqlConnectionFactory = sqlConnectionFactory;
     }
 
 
@@ -57,7 +56,7 @@ public class SQLPlugin
     private string QueryAsCSV(string query) 
     {
         var output = "[DATABASE RESULTS] \n";
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        using (SqlConnection connection = _sqlConnectionFactory.createConnection())
         {
             SqlCommand command = new SqlCommand(query, connection);
             connection.Open();

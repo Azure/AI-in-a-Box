@@ -1,0 +1,78 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "coreNetworkResourceGroup": {
+      "value": "${AZURE_CORE_NW_RG}"
+    },
+    "spokeNetworkResourceGroup": {
+      "value": "${AZURE_SPOKE_NW_RG}"
+    },
+    "appResourceGroup": {
+      "value": "${AZURE_APP_RG}"
+    },
+    "environmentName": {
+      "value": "${AZURE_ENV_NAME}"
+    },
+    "appName": {
+      "value": "${AZURE_APP_NAME}"
+    },
+    "location": {
+      "value": "${AZURE_LOCATION}"
+    },
+    "hubName": {
+      "value": "${AZURE_HUB_NAME}"
+    },
+    "spokeName": {
+      "value": "${AZURE_SPOKE_NAME}"
+    },
+    "privateEndpointSubnetName": {
+      "value": "${AZURE_PRIVATE_ENDPOINT_SUBNET_NAME}"
+    },
+    "privateEndpointSubnetPrefix": {
+      "value": "${AZURE_PRIVATE_ENDPOINT_SUBNET_PREFIX}"
+    },
+    "appSubnetName": {
+      "value": "${AZURE_APP_SUBNET_NAME}"
+    },
+    "appSubnetPrefix": {
+      "value": "${AZURE_APP_SUBNET_PREFIX}"
+    },
+    "coreNetworkingTags": {
+      "value": {
+        "Owner": "Core Networking Team",
+        "Project": "Enterprise Landing Zone",
+        "Environment": "Core",
+        "Toolkit": "Bicep"
+      }
+    },
+    "spokeNetworkingTags": {
+      "value": {
+        "Owner": "Core Networking Team",
+        "Project": "Enterprise Landing Zone",
+        "Environment": "Dev",
+        "Toolkit": "Bicep"
+      }
+    },
+    "projectTags": {
+      "value": {
+        "Owner": "AI Team",
+        "Project": "GPTBot",
+        "Environment": "Dev",
+        "Toolkit": "Bicep"
+      }
+    },
+    "deployDnsResolver": {
+      "value": true
+    },
+    "deploySearch": {
+      "value": true
+    },
+    "deployDocIntel": {
+      "value": true
+    },
+    "deployCosmos": {
+      "value": true
+    }
+  }
+}

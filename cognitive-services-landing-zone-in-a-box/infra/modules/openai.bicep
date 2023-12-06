@@ -8,15 +8,11 @@
 */
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
-param resourceLocation string
-param prefix string
+param location string
+param openaiAccountName string
 param subnetID string
 param privateDnsZoneId string
 param tags object = {}
-
-//Variables--------------------------------------------------------------------------------------------------------------------------
-var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup().id), 1, 3)
-var openaiAccountName = '${prefix}-openai-${uniqueSuffix}'
 
 //Create Resources----------------------------------------------------------------------------------------------------------------------------
 
@@ -24,7 +20,7 @@ var openaiAccountName = '${prefix}-openai-${uniqueSuffix}'
 // https://learn.microsoft.com/en-us/azure/templates/microsoft.cognitiveservices/accounts
 resource openaiAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   name: openaiAccountName
-  location: resourceLocation
+  location: location
   tags: tags
   sku: {
     name: 'S0'
@@ -42,44 +38,9 @@ resource openaiAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   }
 }
 
-resource gpt35deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
-  parent: openaiAccount
-  name: 'gpt-35-turbo'
-  properties: {
-    model: {
-      format: 'OpenAI'
-      name: 'gpt-35-turbo'
-      version: '0613'
-    }
-  }
-  sku: {
-    capacity: 50
-    name: 'Standard'
-  }
-}
-
-resource gpt4deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
-  parent: openaiAccount
-  name: 'gpt-4'
-  properties: {
-    model: {
-      format: 'OpenAI'
-      name: 'gpt-4'
-      version: '0613'
-    }
-  }
-  sku: {
-    capacity: 10
-    name: 'Standard'
-  }
-  dependsOn: [
-    gpt35deployment
-  ]
-}
-
 resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
   name: '${openaiAccountName}-pe'
-  location: resourceLocation
+  location: location
   tags: tags
   properties: {
     subnet: {
