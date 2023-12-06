@@ -1,0 +1,4075 @@
+{
+	"status": "succeeded",
+	"createdDateTime": "2022-09-06T18:37:36Z",
+	"lastUpdatedDateTime": "2022-09-06T18:37:45Z",
+	"analyzeResult": {
+		"apiVersion": "2022-08-31",
+		"modelId": "prebuilt-layout",
+		"stringIndexType": "utf16CodeUnit",
+		"content": "Contoso Safety 360\nHazardous\nCondition\nAt Risk\nSafety\nSafety Recognition\nBehavior\nSuggestion\nTime\nDate\nLocation\n13:00\n08/30/2020\nRoof\n20:15\n10/31/2021\nYard\n08:47\n09/20/2021\nBathroom\nSignificant\nNot Significant\nFindings:\nThere seems to be a leak in a pipe in the bathroom. Root lifting upsidewalk out side.\nRoof missing shingles.\nSuggested Solutions:\nFix leak in bathroom and make sure there isn't any mold. Remove root from sidewalk.\nReplace shingles.\nSubmitter: Heather Walter\nDepartment: Tower Room\nDate: July 26, 2022\nOwner:\nEtleva Hysa\nSolutions:\nFix\nTarget Date:\n07/15/2022\nClose Date:\nSubmitter Approval:\nBill Hall :selected: :selected: :selected: :selected: :selected: :unselected:",
+		"pages": [
+			{
+				"pageNumber": 1,
+				"angle": 0,
+				"width": 8.5,
+				"height": 11,
+				"unit": "inch",
+				"words": [
+					{
+						"content": "Contoso",
+						"polygon": [
+							2.6585,
+							1.1217,
+							3.9311,
+							1.1217,
+							3.9311,
+							1.3734,
+							2.6585,
+							1.3734
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 0,
+							"length": 7
+						}
+					},
+					{
+						"content": "Safety",
+						"polygon": [
+							4.0495,
+							1.1047,
+							5.0134,
+							1.1047,
+							5.0134,
+							1.439,
+							4.0495,
+							1.439
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 8,
+							"length": 6
+						}
+					},
+					{
+						"content": "360",
+						"polygon": [
+							5.1283,
+							1.1214,
+							5.686,
+							1.1214,
+							5.686,
+							1.3734,
+							5.1283,
+							1.3734
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 15,
+							"length": 3
+						}
+					},
+					{
+						"content": "Hazardous",
+						"polygon": [
+							1.3267,
+							1.6431,
+							2.1401,
+							1.6431,
+							2.1401,
+							1.7768,
+							1.3267,
+							1.7768
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 19,
+							"length": 9
+						}
+					},
+					{
+						"content": "Condition",
+						"polygon": [
+							1.1012,
+							1.8997,
+							1.8484,
+							1.8997,
+							1.8484,
+							2.0335,
+							1.1012,
+							2.0335
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 29,
+							"length": 9
+						}
+					},
+					{
+						"content": "At",
+						"polygon": [
+							2.9307,
+							1.6515,
+							3.0994,
+							1.6515,
+							3.0994,
+							1.7766,
+							2.9307,
+							1.7766
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 39,
+							"length": 2
+						}
+					},
+					{
+						"content": "Risk",
+						"polygon": [
+							3.1655,
+							1.6427,
+							3.4617,
+							1.6427,
+							3.4617,
+							1.7768,
+							3.1655,
+							1.7768
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 42,
+							"length": 4
+						}
+					},
+					{
+						"content": "Safety",
+						"polygon": [
+							4.5578,
+							1.6419,
+							5.0408,
+							1.6419,
+							5.0408,
+							1.8098,
+							4.5578,
+							1.8098
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 47,
+							"length": 6
+						}
+					},
+					{
+						"content": "Safety",
+						"polygon": [
+							6.1828,
+							1.6419,
+							6.6658,
+							1.6419,
+							6.6658,
+							1.8098,
+							6.1828,
+							1.8098
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 54,
+							"length": 6
+						}
+					},
+					{
+						"content": "Recognition",
+						"polygon": [
+							5.9757,
+							1.9056,
+							6.8856,
+							1.9056,
+							6.8856,
+							2.0665,
+							5.9757,
+							2.0665
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 61,
+							"length": 11
+						}
+					},
+					{
+						"content": "Behavior",
+						"polygon": [
+							2.7254,
+							1.8993,
+							3.4069,
+							1.8993,
+							3.4069,
+							2.0335,
+							2.7254,
+							2.0335
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 73,
+							"length": 8
+						}
+					},
+					{
+						"content": "Suggestion",
+						"polygon": [
+							4.3392,
+							1.9056,
+							5.1804,
+							1.9056,
+							5.1804,
+							2.0665,
+							4.3392,
+							2.0665
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 82,
+							"length": 10
+						}
+					},
+					{
+						"content": "Time",
+						"polygon": [
+							1.0147,
+							2.1543,
+							1.3159,
+							2.1543,
+							1.3159,
+							2.2548,
+							1.0147,
+							2.2548
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 93,
+							"length": 4
+						}
+					},
+					{
+						"content": "Date",
+						"polygon": [
+							3.1869,
+							2.1567,
+							3.4628,
+							2.1567,
+							3.4628,
+							2.2548,
+							3.1869,
+							2.2548
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 98,
+							"length": 4
+						}
+					},
+					{
+						"content": "Location",
+						"polygon": [
+							5.3522,
+							2.1543,
+							5.86,
+							2.1543,
+							5.86,
+							2.2548,
+							5.3522,
+							2.2548
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 103,
+							"length": 8
+						}
+					},
+					{
+						"content": "13:00",
+						"polygon": [
+							1.934,
+							2.3728,
+							2.2339,
+							2.3681,
+							2.2356,
+							2.4827,
+							1.934,
+							2.4874
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 112,
+							"length": 5
+						}
+					},
+					{
+						"content": "08/30/2020",
+						"polygon": [
+							3.9397,
+							2.3743,
+							4.5564,
+							2.3709,
+							4.5548,
+							2.4964,
+							3.9381,
+							2.497
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 118,
+							"length": 10
+						}
+					},
+					{
+						"content": "Roof",
+						"polygon": [
+							6.2795,
+							2.3728,
+							6.5524,
+							2.3681,
+							6.5544,
+							2.4827,
+							6.2795,
+							2.4874
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 129,
+							"length": 4
+						}
+					},
+					{
+						"content": "20:15",
+						"polygon": [
+							1.9235,
+							2.5877,
+							2.2272,
+							2.5877,
+							2.2264,
+							2.7021,
+							1.9227,
+							2.6999
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 134,
+							"length": 5
+						}
+					},
+					{
+						"content": "10/31/2021",
+						"polygon": [
+							3.9389,
+							2.5631,
+							4.5582,
+							2.5593,
+							4.5555,
+							2.7267,
+							3.9361,
+							2.7269
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 140,
+							"length": 10
+						}
+					},
+					{
+						"content": "Yard",
+						"polygon": [
+							6.2804,
+							2.5829,
+							6.5459,
+							2.5874,
+							6.5439,
+							2.7019,
+							6.2785,
+							2.6974
+						],
+						"confidence": 0.988,
+						"span": {
+							"offset": 151,
+							"length": 4
+						}
+					},
+					{
+						"content": "08:47",
+						"polygon": [
+							1.9244,
+							2.8025,
+							2.2428,
+							2.8025,
+							2.2419,
+							2.9218,
+							1.9244,
+							2.9194
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 156,
+							"length": 5
+						}
+					},
+					{
+						"content": "09/20/2021",
+						"polygon": [
+							3.9269,
+							2.8036,
+							4.5644,
+							2.803,
+							4.566,
+							2.9306,
+							3.9316,
+							2.9243
+						],
+						"confidence": 0.987,
+						"span": {
+							"offset": 162,
+							"length": 10
+						}
+					},
+					{
+						"content": "Bathroom",
+						"polygon": [
+							6.1441,
+							2.81,
+							6.6457,
+							2.8157,
+							6.6414,
+							2.9281,
+							6.1441,
+							2.9267
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 173,
+							"length": 8
+						}
+					},
+					{
+						"content": "Significant",
+						"polygon": [
+							1.3755,
+							3.2786,
+							2.1832,
+							3.2786,
+							2.1832,
+							3.4465,
+							1.3755,
+							3.4465
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 182,
+							"length": 11
+						}
+					},
+					{
+						"content": "Not",
+						"polygon": [
+							4.5807,
+							3.2885,
+							4.8527,
+							3.2885,
+							4.8527,
+							3.4135,
+							4.5807,
+							3.4135
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 194,
+							"length": 3
+						}
+					},
+					{
+						"content": "Significant",
+						"polygon": [
+							4.9098,
+							3.2786,
+							5.716,
+							3.2786,
+							5.716,
+							3.4465,
+							4.9098,
+							3.4465
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 198,
+							"length": 11
+						}
+					},
+					{
+						"content": "Findings:",
+						"polygon": [
+							1.0917,
+							3.7935,
+							1.7681,
+							3.7935,
+							1.7681,
+							3.9602,
+							1.0917,
+							3.9602
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 210,
+							"length": 9
+						}
+					},
+					{
+						"content": "There",
+						"polygon": [
+							1.8065,
+							3.8235,
+							2.1346,
+							3.8234,
+							2.139,
+							3.9609,
+							1.8112,
+							3.9577
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 220,
+							"length": 5
+						}
+					},
+					{
+						"content": "seems",
+						"polygon": [
+							2.1629,
+							3.8234,
+							2.569,
+							3.8233,
+							2.5729,
+							3.9651,
+							2.1673,
+							3.9612
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 226,
+							"length": 5
+						}
+					},
+					{
+						"content": "to",
+						"polygon": [
+							2.5973,
+							3.8233,
+							2.72,
+							3.8233,
+							2.7239,
+							3.9662,
+							2.6012,
+							3.9653
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 232,
+							"length": 2
+						}
+					},
+					{
+						"content": "be",
+						"polygon": [
+							2.7484,
+							3.8233,
+							2.9065,
+							3.8233,
+							2.9102,
+							3.9675,
+							2.7522,
+							3.9664
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 235,
+							"length": 2
+						}
+					},
+					{
+						"content": "a",
+						"polygon": [
+							2.9372,
+							3.8233,
+							3.0128,
+							3.8233,
+							3.0163,
+							3.9682,
+							2.9408,
+							3.9677
+						],
+						"confidence": 0.998,
+						"span": {
+							"offset": 238,
+							"length": 1
+						}
+					},
+					{
+						"content": "leak",
+						"polygon": [
+							3.0411,
+							3.8233,
+							3.296,
+							3.8233,
+							3.2993,
+							3.97,
+							3.0446,
+							3.9684
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 240,
+							"length": 4
+						}
+					},
+					{
+						"content": "in",
+						"polygon": [
+							3.3244,
+							3.8233,
+							3.4447,
+							3.8233,
+							3.4479,
+							3.9706,
+							3.3276,
+							3.9701
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 245,
+							"length": 2
+						}
+					},
+					{
+						"content": "a",
+						"polygon": [
+							3.4754,
+							3.8233,
+							3.551,
+							3.8233,
+							3.554,
+							3.9711,
+							3.4785,
+							3.9707
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 248,
+							"length": 1
+						}
+					},
+					{
+						"content": "pipe",
+						"polygon": [
+							3.5793,
+							3.8233,
+							3.8413,
+							3.8234,
+							3.8441,
+							3.9722,
+							3.5823,
+							3.9712
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 250,
+							"length": 4
+						}
+					},
+					{
+						"content": "in",
+						"polygon": [
+							3.872,
+							3.8234,
+							3.9853,
+							3.8234,
+							3.988,
+							3.9722,
+							3.8748,
+							3.9722
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 255,
+							"length": 2
+						}
+					},
+					{
+						"content": "the",
+						"polygon": [
+							4.0137,
+							3.8234,
+							4.2025,
+							3.8235,
+							4.2049,
+							3.9722,
+							4.0163,
+							3.9722
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 258,
+							"length": 3
+						}
+					},
+					{
+						"content": "bathroom.",
+						"polygon": [
+							4.2308,
+							3.8235,
+							4.8446,
+							3.8237,
+							4.8464,
+							3.9722,
+							4.2332,
+							3.9722
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 262,
+							"length": 9
+						}
+					},
+					{
+						"content": "Root",
+						"polygon": [
+							4.8729,
+							3.8237,
+							5.1656,
+							3.8239,
+							5.1671,
+							3.9722,
+							4.8747,
+							3.9722
+						],
+						"confidence": 0.989,
+						"span": {
+							"offset": 272,
+							"length": 4
+						}
+					},
+					{
+						"content": "lifting",
+						"polygon": [
+							5.194,
+							3.8239,
+							5.515,
+							3.8241,
+							5.5162,
+							3.9714,
+							5.1954,
+							3.9722
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 277,
+							"length": 7
+						}
+					},
+					{
+						"content": "upsidewalk",
+						"polygon": [
+							5.5433,
+							3.8241,
+							6.2137,
+							3.8247,
+							6.2143,
+							3.9676,
+							5.5445,
+							3.9712
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 285,
+							"length": 10
+						}
+					},
+					{
+						"content": "out",
+						"polygon": [
+							6.2421,
+							3.8247,
+							6.4309,
+							3.8249,
+							6.4312,
+							3.966,
+							6.2426,
+							3.9674
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 296,
+							"length": 3
+						}
+					},
+					{
+						"content": "side.",
+						"polygon": [
+							6.4593,
+							3.8249,
+							6.7543,
+							3.8252,
+							6.7543,
+							3.9635,
+							6.4595,
+							3.9657
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 300,
+							"length": 5
+						}
+					},
+					{
+						"content": "Roof",
+						"polygon": [
+							1.0079,
+							4.0426,
+							1.2769,
+							4.0467,
+							1.2766,
+							4.1961,
+							1.0079,
+							4.1932
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 306,
+							"length": 4
+						}
+					},
+					{
+						"content": "missing",
+						"polygon": [
+							1.306,
+							4.0471,
+							1.7714,
+							4.0519,
+							1.7705,
+							4.1993,
+							1.3057,
+							4.1964
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 311,
+							"length": 7
+						}
+					},
+					{
+						"content": "shingles.",
+						"polygon": [
+							1.8005,
+							4.0521,
+							2.3459,
+							4.0538,
+							2.3443,
+							4.1993,
+							1.7996,
+							4.1994
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 319,
+							"length": 9
+						}
+					},
+					{
+						"content": "Suggested",
+						"polygon": [
+							1.0722,
+							4.7618,
+							1.8633,
+							4.7618,
+							1.8633,
+							4.9285,
+							1.0722,
+							4.9285
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 329,
+							"length": 9
+						}
+					},
+					{
+						"content": "Solutions:",
+						"polygon": [
+							1.9282,
+							4.7614,
+							2.6902,
+							4.7614,
+							2.6902,
+							4.8956,
+							1.9282,
+							4.8956
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 339,
+							"length": 10
+						}
+					},
+					{
+						"content": "Fix",
+						"polygon": [
+							2.7254,
+							4.802,
+							2.877,
+							4.8021,
+							2.8801,
+							4.9145,
+							2.7285,
+							4.9125
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 350,
+							"length": 3
+						}
+					},
+					{
+						"content": "leak",
+						"polygon": [
+							2.9013,
+							4.8021,
+							3.1419,
+							4.8022,
+							3.1448,
+							4.918,
+							2.9043,
+							4.9148
+						],
+						"confidence": 0.987,
+						"span": {
+							"offset": 354,
+							"length": 4
+						}
+					},
+					{
+						"content": "in",
+						"polygon": [
+							3.1682,
+							4.8022,
+							3.2713,
+							4.8023,
+							3.2741,
+							4.9197,
+							3.1711,
+							4.9183
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 359,
+							"length": 2
+						}
+					},
+					{
+						"content": "bathroom",
+						"polygon": [
+							3.2976,
+							4.8023,
+							3.789,
+							4.8024,
+							3.7914,
+							4.925,
+							3.3004,
+							4.92
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 362,
+							"length": 8
+						}
+					},
+					{
+						"content": "and",
+						"polygon": [
+							3.8557,
+							4.8024,
+							4.064,
+							4.8025,
+							4.0662,
+							4.9276,
+							3.8581,
+							4.9256
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 371,
+							"length": 3
+						}
+					},
+					{
+						"content": "make",
+						"polygon": [
+							4.0903,
+							4.8025,
+							4.3956,
+							4.8024,
+							4.3976,
+							4.9294,
+							4.0925,
+							4.9277
+						],
+						"confidence": 0.988,
+						"span": {
+							"offset": 375,
+							"length": 4
+						}
+					},
+					{
+						"content": "sure",
+						"polygon": [
+							4.4219,
+							4.8024,
+							4.6706,
+							4.8024,
+							4.6725,
+							4.9309,
+							4.4239,
+							4.9295
+						],
+						"confidence": 0.988,
+						"span": {
+							"offset": 380,
+							"length": 4
+						}
+					},
+					{
+						"content": "there",
+						"polygon": [
+							4.6969,
+							4.8024,
+							4.9861,
+							4.8023,
+							4.9877,
+							4.9316,
+							4.6987,
+							4.931
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 385,
+							"length": 5
+						}
+					},
+					{
+						"content": "isn't",
+						"polygon": [
+							5.0124,
+							4.8023,
+							5.2389,
+							4.8022,
+							5.2403,
+							4.9319,
+							5.014,
+							4.9316
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 391,
+							"length": 5
+						}
+					},
+					{
+						"content": "any",
+						"polygon": [
+							5.2631,
+							4.8022,
+							5.4653,
+							4.8021,
+							5.4666,
+							4.9319,
+							5.2645,
+							4.9319
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 397,
+							"length": 3
+						}
+					},
+					{
+						"content": "mold.",
+						"polygon": [
+							5.4896,
+							4.8021,
+							5.805,
+							4.8019,
+							5.8061,
+							4.9312,
+							5.4909,
+							4.9319
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 401,
+							"length": 5
+						}
+					},
+					{
+						"content": "Remove",
+						"polygon": [
+							5.8293,
+							4.8019,
+							6.2883,
+							4.8015,
+							6.2891,
+							4.9292,
+							5.8304,
+							4.9312
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 407,
+							"length": 6
+						}
+					},
+					{
+						"content": "root",
+						"polygon": [
+							6.3146,
+							4.8015,
+							6.5411,
+							4.8013,
+							6.5417,
+							4.9276,
+							6.3153,
+							4.929
+						],
+						"confidence": 0.987,
+						"span": {
+							"offset": 414,
+							"length": 4
+						}
+					},
+					{
+						"content": "from",
+						"polygon": [
+							6.5653,
+							4.8013,
+							6.7817,
+							4.8011,
+							6.7821,
+							4.9258,
+							6.5659,
+							4.9275
+						],
+						"confidence": 0.987,
+						"span": {
+							"offset": 419,
+							"length": 4
+						}
+					},
+					{
+						"content": "sidewalk.",
+						"polygon": [
+							6.8727,
+							4.8009,
+							7.3924,
+							4.8003,
+							7.3924,
+							4.9197,
+							6.8731,
+							4.9249
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 424,
+							"length": 9
+						}
+					},
+					{
+						"content": "Replace",
+						"polygon": [
+							1.0491,
+							5.0039,
+							1.5271,
+							5.0185,
+							1.5279,
+							5.1696,
+							1.0507,
+							5.1706
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 434,
+							"length": 7
+						}
+					},
+					{
+						"content": "shingles.",
+						"polygon": [
+							1.5578,
+							5.0187,
+							2.1024,
+							5.0115,
+							2.1024,
+							5.1689,
+							1.5586,
+							5.1696
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 442,
+							"length": 9
+						}
+					},
+					{
+						"content": "Submitter:",
+						"polygon": [
+							1.0038,
+							5.8934,
+							1.8241,
+							5.8934,
+							1.8241,
+							6.0275,
+							1.0038,
+							6.0275
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 452,
+							"length": 10
+						}
+					},
+					{
+						"content": "Heather",
+						"polygon": [
+							1.8612,
+							5.8628,
+							2.5489,
+							5.8599,
+							2.5502,
+							6.0362,
+							1.8675,
+							6.039
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 463,
+							"length": 7
+						}
+					},
+					{
+						"content": "Walter",
+						"polygon": [
+							2.5834,
+							5.8599,
+							3.1732,
+							5.8616,
+							3.1701,
+							6.0341,
+							2.5845,
+							6.036
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 471,
+							"length": 6
+						}
+					},
+					{
+						"content": "Department:",
+						"polygon": [
+							1.0134,
+							6.2494,
+							1.9995,
+							6.2494,
+							1.9995,
+							6.4072,
+							1.0134,
+							6.4072
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 478,
+							"length": 11
+						}
+					},
+					{
+						"content": "Tower",
+						"polygon": [
+							2.0351,
+							6.2268,
+							2.5676,
+							6.2219,
+							2.5693,
+							6.406,
+							2.0398,
+							6.4105
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 490,
+							"length": 5
+						}
+					},
+					{
+						"content": "Room",
+						"polygon": [
+							2.6033,
+							6.2219,
+							3.0644,
+							6.2257,
+							3.0633,
+							6.4008,
+							2.6048,
+							6.4057
+						],
+						"confidence": 0.988,
+						"span": {
+							"offset": 496,
+							"length": 4
+						}
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							4.3421,
+							6.2494,
+							4.7385,
+							6.2494,
+							4.7385,
+							6.3742,
+							4.3421,
+							6.3742
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 501,
+							"length": 5
+						}
+					},
+					{
+						"content": "July",
+						"polygon": [
+							4.7888,
+							6.2179,
+							5.1103,
+							6.2141,
+							5.1033,
+							6.4309,
+							4.781,
+							6.4293
+						],
+						"confidence": 0.988,
+						"span": {
+							"offset": 507,
+							"length": 4
+						}
+					},
+					{
+						"content": "26,",
+						"polygon": [
+							5.1527,
+							6.2137,
+							5.4353,
+							6.2117,
+							5.4292,
+							6.4299,
+							5.1458,
+							6.4308
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 512,
+							"length": 3
+						}
+					},
+					{
+						"content": "2022",
+						"polygon": [
+							5.4777,
+							6.2116,
+							5.9263,
+							6.2109,
+							5.9216,
+							6.4242,
+							5.4717,
+							6.4296
+						],
+						"confidence": 0.988,
+						"span": {
+							"offset": 516,
+							"length": 4
+						}
+					},
+					{
+						"content": "Owner:",
+						"polygon": [
+							1.1047,
+							6.836,
+							1.6696,
+							6.836,
+							1.6696,
+							6.9625,
+							1.1047,
+							6.9625
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 521,
+							"length": 6
+						}
+					},
+					{
+						"content": "Etleva",
+						"polygon": [
+							1.7017,
+							6.821,
+							2.2207,
+							6.8265,
+							2.2214,
+							7.0326,
+							1.7064,
+							7.0274
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 528,
+							"length": 6
+						}
+					},
+					{
+						"content": "Hysa",
+						"polygon": [
+							2.2609,
+							6.8267,
+							2.7263,
+							6.8292,
+							2.7232,
+							7.0262,
+							2.2613,
+							7.0326
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 535,
+							"length": 4
+						}
+					},
+					{
+						"content": "Solutions:",
+						"polygon": [
+							1.1022,
+							7.2017,
+							1.8636,
+							7.2017,
+							1.8636,
+							7.3359,
+							1.1022,
+							7.3359
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 540,
+							"length": 10
+						}
+					},
+					{
+						"content": "Fix",
+						"polygon": [
+							1.9006,
+							7.2044,
+							2.1512,
+							7.2085,
+							2.1483,
+							7.3756,
+							1.9006,
+							7.3713
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 551,
+							"length": 3
+						}
+					},
+					{
+						"content": "Target",
+						"polygon": [
+							1.0967,
+							7.5744,
+							1.5998,
+							7.5744,
+							1.5998,
+							7.7322,
+							1.0967,
+							7.7322
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 555,
+							"length": 6
+						}
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							1.6649,
+							7.5744,
+							2.0614,
+							7.5744,
+							2.0614,
+							7.6992,
+							1.6649,
+							7.6992
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 562,
+							"length": 5
+						}
+					},
+					{
+						"content": "07/15/2022",
+						"polygon": [
+							2.0984,
+							7.5752,
+							3.0489,
+							7.569,
+							3.0515,
+							7.7469,
+							2.0929,
+							7.7486
+						],
+						"confidence": 0.99,
+						"span": {
+							"offset": 568,
+							"length": 10
+						}
+					},
+					{
+						"content": "Close",
+						"polygon": [
+							4.3032,
+							7.5517,
+							4.7096,
+							7.5517,
+							4.7096,
+							7.6859,
+							4.3032,
+							7.6859
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 579,
+							"length": 5
+						}
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							4.7786,
+							7.5611,
+							5.175,
+							7.5611,
+							5.175,
+							7.6859,
+							4.7786,
+							7.6859
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 585,
+							"length": 5
+						}
+					},
+					{
+						"content": "Submitter",
+						"polygon": [
+							1.1022,
+							7.87,
+							1.8814,
+							7.87,
+							1.8814,
+							8.0042,
+							1.1022,
+							8.0042
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 591,
+							"length": 9
+						}
+					},
+					{
+						"content": "Approval:",
+						"polygon": [
+							1.9321,
+							7.87,
+							2.6789,
+							7.87,
+							2.6789,
+							8.0372,
+							1.9321,
+							8.0372
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 601,
+							"length": 9
+						}
+					},
+					{
+						"content": "Bill",
+						"polygon": [
+							2.7272,
+							7.8843,
+							2.9721,
+							7.8796,
+							2.9715,
+							8.0519,
+							2.7245,
+							8.0481
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 611,
+							"length": 4
+						}
+					},
+					{
+						"content": "Hall",
+						"polygon": [
+							3.0059,
+							7.879,
+							3.3578,
+							7.8698,
+							3.3605,
+							8.0466,
+							3.0056,
+							8.0525
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 616,
+							"length": 4
+						}
+					}
+				],
+				"selectionMarks": [
+					{
+						"state": "selected",
+						"polygon": [
+							1.0485,
+							1.5939,
+							1.2985,
+							1.5939,
+							1.2985,
+							1.8439,
+							1.0485,
+							1.8439
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 621,
+							"length": 10
+						}
+					},
+					{
+						"state": "selected",
+						"polygon": [
+							2.6667,
+							1.5939,
+							2.9167,
+							1.5939,
+							2.9167,
+							1.8439,
+							2.6667,
+							1.8439
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 632,
+							"length": 10
+						}
+					},
+					{
+						"state": "selected",
+						"polygon": [
+							4.2879,
+							1.5909,
+							4.5379,
+							1.5909,
+							4.5379,
+							1.8409,
+							4.2879,
+							1.8409
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 643,
+							"length": 10
+						}
+					},
+					{
+						"state": "selected",
+						"polygon": [
+							5.903,
+							1.5909,
+							6.153,
+							1.5909,
+							6.153,
+							1.8409,
+							5.903,
+							1.8409
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 654,
+							"length": 10
+						}
+					},
+					{
+						"state": "selected",
+						"polygon": [
+							1.1061,
+							3.2182,
+							1.3561,
+							3.2182,
+							1.3561,
+							3.4682,
+							1.1061,
+							3.4682
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 665,
+							"length": 10
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							4.3091,
+							3.2212,
+							4.5591,
+							3.2212,
+							4.5591,
+							3.4712,
+							4.3091,
+							3.4712
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 676,
+							"length": 12
+						}
+					}
+				],
+				"lines": [
+					{
+						"content": "Contoso Safety 360",
+						"polygon": [
+							2.6585,
+							1.1047,
+							5.686,
+							1.1047,
+							5.686,
+							1.439,
+							2.6585,
+							1.439
+						],
+						"spans": [
+							{
+								"offset": 0,
+								"length": 18
+							}
+						]
+					},
+					{
+						"content": "Hazardous",
+						"polygon": [
+							1.3267,
+							1.6431,
+							2.1401,
+							1.6431,
+							2.1401,
+							1.7768,
+							1.3267,
+							1.7768
+						],
+						"spans": [
+							{
+								"offset": 19,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "Condition",
+						"polygon": [
+							1.1012,
+							1.8997,
+							1.8484,
+							1.8997,
+							1.8484,
+							2.0335,
+							1.1012,
+							2.0335
+						],
+						"spans": [
+							{
+								"offset": 29,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "At Risk",
+						"polygon": [
+							2.9307,
+							1.6427,
+							3.4617,
+							1.6427,
+							3.4617,
+							1.7768,
+							2.9307,
+							1.7768
+						],
+						"spans": [
+							{
+								"offset": 39,
+								"length": 7
+							}
+						]
+					},
+					{
+						"content": "Safety",
+						"polygon": [
+							4.5578,
+							1.6419,
+							5.0408,
+							1.6419,
+							5.0408,
+							1.8098,
+							4.5578,
+							1.8098
+						],
+						"spans": [
+							{
+								"offset": 47,
+								"length": 6
+							}
+						]
+					},
+					{
+						"content": "Safety",
+						"polygon": [
+							6.1828,
+							1.6419,
+							6.6658,
+							1.6419,
+							6.6658,
+							1.8098,
+							6.1828,
+							1.8098
+						],
+						"spans": [
+							{
+								"offset": 54,
+								"length": 6
+							}
+						]
+					},
+					{
+						"content": "Recognition",
+						"polygon": [
+							5.9757,
+							1.9056,
+							6.8856,
+							1.9056,
+							6.8856,
+							2.0665,
+							5.9757,
+							2.0665
+						],
+						"spans": [
+							{
+								"offset": 61,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "Behavior",
+						"polygon": [
+							2.7254,
+							1.8993,
+							3.4069,
+							1.8993,
+							3.4069,
+							2.0335,
+							2.7254,
+							2.0335
+						],
+						"spans": [
+							{
+								"offset": 73,
+								"length": 8
+							}
+						]
+					},
+					{
+						"content": "Suggestion",
+						"polygon": [
+							4.3392,
+							1.9056,
+							5.1804,
+							1.9056,
+							5.1804,
+							2.0665,
+							4.3392,
+							2.0665
+						],
+						"spans": [
+							{
+								"offset": 82,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Time",
+						"polygon": [
+							1.0147,
+							2.1543,
+							1.3159,
+							2.1543,
+							1.3159,
+							2.2548,
+							1.0147,
+							2.2548
+						],
+						"spans": [
+							{
+								"offset": 93,
+								"length": 4
+							}
+						]
+					},
+					{
+						"content": "Date",
+						"polygon": [
+							3.1869,
+							2.1567,
+							3.4628,
+							2.1567,
+							3.4628,
+							2.2548,
+							3.1869,
+							2.2548
+						],
+						"spans": [
+							{
+								"offset": 98,
+								"length": 4
+							}
+						]
+					},
+					{
+						"content": "Location",
+						"polygon": [
+							5.3522,
+							2.1543,
+							5.86,
+							2.1543,
+							5.86,
+							2.2548,
+							5.3522,
+							2.2548
+						],
+						"spans": [
+							{
+								"offset": 103,
+								"length": 8
+							}
+						]
+					},
+					{
+						"content": "13:00",
+						"polygon": [
+							1.934,
+							2.3728,
+							2.2444,
+							2.3681,
+							2.2396,
+							2.4826,
+							1.934,
+							2.4874
+						],
+						"spans": [
+							{
+								"offset": 112,
+								"length": 5
+							}
+						]
+					},
+					{
+						"content": "08/30/2020",
+						"polygon": [
+							3.9348,
+							2.3681,
+							4.5652,
+							2.3681,
+							4.5652,
+							2.4922,
+							3.9348,
+							2.497
+						],
+						"spans": [
+							{
+								"offset": 118,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Roof",
+						"polygon": [
+							6.2843,
+							2.3728,
+							6.5612,
+							2.3681,
+							6.5612,
+							2.4826,
+							6.2795,
+							2.4874
+						],
+						"spans": [
+							{
+								"offset": 129,
+								"length": 4
+							}
+						]
+					},
+					{
+						"content": "20:15",
+						"polygon": [
+							1.9149,
+							2.5877,
+							2.2444,
+							2.5877,
+							2.2444,
+							2.7023,
+							1.9101,
+							2.6975
+						],
+						"spans": [
+							{
+								"offset": 134,
+								"length": 5
+							}
+						]
+					},
+					{
+						"content": "10/31/2021",
+						"polygon": [
+							3.9348,
+							2.559,
+							4.5604,
+							2.559,
+							4.5604,
+							2.7214,
+							3.9348,
+							2.7261
+						],
+						"spans": [
+							{
+								"offset": 140,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Yard",
+						"polygon": [
+							6.2747,
+							2.5829,
+							6.5565,
+							2.5877,
+							6.5565,
+							2.7023,
+							6.2747,
+							2.6975
+						],
+						"spans": [
+							{
+								"offset": 151,
+								"length": 4
+							}
+						]
+					},
+					{
+						"content": "08:47",
+						"polygon": [
+							1.9292,
+							2.8025,
+							2.2492,
+							2.8073,
+							2.2444,
+							2.9219,
+							1.9244,
+							2.9219
+						],
+						"spans": [
+							{
+								"offset": 156,
+								"length": 5
+							}
+						]
+					},
+					{
+						"content": "09/20/2021",
+						"polygon": [
+							3.9253,
+							2.8025,
+							4.5652,
+							2.8025,
+							4.5652,
+							2.9266,
+							3.9253,
+							2.9219
+						],
+						"spans": [
+							{
+								"offset": 162,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Bathroom",
+						"polygon": [
+							6.141,
+							2.8073,
+							6.6997,
+							2.8121,
+							6.6997,
+							2.9266,
+							6.141,
+							2.9219
+						],
+						"spans": [
+							{
+								"offset": 173,
+								"length": 8
+							}
+						]
+					},
+					{
+						"content": "Significant",
+						"polygon": [
+							1.3755,
+							3.2786,
+							2.1832,
+							3.2786,
+							2.1832,
+							3.4465,
+							1.3755,
+							3.4465
+						],
+						"spans": [
+							{
+								"offset": 182,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "Not Significant",
+						"polygon": [
+							4.5807,
+							3.2786,
+							5.716,
+							3.2786,
+							5.716,
+							3.4465,
+							4.5807,
+							3.4465
+						],
+						"spans": [
+							{
+								"offset": 194,
+								"length": 15
+							}
+						]
+					},
+					{
+						"content": "Findings:",
+						"polygon": [
+							1.0917,
+							3.7935,
+							1.7681,
+							3.7935,
+							1.7681,
+							3.9602,
+							1.0917,
+							3.9602
+						],
+						"spans": [
+							{
+								"offset": 210,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "There seems to be a leak in a pipe in the bathroom. Root lifting upsidewalk out side.",
+						"polygon": [
+							1.8051,
+							3.8194,
+							6.757,
+							3.8242,
+							6.757,
+							3.9722,
+							1.8051,
+							3.9674
+						],
+						"spans": [
+							{
+								"offset": 220,
+								"length": 85
+							}
+						]
+					},
+					{
+						"content": "Roof missing shingles.",
+						"polygon": [
+							1.0076,
+							4.0391,
+							2.3447,
+							4.0486,
+							2.3447,
+							4.1966,
+							1.0076,
+							4.1918
+						],
+						"spans": [
+							{
+								"offset": 306,
+								"length": 22
+							}
+						]
+					},
+					{
+						"content": "Suggested Solutions:",
+						"polygon": [
+							1.0722,
+							4.7614,
+							2.6902,
+							4.7614,
+							2.6902,
+							4.9285,
+							1.0722,
+							4.9285
+						],
+						"spans": [
+							{
+								"offset": 329,
+								"length": 20
+							}
+						]
+					},
+					{
+						"content": "Fix leak in bathroom and make sure there isn't any mold. Remove root from sidewalk.",
+						"polygon": [
+							2.7219,
+							4.7982,
+							7.3921,
+							4.7982,
+							7.3921,
+							4.9271,
+							2.7219,
+							4.9271
+						],
+						"spans": [
+							{
+								"offset": 350,
+								"length": 83
+							}
+						]
+					},
+					{
+						"content": "Replace shingles.",
+						"polygon": [
+							1.0458,
+							5.0035,
+							2.1059,
+							5.0035,
+							2.1059,
+							5.1706,
+							1.0458,
+							5.1658
+						],
+						"spans": [
+							{
+								"offset": 434,
+								"length": 17
+							}
+						]
+					},
+					{
+						"content": "Submitter:",
+						"polygon": [
+							1.0038,
+							5.8934,
+							1.8241,
+							5.8934,
+							1.8241,
+							6.0275,
+							1.0038,
+							6.0275
+						],
+						"spans": [
+							{
+								"offset": 452,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Heather Walter",
+						"polygon": [
+							1.8576,
+							5.8581,
+							3.1756,
+							5.8581,
+							3.1756,
+							6.0299,
+							1.8576,
+							6.0347
+						],
+						"spans": [
+							{
+								"offset": 463,
+								"length": 14
+							}
+						]
+					},
+					{
+						"content": "Department:",
+						"polygon": [
+							1.0134,
+							6.2494,
+							1.9995,
+							6.2494,
+							1.9995,
+							6.4072,
+							1.0134,
+							6.4072
+						],
+						"spans": [
+							{
+								"offset": 478,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "Tower Room",
+						"polygon": [
+							2.0343,
+							6.2209,
+							3.1326,
+							6.2209,
+							3.1326,
+							6.4023,
+							2.0343,
+							6.4071
+						],
+						"spans": [
+							{
+								"offset": 490,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							4.3421,
+							6.2494,
+							4.7385,
+							6.2494,
+							4.7385,
+							6.3742,
+							4.3421,
+							6.3742
+						],
+						"spans": [
+							{
+								"offset": 501,
+								"length": 5
+							}
+						]
+					},
+					{
+						"content": "July 26, 2022",
+						"polygon": [
+							4.7801,
+							6.2161,
+							5.9309,
+							6.2066,
+							5.9309,
+							6.4214,
+							4.7801,
+							6.431
+						],
+						"spans": [
+							{
+								"offset": 507,
+								"length": 13
+							}
+						]
+					},
+					{
+						"content": "Owner:",
+						"polygon": [
+							1.1047,
+							6.836,
+							1.6696,
+							6.836,
+							1.6696,
+							6.9625,
+							1.1047,
+							6.9625
+						],
+						"spans": [
+							{
+								"offset": 521,
+								"length": 6
+							}
+						]
+					},
+					{
+						"content": "Etleva Hysa",
+						"polygon": [
+							1.7,
+							6.8177,
+							2.7315,
+							6.8225,
+							2.7267,
+							7.0278,
+							1.7,
+							7.023
+						],
+						"spans": [
+							{
+								"offset": 528,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "Solutions:",
+						"polygon": [
+							1.1022,
+							7.2017,
+							1.8636,
+							7.2017,
+							1.8636,
+							7.3359,
+							1.1022,
+							7.3359
+						],
+						"spans": [
+							{
+								"offset": 540,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Fix",
+						"polygon": [
+							1.9006,
+							7.2044,
+							2.1823,
+							7.2092,
+							2.1775,
+							7.3763,
+							1.9006,
+							7.3715
+						],
+						"spans": [
+							{
+								"offset": 551,
+								"length": 3
+							}
+						]
+					},
+					{
+						"content": "Target Date:",
+						"polygon": [
+							1.0967,
+							7.5744,
+							2.0614,
+							7.5744,
+							2.0614,
+							7.7322,
+							1.0967,
+							7.7322
+						],
+						"spans": [
+							{
+								"offset": 555,
+								"length": 12
+							}
+						]
+					},
+					{
+						"content": "07/15/2022",
+						"polygon": [
+							2.0916,
+							7.572,
+							3.0657,
+							7.5673,
+							3.0657,
+							7.7392,
+							2.0916,
+							7.7487
+						],
+						"spans": [
+							{
+								"offset": 568,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Close Date:",
+						"polygon": [
+							4.3032,
+							7.5517,
+							5.175,
+							7.5517,
+							5.175,
+							7.6859,
+							4.3032,
+							7.6859
+						],
+						"spans": [
+							{
+								"offset": 579,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "Submitter Approval:",
+						"polygon": [
+							1.1022,
+							7.87,
+							2.6789,
+							7.87,
+							2.6789,
+							8.0372,
+							1.1022,
+							8.0372
+						],
+						"spans": [
+							{
+								"offset": 591,
+								"length": 19
+							}
+						]
+					},
+					{
+						"content": "Bill Hall",
+						"polygon": [
+							2.7219,
+							7.8776,
+							3.3618,
+							7.8681,
+							3.3666,
+							8.0447,
+							2.7219,
+							8.0543
+						],
+						"spans": [
+							{
+								"offset": 611,
+								"length": 9
+							}
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 0,
+						"length": 688
+					}
+				],
+				"kind": "document"
+			}
+		],
+		"tables": [
+			{
+				"rowCount": 4,
+				"columnCount": 4,
+				"cells": [
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 0,
+						"columnSpan": 2,
+						"content": "Time",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.0067,
+									2.1018,
+									3.1727,
+									2.1018,
+									3.1727,
+									2.3159,
+									1.0067,
+									2.3159
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 93,
+								"length": 4
+							}
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 2,
+						"content": "Date",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.1727,
+									2.1018,
+									5.3253,
+									2.1018,
+									5.3253,
+									2.3159,
+									3.1727,
+									2.3159
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 98,
+								"length": 4
+							}
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 3,
+						"content": "Location",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.3253,
+									2.1018,
+									7.5049,
+									2.1018,
+									7.5049,
+									2.3159,
+									5.3253,
+									2.3159
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 103,
+								"length": 8
+							}
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 0,
+						"columnSpan": 2,
+						"content": "13:00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.0067,
+									2.3159,
+									3.1727,
+									2.3159,
+									3.1727,
+									2.5299,
+									1.0067,
+									2.5299
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 112,
+								"length": 5
+							}
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 2,
+						"content": "08/30/2020",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.1727,
+									2.3159,
+									5.3253,
+									2.3159,
+									5.3253,
+									2.5299,
+									3.1727,
+									2.5299
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 118,
+								"length": 10
+							}
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 3,
+						"content": "Roof",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.3253,
+									2.3159,
+									7.5049,
+									2.3159,
+									7.5049,
+									2.5299,
+									5.3253,
+									2.5299
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 129,
+								"length": 4
+							}
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 0,
+						"columnSpan": 2,
+						"content": "20:15",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.0067,
+									2.5299,
+									3.1727,
+									2.5299,
+									3.166,
+									2.744,
+									1.0067,
+									2.7506
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 134,
+								"length": 5
+							}
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 2,
+						"content": "10/31/2021",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.1727,
+									2.5299,
+									5.3253,
+									2.5299,
+									5.3253,
+									2.744,
+									3.166,
+									2.744
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 140,
+								"length": 10
+							}
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 3,
+						"content": "Yard",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.3253,
+									2.5299,
+									7.5049,
+									2.5299,
+									7.5049,
+									2.744,
+									5.3253,
+									2.744
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 151,
+								"length": 4
+							}
+						]
+					},
+					{
+						"rowIndex": 3,
+						"columnIndex": 0,
+						"columnSpan": 2,
+						"content": "08:47",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.0067,
+									2.7506,
+									3.166,
+									2.744,
+									3.166,
+									2.958,
+									1.0067,
+									2.9647
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 156,
+								"length": 5
+							}
+						]
+					},
+					{
+						"rowIndex": 3,
+						"columnIndex": 2,
+						"content": "09/20/2021",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.166,
+									2.744,
+									5.3253,
+									2.744,
+									5.3253,
+									2.958,
+									3.166,
+									2.958
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 162,
+								"length": 10
+							}
+						]
+					},
+					{
+						"rowIndex": 3,
+						"columnIndex": 3,
+						"content": "Bathroom",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.3253,
+									2.744,
+									7.5049,
+									2.744,
+									7.5049,
+									2.9647,
+									5.3253,
+									2.958
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 173,
+								"length": 8
+							}
+						]
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.003,
+							2.0749,
+							7.5098,
+							2.0721,
+							7.5075,
+							2.9737,
+							1.0002,
+							2.9772
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 93,
+						"length": 88
+					}
+				]
+			},
+			{
+				"rowCount": 3,
+				"columnCount": 2,
+				"cells": [
+					{
+						"rowIndex": 0,
+						"columnIndex": 0,
+						"columnSpan": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9876,
+									5.6879,
+									7.4993,
+									5.6879,
+									7.4993,
+									5.775,
+									0.9809,
+									5.775
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 0,
+						"content": "Submitter: Heather Walter",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9809,
+									5.775,
+									3.7454,
+									5.775,
+									3.7522,
+									6.0982,
+									0.9809,
+									6.0982
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 452,
+								"length": 25
+							}
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 1,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.7454,
+									5.775,
+									7.4993,
+									5.775,
+									7.4993,
+									6.0982,
+									3.7522,
+									6.0982
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 0,
+						"content": "Department: Tower Room",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9809,
+									6.0982,
+									3.7522,
+									6.0982,
+									3.759,
+									6.4961,
+									0.9809,
+									6.4899
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 478,
+								"length": 22
+							}
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 1,
+						"content": "Date: July 26, 2022",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.7522,
+									6.0982,
+									7.4993,
+									6.0982,
+									7.4993,
+									6.4961,
+									3.759,
+									6.4961
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 501,
+								"length": 19
+							}
+						]
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9715,
+							5.6872,
+							7.504,
+							5.695,
+							7.5018,
+							6.5014,
+							0.9686,
+							6.4936
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 452,
+						"length": 68
+					}
+				]
+			}
+		],
+		"paragraphs": [
+			{
+				"spans": [
+					{
+						"offset": 0,
+						"length": 18
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.6585,
+							1.1047,
+							5.686,
+							1.1047,
+							5.686,
+							1.439,
+							2.6585,
+							1.439
+						]
+					}
+				],
+				"role": "title",
+				"content": "Contoso Safety 360"
+			},
+			{
+				"spans": [
+					{
+						"offset": 19,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.3267,
+							1.6431,
+							2.1401,
+							1.6431,
+							2.1401,
+							1.7768,
+							1.3267,
+							1.7768
+						]
+					}
+				],
+				"content": "Hazardous"
+			},
+			{
+				"spans": [
+					{
+						"offset": 29,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.1012,
+							1.8997,
+							1.8484,
+							1.8997,
+							1.8484,
+							2.0335,
+							1.1012,
+							2.0335
+						]
+					}
+				],
+				"content": "Condition"
+			},
+			{
+				"spans": [
+					{
+						"offset": 39,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.9307,
+							1.6427,
+							3.4617,
+							1.6427,
+							3.4617,
+							1.7768,
+							2.9307,
+							1.7768
+						]
+					}
+				],
+				"content": "At Risk"
+			},
+			{
+				"spans": [
+					{
+						"offset": 47,
+						"length": 6
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.5578,
+							1.6419,
+							5.0408,
+							1.6419,
+							5.0408,
+							1.8098,
+							4.5578,
+							1.8098
+						]
+					}
+				],
+				"content": "Safety"
+			},
+			{
+				"spans": [
+					{
+						"offset": 54,
+						"length": 18
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.9757,
+							1.6419,
+							6.8856,
+							1.6419,
+							6.8856,
+							2.0665,
+							5.9757,
+							2.0665
+						]
+					}
+				],
+				"content": "Safety Recognition"
+			},
+			{
+				"spans": [
+					{
+						"offset": 73,
+						"length": 8
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.7254,
+							1.8993,
+							3.4069,
+							1.8993,
+							3.4069,
+							2.0335,
+							2.7254,
+							2.0335
+						]
+					}
+				],
+				"content": "Behavior"
+			},
+			{
+				"spans": [
+					{
+						"offset": 82,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.3392,
+							1.9056,
+							5.1804,
+							1.9056,
+							5.1804,
+							2.0665,
+							4.3392,
+							2.0665
+						]
+					}
+				],
+				"content": "Suggestion"
+			},
+			{
+				"spans": [
+					{
+						"offset": 93,
+						"length": 4
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0067,
+							2.1018,
+							3.1727,
+							2.1018,
+							3.1727,
+							2.3159,
+							1.0067,
+							2.3159
+						]
+					}
+				],
+				"content": "Time"
+			},
+			{
+				"spans": [
+					{
+						"offset": 98,
+						"length": 4
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.1727,
+							2.1018,
+							5.3253,
+							2.1018,
+							5.3253,
+							2.3159,
+							3.1727,
+							2.3159
+						]
+					}
+				],
+				"content": "Date"
+			},
+			{
+				"spans": [
+					{
+						"offset": 103,
+						"length": 8
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.3253,
+							2.1018,
+							7.5049,
+							2.1018,
+							7.5049,
+							2.3159,
+							5.3253,
+							2.3159
+						]
+					}
+				],
+				"content": "Location"
+			},
+			{
+				"spans": [
+					{
+						"offset": 112,
+						"length": 5
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0067,
+							2.3159,
+							3.1727,
+							2.3159,
+							3.1727,
+							2.5299,
+							1.0067,
+							2.5299
+						]
+					}
+				],
+				"content": "13:00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 118,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.1727,
+							2.3159,
+							5.3253,
+							2.3159,
+							5.3253,
+							2.5299,
+							3.1727,
+							2.5299
+						]
+					}
+				],
+				"content": "08/30/2020"
+			},
+			{
+				"spans": [
+					{
+						"offset": 129,
+						"length": 4
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.3253,
+							2.3159,
+							7.5049,
+							2.3159,
+							7.5049,
+							2.5299,
+							5.3253,
+							2.5299
+						]
+					}
+				],
+				"content": "Roof"
+			},
+			{
+				"spans": [
+					{
+						"offset": 134,
+						"length": 5
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0067,
+							2.5299,
+							3.1727,
+							2.5299,
+							3.166,
+							2.744,
+							1.0067,
+							2.7506
+						]
+					}
+				],
+				"content": "20:15"
+			},
+			{
+				"spans": [
+					{
+						"offset": 140,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.1727,
+							2.5299,
+							5.3253,
+							2.5299,
+							5.3253,
+							2.744,
+							3.166,
+							2.744
+						]
+					}
+				],
+				"content": "10/31/2021"
+			},
+			{
+				"spans": [
+					{
+						"offset": 151,
+						"length": 4
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.3253,
+							2.5299,
+							7.5049,
+							2.5299,
+							7.5049,
+							2.744,
+							5.3253,
+							2.744
+						]
+					}
+				],
+				"content": "Yard"
+			},
+			{
+				"spans": [
+					{
+						"offset": 156,
+						"length": 5
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0067,
+							2.7506,
+							3.166,
+							2.744,
+							3.166,
+							2.958,
+							1.0067,
+							2.9647
+						]
+					}
+				],
+				"content": "08:47"
+			},
+			{
+				"spans": [
+					{
+						"offset": 162,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.166,
+							2.744,
+							5.3253,
+							2.744,
+							5.3253,
+							2.958,
+							3.166,
+							2.958
+						]
+					}
+				],
+				"content": "09/20/2021"
+			},
+			{
+				"spans": [
+					{
+						"offset": 173,
+						"length": 8
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.3253,
+							2.744,
+							7.5049,
+							2.744,
+							7.5049,
+							2.9647,
+							5.3253,
+							2.958
+						]
+					}
+				],
+				"content": "Bathroom"
+			},
+			{
+				"spans": [
+					{
+						"offset": 182,
+						"length": 11
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.3755,
+							3.2786,
+							2.1832,
+							3.2786,
+							2.1832,
+							3.4465,
+							1.3755,
+							3.4465
+						]
+					}
+				],
+				"content": "Significant"
+			},
+			{
+				"spans": [
+					{
+						"offset": 194,
+						"length": 15
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.5807,
+							3.2786,
+							5.716,
+							3.2786,
+							5.716,
+							3.4465,
+							4.5807,
+							3.4465
+						]
+					}
+				],
+				"content": "Not Significant"
+			},
+			{
+				"spans": [
+					{
+						"offset": 210,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0917,
+							3.7935,
+							1.7681,
+							3.7935,
+							1.7681,
+							3.9602,
+							1.0917,
+							3.9602
+						]
+					}
+				],
+				"content": "Findings:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 220,
+						"length": 85
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.8051,
+							3.8194,
+							6.757,
+							3.8242,
+							6.757,
+							3.9722,
+							1.8051,
+							3.9674
+						]
+					}
+				],
+				"content": "There seems to be a leak in a pipe in the bathroom. Root lifting upsidewalk out side."
+			},
+			{
+				"spans": [
+					{
+						"offset": 306,
+						"length": 22
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0076,
+							4.0391,
+							2.3447,
+							4.0486,
+							2.3447,
+							4.1966,
+							1.0076,
+							4.1918
+						]
+					}
+				],
+				"content": "Roof missing shingles."
+			},
+			{
+				"spans": [
+					{
+						"offset": 329,
+						"length": 20
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0722,
+							4.7614,
+							2.6902,
+							4.7614,
+							2.6902,
+							4.9285,
+							1.0722,
+							4.9285
+						]
+					}
+				],
+				"content": "Suggested Solutions:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 350,
+						"length": 83
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.7219,
+							4.7982,
+							7.3921,
+							4.7982,
+							7.3921,
+							4.9271,
+							2.7219,
+							4.9271
+						]
+					}
+				],
+				"content": "Fix leak in bathroom and make sure there isn't any mold. Remove root from sidewalk."
+			},
+			{
+				"spans": [
+					{
+						"offset": 434,
+						"length": 17
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0458,
+							5.0035,
+							2.1059,
+							5.0035,
+							2.1059,
+							5.1706,
+							1.0458,
+							5.1658
+						]
+					}
+				],
+				"content": "Replace shingles."
+			},
+			{
+				"spans": [
+					{
+						"offset": 452,
+						"length": 25
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9809,
+							5.775,
+							3.7454,
+							5.775,
+							3.7522,
+							6.0982,
+							0.9809,
+							6.0982
+						]
+					}
+				],
+				"content": "Submitter: Heather Walter"
+			},
+			{
+				"spans": [
+					{
+						"offset": 478,
+						"length": 22
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9809,
+							6.0982,
+							3.7522,
+							6.0982,
+							3.759,
+							6.4961,
+							0.9809,
+							6.4899
+						]
+					}
+				],
+				"content": "Department: Tower Room"
+			},
+			{
+				"spans": [
+					{
+						"offset": 501,
+						"length": 19
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.7522,
+							6.0982,
+							7.4993,
+							6.0982,
+							7.4993,
+							6.4961,
+							3.759,
+							6.4961
+						]
+					}
+				],
+				"content": "Date: July 26, 2022"
+			},
+			{
+				"spans": [
+					{
+						"offset": 521,
+						"length": 6
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.1047,
+							6.836,
+							1.6696,
+							6.836,
+							1.6696,
+							6.9625,
+							1.1047,
+							6.9625
+						]
+					}
+				],
+				"content": "Owner:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 528,
+						"length": 11
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.7,
+							6.8177,
+							2.7315,
+							6.8225,
+							2.7267,
+							7.0278,
+							1.7,
+							7.023
+						]
+					}
+				],
+				"content": "Etleva Hysa"
+			},
+			{
+				"spans": [
+					{
+						"offset": 540,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.1022,
+							7.2017,
+							1.8636,
+							7.2017,
+							1.8636,
+							7.3359,
+							1.1022,
+							7.3359
+						]
+					}
+				],
+				"content": "Solutions:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 551,
+						"length": 3
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.9006,
+							7.2044,
+							2.1823,
+							7.2092,
+							2.1775,
+							7.3763,
+							1.9006,
+							7.3715
+						]
+					}
+				],
+				"content": "Fix"
+			},
+			{
+				"spans": [
+					{
+						"offset": 555,
+						"length": 12
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0967,
+							7.5744,
+							2.0614,
+							7.5744,
+							2.0614,
+							7.7322,
+							1.0967,
+							7.7322
+						]
+					}
+				],
+				"content": "Target Date:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 568,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.0916,
+							7.572,
+							3.0657,
+							7.5673,
+							3.0657,
+							7.7392,
+							2.0916,
+							7.7487
+						]
+					}
+				],
+				"content": "07/15/2022"
+			},
+			{
+				"spans": [
+					{
+						"offset": 579,
+						"length": 11
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.3032,
+							7.5517,
+							5.175,
+							7.5517,
+							5.175,
+							7.6859,
+							4.3032,
+							7.6859
+						]
+					}
+				],
+				"content": "Close Date:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 591,
+						"length": 19
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.1022,
+							7.87,
+							2.6789,
+							7.87,
+							2.6789,
+							8.0372,
+							1.1022,
+							8.0372
+						]
+					}
+				],
+				"content": "Submitter Approval:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 611,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.7219,
+							7.8776,
+							3.3618,
+							7.8681,
+							3.3666,
+							8.0447,
+							2.7219,
+							8.0543
+						]
+					}
+				],
+				"content": "Bill Hall"
+			}
+		],
+		"styles": []
+	}
+}
