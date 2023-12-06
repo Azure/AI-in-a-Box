@@ -1,17 +1,16 @@
-param resourceLocation string
-param prefix string
+param location string
+param botServiceName string
 param endpoint string
-param msaAppId string
+param msiID string
+param msiClientID string
 param sku string = 'F0'
 param kind string = 'azurebot'
 param tags object = {}
-
-var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup().id), 1, 3) 
-var botServiceName = '${prefix}-bot-${uniqueSuffix}'
+param publicNetworkAccess string
 
 resource botservice 'Microsoft.BotService/botServices@2022-09-15' = {
   name: botServiceName
-  location: resourceLocation
+  location: location
   tags: tags
   sku: {
     name: sku
@@ -20,7 +19,11 @@ resource botservice 'Microsoft.BotService/botServices@2022-09-15' = {
   properties: {
     displayName: botServiceName
     endpoint: endpoint
-    msaAppId: msaAppId
-    msaAppType: 'MultiTenant'
+    msaAppMSIResourceId: msiID
+    msaAppId: msiClientID
+    msaAppType: 'UserAssignedMSI'
+    msaAppTenantId: tenant().tenantId
+    publicNetworkAccess: publicNetworkAccess
   }
+
 }

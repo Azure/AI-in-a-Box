@@ -8,27 +8,22 @@
 */
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
-param resourceLocation string
-param prefix string
+param location string
+param cosmosName string
 param subnetID string
 param privateDnsZoneId string
 param tags object = {}
 
-
-//Variables--------------------------------------------------------------------------------------------------------------------------
-var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup().id), 1, 3) 
-var cosmosAccountName = '${prefix}-cosmos-${uniqueSuffix}'
-
 //Create Resources----------------------------------------------------------------------------------------------------------------------------
 
 resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2022-05-15' =  {
-  name: cosmosAccountName
-  location: resourceLocation
+  name: cosmosName
+  location: location
   kind: 'GlobalDocumentDB'
   properties: {
     locations: [
       {
-        locationName: resourceLocation
+        locationName: location
         failoverPriority: 0
         isZoneRedundant: false
       }
@@ -38,8 +33,8 @@ resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2022-05-15' =  {
 }
 
 resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
-  name: '${cosmosAccountName}-pe'
-  location: resourceLocation
+  name: '${cosmosName}-pe'
+  location: location
   tags: tags
   properties: {
     subnet: {

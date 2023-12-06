@@ -1,57 +1,36 @@
-param resourceLocation string
-param prefix string
-param msaAppId string
+param location string
+param appServicePlanName string
+param appServiceName string
+param msiID string
+param msiClientID string
 param sku string = 'S1'
-@secure()
-param msaAppPassword string
 param tags object = {}
-param openaiAccountName string
-param documentIntelligenceAccountName string
-param searchAccountName string
-param cosmosAccountName string
-param sqlServerName string
-param sqlDBName string
+param openaiGPTModel string
+param openaiEmbeddingsModel string
 
-param deploySQL bool
-param deploySearch bool
-param deployDocIntel bool
+param documentIntelligenceName string
+var documentIntelligenceNames = !empty(documentIntelligenceName) ? [documentIntelligenceName] : []
+param bingName string
+var bingNames = !empty(bingName) ? [bingName] : []
 
-var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup().id), 1, 3)
-var appServicePlanName = '${prefix}-plan-${uniqueSuffix}'
-var appServiceName = '${prefix}-app-${uniqueSuffix}'
+param openaiEndpoint string
+param searchEndpoint string
+param documentIntelligenceEndpoint string
+param sqlConnectionString string
+param cosmosEndpoint string
 
-resource openaiAccount 'Microsoft.CognitiveServices/accounts@2021-10-01' existing = {
-  name: openaiAccountName
-  resource gpt35deployment 'deployments' existing = {
-    name: 'gpt-35-turbo'
-  }
-  resource gpt4deployment 'deployments' existing = {
-    name: 'gpt-4'
-  }
-}
+resource bingAccounts 'Microsoft.Bing/accounts@2020-06-10' existing = [for name in bingNames: {
+  name: name
+}]
 
-resource documentIntelligenceAccount 'Microsoft.CognitiveServices/accounts@2021-10-01' existing = if (deployDocIntel) {
-  name: documentIntelligenceAccountName
-}
 
-resource searchAccount 'Microsoft.Search/searchServices@2022-09-01' existing = if (deploySearch) {
-  name: searchAccountName
-}
-
-resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2022-05-15' existing = {
-  name: cosmosAccountName
-}
-
-resource sqlServer 'Microsoft.Sql/servers@2022-05-01-preview' existing = if (deploySQL) {
-  name: sqlServerName
-  resource sqlDB 'databases' existing = {
-    name: sqlDBName
-  }
-}
+resource documentIntelligences 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = [for name in documentIntelligenceNames: {
+  name: name
+}]
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
   name: appServicePlanName
-  location: resourceLocation
+  location: location
   tags: tags
   sku: {
     name: sku
@@ -60,10 +39,13 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
 
 resource appService 'Microsoft.Web/sites@2022-09-01' = {
   name: appServiceName
-  location: resourceLocation
-  tags: tags
+  location: location
+  tags: union(tags, { 'azd-service-name': 'semantic-kernel-bot-app' })
   identity: {
-    type: 'SystemAssigned'
+    type: 'UserAssigned'
+    userAssignedIdentities: {
+      '${msiID}': {}
+    }
   }
   properties: {
     serverFarmId: appServicePlan.id
@@ -73,59 +55,75 @@ resource appService 'Microsoft.Web/sites@2022-09-01' = {
       appSettings: [
         {
           name: 'MicrosoftAppType'
-          value: 'MultiTenant'
+          value: 'UserAssignedMSI'
         }
         {
           name: 'MicrosoftAppId'
-          value: msaAppId
+          value: msiClientID
         }
         {
-          name: 'MicrosoftAppPassword'
-          value: msaAppPassword
+          name: 'MicrosoftAppTenantId'
+          value: tenant().tenantId
         }
         {
           name: 'AOAI_API_ENDPOINT'
-          value: openaiAccount.properties.endpoint
+          value: openaiEndpoint
         }
         {
-          name: 'AOAI_MODEL'
-          value: openaiAccount::gpt4deployment.name
+          name: 'AOAI_GPT_MODEL'
+          value: openaiGPTModel
         }
         {
-          name: 'AOAI_API_KEY'
-          value: openaiAccount.listKeys().key1
+          name: 'AOAI_EMBEDDINGS_MODEL'
+          value: openaiEmbeddingsModel
         }
         {
           name: 'SEARCH_API_ENDPOINT'
-          value: deploySearch ? 'https://${searchAccount.name}.search.windows.net' : ''
+          value: searchEndpoint
         }
         {
           name: 'SEARCH_INDEX'
-          value: deploySearch ? 'hotels-sample-index' : ''
-        }
-        {
-          name: 'SEARCH_API_KEY'
-          value: deploySearch ? searchAccount.listQueryKeys().value[0].key : ''
+          value: 'hotels-sample-index'
         }
         {
           name: 'DOCINTEL_API_ENDPOINT'
-          value: deployDocIntel ? documentIntelligenceAccount.properties.endpoint : ''
+          value: documentIntelligenceEndpoint
         }
         {
           name: 'DOCINTEL_API_KEY'
-          value: deployDocIntel ? documentIntelligenceAccount.listKeys().key1 : ''
+          value: !empty(documentIntelligenceName) ? documentIntelligences[0].listKeys().key1 : ''
         }
         {
           name: 'SQL_CONNECTION_STRING'
-          value: deploySQL ? 'Server=tcp:${sqlServer.properties.fullyQualifiedDomainName},1433;Initial Catalog=${sqlServer::sqlDB.name};Persist Security Info=False;User ID=${sqlServer.properties.administratorLogin};Password=${msaAppPassword};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;' : ''
+          value: sqlConnectionString
         }
         {
           name: 'COSMOS_API_ENDPOINT'
-          value: cosmosAccount.properties.documentEndpoint
+          value: cosmosEndpoint
         }
         {
-          name: 'COSMOS_API_KEY'
-          value: cosmosAccount.listKeys().primaryMasterKey
+          name: 'DIRECT_LINE_SECRET'
+          value: ''
+        }
+        {
+          name: 'BING_API_ENDPOINT'
+          value: !empty(bingName) ? bingAccounts[0].listKeys().key1 : ''
+        }
+        {
+          name: 'BING_API_KEY'
+          value: !empty(bingName) ? bingAccounts[0].listKeys().key1 : ''
+        }
+        {
+          name: 'PROMPT_WELCOME_MESSAGE'
+          value: 'Welcome to Semantic Kernel Bot in-a-box! Ask me anything to get started.'
+        }
+        {
+          name: 'PROMPT_SYSTEM_MESSAGE'
+          value: 'Answer the questions as accurately as possible using the provided functions.'
+        }
+        {
+          name: 'PROMPT_SUGGESTED_QUESTIONS'
+          value: '[]'
         }
       ]
     }

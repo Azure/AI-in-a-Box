@@ -6,20 +6,17 @@
 */
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
-param resourceLocation string
+param location string
+param dnsResolverName string
 param vnetId string
 param subnetId string
-param prefix string
 param tags object = {}
 
-//Variables--------------------------------------------------------------------------------------------------------------------------
-var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup().id), 1, 3) 
-var resolverName = '${prefix}-resolver-${uniqueSuffix}'
 
 //Create Resources----------------------------------------------------------------------------------------------------------------------------
 resource resolver 'Microsoft.Network/dnsResolvers@2022-07-01' = {
-  name: resolverName
-  location: resourceLocation
+  name: dnsResolverName
+  location: location
   tags: tags
   properties: {
     virtualNetwork: {
@@ -28,7 +25,7 @@ resource resolver 'Microsoft.Network/dnsResolvers@2022-07-01' = {
   }
   resource inEndpoint 'inboundEndpoints' = {
     name: 'inbound-endpoint'
-    location: resourceLocation
+    location: location
     tags: tags
     properties: {
       ipConfigurations: [
@@ -44,4 +41,4 @@ resource resolver 'Microsoft.Network/dnsResolvers@2022-07-01' = {
 }
 
 
-output dnsIp string = resolver::inEndpoint.properties.ipConfigurations[0].privateIpAddress
+output dnsResolverInboundIp string = resolver::inEndpoint.properties.ipConfigurations[0].privateIpAddress

@@ -1,23 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <UserSecretsId>73c2a03b-aae7-4833-b3a8-c01744ad2b7d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AdaptiveCards" Version="3.1.0" />
     <PackageReference Include="Azure.AI.FormRecognizer" Version="4.1.0" />
     <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.8" />
-    <PackageReference Include="Azure.Identity" Version="1.10.3" />
-    <PackageReference Include="Azure.Search.Documents" Version="11.4.0" />
+    <PackageReference Include="Azure.Identity" Version="1.10.4" />
+    <PackageReference Include="Azure.Search.Documents" Version="11.5.0" />
+    <PackageReference Include="Microsoft.Azure.CognitiveServices.Search.WebSearch" Version="2.0.0" />
     <PackageReference Include="Microsoft.Azure.KeyVault.Core" Version="3.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.7" />
-    <PackageReference Include="Microsoft.Bot.Builder.Azure" Version="4.20.1" />
+    <PackageReference Include="Microsoft.Bot.Builder.Azure" Version="4.21.1" />
     <PackageReference Include="Microsoft.Bot.Builder.Azure.Blobs" Version="4.20.1" />
+    <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.21.2" />
     <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.20.1" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
-    <PackageReference Include="Microsoft.SemanticKernel" Version="1.0.0-beta2" />
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.0.0-beta8" />
   </ItemGroup>
 
   <PropertyGroup>

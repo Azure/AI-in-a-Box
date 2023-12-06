@@ -8,31 +8,26 @@
 */
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
-param resourceLocation string
-param prefix string
+param location string
+param docIntelName string
 param subnetID string
 param privateDnsZoneId string
 param tags object = {}
-
-
-//Variables--------------------------------------------------------------------------------------------------------------------------
-var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup().id), 1, 3) 
-var docintelAccountName = '${prefix}-docintel-${uniqueSuffix}'
 
 //Create Resources----------------------------------------------------------------------------------------------------------------------------
 
 //2. Create Azure Document Intelligence
 // https://learn.microsoft.com/en-us/azure/templates/microsoft.cognitiveservices/accounts
 resource docintelAccount 'Microsoft.CognitiveServices/accounts@2021-10-01' = {
-  name: docintelAccountName
-  location: resourceLocation
+  name: docIntelName
+  location: location
   tags: tags
   sku: {
     name: 'S0'
   }
   kind: 'FormRecognizer'
   properties: {
-    customSubDomainName: docintelAccountName
+    customSubDomainName: docIntelName
     publicNetworkAccess: 'Disabled'
     apiProperties: {
       statisticsEnabled: false
@@ -41,8 +36,8 @@ resource docintelAccount 'Microsoft.CognitiveServices/accounts@2021-10-01' = {
 }
 
 resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
-  name: '${docintelAccountName}-pe'
-  location: resourceLocation
+  name: '${docIntelName}-pe'
+  location: location
   tags: tags
   properties: {
     subnet: {

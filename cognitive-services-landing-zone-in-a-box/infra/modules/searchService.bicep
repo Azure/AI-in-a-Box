@@ -8,8 +8,8 @@
 */
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
-param resourceLocation string
-param prefix string
+param location string
+param searchName string
 param subnetID string
 param privateDnsZoneId string
 param tags object = {}
@@ -17,15 +17,14 @@ param tags object = {}
 
 //Variables--------------------------------------------------------------------------------------------------------------------------
 var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup().id), 1, 3) 
-var searchAccountName = '${prefix}-search-${uniqueSuffix}'
 
 //Create Resources----------------------------------------------------------------------------------------------------------------------------
 
 // 1. Create Azure Search Instance
 // https://learn.microsoft.com/en-us/azure/templates/microsoft.search/searchservices
 resource searchAccount 'Microsoft.Search/searchServices@2020-08-01' = {
-  name: searchAccountName
-  location: resourceLocation
+  name: searchName
+  location: location
   tags: tags
   sku: {
     name: 'standard'
@@ -39,8 +38,8 @@ resource searchAccount 'Microsoft.Search/searchServices@2020-08-01' = {
 }
 
 resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
-  name: '${searchAccountName}-pe'
-  location: resourceLocation
+  name: '${searchName}-pe'
+  location: location
   tags: tags
   properties: {
     subnet: {

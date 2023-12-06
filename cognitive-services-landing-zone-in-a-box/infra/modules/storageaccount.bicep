@@ -8,30 +8,24 @@
 */
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
-param resourceLocation string
-param prefix string
+param location string
+param storageName string
+param storageType string = 'Standard_LRS'
 param subnetID string
 param privateDnsZoneId string
 param tags object = {}
 
-
-//Variables--------------------------------------------------------------------------------------------------------------------------
-var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup().id), 1, 3) 
-var storageAccountName = '${prefix}storage${uniqueSuffix}'
-var storageAccountType = 'Standard_LRS'
-
 //Create Resources----------------------------------------------------------------------------------------------------------------------------
-
 
 // 4. Create Storage Account and default container
 // https://learn.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
 // https://learn.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
-  name: storageAccountName
+  name: storageName
   kind: 'StorageV2'
-  location: resourceLocation
+  location: location
   tags: tags
-  properties:{
+  properties: {
     isHnsEnabled: true
     minimumTlsVersion: 'TLS1_2'
     networkAcls: {
@@ -55,7 +49,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
     accessTier: 'Hot'
   }
   sku: {
-    name: storageAccountType
+    name: storageType
   }
 }
 
@@ -73,8 +67,8 @@ resource storageAccount_default 'Microsoft.Storage/storageAccounts/blobServices@
 }
 
 resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
-  name: '${storageAccountName}-pe'
-  location: resourceLocation
+  name: '${storageName}-pe'
+  location: location
   tags: tags
   properties: {
     subnet: {
@@ -85,7 +79,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
         name: 'private-endpoint-connection'
         properties: {
           privateLinkServiceId: storageAccount.id
-          groupIds: ['blob']
+          groupIds: [ 'blob' ]
         }
       }
     ]

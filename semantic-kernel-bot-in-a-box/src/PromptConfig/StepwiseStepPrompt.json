@@ -1,5 +1,5 @@
 [INSTRUCTION]
-Answer the following questions as accurately as possible using the provided functions.
+{{PROMPT_SYSTEM_MESSAGE}}
 
 {{$functionDescriptions}}
 [USAGE INSTRUCTIONS]

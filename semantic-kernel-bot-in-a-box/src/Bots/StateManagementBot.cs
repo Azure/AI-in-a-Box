@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 
@@ -14,8 +15,8 @@ namespace Microsoft.BotBuilderSamples
 {
     public class StateManagementBot : ActivityHandler
     {
-        private BotState _conversationState;
-        private BotState _userState;
+        public readonly BotState _conversationState;
+        public readonly BotState _userState;
         private int _max_messages;
         private int _max_attachments;
 
@@ -52,19 +53,24 @@ namespace Microsoft.BotBuilderSamples
 
             // -- Special keywords
             // Clear conversation
-            if (turnContext.Activity.Text == "clear") {
+            if (turnContext.Activity.Text != null && turnContext.Activity.Text.ToLower() == "clear") {
                 conversationData.History.Clear();
                 conversationData.Attachments.Clear();
                 await turnContext.SendActivityAsync("Conversation context cleared");
                 return;
             }
-
             conversationData.History.Add(new ConversationTurn { Role = "user", Message = turnContext.Activity.Text });
 
             var replyText = await ProcessMessage(conversationData, turnContext);
 
-            await turnContext.SendActivityAsync(replyText);
+
             conversationData.History.Add(new ConversationTurn { Role = "assistant", Message = replyText });
+            
+            if (turnContext.Activity.Text == null || turnContext.Activity.Text.ToLower() == "") {
+                return;
+            }
+            
+            await turnContext.SendActivityAsync(replyText);
 
             conversationData.History = conversationData.History.GetRange(
                 Math.Max(conversationData.History.Count - _max_messages, 0), 
