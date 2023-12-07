@@ -7,9 +7,9 @@
 */
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
-param formRecognizerName string
-param location string
+param resourceLocation string
 param keyVaultName string
+param documentIntelligenceAccountName string
 
 //Retrieve the name of the newly created key vault
 resource kvRef 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
@@ -18,9 +18,9 @@ resource kvRef 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
 
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.cognitiveservices/accounts
 //1. Create Form Recognizer
-resource formrecognizer 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
-  name: formRecognizerName
-  location: location
+resource documentIntelligenceAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
+  name: documentIntelligenceAccountName
+  location: resourceLocation 
   sku: {
     name: 'S0' // Valid name:F0, F1, S, S0, S1, S2, S3, S4, S5, S6, P0, P1, and P2. 
   }
@@ -29,7 +29,7 @@ resource formrecognizer 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
     type: 'SystemAssigned'
   }
   properties: {
-    customSubDomainName: formRecognizerName
+    customSubDomainName: documentIntelligenceAccountName
     networkAcls: {
       defaultAction: 'Allow'
       virtualNetworkRules: []
@@ -45,7 +45,7 @@ resource FrEndPointToKv 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
   name: 'FormRecognizerEndPoint'
   parent: kvRef
   properties: {
-    value: formrecognizer.properties.endpoint
+    value: documentIntelligenceAccount.properties.endpoint
   }
 }
 
@@ -54,9 +54,9 @@ resource FrKeyToKv 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
   name: 'FormRecognizerKey'
   parent: kvRef
   properties: {
-    value: formrecognizer.listKeys().key1
+    value: documentIntelligenceAccount.listKeys().key1
   }
 }
 
-output formRecognizerId string = formrecognizer.id
-output formRecognizerPrincipalId string = formrecognizer.identity.principalId
+output documentIntelligenceAccountID string = documentIntelligenceAccount.id
+output documentIntelligencePrincipalId string = documentIntelligenceAccount.identity.principalId

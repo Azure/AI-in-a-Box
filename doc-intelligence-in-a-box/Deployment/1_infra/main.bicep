@@ -1,7 +1,6 @@
 /*region Header
       =========================================================================================================
       Created by:       Author: Your Name | your.name@azurestream.io 
-      Created on:       11/16/2023
       Description:      AI Services in-a-box - Doc Intelligence in-a-box
       =========================================================================================================
 
@@ -36,6 +35,8 @@
       7 - Assign Blob Contributor Role to Form Recognizer
       8 - Create Function App
       9 - Create KV Access Policies for Function App
+      10- Create APIs to ADLS and CosmosDB
+      11- Create form processing logic app that uses azure functions app's host key
       //=====================================================================================
 
 */
@@ -45,8 +46,8 @@
 //********************************************************
 targetScope = 'resourceGroup'
 
-param resourceGroupName string
-param resourceLocation string
+param resourceGroupName string  
+param resourceLocation string 
 param prefix string
 param uniqueSuffix string
 @description('Your Object ID')
@@ -68,17 +69,18 @@ var cosmosAccountName = '${prefix}-cosmos-${uniqueSuffix}'
 var cosmosDbName = 'form-db' // preset for solution
 var cosmosDbContainerName = 'form-docs' // preset for solution
 
-//Form Recognizer Module Parameters
-var formRecognizerName = '${prefix}-fr-${uniqueSuffix}'
+//Doc Intelligence Module Parameters
+var documentIntelligenceAccountName = '${prefix}-fr-${uniqueSuffix}'
 
 //Function App Module Parameters
 var funcAppName = '${prefix}-funcapp'
 var funAppStorageName = '${prefix}funcapp${uniqueSuffix}'
 
 //Logic App Module Parameters
-var logicAppFormProcName = '${prefix}lapp-formproc${uniqueSuffix}'
-var adlsConnectionName = '${prefix}ApiToAdlsWithKey'
-var cosmosDbConnectionName = '${prefix}ApiToCosmosDbWithKey'
+var logicAppFormProcName = '${prefix}-logicapp-${uniqueSuffix}'
+var apiCnxADLSName = '${prefix}-ApiCnxADLS'
+var apiCnxCosmosDBName = '${prefix}-ApiCnxCosmosDB'
+
 
 //====================================================================================
 // Existing Resource Group 
@@ -89,23 +91,23 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2023-07-01' existing 
 }
 
 //1. Deploy UAMI
-module uaManagedIdentity 'modules/uami.bicep' = {
+module m_uaManagedIdentity 'modules/uami.bicep' = {
   name: 'deploy_UAMI'
   scope: resourceGroup
   params: {
-    deploymentScriptUAMIName: deploymentScriptUAMIName
     resourceLocation: resourceLocation
+    deploymentScriptUAMIName: deploymentScriptUAMIName
   }
 }
 
 //2. Deploy Required Key Vault and UAMI
-module keyvault 'modules/keyvault.bicep' = {
+module m_keyvault 'modules/keyvault.bicep' = {
   name: 'deploy_keyvault'
   scope: resourceGroup
   params: {
     resourceLocation: resourceLocation
     keyVaultName: keyVaultName
-    principalId: uaManagedIdentity.outputs.uamiPrincipleId
+    principalId: m_uaManagedIdentity.outputs.uamiPrincipleId
 
     //Send in Service Principal and/or User Oject ID
     spObjectId: spObjectId
@@ -116,12 +118,9 @@ module keyvault 'modules/keyvault.bicep' = {
 }
 
 //3. Deploy Storage Account
-module datalake 'modules/datalake.bicep' = {
+module m_datalake 'modules/datalake.bicep' = {
   name: 'deploy_datalake'
   scope: resourceGroup
-  dependsOn: [
-    keyvault
-  ]
   params: {
     resourceLocation: resourceLocation
     storageAccountName: storageAccountName
@@ -133,91 +132,94 @@ module datalake 'modules/datalake.bicep' = {
       'samples'
     ]
     keyVaultName: keyVaultName
-    uami: uaManagedIdentity.outputs.uamiId
+    uami: m_uaManagedIdentity.outputs.uamiId
   }
+  dependsOn: [
+    m_keyvault
+  ]
 }
 
 //4. Deploy CosmosDB
-module cosmosdb 'modules/cosmosdb.bicep' = {
+module m_cosmosdb 'modules/cosmosdb.bicep' = {
   name: 'deploy_cosmosdb'
   scope: resourceGroup
-  dependsOn: [
-    keyvault
-  ]
   params: {
+    resourceLocation: resourceLocation
+    keyVaultName: keyVaultName
     cosmosAccountName: cosmosAccountName
     cosmosDbName: cosmosDbName
     cosmosDbContainerName: cosmosDbContainerName
-    resourceLocation: resourceLocation
-    keyVaultName: keyVaultName
   }
+  dependsOn: [
+    m_keyvault
+  ]
 }
 
 //5. Create Form Recognizer (Document Intelligence)
-module formrecognizer 'modules/form-recognizer.bicep' = {
-  name: 'deploy_formrecognizer'
+module m_docintelligence 'modules/documentIntelligence.bicep' = {
+  name:'deploy_docintelligence'
   scope: resourceGroup
   params: {
-    formRecognizerName: formRecognizerName
-    location: resourceLocation
+    resourceLocation: resourceLocation
+    documentIntelligenceAccountName: documentIntelligenceAccountName
     keyVaultName: keyVaultName
   }
   dependsOn: [
-    keyvault
+    m_keyvault 
   ]
 }
 
 //6. Assign Blob Contributor Role to UAMI
-module assignBlobContributorRoleToUAMI 'modules/assign-blobcontributor.bicep' = {
+module m_assignBlobContributorRoleToUAMI 'modules/assign-blobcontributor.bicep' = {
   name: 'deploy_assignBlobContributorRoleToUAMI'
   scope: resourceGroup
   params: {
     storageAccountName: storageAccountName
-    principalId: uaManagedIdentity.outputs.uamiPrincipleId
+    principalId: m_uaManagedIdentity.outputs.uamiPrincipleId
     principalType: 'ServicePrincipal'
   }
 }
 
 //7. Assign Blob Contributor Role to Form Recognizer
-module assignBlobContributorRoleToFR 'modules/assign-blobcontributor.bicep' = {
+module m_assignBlobContributorRoleToFR 'modules/assign-blobcontributor.bicep' = {
   name: 'deploy_assignBlobContributorRoleToFR'
   scope: resourceGroup
   params: {
     storageAccountName: storageAccountName
-    principalId: formrecognizer.outputs.formRecognizerPrincipalId
+    principalId: m_docintelligence.outputs.documentIntelligencePrincipalId
     principalType: 'ServicePrincipal'
   }
 }
 
 //8. Create Function App
-module functionApp 'modules/functionapp.bicep' = {
+module m_functionApp 'modules/functionapp.bicep' = {
   name: 'deploy_functionapp'
   scope: resourceGroup
   params: {
     resourceLocation: resourceLocation
     funcAppName: funcAppName
     funAppStorageName: funAppStorageName
-    uamiId: uaManagedIdentity.outputs.uamiId
-    uamiClientId: uaManagedIdentity.outputs.uamiClientid
+    uamiId: m_uaManagedIdentity.outputs.uamiId
+    uamiClientId: m_uaManagedIdentity.outputs.uamiClientid
     keyVaultName: keyVaultName
   }
   dependsOn: [
-    uaManagedIdentity
-    keyvault
+    m_uaManagedIdentity
+    m_keyvault 
   ]
 }
 
 //9. Create KV Access Policies for Function App
-module keyvaultPolicy 'modules/keyvaultpolicy.bicep' = {
-  dependsOn: [
-    functionApp
-  ]
+module m_keyVaultPolicy 'modules/keyvaultpolicy.bicep' = {
   scope: resourceGroup
   name: 'deploy_kv_accessPolicies'
   params: {
     keyVaultResourceName: keyVaultName
-    principalId: functionApp.outputs.principalId
+    principalId: m_functionApp.outputs.principalId
   }
+  dependsOn: [
+    m_functionApp
+  ]
 }
 
 //====================================================================================
@@ -225,12 +227,12 @@ module keyvaultPolicy 'modules/keyvaultpolicy.bicep' = {
 //====================================================================================
 
 resource keyvaultRef 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
-  name: keyvault.outputs.keyVaultName
+  name: m_keyvault.outputs.keyVaultName
   scope: resourceGroup
 }
 
 resource uaManagedIdentityRef 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' existing = {
-  name: uaManagedIdentity.outputs.uamiName
+  name: m_uaManagedIdentity.outputs.uamiName
   scope: resourceGroup
 }
 
@@ -243,60 +245,62 @@ resource uaManagedIdentityRef 'Microsoft.ManagedIdentity/userAssignedIdentities@
 //      Azure Logic App - Form Processing 
 //=====================================================================================
 
-module apiAdls 'modules/api-adls.bicep' = {
-  name: 'module-apiAdls'
+//10. Create APIs to ADLS and CosmosDB
+module m_apiAdls 'modules/api-adls.bicep' = {
+  name: 'deploy_apiCnxAdls'
   scope: resourceGroup
-  dependsOn: [
-    keyvault
-    datalake
-  ]
   params: {
-    location: resourceLocation
+    resourceLocation: resourceLocation
+    connectionName: apiCnxADLSName
     storageAccountName: storageAccountName
-    adlsConnectionWithKey: adlsConnectionName
     paramAdlsPrimaryKey: keyvaultRef.getSecret('AdlsPrimaryKey')
   }
+  dependsOn: [
+    m_keyvault   
+    m_datalake 
+  ]
 }
 
-module apiCosmosDb 'modules/api-cosmosdb.bicep' = {
-  name: 'module-apiCosmosDb'
+module m_apiCosmosDb 'modules/api-cosmosdb.bicep' = {
+  name: 'deploy_apiCnxCosmosDB'
   scope: resourceGroup
-  dependsOn: [
-    keyvault
-    cosmosdb
-  ]
   params: {
-    location: resourceLocation
+    resourceLocation: resourceLocation
+    connectionName: apiCnxCosmosDBName
     cosmosAccountName: cosmosAccountName
-    cosmosDbConnectionWithKey: cosmosDbConnectionName
     paramCosmosAccountKey: keyvaultRef.getSecret('CosmosDbPrimaryKey')
   }
+  dependsOn: [
+    m_keyvault   
+    m_cosmosdb 
+  ]
 }
 
 //*************************************************************************************
 // Create form processing logic app that uses azure functions app's host key
 //*************************************************************************************
-module logicAppFormProc 'modules/logicapp-formproc-hostkey.bicep' = {
-  name: 'module-logicAppFormProc'
+//11. Create form processing logic app that uses azure functions app's host key
+module m_logicAppFormProc 'modules/logicapp-formproc-hostkey.bicep' = {
+  name : 'deploy_logicAppFormProc'
   scope: resourceGroup
-  dependsOn: [
-    keyvault
-    apiAdls
-    apiCosmosDb
-    functionApp
-    uaManagedIdentity
-    cosmosdb
-    datalake
-  ]
   params: {
+    resourceLocation: resourceLocation
     logicAppFormProcName: logicAppFormProcName
     azureFunctionsAppName: funcAppName
-    location: resourceLocation
-    mid: uaManagedIdentityRef.id
+    uamiId: uaManagedIdentityRef.id
     storageAccountName: storageAccountName
-    adlsConnectionName: adlsConnectionName
-    adlsConnectionId: apiAdls.outputs.adlsConnectionId
-    cosmosDbConnectionName: cosmosDbConnectionName
-    cosmosDbConnectionId: apiCosmosDb.outputs.cosmosDbConnectionId
+    adlsCnxId: m_apiAdls.outputs.adlsConnectionId
+    adlsCnxName: apiCnxADLSName
+    cosmosDbCnxId: m_apiCosmosDb.outputs.cosmosDbConnectionId
+    cosmosDbCnxName: apiCnxCosmosDBName
   }
+  dependsOn: [
+    m_keyvault
+    m_apiAdls
+    m_apiCosmosDb
+    m_functionApp
+    m_uaManagedIdentity
+    m_cosmosdb
+    m_datalake
+  ]
 }

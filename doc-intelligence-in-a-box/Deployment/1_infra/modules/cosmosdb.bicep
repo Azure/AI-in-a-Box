@@ -8,12 +8,11 @@
 */
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
+param resourceLocation string
+param keyVaultName string
 param cosmosAccountName string
 param cosmosDbName string
 param cosmosDbContainerName string
-param resourceLocation string
-
-param keyVaultName string
 
 //Retrieve the name of the newly created key vault
 resource kvRef 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
@@ -111,7 +110,7 @@ resource CosmosDbConnectionStringToKv 'Microsoft.KeyVault/vaults/secrets@2023-07
   name: 'CosmosDbConnectionString'
   parent: kvRef
   properties: {
-    value: cosmosdbaccount.listConnectionStrings().connectionStrings[0].connectionString
+   value: cosmosdbaccount.listConnectionStrings().connectionStrings[0].connectionString
   }
 }
 

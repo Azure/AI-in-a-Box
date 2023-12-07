@@ -1,20 +1,29 @@
-param logicAppFormProcName string //= 'appFormProc'
-param azureFunctionsAppName string
-param storageAccountName string
-param location string
-param mid string
-param adlsConnectionName string
-param adlsConnectionId string
-param cosmosDbConnectionName string
-param cosmosDbConnectionId string
+/*region Header
+      Module Steps 
+      1 - Get Function App Host Keys
+      2 - Create Logic App 
+*/
 
+//Declare Parameters--------------------------------------------------------------------------------------------------------------------------
+param resourceLocation string
+param logicAppFormProcName string 
+param azureFunctionsAppName string
+param uamiId string
+param storageAccountName string
+param adlsCnxId string 
+param adlsCnxName string
+param cosmosDbCnxId string
+param cosmosDbCnxName string
+
+
+//Create Logic App
 resource LogicAppFormProc 'Microsoft.Logic/workflows@2019-05-01' = {
   name: logicAppFormProcName
-  location: location
+  location: resourceLocation
   identity: {
     type: 'UserAssigned'
     userAssignedIdentities: {
-      '${mid}': {}
+      '${uamiId}': {}
     }
   }
   properties: {
@@ -181,14 +190,14 @@ resource LogicAppFormProc 'Microsoft.Logic/workflows@2019-05-01' = {
       '$connections': {
         value: {
           azureblob: {
-            connectionId: adlsConnectionId
-            connectionName: adlsConnectionName
-            id: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Web/locations/${location}/managedApis/azureblob'
+            connectionId: adlsCnxId
+            connectionName: adlsCnxName
+            id: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Web/locations/${resourceLocation}/managedApis/azureblob'
           }
           documentdb_1: {
-            connectionId: cosmosDbConnectionId
-            connectionName: cosmosDbConnectionName
-            id: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Web/locations/${location}/managedApis/documentdb'
+            connectionId: cosmosDbCnxId
+            connectionName: cosmosDbCnxName
+            id: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Web/locations/${resourceLocation}/managedApis/documentdb'
           }
         }
       }

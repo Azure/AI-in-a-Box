@@ -1,36 +1,34 @@
-//====================================================================================
-// Copyright (c) Microsoft Corporation.
-// Licensed under the MIT license.
-//====================================================================================
-//
-// Developed by Dr. Gaiye "Gail" Zhou, Sr Architect @ Microsoft.  
-// August 2022
-//
-//====================================================================================
+/*region Header
+      Module Steps 
+      1 - Get Key Vault Reference
+      2 - Create Logic App API Cnx
+*/
 
-param location string
+//Declare Parameters--------------------------------------------------------------------------------------------------------------------------
+param resourceLocation string
+param connectionName string
 param storageAccountName string
-param adlsConnectionWithKey string
 @secure()
 param paramAdlsPrimaryKey string
 
-// this one sets up an active connection
-resource adlsconnectionkey 'Microsoft.Web/connections@2016-06-01' = {
-  name: adlsConnectionWithKey
-  location: location
+//https://learn.microsoft.com/en-us/azure/templates/microsoft.web/connections
+//Set up an active connection
+resource apiCnxADLS 'Microsoft.Web/connections@2016-06-01' = {
+  name: connectionName
+  location: resourceLocation
   properties: {
-    displayName: adlsConnectionWithKey
+    displayName: connectionName
+    api: {
+      name: 'azureblob'
+      displayName: 'Azure Blob Storage'
+      id: subscriptionResourceId('Microsoft.Web/locations/managedApis', resourceLocation, 'azureblob')
+      type: 'Microsoft.Web/locations/managedApis'
+    }
     parameterValues: {
       accountName: storageAccountName
       accessKey: paramAdlsPrimaryKey
     }
-    api: {
-      name: 'azureblob'
-      displayName: 'Azure Blob Storage'
-      id: subscriptionResourceId('Microsoft.Web/locations/managedApis', location, 'azureblob')
-      type: 'Microsoft.Web/locations/managedApis'
-    }
   }
 }
 
-output adlsConnectionId string = adlsconnectionkey.id
+output adlsConnectionId string = apiCnxADLS.id

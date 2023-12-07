@@ -4,8 +4,8 @@
 */
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
-param deploymentScriptUAMIName string
 param resourceLocation string
+param deploymentScriptUAMIName string
 
 //https://docs.microsoft.com/en-us/azure/templates/microsoft.managedidentity/userassignedidentities
 //1. User-Assignment Managed Identity used to execute deployment scripts

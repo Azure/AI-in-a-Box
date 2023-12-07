@@ -1,14 +1,16 @@
-<p align="center">
-  <img src="../Assets/images/aiservices-in-a-box.svg" alt="FTA AI Services-in-a-Box: Deployment Accelerator" style="width: 15%" />
-</p>
 
 # Doc-Intelligence-in-a-Box
+![Banner](./readme_assets/banner-doc-intelligence-in-a-box.png)
 
-This solution leverages [Azure AI Document Intelligence](https://azure.microsoft.com/en-us/products/ai-services/ai-document-intelligence) to extract data from PDF forms and store the data in a [Azure Cosmos DB](https://learn.microsoft.com/en-us/azure/cosmos-db/introduction).
+## Use Case
+This solution accelerator empowers companies to automate the processing of PDF forms to modernize their operations, save time, and reduce cost.
+
+The solution leverages [Azure AI Document Intelligence](https://azure.microsoft.com/en-us/products/ai-services/ai-document-intelligence) to extract data from PDF forms and store the data in a [Azure Cosmos DB](https://learn.microsoft.com/en-us/azure/cosmos-db/introduction).
 
 ## Solution Architecture
-The architecture for this solution is shown below:
-![Architecture Diagram](./Deployment/Images/Arch-SA-PDF-Form-Processing-Automation-AAC.png "PDF Form Processing Automation Architecture Diagram")
+The below architecture diagram illustrates the main components and information flow of this solution accelerator: 
+
+![Architecture Diagram](./Deployment/Images/Arch-SA-PDF-Form-Processing-Automation.png "PDF Form Processing Automation Architecture Diagram")
 
 1. PDF forms are uploaded to a container in [Azure Data Lake Storage Gen2](https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction) (ADLS Gen2).
 1. When PDF forms are uploaded to the container, an [Azure Logic App](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview) is triggered to start the processing of the PDF form(s).  

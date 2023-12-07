@@ -1,27 +1,34 @@
-param location string
+/*region Header
+      Module Steps 
+      1 - Get Key Vault Reference
+      2 - Create Logic App API Cnx
+*/
+
+//Declare Parameters--------------------------------------------------------------------------------------------------------------------------
+param resourceLocation string
+param connectionName string
 param cosmosAccountName string
-param cosmosDbConnectionWithKey string
 @secure()
 param paramCosmosAccountKey string
 
-// this one sets up an active connection
-resource cosmosdbconnectionkey 'Microsoft.Web/connections@2016-06-01' = {
-  name: cosmosDbConnectionWithKey
-  location: location
+//https://learn.microsoft.com/en-us/azure/templates/microsoft.web/connections
+//Set up an active connection
+resource apiCnxCosmosDB 'Microsoft.Web/connections@2016-06-01' = {
+  name: connectionName
+  location: resourceLocation
   properties: {
-    displayName: cosmosDbConnectionWithKey
+    displayName: connectionName
+    api: {
+      name: 'cosmosdb'
+      displayName: 'CosmosDB'
+      id: subscriptionResourceId('Microsoft.Web/locations/managedApis', resourceLocation, 'documentdb')
+      type: 'Microsoft.Web/locations/managedApis'
+    }
     parameterValues: {
       databaseAccount: cosmosAccountName
       accessKey: paramCosmosAccountKey
     }
-    customParameterValues: {}
-    api: {
-      name: 'documentdb'
-      displayName: cosmosDbConnectionWithKey
-      id: subscriptionResourceId('Microsoft.Web/locations/managedApis', location, 'documentdb')
-      type: 'Microsoft.Web/locations/managedApis'
-    }
   }
 }
 
-output cosmosDbConnectionId string = cosmosdbconnectionkey.id
+output cosmosDbConnectionId string = apiCnxCosmosDB.id
