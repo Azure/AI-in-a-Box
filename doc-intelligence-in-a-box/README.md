@@ -1,4 +1,3 @@
-
 # Doc-Intelligence-in-a-Box
 ![Banner](./readme_assets/banner-doc-intelligence-in-a-box.png)
 
