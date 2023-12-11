@@ -46,8 +46,8 @@
 //********************************************************
 targetScope = 'resourceGroup'
 
-param resourceGroupName string  
-param resourceLocation string 
+param resourceGroupName string
+param resourceLocation string
 param prefix string
 param uniqueSuffix string
 @description('Your Object ID')
@@ -80,7 +80,7 @@ var funAppStorageName = '${prefix}funcapp${uniqueSuffix}'
 var logicAppFormProcName = '${prefix}-logicapp-${uniqueSuffix}'
 var apiCnxADLSName = '${prefix}-ApiCnxADLS'
 var apiCnxCosmosDBName = '${prefix}-ApiCnxCosmosDB'
-
+var apiCnxKeyVaultName = '${prefix}-ApiCnxKeyVault'
 
 //====================================================================================
 // Existing Resource Group 
@@ -157,7 +157,7 @@ module m_cosmosdb 'modules/cosmosdb.bicep' = {
 
 //5. Create Form Recognizer (Document Intelligence)
 module m_docintelligence 'modules/documentIntelligence.bicep' = {
-  name:'deploy_docintelligence'
+  name: 'deploy_docintelligence'
   scope: resourceGroup
   params: {
     resourceLocation: resourceLocation
@@ -165,7 +165,7 @@ module m_docintelligence 'modules/documentIntelligence.bicep' = {
     keyVaultName: keyVaultName
   }
   dependsOn: [
-    m_keyvault 
+    m_keyvault
   ]
 }
 
@@ -205,7 +205,7 @@ module m_functionApp 'modules/functionapp.bicep' = {
   }
   dependsOn: [
     m_uaManagedIdentity
-    m_keyvault 
+    m_keyvault
   ]
 }
 
@@ -245,7 +245,19 @@ resource uaManagedIdentityRef 'Microsoft.ManagedIdentity/userAssignedIdentities@
 //      Azure Logic App - Form Processing 
 //=====================================================================================
 
-//10. Create APIs to ADLS and CosmosDB
+//10. Create APIs to Key Vault, ADLS and CosmosDB 
+module m_apiKeyVault 'modules/api-keyvault.bicep' = {
+  name: 'deploy_apiCnxKeyVault'
+  scope: resourceGroup
+  params: {
+    resourceLocation: resourceLocation
+    connectionName: apiCnxKeyVaultName
+  }
+  dependsOn: [
+    m_keyvault
+   ]
+}
+
 module m_apiAdls 'modules/api-adls.bicep' = {
   name: 'deploy_apiCnxAdls'
   scope: resourceGroup
@@ -256,8 +268,8 @@ module m_apiAdls 'modules/api-adls.bicep' = {
     paramAdlsPrimaryKey: keyvaultRef.getSecret('AdlsPrimaryKey')
   }
   dependsOn: [
-    m_keyvault   
-    m_datalake 
+    m_keyvault
+    m_datalake
   ]
 }
 
@@ -271,8 +283,8 @@ module m_apiCosmosDb 'modules/api-cosmosdb.bicep' = {
     paramCosmosAccountKey: keyvaultRef.getSecret('CosmosDbPrimaryKey')
   }
   dependsOn: [
-    m_keyvault   
-    m_cosmosdb 
+    m_keyvault
+    m_cosmosdb
   ]
 }
 
@@ -281,7 +293,7 @@ module m_apiCosmosDb 'modules/api-cosmosdb.bicep' = {
 //*************************************************************************************
 //11. Create form processing logic app that uses azure functions app's host key
 module m_logicAppFormProc 'modules/logicapp-formproc-hostkey.bicep' = {
-  name : 'deploy_logicAppFormProc'
+  name: 'deploy_logicAppFormProc'
   scope: resourceGroup
   params: {
     resourceLocation: resourceLocation
@@ -293,6 +305,8 @@ module m_logicAppFormProc 'modules/logicapp-formproc-hostkey.bicep' = {
     adlsCnxName: apiCnxADLSName
     cosmosDbCnxId: m_apiCosmosDb.outputs.cosmosDbConnectionId
     cosmosDbCnxName: apiCnxCosmosDBName
+    keyVaultCnxID:m_apiKeyVault.outputs.keyVaultConnectionID
+    keyVaultCnxName: apiCnxKeyVaultName
   }
   dependsOn: [
     m_keyvault

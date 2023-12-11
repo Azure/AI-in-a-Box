@@ -6,14 +6,16 @@
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
 param resourceLocation string
-param logicAppFormProcName string 
+param logicAppFormProcName string
 param azureFunctionsAppName string
 param uamiId string
 param storageAccountName string
-param adlsCnxId string 
+param adlsCnxId string
 param adlsCnxName string
 param cosmosDbCnxId string
 param cosmosDbCnxName string
+param keyVaultCnxID string
+param keyVaultCnxName string
 
 
 //Create Logic App
@@ -69,8 +71,33 @@ resource LogicAppFormProc 'Microsoft.Logic/workflows@2019-05-01' = {
         }
       }
       actions: {
-        InitSplitFileStatusCode: {
+        Get_secret: {
           runAfter: {}
+          type: 'ApiConnection'
+          inputs: {
+            host: {
+              connection: {
+                name: '@parameters(\'$connections\')[\'keyvault\'][\'id\']'
+              }
+            }
+            method: 'get'
+            path: '/secrets/@{encodeURIComponent(\'FunctionAppHostKey\')}/value'
+          }
+          runtimeConfiguration: {
+            secureData: {
+              properties: [
+                'inputs'
+                'outputs'
+              ]
+            }
+          }
+        }
+        InitSplitFileStatusCode: {
+          runAfter: {
+            Get_secret: [
+              'Succeeded'
+            ]
+          }
           type: 'InitializeVariable'
           inputs: {
             variables: [
@@ -107,7 +134,7 @@ resource LogicAppFormProc 'Microsoft.Logic/workflows@2019-05-01' = {
                 }
                 RecognizeFileFunction: {
                   runAfter: {}
-                  type: 'function'
+                  type: 'Http'
                   inputs: {
                     body: {
                       date: '@{items(\'ForEachFile\')?[\'date\']}'
@@ -125,8 +152,14 @@ resource LogicAppFormProc 'Microsoft.Logic/workflows@2019-05-01' = {
                       'Content-Type': 'application/json'
                     }
                     method: 'POST'
-                    function: {
-                      id: '/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Web/sites/${azureFunctionsAppName}/functions/RecognizeFile'
+                    uri: 'https://${azureFunctionsAppName}.azurewebsites.net/api/RecognizeFile?code=@{body(\'Get_secret\')?[\'value\']}'
+                  }
+                  runtimeConfiguration: {
+                    secureData: {
+                      properties: [
+                        'inputs'
+                        'outputs'
+                      ]
                     }
                   }
                 }
@@ -152,7 +185,7 @@ resource LogicAppFormProc 'Microsoft.Logic/workflows@2019-05-01' = {
             }
             SplitFileFunction: {
               runAfter: {}
-              type: 'function'
+              type: 'Http'
               inputs: {
                 body: {
                   file_name: '@{triggerBody()?[\'Name\']}'
@@ -161,13 +194,19 @@ resource LogicAppFormProc 'Microsoft.Logic/workflows@2019-05-01' = {
                   output_container: 'files-2-split'
                   storage_account: storageAccountName
                 }
-                function: {
-                  id: '/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Web/sites/${azureFunctionsAppName}/functions/SplitFile'
-                }
                 headers: {
                   'Content-Type': 'application/json'
                 }
                 method: 'POST'
+                uri: 'https://${azureFunctionsAppName}.azurewebsites.net/api/SplitFile?code=@{body(\'Get_secret\')?[\'value\']}'
+              }
+              runtimeConfiguration: {
+                secureData: {
+                  properties: [
+                    'inputs'
+                    'outputs'
+                  ]
+                }
               }
             }
           }
@@ -198,6 +237,18 @@ resource LogicAppFormProc 'Microsoft.Logic/workflows@2019-05-01' = {
             connectionId: cosmosDbCnxId
             connectionName: cosmosDbCnxName
             id: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Web/locations/${resourceLocation}/managedApis/documentdb'
+          }
+          keyvault: {
+            connectionID: keyVaultCnxID
+            connectionName: keyVaultCnxName
+            authentication: 'ManagedServiceIdentity'
+            id: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Web/locations/${resourceLocation}/managedApis/keyvault'
+            connectionProperties: {
+              authentication: {
+                type: 'ManagedServiceIdentity'
+                identity: uamiId
+              }
+            }
           }
         }
       }
