@@ -4,7 +4,7 @@ param resourceLocation = 'your-location'
 param resourceGroupName = 'your-resource-group-name'
 param prefix = 'your-prefix'
 param uniqueSuffix = 'your-unique-suffix'
-param spObjectId = 'your-service-principal-object-id'' 
+param spObjectId = 'your-service-principal-object-id'
 
 param kvKeyPermissions = [
     'all'
