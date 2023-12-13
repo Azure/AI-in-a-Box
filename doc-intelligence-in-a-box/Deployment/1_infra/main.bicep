@@ -245,19 +245,7 @@ resource uaManagedIdentityRef 'Microsoft.ManagedIdentity/userAssignedIdentities@
 //      Azure Logic App - Form Processing 
 //=====================================================================================
 
-//10. Create APIs to Key Vault, ADLS and CosmosDB 
-module m_apiKeyVault 'modules/api-keyvault.bicep' = {
-  name: 'deploy_apiCnxKeyVault'
-  scope: resourceGroup
-  params: {
-    resourceLocation: resourceLocation
-    connectionName: apiCnxKeyVaultName
-  }
-  dependsOn: [
-    m_keyvault
-   ]
-}
-
+//10. Create APIs to ADLS and CosmosDB 
 module m_apiAdls 'modules/api-adls.bicep' = {
   name: 'deploy_apiCnxAdls'
   scope: resourceGroup
@@ -305,8 +293,8 @@ module m_logicAppFormProc 'modules/logicapp-formproc-hostkey.bicep' = {
     adlsCnxName: apiCnxADLSName
     cosmosDbCnxId: m_apiCosmosDb.outputs.cosmosDbConnectionId
     cosmosDbCnxName: apiCnxCosmosDBName
-    keyVaultCnxID:m_apiKeyVault.outputs.keyVaultConnectionID
-    keyVaultCnxName: apiCnxKeyVaultName
+    keyVaultName:m_keyvault.outputs.keyVaultName
+    
   }
   dependsOn: [
     m_keyvault

@@ -14,9 +14,7 @@ param adlsCnxId string
 param adlsCnxName string
 param cosmosDbCnxId string
 param cosmosDbCnxName string
-param keyVaultCnxID string
-param keyVaultCnxName string
-
+param keyVaultName string
 
 //Create Logic App
 resource LogicAppFormProc 'Microsoft.Logic/workflows@2019-05-01' = {
@@ -71,22 +69,24 @@ resource LogicAppFormProc 'Microsoft.Logic/workflows@2019-05-01' = {
         }
       }
       actions: {
-        Get_secret: {
+        Get_Key_Vault_Secret: {
           runAfter: {}
-          type: 'ApiConnection'
+          type: 'Http'
           inputs: {
-            host: {
-              connection: {
-                name: '@parameters(\'$connections\')[\'keyvault\'][\'id\']'
-              }
+            authentication: {
+              audience: 'https://vault.azure.net'
+              type: 'ManagedServiceIdentity'
+              identity: uamiId
             }
-            method: 'get'
-            path: '/secrets/@{encodeURIComponent(\'FunctionAppHostKey\')}/value'
+            method: 'GET'
+            queries: {
+              'api-version': '2016-10-01'
+            }
+            uri: 'https://${keyVaultName}.vault.azure.net/secrets/FunctionAppHostKey/'
           }
           runtimeConfiguration: {
             secureData: {
               properties: [
-                'inputs'
                 'outputs'
               ]
             }
@@ -94,7 +94,7 @@ resource LogicAppFormProc 'Microsoft.Logic/workflows@2019-05-01' = {
         }
         InitSplitFileStatusCode: {
           runAfter: {
-            Get_secret: [
+            Get_Key_Vault_Secret: [
               'Succeeded'
             ]
           }
@@ -152,7 +152,7 @@ resource LogicAppFormProc 'Microsoft.Logic/workflows@2019-05-01' = {
                       'Content-Type': 'application/json'
                     }
                     method: 'POST'
-                    uri: 'https://${azureFunctionsAppName}.azurewebsites.net/api/RecognizeFile?code=@{body(\'Get_secret\')?[\'value\']}'
+                    uri: 'https://${azureFunctionsAppName}.azurewebsites.net/api/RecognizeFile?code=@{body(\'Get_Key_Vault_Secret\')?[\'value\']}'
                   }
                   runtimeConfiguration: {
                     secureData: {
@@ -198,7 +198,7 @@ resource LogicAppFormProc 'Microsoft.Logic/workflows@2019-05-01' = {
                   'Content-Type': 'application/json'
                 }
                 method: 'POST'
-                uri: 'https://${azureFunctionsAppName}.azurewebsites.net/api/SplitFile?code=@{body(\'Get_secret\')?[\'value\']}'
+                uri: 'https://${azureFunctionsAppName}.azurewebsites.net/api/SplitFile?code=@{body(\'Get_Key_Vault_Secret\')?[\'value\']}'
               }
               runtimeConfiguration: {
                 secureData: {
@@ -237,18 +237,6 @@ resource LogicAppFormProc 'Microsoft.Logic/workflows@2019-05-01' = {
             connectionId: cosmosDbCnxId
             connectionName: cosmosDbCnxName
             id: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Web/locations/${resourceLocation}/managedApis/documentdb'
-          }
-          keyvault: {
-            connectionID: keyVaultCnxID
-            connectionName: keyVaultCnxName
-            authentication: 'ManagedServiceIdentity'
-            id: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Web/locations/${resourceLocation}/managedApis/keyvault'
-            connectionProperties: {
-              authentication: {
-                type: 'ManagedServiceIdentity'
-                identity: uamiId
-              }
-            }
           }
         }
       }
