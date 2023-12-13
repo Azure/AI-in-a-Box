@@ -1,6 +1,6 @@
 # Test the Solution Accelerator
 
-Once you have have successfully deployed and configured the solution, follow below instructions to test the solution.
+Once you have have successfully deployed and configured the solution as required, follow the instructions below to test the solution.
 
 ## Step 1: Upload PDFs to Azure Data Lake Storage Containers
 
@@ -10,7 +10,7 @@ Once you have have successfully deployed and configured the solution, follow bel
 
     ![ADLS-Containers](../Images/Test-ADLS-Containers.png)
 
-1. Upload selected files from [Sample Test Forms](../Data/samples/test/contoso_set_1/) to the Azure Data Lake Storage container `file-1-input`.
+1. Navigate to the `file-1-input` folder  and upload selected files from [``..Data/samples/test/contoso_set_1/``](../Data/samples/test/contoso_set_1/) to `file-1-input`.
 
 ## Step 2: Verify the Form Processing Logic App
 

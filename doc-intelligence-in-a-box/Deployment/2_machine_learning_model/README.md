@@ -24,37 +24,37 @@ In this step, you will train custom Azure AI Document intelligence customer extr
 
 1. Go to [Document Intelligence Studio](https://documentintelligence.ai.azure.com/studio), scroll down to  `Custom Extraction Model` and select `Create new`, as illustrated below.
 
-![FR Create Custom Model](../Images/FR-Create-Custom-Model.png)
+    ![FR Create Custom Model](../Images/FR-Create-Custom-Model.png)
 
 1. Select `+Create a project` to create a project.
 1. Enter a project name. For example `SafetyFormProject-Set-1` or any other project name of your choice.
-1. Enter a project description. For example `Custom form recognizer model with samples contoso_set_1` and click `Continue`.
+1. Enter a project description. For example `Custom document intelligence model with samples contoso_set_1` and click `Continue`.
 1. Select your Subscription, Resource Group and the Document Intelligence resource.
 1. Select the latest, non-preview API Version.
 1. Now you will be prompted to enter the training data source, as illustrated below. Select your subscription. Select Resource Group, and Azure storage created by the deployment scripts. Enter `samples` in the Blob container field. Enter `train/contoso_set_1` in the Folder path field. Click `Continue`.
 
-![FR Training Data Set](../Images/FR-Training-Data-Set.png)
+    ![FR Training Data Set](../Images/FR-Training-Data-Set.png)
 
 1. Review Information and click `Create Project`. This step connects the form recognizer studio to Azure data lake storage/container resource in your subscription to access the training data. 
 1. After the project is created, forms with OCR, field key and value pair will appear as illustrated below. Click '`Train`' on upper right corner.
 
-![FR Label Data and Train](../Images/FR-Label-Data-and-Train.png)
+    ![FR Label Data and Train](../Images/FR-Label-Data-and-Train.png)
 
-1. Fill in information as below, and select the dropdown "Build Mode" to `Template`, and then click `Train`. 
+1. Fill in information as below, and select the dropdown "Build Mode" to `Template`, and then click `Train`.
 
-![FR Train New Model](../Images/FR-Train-New-Model.png)
+    ![FR Train New Model](../Images/FR-Train-New-Model.png)
 
 1. Once the training for `contoso_set_1` samples is done, the model will be located in `Models` tab with confidence score of each field, as illustrated below.
 
-![FR Field Confidence](../Images/FR-Field-Confidence.png)
+    ![FR Field Confidence](../Images/FR-Field-Confidence.png)
 
-1. Train second model with files stored in `train/contoso_set_2`, using above steps to create a new project and model. Name your second model as `consoto-set-2` or choice of your own.
+1. Train a second model with files stored in `train/contoso_set_2`, using above steps to create a new project and model. Name your second model as `consoto-set-2` or choice of your own.
 1. Click 'Models' from your project. You will see a list of models already created. You can now merge individual models into a composite model. Select `contoso-set-1` and `contoso-set-2`, then click `Compose`. The system will prompt you for a new model name and description. Enter `contoso-safety-forms` or choice of your own, with a description. Click `Compose`.
 
-![FR Merge Models](../Images/FR-Merge-Models.png)
+    ![FR Merge Models](../Images/FR-Merge-Models.png)
 
-![FR Compose Model](../Images/FR-Compose-Model-Contoso-Safety.png)
+    ![FR Compose Model](../Images/FR-Compose-Model-Contoso-Safety.png)
 
-1. Now your model id `contoso-safety-forms` will appear in the Model ID list, as illustrated below. Please make a note of this composed model id as you will need it to set up the Azure Functions App to use this model id, as described in [Solution Configuration Guide](../3_solution_configuration/README.md). 
+1. Now your model id `contoso-safety-forms` will appear in the Model ID list, as illustrated below. If you did not name your composite model `contoso-safety-forms`, make a note it and got to the [Solution Configuration Guide](../3_solution_configuration/README.md). Otherwise, you can jump ahead to the [Solution Testing Guide](../4_solution_testing/).
 
-![FR List of Models](../Images/FR-List-of-Models.png "Project-and-Model-ID")
+    ![FR List of Models](../Images/FR-List-of-Models.png "Project-and-Model-ID")
