@@ -9,7 +9,7 @@ The solution leverages [Azure AI Document Intelligence](https://azure.microsoft.
 ## Solution Architecture
 The below architecture diagram illustrates the main components and information flow of this solution accelerator: 
 
-![Architecture Diagram](./Deployment/Images/Arch-SA-PDF-Form-Processing-Automation.png "PDF Form Processing Automation Architecture Diagram")
+![Architecture Diagram](./Images/Arch-SA-PDF-Form-Processing-Automation.png "PDF Form Processing Automation Architecture Diagram")
 
 1. PDF forms are uploaded to a container in [Azure Data Lake Storage Gen2](https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction) (ADLS Gen2).
 1. When PDF forms are uploaded to the container, an [Azure Logic App](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview) is triggered to start the processing of the PDF form(s).  

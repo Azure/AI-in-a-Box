@@ -2,7 +2,7 @@
 
 When you deploy this template, Microsoft is able to identify the installation of the software with the Azure resources that are deployed. Microsoft is able to correlate the Azure resources that are used to support the software. Microsoft collects this information to provide the best experiences with their products and to operate their business. The data is collected and governed by Microsoft's privacy policies, which can be found at [Microsoft Privacy Statement](https://go.microsoft.com/fwlink/?LinkID=824704).
 
-To disable this, simply remove the following section from [deploy-resources.bicep](./Deployment/1_deployment_scripts/deploy-resources.bicep) before deploying the resources to Azure:
+To disable this, simply remove the following section from [resource-id.bicep](./1_infra/resource-id.bicep) before deploying the resources to Azure:
 
 ```json
 @description('create resource with solution accelerator tag ID')
