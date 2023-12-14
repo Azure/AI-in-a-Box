@@ -1,0 +1,126 @@
+{
+	"$schema": "https://schema.cognitiveservices.azure.com/formrecognizer/2021-03-01/fields.json",
+	"fields": [
+		{
+			"fieldKey": "Hazardous Condition",
+			"fieldType": "selectionMark",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "At Risk Behavior",
+			"fieldType": "selectionMark",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Safety Suggestion",
+			"fieldType": "selectionMark",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Safety Recognition",
+			"fieldType": "selectionMark",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Equipment",
+			"fieldType": "selectionMark",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Slips, Trips, Falls",
+			"fieldType": "selectionMark",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Electrical",
+			"fieldType": "selectionMark",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Ergonomics",
+			"fieldType": "selectionMark",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Material Handling",
+			"fieldType": "selectionMark",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Spill, Release, Environmental",
+			"fieldType": "selectionMark",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "PPE",
+			"fieldType": "selectionMark",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Other Safety",
+			"fieldType": "selectionMark",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Significant",
+			"fieldType": "selectionMark",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Not Significant",
+			"fieldType": "selectionMark",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Findings",
+			"fieldType": "string",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Suggested Solutions",
+			"fieldType": "string",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Submitter",
+			"fieldType": "string",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Department",
+			"fieldType": "string",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Date",
+			"fieldType": "date",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Owner",
+			"fieldType": "string",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Solutions",
+			"fieldType": "string",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Target Date",
+			"fieldType": "date",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Close Date",
+			"fieldType": "date",
+			"fieldFormat": "not-specified"
+		},
+		{
+			"fieldKey": "Submitter Approval",
+			"fieldType": "string",
+			"fieldFormat": "not-specified"
+		}
+	],
+	"definitions": {}
+}

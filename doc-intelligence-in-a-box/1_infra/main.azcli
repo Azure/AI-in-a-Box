@@ -1,0 +1,67 @@
+#PARAMETERS
+#region Login
+    $TenantID          = "YOUR-TENANT-ID"
+    $SubscriptionID    = "YOUR-Subscription-ID"
+    $appID             = "YOUR-ServicePrincipal-ClientID"
+    $password          = "YOUR-ServicePrincipal-CLIENTSECRET"
+    $location          = "eastus"
+    $rgName            = "aibx-docinteli-rg"
+    $DeploymentName    = "main"
+    $BicepFile         = "main.bicep"
+    $parameterFile     = "main.bicepparam"
+    $spObjectId        = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+#endregion
+
+#CD into appropriate directory
+#cd doc-intelligence-in-a-box\Deployment\1_deployment_scripts
+
+#Login with Service Principal - Make sure you login and run deployment with a user that has a high enough RBAC to create role assignments (Owner Role). 
+az login --service-principal --username $appID --password $password --tenant $TenantID 
+
+#Set the default subscription for all of the Azure CLI commands that you run in this session
+az account set --subscription $SubscriptionID
+az account show 
+
+#1. Create your Resource Group where you are going to land all your Azure Applied AI Services Resources and Dependencies
+az group create --name $rgName --location $location
+
+#2. Get your Service Principal or User Object ID (You will more than likely need to run the command in the Cloud Shell)
+# It will use your AAD email to get AAD objectId to grant you Key vault permission
+$spObjectId = az ad user show --id 'email@youremail.com' --query id 
+
+#3. Build and convert your Bicep file to an Azure Resource Manager template (ARM template)
+#(Make sure that you run the below command within the src/bicep-deployment directory. So change directory (cd) at the command prompt)
+az bicep build --file main.bicep
+
+#4. Deploy your Bicep template to Azure 
+az deployment group create --resource-group $rgName --template-file $BicepFile --parameters $parameterFile --name $DeploymentName --query properties.outputs --verbose 
+
+#5. Clean Up the Resources and Delete the Resource Group
+#az group delete --name $rgName
+#make sure to purge your key vault and document intelligence resources from the portal if you want to start from scratch
+#az keyvault purge --name $keyVaultName
+#az cognitiveservices account list-deleted
+#az cognitiveservices account purge --name $cognitiveServicesName --resource-group $rgName
+
+#6. Decompile ARM template
+#az bicep decompile --file template.json
+
+#Note - RUN THE FOLLOWING AZURE CLI COMMAND. You are going to need to GET your Service Principal ID If you run the deployment with Azure DevOps. 
+#The service principal ID is different. You can get your Service Principal Application ID and Service Principal Object ID from the Portal but not the ID. 
+#So you need to get your Service Principal ID if you run the deployment through Azure DevOps
+#az ad sp show --id <YourServicePrincipalAppID>
+
+################################################################################################
+# Deploy Python Code to the Azure Functions Infrastructure created by 3 
+################################################################################################
+#Go to the location where code resides: 
+cd ..\Code
+#Get name of Azure Function App
+$functionApp = az functionapp list --resource-group $rgName --query "[].{hostName:name}" --output tsv
+#Check variable value
+$functionApp
+#Publish code to Azure Functions App 
+func azure functionapp publish $functionApp --python    
+#Once published move on to steps 2_machine_learning_model_deployment, 3_solution_configuration, 4_solution_testing
+
+
