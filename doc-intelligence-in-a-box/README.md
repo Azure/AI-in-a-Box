@@ -29,10 +29,27 @@ The below architecture diagram illustrates the main components and information f
 
 * An [Azure subscription](https://azure.microsoft.com/en-us/free/).
 * Install latest version of [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
- * Install latest version of [Bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install)
- * Install latest version [Azure Functions Core Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash#v2)
+* Install latest version of [Bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install)
+* Install latest version [Azure Functions Core Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash#v2)
 * If you wish to connect Power BI see the a report over data processed using Azure AI Document Intelligence, install [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/).
- * Clone this repo
+* Clone this repo
 
-## Deploy to Azure
-Follow the steps in the [Deployment Guide](./Deployment/README.md) to set up your Azure resources, create the Document Intelligence model, test the solution, and visualize the results in Power BI.
+## Document Intelligence Accelerator Deployment Guide
+
+Follow the steps below to set up your Azure resources, create the Document Intelligence model, test the solution, and visualize the results in Power BI.
+
+### Step 1: Deploy the Solution Accelerator
+
+Follow instructions in the folder `1_infra`: [Deployment Scripts Guide](./1_infra/README.md).
+
+### Step 2: Create Azure AI Document Intelligence Machine Learning Model
+
+Follow instructions in the folder `2_machine_learning_model` : [Machine Learning Model Guide](./2_machine_learning_model/README.md).
+
+### Step 3: Test the Solution Accelerator
+
+Follow instructions in the `4_solution_testing` folder: [Solution Testing Guide](./3_solution_testing/README.md).
+
+### Step 4: Set Up Power BI Model
+
+Follow instructions in the `5_power_bi` folder: [PowerBI Model Guide](./4_power_bi/README.md).

@@ -4,7 +4,7 @@ Follow the steps below to train a Azure AI Document Intelligence custom extracti
 
 ## Step 1: Locate the Sample Data Files
 
-After finishing the deployment process described in [Deployment Scripts Guide](../1_deployment_scripts/README.md), your Document intelligence source should be ready for you to start creating a new Document Intelligence ML model. From your cloned repository, navigate to the project root directory then to `Deployment\Data\samples\train`
+After deploying the Azure Resources, your Document intelligence source will be ready for you to start creating a new Document Intelligence ML model. From your cloned repository, navigate to the project root directory then to [Data/samples/train](../Data/samples/train/)
 
 You will see two folders that contain sample training forms, as illustrated below.
 
@@ -12,13 +12,13 @@ You will see two folders that contain sample training forms, as illustrated belo
 
 ## Step 2: Upload Sample Forms to Azure Data Lake Storage
 
-1. Go to the [Azure Portal](https://portal.azure.com) and select the Azure Data Lake Storage Account that was created by deployment script. The name of this account should be <your-prefix>adls,<your-suffix>.
+1. Go to the [Azure Portal](https://portal.azure.com) and select the Azure Data Lake Storage Account that was created by deployment script. The name of this account should be <your-prefix>adls<your-suffix>.
 2. On the left side of the menu pane, select `Data storage`, then `Containers` and go to the `samples` container. 
 3. Create a new folder and name it `train`.  
 4. In the `train` folder, create two folders. One named `contoso_set_1` and the other named `contoso_set_2`.  
 5. Upload the sample labeling files in [Data/samples/train/contoso_set_1](../Data/samples/train/contoso_set_1) and [Data/samples/train/contoso_set_2](../Data/samples/train/contoso_set_2)  into the corresponding folders. You now have two full sets of pre-labeled data to create the machine learning models.
 
-### Step 3: Train and Merge Document Intelligence ML Models
+## Step 3: Train and Merge Document Intelligence ML Models
 
 In this step, you will train custom Azure AI Document intelligence customer extraction models and merge them into a composite model. For more information, please refer to Azure online document [Compose Custom Models](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/how-to-guides/compose-custom-models?view=doc-intel-4.0.0&tabs=studio).
 
@@ -49,12 +49,19 @@ In this step, you will train custom Azure AI Document intelligence customer extr
     ![FR Field Confidence](../Images/FR-Field-Confidence.png)
 
 1. Train a second model with files stored in `train/contoso_set_2`, using above steps to create a new project and model. Name your second model as `consoto-set-2` or choice of your own.
-1. Click 'Models' from your project. You will see a list of models already created. You can now merge individual models into a composite model. Select `contoso-set-1` and `contoso-set-2`, then click `Compose`. The system will prompt you for a new model name and description. Enter `contoso-safety-forms` or choice of your own, with a description. Click `Compose`.
+1. Click 'Models' from your project. You will see a list of models already created. You can now merge individual models into a composite model. Select `contoso-set-1` and `contoso-set-2`, then click `Compose`. The system will prompt you for a new model name and description. Name it `contoso-safety-forms` and provide a description. Click `Compose`.
 
     ![FR Merge Models](../Images/FR-Merge-Models.png)
 
     ![FR Compose Model](../Images/FR-Compose-Model-Contoso-Safety.png)
 
-1. Now your model id `contoso-safety-forms` will appear in the Model ID list, as illustrated below. If you did not name your composite model `contoso-safety-forms`, make a note it and got to the [Solution Configuration Guide](../3_solution_configuration/README.md). Otherwise, you can jump ahead to the [Solution Testing Guide](../4_solution_testing/).
+1. Now your model id `contoso-safety-forms` will appear in the Model ID list, as illustrated below. 
 
     ![FR List of Models](../Images/FR-List-of-Models.png "Project-and-Model-ID")
+
+1. If you called your composite model `contoso-safety-forms`, you can move on to [3_solution_testing](..\3_solution_testing\README.md)
+1. If you did NOT call your composite model `contoso-safety-forms`, follow the instructions below:
+    1. From the the [Azure Portal](https://portal.azure.com), open the resource group you deployed this solution to.
+    1. Find the Azure Functions App, click the resource and get to its overview page.
+    1. On left panel, under section **Settings**, click **Environment variables**.  Under the **App**, locate **CUSTOM_BUILT_MODEL_ID** click it and replace the default value with your composite model id.
+    1. click **OK** and then **Save**. After this, your Azure Functions app will work with this document intelligence extraction model.![ModelID](../Images/AF-Set-Configuration-Model-ID.png)
