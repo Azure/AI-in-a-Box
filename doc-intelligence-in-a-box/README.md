@@ -53,3 +53,19 @@ Follow instructions in the `4_solution_testing` folder: [Solution Testing Guide]
 ### Step 4: Set Up Power BI Model
 
 Follow instructions in the `5_power_bi` folder: [PowerBI Model Guide](./4_power_bi/README.md).
+
+## Extending the solution in your own environment
+
+This solution deploys the infrastructure needed for processing form data and loading the data into a database. After deploying the solution in your Azure subscription and testing the solution as described, you can extend the solution to work with you own files and data.
+
+### Use your own forms
+
+This solution includes a labeled dataset generated from PDF files. To create your own labeled datasets, [follow this guide on generating labeled datasets](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/concept-custom-label?view=doc-intel-4.0.0).
+
+### Automate loading files to blob storage
+
+When testing the solution, you will manually upload PDF files to blob storage. For you own environment, you may wish to automate uploading the files to blob storage. There's a host of options to automate the uploading of files, including Azure Data Factory, Azure Logic Apps, Azure Functions, and Power Automate.
+
+### Use the Azure Data Platform of your choice
+
+This Azure Logic app in this solution loads data into Azure Cosmos DB. You can change the Logic App connection to load the into your  preferred Azure Data Platform, including Azure SQL DB, Azure SQL DB or Azure Data Lake Gen2.
