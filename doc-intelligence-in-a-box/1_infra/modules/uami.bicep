@@ -13,7 +13,7 @@ resource r_UAMI 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = 
   name: deploymentScriptUAMIName
   location: resourceLocation
   tags: {
-    SA : 'Azure Safety Form Processing Automation'
+    SA : 'Azure Doc Intelligence'
   }
 }
 
