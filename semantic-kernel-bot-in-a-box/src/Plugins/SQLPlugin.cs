@@ -22,7 +22,7 @@ public class SQLPlugin
 
 
 
-    [SKFunction, Description("Obtain the table names in AdventureWorksLT, which contains customer and sales data. Always run this before running other queries instead of assuming the user mentioned the correct name. Remember the salesperson information is contained in the Customer table.")]
+    [KernelFunction, Description("Obtain the table names in AdventureWorksLT, which contains customer and sales data. Always run this before running other queries instead of assuming the user mentioned the correct name. Remember the salesperson information is contained in the Customer table.")]
     public async Task<string> GetTables() {
         await _turnContext.SendActivityAsync($"Getting tables...");
         return QueryAsCSV($"SELECT TABLE_SCHEMA, TABLE_NAME FROM INFORMATION_SCHEMA.TABLES;");
@@ -30,7 +30,7 @@ public class SQLPlugin
 
 
 
-    [SKFunction, Description("Obtain the database schema for a table in AdventureWorksLT.")]
+    [KernelFunction, Description("Obtain the database schema for a table in AdventureWorksLT.")]
     public async Task<string> GetSchema(
         [Description("The table to get the schema for. Do not include the schema name.")] string tableName
     ) 
@@ -41,7 +41,7 @@ public class SQLPlugin
 
 
 
-    [SKFunction, Description("Run SQL against the AdventureWorksLT database")]
+    [KernelFunction, Description("Run SQL against the AdventureWorksLT database")]
     public async Task<string> RunQuery(
         [Description("The query to run on SQL Server. When referencing tables, make sure to add the schema names.")] string query
     )

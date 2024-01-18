@@ -22,6 +22,7 @@ param cosmosName string = ''
 param sqlServerName string = ''
 param sqlDBName string = ''
 param searchName string = ''
+param storageName string = ''
 param documentIntelligenceName string = ''
 param bingName string = ''
 @description('Deploy SQL Database? (required for SQL Plugin demo)')
@@ -31,7 +32,7 @@ param deploySearch bool
 @description('Deploy Document Intelligence service? (required for Upload Plugin demo)')
 param deployDocIntel bool
 param deployDalle3 bool = false
-param deployBing bool = false
+param deployBing bool
 
 @allowed(['Enabled', 'Disabled'])
 param publicNetworkAccess string
@@ -96,6 +97,18 @@ module m_search 'modules/searchService.bicep' = if (deploySearch) {
   }
 }
 
+module m_storage 'modules/storage.bicep' = if (deploySearch) {
+  name: 'deploy_storage'
+  scope: resourceGroup
+  params: {
+    location: location
+    storageName: !empty(storageName) ? storageName : '${abbrs.storageStorageAccounts}${replace(replace(environmentName,'-',''),'_','')}${uniqueSuffix}'
+    msiPrincipalID: m_msi.outputs.msiPrincipalID
+    publicNetworkAccess: publicNetworkAccess
+    tags: tags
+  }
+}
+
 module m_sql 'modules/sql.bicep' = if (deploySQL) {
   name: 'deploy_sql'
   scope: resourceGroup
@@ -143,15 +156,18 @@ module m_app 'modules/appservice.bicep' = {
     tags: tags
     msiID: m_msi.outputs.msiID
     msiClientID: m_msi.outputs.msiClientID
+    openaiName: m_openai.outputs.openaiName
     openaiEndpoint: m_openai.outputs.openaiEndpoint
     openaiGPTModel: m_openai.outputs.openaiGPTModel
     openaiEmbeddingsModel: m_openai.outputs.openaiEmbeddingsModel
     bingName: deployBing ? m_bing.outputs.bingName : ''
     documentIntelligenceName: deployDocIntel ? m_docs.outputs.documentIntelligenceName : ''
     documentIntelligenceEndpoint: deployDocIntel ? m_docs.outputs.documentIntelligenceEndpoint : ''
+    searchName: m_search.outputs.searchName
     searchEndpoint: deploySearch ? m_search.outputs.searchEndpoint : ''
     cosmosEndpoint: m_cosmos.outputs.cosmosEndpoint
     sqlConnectionString: deploySQL ? m_sql.outputs.sqlConnectionString : ''
+    storageName: m_storage.outputs.storageName
   }
 }
 

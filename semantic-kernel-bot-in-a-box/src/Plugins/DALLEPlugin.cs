@@ -22,7 +22,7 @@ public class DALLEPlugin
 
 
 
-    [SKFunction, Description("Generate images from descriptions.")]
+    [KernelFunction, Description("Generate images from descriptions.")]
     public async Task<string> GenerateImages(
         [Description("The description of the images to be generated")] string prompt,
         [Description("The number of images to generate. If not specified, I should use 1")] int n
@@ -45,7 +45,7 @@ public class DALLEPlugin
                 size="large"
             }
         );
-        foreach (ImageLocation img in imageGenerations.Value.Data)
+        foreach (ImageGenerationData img in imageGenerations.Value.Data)
             images.Add(new { type = "Image", url = img.Url.AbsoluteUri });
         object adaptiveCardJson = new
         {

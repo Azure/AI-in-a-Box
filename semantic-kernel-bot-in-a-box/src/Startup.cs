@@ -5,21 +5,22 @@ using System;
 using Azure;
 using Azure.AI.FormRecognizer.DocumentAnalysis;
 using Azure.AI.OpenAI;
-using Azure.Core;
 using Azure.Identity;
 using Azure.Search.Documents;
+using Azure.Storage;
+using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
-using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.SemanticKernel.Connectors.AI.OpenAI.TextEmbedding;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
+using Microsoft.WindowsAzure.Storage.Auth;
 using Services;
 
 namespace Microsoft.BotBuilderSamples
@@ -79,22 +80,38 @@ namespace Microsoft.BotBuilderSamples
             var conversationState = new ConversationState(storage);
             services.AddSingleton(conversationState);
 
-            services.AddSingleton(new OpenAIClient(new Uri(configuration.GetValue<string>("AOAI_API_ENDPOINT")), azureCredentials));
-            services.AddSingleton(new AzureOpenAITextEmbeddingGeneration(configuration.GetValue<string>("AOAI_EMBEDDINGS_MODEL"), configuration.GetValue<string>("AOAI_API_ENDPOINT"), azureCredentials));
+            if (!configuration.GetValue<string>("AOAI_API_KEY").IsNullOrEmpty())
+            {
+                services.AddSingleton(new OpenAIClient(new Uri(configuration.GetValue<string>("AOAI_API_ENDPOINT")), new AzureKeyCredential(configuration.GetValue<string>("AOAI_API_KEY"))));
+                services.AddSingleton(new AzureOpenAITextEmbeddingGenerationService(configuration.GetValue<string>("AOAI_EMBEDDINGS_MODEL"), configuration.GetValue<string>("AOAI_API_ENDPOINT"), configuration.GetValue<string>("AOAI_API_KEY")));
+            }
+            else
+            {
+                services.AddSingleton(new OpenAIClient(new Uri(configuration.GetValue<string>("AOAI_API_ENDPOINT")), azureCredentials));
+                services.AddSingleton(new AzureOpenAITextEmbeddingGenerationService(configuration.GetValue<string>("AOAI_EMBEDDINGS_MODEL"), configuration.GetValue<string>("AOAI_API_ENDPOINT"), azureCredentials));
+            }
             if (!configuration.GetValue<string>("DOCINTEL_API_ENDPOINT").IsNullOrEmpty())
                 services.AddSingleton(new DocumentAnalysisClient(new Uri(configuration.GetValue<string>("DOCINTEL_API_ENDPOINT")), new AzureKeyCredential(configuration.GetValue<string>("DOCINTEL_API_KEY"))));
             if (!configuration.GetValue<string>("SEARCH_API_ENDPOINT").IsNullOrEmpty())
-                services.AddSingleton(new SearchClient(new Uri(configuration.GetValue<string>("SEARCH_API_ENDPOINT")), configuration.GetValue<string>("SEARCH_INDEX"), azureCredentials));
+                if (!configuration.GetValue<string>("SEARCH_API_KEY").IsNullOrEmpty())
+                    services.AddSingleton(new SearchClient(new Uri(configuration.GetValue<string>("SEARCH_API_ENDPOINT")), configuration.GetValue<string>("SEARCH_INDEX"), new AzureKeyCredential(configuration.GetValue<string>("SEARCH_API_KEY"))));
+                else
+                    services.AddSingleton(new SearchClient(new Uri(configuration.GetValue<string>("SEARCH_API_ENDPOINT")), configuration.GetValue<string>("SEARCH_INDEX"), azureCredentials));
             if (!configuration.GetValue<string>("SQL_CONNECTION_STRING").IsNullOrEmpty())
                 services.AddSingleton(new SqlConnectionFactory(configuration.GetValue<string>("SQL_CONNECTION_STRING")));
             if (!configuration.GetValue<string>("BING_API_ENDPOINT").IsNullOrEmpty())
                 services.AddSingleton(new BingClient(new System.Net.Http.HttpClient(), new Uri(configuration.GetValue<string>("BING_API_ENDPOINT")), configuration.GetValue<string>("BING_API_KEY")));
-            services.AddSingleton(azureCredentials);
+            if (!configuration.GetValue<string>("BLOB_API_ENDPOINT").IsNullOrEmpty())
+                if (!configuration.GetValue<string>("BLOB_API_KEY").IsNullOrEmpty())
+                    services.AddSingleton(new BlobServiceClient(new Uri(configuration.GetValue<string>("BLOB_API_ENDPOINT")), new StorageSharedKeyCredential(configuration.GetValue<string>("BLOB_API_ENDPOINT").Split('/')[2].Split('.')[0], configuration.GetValue<string>("BLOB_API_KEY"))));
+                else
+                    services.AddSingleton(new BlobServiceClient(new Uri(configuration.GetValue<string>("BLOB_API_ENDPOINT")), azureCredentials));
 
             services.AddHttpClient();
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             // services.AddSingleton<LoginDialog>();
-            services.AddTransient<IBot, SemanticKernelBot>();
+            services.AddSingleton<LoginDialog>();
+            services.AddTransient<IBot, SemanticKernelBot<LoginDialog>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

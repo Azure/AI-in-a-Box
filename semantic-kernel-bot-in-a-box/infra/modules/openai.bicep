@@ -94,6 +94,7 @@ resource appAccess 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 
 output openaiID string = openai.id
+output openaiName string = openai.name
 output openaiEndpoint string = openai.properties.endpoint
 output openaiGPTModel string = gpt4deployment.name
 output openaiEmbeddingsModel string = adaEmbeddingsdeployment.name
