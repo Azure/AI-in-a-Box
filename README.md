@@ -32,7 +32,6 @@ Embarking on an Azure AI/ML journey can appear challenging for certain organizat
 | Jean Hayes | @jehayesms | jean.hayes@microsoft.com |
 | Marco Aurélio Bigélli Cardoso  | @MarcoABCardoso | macardoso@microsoft.com | 
 | Maria Vrabie  | @MariaVrabie | mavrabie@microsoft.com | 
-| Meer Alam | @msdpalam | meeral@microsoft.com | 
 | Neeraj Jhaveri | @neerajjhaveri | neeraj.jhaveri@microsoft.com |
 | Thiago Rotta | @rottathiago | thiago.rotta@microsoft.com |
 | Victor Santana | @Welasco | vsantana@microsoft.com |
