@@ -163,7 +163,7 @@ module m_app 'modules/appservice.bicep' = {
     bingName: deployBing ? m_bing.outputs.bingName : ''
     documentIntelligenceName: deployDocIntel ? m_docs.outputs.documentIntelligenceName : ''
     documentIntelligenceEndpoint: deployDocIntel ? m_docs.outputs.documentIntelligenceEndpoint : ''
-    searchName: m_search.outputs.searchName
+    searchName: deploySearch ? m_search.outputs.searchName : ''
     searchEndpoint: deploySearch ? m_search.outputs.searchEndpoint : ''
     cosmosEndpoint: m_cosmos.outputs.cosmosEndpoint
     sqlConnectionString: deploySQL ? m_sql.outputs.sqlConnectionString : ''
