@@ -1,22 +1,22 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
-using Microsoft.SemanticKernel;
 using System.Linq;
-using Microsoft.SemanticKernel.Connectors.AI.OpenAI.TextEmbedding;
 using System.Collections.Generic;
 using Microsoft.BotBuilderSamples;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
+using Microsoft.SemanticKernel;
 
 namespace Plugins;
 
 public class UploadPlugin
 {
-    private readonly AzureOpenAITextEmbeddingGeneration _embeddingClient;
+    private readonly AzureOpenAITextEmbeddingGenerationService _embeddingClient;
     private ConversationData _conversationData;
     private ITurnContext<IMessageActivity> _turnContext;
 
-    public UploadPlugin(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext, AzureOpenAITextEmbeddingGeneration embeddingClient)
+    public UploadPlugin(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext, AzureOpenAITextEmbeddingGenerationService embeddingClient)
     {
         _embeddingClient = embeddingClient;
         _conversationData = conversationData;
@@ -24,7 +24,7 @@ public class UploadPlugin
     }
 
 
-    [SKFunction, Description("Search for relevant information in the uploaded documents. Only use this when the user refers to documents they uploaded. Do not use or ask follow up questions about this function if the user did not specifically mention a document")]
+    [KernelFunction, Description("Search for relevant information in the uploaded documents. Only use this when the user refers to documents they uploaded. Do not use or ask follow up questions about this function if the user did not specifically mention a document")]
     public async Task<string> SearchUploads(
         [Description("The exact name of the document to be searched.")] string docName,
         [Description("The text to search by similarity.")] string query

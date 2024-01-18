@@ -95,6 +95,7 @@ You may ask about the following topics to test each functionality
 ## Keywords
 
 - Send "clear" to reset the conversation context;
+- Send "logout" to sign out when SSO is enabled;
 
 ## Developing your own plugins
 
@@ -120,18 +121,6 @@ To deploy a Web Chat version of your app:
 - Your bot will be available at https://APP_NAME.azurewebsites.net.
 
 Please note that doing so will make your bot public, unless you implement authentication / SSO.
-
-## Deploying with Private Endpoints
-
-If you want to deploy this sample with disabled public access, you may use the Cognitive Services Landing Zone in-a-box accelerator with this one. Follow the steps below to do so.
-
-1. Deploy the [Cognitive Services Landing Zone in-a-Box](../cognitive-services-landing-zone-in-a-box/)
-
-2. Deploy this sample, using the same environmentName and appName parameters. When prompted for publicNetworkAccess, choose "Disabled". If you wish to configure services manually and have not set up VPN / ExpressRoute connectivity, you may instead deploy with public access "Enabled", perform configurations, and then redeploy with public access "Disabled".
-
-3. All services deployed will now have private endpoints and disabled public network access. Make sure to re-enable access to any services that need public connectivity.
-
-
 
 ## Contributing
 

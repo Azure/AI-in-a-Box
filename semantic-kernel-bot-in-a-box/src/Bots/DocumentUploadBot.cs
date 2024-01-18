@@ -9,23 +9,22 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Azure;
 using Azure.AI.FormRecognizer.DocumentAnalysis;
-using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.SemanticKernel.Connectors.AI.OpenAI.TextEmbedding;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 
 namespace Microsoft.BotBuilderSamples
 {
-    public class DocumentUploadBot : StateManagementBot
+    public class DocumentUploadBot<T> : StateManagementBot<T> where T : Dialog
     {
-        private readonly AzureOpenAITextEmbeddingGeneration _embeddingsClient;
+        private readonly AzureOpenAITextEmbeddingGenerationService _embeddingsClient;
         private readonly DocumentAnalysisClient _documentAnalysisClient;
 
-        public DocumentUploadBot(IConfiguration config, ConversationState conversationState, UserState userState, AzureOpenAITextEmbeddingGeneration embeddingsClient, DocumentAnalysisClient documentAnalysisClient) : base(config, conversationState, userState)
+        public DocumentUploadBot(IConfiguration config, ConversationState conversationState, UserState userState, AzureOpenAITextEmbeddingGenerationService embeddingsClient, DocumentAnalysisClient documentAnalysisClient, T dialog) : base(config, conversationState, userState, dialog)
         {
             _embeddingsClient = embeddingsClient;
             _documentAnalysisClient = documentAnalysisClient;

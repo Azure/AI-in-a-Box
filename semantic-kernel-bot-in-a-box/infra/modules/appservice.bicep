@@ -12,6 +12,10 @@ param documentIntelligenceName string
 var documentIntelligenceNames = !empty(documentIntelligenceName) ? [documentIntelligenceName] : []
 param bingName string
 var bingNames = !empty(bingName) ? [bingName] : []
+param openaiName string
+param storageName string
+param searchName string
+var searchNames = !empty(searchName) ? [searchName] : []
 
 param openaiEndpoint string
 param searchEndpoint string
@@ -19,10 +23,22 @@ param documentIntelligenceEndpoint string
 param sqlConnectionString string
 param cosmosEndpoint string
 
+
+resource openai 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: openaiName
+}
+
 resource bingAccounts 'Microsoft.Bing/accounts@2020-06-10' existing = [for name in bingNames: {
   name: name
 }]
 
+resource storage 'Microsoft.Storage/storageAccounts@2021-09-01' existing = {
+  name: storageName
+}
+
+resource searchAccounts 'Microsoft.Search/searchServices@2023-11-01' existing = [for name in searchNames: {
+  name: name
+}]
 
 resource documentIntelligences 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = [for name in documentIntelligenceNames: {
   name: name
@@ -70,6 +86,10 @@ resource appService 'Microsoft.Web/sites@2022-09-01' = {
           value: openaiEndpoint
         }
         {
+          name: 'AOAI_API_KEY'
+          value: openai.listKeys().key1
+        }
+        {
           name: 'AOAI_GPT_MODEL'
           value: openaiGPTModel
         }
@@ -82,8 +102,16 @@ resource appService 'Microsoft.Web/sites@2022-09-01' = {
           value: searchEndpoint
         }
         {
+          name: 'SEARCH_API_KEY'
+          value: !empty(searchNames) ? searchAccounts[0].listQueryKeys().value[0].key : ''
+        }
+        {
           name: 'SEARCH_INDEX'
-          value: 'hotels-sample-index'
+          value: 'index-name'
+        }
+        {
+          name: 'SEARCH_SEMANTIC_CONFIG'
+          value: 'index-name-semantic-configuration'
         }
         {
           name: 'DOCINTEL_API_ENDPOINT'
@@ -107,7 +135,7 @@ resource appService 'Microsoft.Web/sites@2022-09-01' = {
         }
         {
           name: 'BING_API_ENDPOINT'
-          value: !empty(bingName) ? bingAccounts[0].listKeys().key1 : ''
+          value: !empty(bingName) ? 'https://api.bing.microsoft.com/' : ''
         }
         {
           name: 'BING_API_KEY'
@@ -124,6 +152,42 @@ resource appService 'Microsoft.Web/sites@2022-09-01' = {
         {
           name: 'PROMPT_SUGGESTED_QUESTIONS'
           value: '[]'
+        }
+        {
+          name: 'SSO_ENABLED'
+          value: 'false'
+        }
+        {
+          name: 'SSO_CONFIG_NAME'
+          value: ''
+        }
+        {
+          name: 'SSO_MESSAGE_TITLE'
+          value: 'Please sign in to continue.'
+        }
+        {
+          name: 'SSO_MESSAGE_PROMPT'
+          value: 'Sign in'
+        }
+        {
+          name: 'SSO_MESSAGE_SUCCESS'
+          value: 'User logged in successfully! Please repeat your question.'
+        }
+        {
+          name: 'SSO_MESSAGE_FAILED'
+          value: 'Log in failed. Type anything to retry.'
+        }
+        {
+          name: 'USE_STEPWISE_PLANNER'
+          value: 'true'
+        }
+        {
+          name: 'BLOB_API_ENDPOINT'
+          value: 'https://${storageName}.blob.${environment().suffixes.storage}'
+        }
+        {
+          name: 'BLOB_API_KEY'
+          value: storage.listKeys().keys[0].value
         }
       ]
     }
