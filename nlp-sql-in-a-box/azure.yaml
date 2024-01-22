@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: nlpsql-in-a-box
+metadata:
+    template: azd-init@0.0.1-beta
+infra:
+  provider: "bicep"
+  path: "infra"
+  module: "main"
+hooks:
+    postprovision:
+        windows:
+            shell: pwsh
+            run: ./scripts/postprovision.ps1
+            continueOnError: false
+            interactive: false
