@@ -97,7 +97,7 @@ module m_search 'modules/searchService.bicep' = if (deploySearch) {
   }
 }
 
-module m_storage 'modules/storage.bicep' = if (deploySearch) {
+module m_storage 'modules/storage.bicep' = {
   name: 'deploy_storage'
   scope: resourceGroup
   params: {
