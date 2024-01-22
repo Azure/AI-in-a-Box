@@ -45,7 +45,7 @@ An adversarial prompt attack is when a prompt manipulates the LLM to deviate fro
 
 For a more complete list of prompt injection attacks see: [The EL15 Guide to Prompt Injection: Techniques, Prevention Methods & Tools](https://www.lakera.ai/blog/guide-to-prompt-injection)
 
-#### Mitigation Strategies
+#### Mitigations 
 There is a growing list of specific techniques that can be used to mitigating adversarial prompt attacks that include enriching prompts with specific instructions, formatting, and providing examples of the kind of output content that is intended.  Below are some additional strategies to consider: 
   * Defensive Instructions
   * Parameterizing the Prompt
@@ -53,7 +53,7 @@ There is a growing list of specific techniques that can be used to mitigating ad
   * Monitor for degradation in output quality
   * Use inbound/outbound blocking/white lists or filters or rules 
   * Use other models or dedicated services to pre-process requests 
-  * Use the native power of models to steer zero- or few-shot prompting strategies. See [promptbase](https://github.com/microsoft/promptbase) for an growing collection of resources, best practices, and sample scripts.  
+  * Use the native power of models to steer zero- or few-shot prompting strategies. See [promptbase](https://github.com/microsoft/promptbase) for a growing collection of resources, best practices, and sample scripts.  
 
 See [Exploring Adversarial Prompting and Mitigations in AI-Infused Applications](https://www.linkedin.com/pulse/exploring-adversarial-prompting-mitigations-alex-morales-3sqne/) for more specifics on these types of attacks and defense tactics. 
   
