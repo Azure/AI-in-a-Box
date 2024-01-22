@@ -1,0 +1,40 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+
+description: Train model with diabetes data
+
+display_name: diabetes-pipeline-example
+experiment_name: diabetes-pipeline-example
+jobs:
+
+  prep_job:
+    type: command
+    inputs:
+      raw_data: 
+          type: uri_folder 
+          path: azureml:diabetes-folder:1
+    outputs:
+      prep_data: 
+        mode: upload
+    code: model
+    environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
+    compute: azureml:madiepev3
+    command: >-
+      python prep-data.py 
+      --input_data ${{inputs.raw_data}} 
+      --output_data ${{outputs.prep_data}}
+  
+  train_job:
+    type: command
+    inputs:
+      training_data: ${{parent.jobs.prep_job.outputs.prep_data}}
+    outputs:
+      model_output: 
+        mode: upload
+    code: model
+    environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
+    compute: azureml:madiepev3
+    command: >-
+      python train-decision-tree.py 
+      --training_data ${{inputs.training_data}} 
+      --model_output ${{outputs.model_output}}

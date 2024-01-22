@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: <<amlflowdeploymentname>>
+endpoint_name: <<amlendpointname>>
+model: azureml:<<amlmodelname>>@latest
+instance_type: Standard_DS2_v2
+instance_count: 1

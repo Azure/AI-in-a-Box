@@ -1,0 +1,1 @@
+Compress-Archive -Path AzureMLAlertWebhook\* -DestinationPath AzureMLAlertWebhook.zip -Force

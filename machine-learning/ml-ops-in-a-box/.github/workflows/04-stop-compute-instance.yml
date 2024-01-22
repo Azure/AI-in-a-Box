@@ -1,0 +1,65 @@
+name: Stop compute instance
+
+on:
+  # push:
+  #   branches:
+  #    - 'main'
+  #   paths:
+  #   - 'src/model/*'
+  workflow_dispatch:
+    inputs:
+      resource_group:
+        description: 'Resource group name'
+        required: true
+        default: 'rg-dev-mlops'
+        type: string
+      aml_workspace:
+        description: 'Azure Machine Learning workspace name'
+        required: true
+        default: 'mlw-dev-mlops'
+        type: string
+      compute:
+        description: 'Azure Machine Learning compute instance name'
+        required: true
+        default: 'aml-cluster'
+        type: string
+  # workflow_run:
+  #   workflows: [Deploy Model to a target]
+  #   types: [completed]
+
+env:
+  rg: 'Replace with the name of the Azure Resource Group'
+  amlw: 'Replace with the name of the AzureML Workspace Name'
+  compute: 'Replace with the name of the AzureML Workspace Compute Cluster Name'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion != 'failure' }}
+    steps:
+    - name: Define rg and amlw
+      run: |
+        if [[ "${{ github.event_name }}" == "push" ]]; then
+          echo "rg=${{ env.rg }}" >> "$GITHUB_ENV"
+          echo "amlw=${{ env.amlw }}" >> "$GITHUB_ENV"
+          echo "compute=${{ env.compute }}" >> "$GITHUB_ENV"
+        else
+          echo "rg=${{ github.event.inputs.resource_group }}" >> "$GITHUB_ENV"
+          echo "amlw=${{ github.event.inputs.aml_workspace }}" >> "$GITHUB_ENV"
+          echo "compute=${{ github.event.inputs.compute }}" >> "$GITHUB_ENV"
+        fi
+
+    - name: Check out repo
+      uses: actions/checkout@main
+
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+
+    - name: Stop Azure Machine Learning compute instance
+      run: |
+        az ml compute stop -n "${{ env.compute }}" -w "${{ env.amlw }}" -g "${{ env.rg }}"

@@ -1,0 +1,111 @@
+name: Deploy Model to a target
+
+on:
+  # push:
+  #   branches:
+  #    - 'main'
+  #   paths:
+  #   - 'src/model/*'
+  workflow_dispatch:
+    inputs:
+      resource_group:
+        description: 'Resource group name'
+        required: true
+        default: 'rg-dev-mlops'
+        type: string
+      aml_workspace:
+        description: 'Azure Machine Learning workspace name'
+        required: true
+        default: 'mlw-dev-mlops'
+        type: string
+      aml_flow_deployment_name:
+        description: 'Azure Machine Learning flow deployment name'
+        required: true
+        default: 'mlflow-deployment'
+        type: string
+      aml_endpoint_name:
+        description: 'Azure Machine Learning endpoint name'
+        required: true
+        default: 'diabetes-mlflow-mma'
+        type: string
+      aml_model_name:
+        description: 'Azure Machine Learning model name'
+        required: true
+        default: 'diabetes-data-example'
+        type: string
+  repository_dispatch:
+    types: [deploy-model]
+  # workflow_run:
+  #   workflows: [Create Execute Job through ml]
+  #   types: [completed]
+
+env:
+  rg: 'Replace with the name of the Azure Resource Group'
+  amlw: 'Replace with the name of the AzureML Workspace Name'
+  amlflowdeploymentname: 'Replace with the name of the AzureML Workspace Deployment Name'
+  amlendpointname: 'Replace with the name of the AzureML Workspace Endpoint Name'
+  amlmodelname: 'Replace with the name of the AzureML Workspace Model Name'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion != 'failure' }}
+    steps:
+    - name: Define rg and amlw
+      run: |
+        if [[ "${{ github.event_name }}" == "push" ]]; then
+          echo "rg=${{ env.rg }}" >> "$GITHUB_ENV"
+          echo "amlw=${{ env.amlw }}" >> "$GITHUB_ENV"
+          echo "amlflowdeploymentname=${{ env.amlflowdeploymentname }}" >> "$GITHUB_ENV"
+          echo "amlendpointname=${{ env.amlendpointname }}" >> "$GITHUB_ENV"
+          echo "amlmodelname=${{ env.amlmodelname }}" >> "$GITHUB_ENV"
+        else
+          echo "rg=${{ github.event.inputs.resource_group }}" >> "$GITHUB_ENV"
+          echo "amlw=${{ github.event.inputs.aml_workspace }}" >> "$GITHUB_ENV"
+          echo "amlflowdeploymentname=${{ github.event.inputs.aml_flow_deployment_name }}" >> "$GITHUB_ENV"
+          echo "amlendpointname=${{ github.event.inputs.aml_endpoint_name }}" >> "$GITHUB_ENV"
+          echo "amlmodelname=${{ github.event.inputs.aml_model_name }}" >> "$GITHUB_ENV"
+        fi
+
+    - name: Check out repo
+      uses: actions/checkout@main
+
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+
+    - name: Set Azure ML workspace as default
+      run: |
+        az configure --defaults group="${{ env.rg }}"
+        az configure --defaults workspace="${{ env.amlw }}"
+
+    - name: List models
+      run: |
+        az ml model list -w "${{ env.amlw }}" -g "${{ env.rg }}"
+
+    - name: Register Model
+      run: |
+        runname=$(az ml job list --resource-group "${{ env.rg }}" --workspace-name "${{ env.amlw }}" --query "([?contains(status, 'Completed')][])[0]" | jq -r .name)
+        az ml model create -n "${{ env.amlmodelname }}" -p "runs:/$runname/model" --type mlflow_model -w "${{ env.amlw }}" -g "${{ env.rg }}"
+
+    - name: Deploy model
+      run: |
+        cd src
+        endpointexistname=$(az ml online-endpoint list -g "${{ env.rg }}" --workspace-name "${{ env.amlw }}" --query "([?contains(name, '${{ env.amlendpointname }}')].name)" -o tsv)
+        if [[ "$endpointexistname" == "${{ env.amlendpointname }}" ]]; then
+          sed -i "s/<<amlflowdeploymentname>>/${{ env.amlflowdeploymentname }}/" mlflow-deployment.yml
+          sed -i "s/<<amlendpointname>>/${{ env.amlendpointname }}/" mlflow-deployment.yml
+          sed -i "s/<<amlmodelname>>/${{ env.amlmodelname }}/" mlflow-deployment.yml
+          az ml online-deployment update --name "${{ env.amlflowdeploymentname }}" --endpoint "${{ env.amlendpointname }}" --file mlflow-deployment.yml --resource-group "${{ env.rg }}" --workspace-name "${{ env.amlw }}"
+        else
+          sed -i "s/<<amlendpointname>>/${{ env.amlendpointname }}/" create-endpoint.yml
+          az ml online-endpoint create --name "${{ env.amlendpointname }}" --file create-endpoint.yml
+          sed -i "s/<<amlflowdeploymentname>>/${{ env.amlflowdeploymentname }}/" mlflow-deployment.yml
+          sed -i "s/<<amlendpointname>>/${{ env.amlendpointname }}/" mlflow-deployment.yml
+          sed -i "s/<<amlmodelname>>/${{ env.amlmodelname }}/" mlflow-deployment.yml
+          az ml online-deployment create --name "${{ env.amlflowdeploymentname }}" --endpoint "${{ env.amlendpointname }}" --file mlflow-deployment.yml --resource-group "${{ env.rg }}" --workspace-name "${{ env.amlw }}"
+        fi

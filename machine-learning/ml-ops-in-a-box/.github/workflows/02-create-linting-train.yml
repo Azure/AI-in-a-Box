@@ -1,0 +1,124 @@
+name: Create linting and traing jobs
+
+on:
+  push:
+    branches:
+     - 'main'
+    paths:
+    - 'src/model/*'
+  workflow_dispatch:
+    inputs:
+      resource_group:
+        description: 'Resource group name'
+        required: true
+        default: 'rg-dev-mlops'
+        type: string
+      aml_workspace:
+        description: 'Azure Machine Learning workspace name'
+        required: true
+        default: 'mlw-dev-mlops'
+        type: string
+      aml_compute_cluster:
+        description: 'Azure Machine Learning workspace compute cluster name'
+        required: true
+        default: 'aml-cluster'
+        type: string
+      aml_dataset:
+        description: 'Azure Machine Learning Dataset name'
+        required: true
+        default: 'diabetes-folder'
+        type: string
+      aml_model_name:
+        description: 'Azure Machine Learning model name'
+        required: true
+        default: 'diabetes-data-example'
+        type: string
+  workflow_run:
+    workflows: [Create Azure ML Workspace]
+    types: [completed]
+
+env:
+  rg: 'Replace with the name of the Azure Resource Group'
+  amlw: 'Replace with the name of the AzureML Workspace Name'
+  amlcomputecluster: Replace with the name of the AzureML Workspace Compute Cluster Name
+  amldataset: 'Replace with the name of the AzureML Workspace Data set Name Ex: diabetes-folder'
+  amlmodelname: 'Replace with the name of the AzureML Workspace Model Name'
+  runname: ''
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion != 'failure' }}
+    steps:
+    - name: Define rg and amlw
+      run: |
+        if [[ ("${{ github.event_name }}" == "push") || ("${{ github.event.workflow_run.conclusion }}" == "success") ]]; then
+          echo "rg=${{ env.rg }}" >> "$GITHUB_ENV"
+          echo "amlw=${{ env.amlw }}" >> "$GITHUB_ENV"
+          echo "amlcomputecluster=${{ env.amlcomputecluster }}" >> "$GITHUB_ENV"
+          echo "amldataset=${{ env.amldataset }}" >> "$GITHUB_ENV"
+          echo "amlmodelname=${{ env.amlmodelname }}" >> "$GITHUB_ENV"
+        else
+          echo "rg=${{ github.event.inputs.resource_group }}" >> "$GITHUB_ENV"
+          echo "amlw=${{ github.event.inputs.aml_workspace }}" >> "$GITHUB_ENV"
+          echo "amlcomputecluster=${{ github.event.inputs.aml_compute_cluster }}" >> "$GITHUB_ENV"
+          echo "amldataset=${{ github.event.inputs.aml_dataset }}" >> "$GITHUB_ENV"
+          echo "amlmodelname=${{ github.event.inputs.aml_model_name }}" >> "$GITHUB_ENV"
+        fi
+
+# Create dataset phase
+    - name: Check out repo
+      uses: actions/checkout@main
+
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+
+    - name: Set Azure ML workspace as default
+      run: |
+        az configure --defaults group="${{ env.rg }}"
+        az configure --defaults workspace="${{ env.amlw }}"
+
+    - name: Create dataset in Azure ML workspace
+      run: |
+        cd experimentation
+        az ml data create --name "${{ env.amldataset }}" --path data
+
+# Test phase
+    - name: Use Python version 3.7
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.8'
+
+    - name: Install Flake8
+      run: |
+        python -m pip install flake8
+
+    - name: Install Pytest
+      run: |
+        python -m pip install -r requirements.txt
+
+    - name: Run linting tests
+      run: |
+        flake8 src/model/
+
+    - name: Run unit test
+      run: |
+        pytest tests/
+
+# Training phase
+    - name: Submit Training Job
+      run: |
+        cd src
+        sed -i "s/<<amldataset>>/${{ env.amldataset }}/" job.yml
+        sed -i "s/<<amlcluster>>/${{ env.amlcomputecluster }}/" job.yml
+        runname=$(az ml job create --file job.yml --resource-group "${{ env.rg }}" --workspace-name "${{ env.amlw }}" | jq -r .name)
+        echo "runname=$runname" >> $GITHUB_OUTPUT
+
+    # - name: Register Model
+    #   run: |
+    #     az ml model create -n "${{ env.amlmodelname }}" -p "runs:/${{ env.runname }}/model" --type mlflow_model -w "${{ env.amlw }}" -g "${{ env.rg }}"
