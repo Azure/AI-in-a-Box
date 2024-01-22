@@ -12,6 +12,13 @@ Embarking on an Azure AI/ML journey can appear challenging for certain organizat
   <img src="Assets/images/aibxtable.png" alt="FTA AI-in-a-Box: Deployment Accelerator" />
 </p>
 
+## Available Guidance
+
+|Topic|Description|
+|---|---|
+|[Responsible AI]() | (coming soon) | 
+|[Security for Generative AI Applications](./genai-security/)| (coming soon)  |
+
 ## Available Patterns
 
 |Pattern|Description|Category|Supported Use Cases and Features|
