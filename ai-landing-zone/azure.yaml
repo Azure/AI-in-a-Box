@@ -1,0 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: cognitive-services-landing-zone-in-a-box
+metadata:
+    template: azd-init@1.4.4
