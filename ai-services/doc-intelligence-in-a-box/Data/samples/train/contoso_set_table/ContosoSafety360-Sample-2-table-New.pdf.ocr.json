@@ -1,0 +1,3574 @@
+{
+	"status": "succeeded",
+	"createdDateTime": "2022-09-06T18:39:21Z",
+	"lastUpdatedDateTime": "2022-09-06T18:39:31Z",
+	"analyzeResult": {
+		"apiVersion": "2022-08-31",
+		"modelId": "prebuilt-layout",
+		"stringIndexType": "utf16CodeUnit",
+		"content": "Contoso Safety 360\nHazardous\nAt Risk\nSafety\nSafety Recognition\nCondition\nBehavior\nSuggestion\nTime\nDate\nLocation\n1:00pm\n11/01/2021\nOffice\n10:15am\n02/14/2022\nHall Closet\nSignificant\nNot Significant\nFindings:\nOffice chair is missing a wheel. Hall closet door is falling off hinges.\nSuggested Solutions:\nReplace office chair and replace all closet hinges.\nSubmitter: Bill Smith\nDepartment: Tower Room\nDate: July 26, 2021\nOwner:\nEtleva Hysa\nSolutions:\nFix ASAP\nTarget Date:\n12/31/2022\nClose Date:\n12/24/2022\nSubmitter Approval:\nTim Smith :selected: :unselected: :unselected: :unselected: :selected: :unselected:",
+		"pages": [
+			{
+				"pageNumber": 1,
+				"angle": 0,
+				"width": 8.5,
+				"height": 11,
+				"unit": "inch",
+				"words": [
+					{
+						"content": "Contoso",
+						"polygon": [
+							2.6585,
+							1.1217,
+							3.9311,
+							1.1217,
+							3.9311,
+							1.3734,
+							2.6585,
+							1.3734
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 0,
+							"length": 7
+						}
+					},
+					{
+						"content": "Safety",
+						"polygon": [
+							4.0495,
+							1.1047,
+							5.0134,
+							1.1047,
+							5.0134,
+							1.439,
+							4.0495,
+							1.439
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 8,
+							"length": 6
+						}
+					},
+					{
+						"content": "360",
+						"polygon": [
+							5.1283,
+							1.1214,
+							5.686,
+							1.1214,
+							5.686,
+							1.3734,
+							5.1283,
+							1.3734
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 15,
+							"length": 3
+						}
+					},
+					{
+						"content": "Hazardous",
+						"polygon": [
+							1.3267,
+							1.6431,
+							2.1401,
+							1.6431,
+							2.1401,
+							1.7768,
+							1.3267,
+							1.7768
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 19,
+							"length": 9
+						}
+					},
+					{
+						"content": "At",
+						"polygon": [
+							2.9307,
+							1.6515,
+							3.0994,
+							1.6515,
+							3.0994,
+							1.7766,
+							2.9307,
+							1.7766
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 29,
+							"length": 2
+						}
+					},
+					{
+						"content": "Risk",
+						"polygon": [
+							3.1655,
+							1.6427,
+							3.4617,
+							1.6427,
+							3.4617,
+							1.7768,
+							3.1655,
+							1.7768
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 32,
+							"length": 4
+						}
+					},
+					{
+						"content": "Safety",
+						"polygon": [
+							4.5578,
+							1.6419,
+							5.0408,
+							1.6419,
+							5.0408,
+							1.8098,
+							4.5578,
+							1.8098
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 37,
+							"length": 6
+						}
+					},
+					{
+						"content": "Safety",
+						"polygon": [
+							6.1828,
+							1.6419,
+							6.6658,
+							1.6419,
+							6.6658,
+							1.8098,
+							6.1828,
+							1.8098
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 44,
+							"length": 6
+						}
+					},
+					{
+						"content": "Recognition",
+						"polygon": [
+							5.9757,
+							1.9056,
+							6.8856,
+							1.9056,
+							6.8856,
+							2.0665,
+							5.9757,
+							2.0665
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 51,
+							"length": 11
+						}
+					},
+					{
+						"content": "Condition",
+						"polygon": [
+							1.1012,
+							1.8997,
+							1.8484,
+							1.8997,
+							1.8484,
+							2.0335,
+							1.1012,
+							2.0335
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 63,
+							"length": 9
+						}
+					},
+					{
+						"content": "Behavior",
+						"polygon": [
+							2.7254,
+							1.8993,
+							3.4069,
+							1.8993,
+							3.4069,
+							2.0335,
+							2.7254,
+							2.0335
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 73,
+							"length": 8
+						}
+					},
+					{
+						"content": "Suggestion",
+						"polygon": [
+							4.3392,
+							1.9056,
+							5.1804,
+							1.9056,
+							5.1804,
+							2.0665,
+							4.3392,
+							2.0665
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 82,
+							"length": 10
+						}
+					},
+					{
+						"content": "Time",
+						"polygon": [
+							1.0147,
+							2.1543,
+							1.3159,
+							2.1543,
+							1.3159,
+							2.2548,
+							1.0147,
+							2.2548
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 93,
+							"length": 4
+						}
+					},
+					{
+						"content": "Date",
+						"polygon": [
+							3.1869,
+							2.1567,
+							3.4628,
+							2.1567,
+							3.4628,
+							2.2548,
+							3.1869,
+							2.2548
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 98,
+							"length": 4
+						}
+					},
+					{
+						"content": "Location",
+						"polygon": [
+							5.3522,
+							2.1543,
+							5.86,
+							2.1543,
+							5.86,
+							2.2548,
+							5.3522,
+							2.2548
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 103,
+							"length": 8
+						}
+					},
+					{
+						"content": "1:00pm",
+						"polygon": [
+							1.8844,
+							2.3756,
+							2.2536,
+							2.38,
+							2.2524,
+							2.51,
+							1.8859,
+							2.5022
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 112,
+							"length": 6
+						}
+					},
+					{
+						"content": "11/01/2021",
+						"polygon": [
+							3.9417,
+							2.3764,
+							4.5552,
+							2.3682,
+							4.5536,
+							2.4926,
+							3.9417,
+							2.4947
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 119,
+							"length": 10
+						}
+					},
+					{
+						"content": "Office",
+						"polygon": [
+							6.2461,
+							2.3728,
+							6.5784,
+							2.3728,
+							6.5776,
+							2.4873,
+							6.2461,
+							2.4849
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 130,
+							"length": 6
+						}
+					},
+					{
+						"content": "10:15am",
+						"polygon": [
+							1.8454,
+							2.5869,
+							2.2867,
+							2.5937,
+							2.285,
+							2.707,
+							1.8423,
+							2.7059
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 137,
+							"length": 7
+						}
+					},
+					{
+						"content": "02/14/2022",
+						"polygon": [
+							3.9349,
+							2.5848,
+							4.5645,
+							2.5868,
+							4.5614,
+							2.7067,
+							3.9349,
+							2.704
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 145,
+							"length": 10
+						}
+					},
+					{
+						"content": "Hall",
+						"polygon": [
+							6.1154,
+							2.5908,
+							6.3336,
+							2.5897,
+							6.3305,
+							2.7058,
+							6.1107,
+							2.7029
+						],
+						"confidence": 0.982,
+						"span": {
+							"offset": 156,
+							"length": 4
+						}
+					},
+					{
+						"content": "Closet",
+						"polygon": [
+							6.3563,
+							2.5896,
+							6.73,
+							2.587,
+							6.73,
+							2.7035,
+							6.3535,
+							2.7059
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 161,
+							"length": 6
+						}
+					},
+					{
+						"content": "Significant",
+						"polygon": [
+							1.3755,
+							3.2786,
+							2.1832,
+							3.2786,
+							2.1832,
+							3.4465,
+							1.3755,
+							3.4465
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 168,
+							"length": 11
+						}
+					},
+					{
+						"content": "Not",
+						"polygon": [
+							4.5807,
+							3.2885,
+							4.8527,
+							3.2885,
+							4.8527,
+							3.4135,
+							4.5807,
+							3.4135
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 180,
+							"length": 3
+						}
+					},
+					{
+						"content": "Significant",
+						"polygon": [
+							4.9098,
+							3.2786,
+							5.716,
+							3.2786,
+							5.716,
+							3.4465,
+							4.9098,
+							3.4465
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 184,
+							"length": 11
+						}
+					},
+					{
+						"content": "Findings:",
+						"polygon": [
+							1.0917,
+							3.7935,
+							1.7681,
+							3.7935,
+							1.7681,
+							3.9602,
+							1.0917,
+							3.9602
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 196,
+							"length": 9
+						}
+					},
+					{
+						"content": "Office",
+						"polygon": [
+							1.8003,
+							3.8257,
+							2.1398,
+							3.8251,
+							2.1439,
+							3.9629,
+							1.805,
+							3.961
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 206,
+							"length": 6
+						}
+					},
+					{
+						"content": "chair",
+						"polygon": [
+							2.1683,
+							3.8251,
+							2.4626,
+							3.8246,
+							2.4663,
+							3.9647,
+							2.1724,
+							3.9631
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 213,
+							"length": 5
+						}
+					},
+					{
+						"content": "is",
+						"polygon": [
+							2.4911,
+							3.8246,
+							2.5956,
+							3.8245,
+							2.599,
+							3.9654,
+							2.4947,
+							3.9648
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 219,
+							"length": 2
+						}
+					},
+					{
+						"content": "missing",
+						"polygon": [
+							2.6241,
+							3.8245,
+							3.0894,
+							3.8241,
+							3.092,
+							3.9677,
+							2.6275,
+							3.9655
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 222,
+							"length": 7
+						}
+					},
+					{
+						"content": "a",
+						"polygon": [
+							3.1178,
+							3.8241,
+							3.2009,
+							3.824,
+							3.2034,
+							3.9682,
+							3.1205,
+							3.9679
+						],
+						"confidence": 0.998,
+						"span": {
+							"offset": 230,
+							"length": 1
+						}
+					},
+					{
+						"content": "wheel.",
+						"polygon": [
+							3.2318,
+							3.824,
+							3.6211,
+							3.8239,
+							3.6229,
+							3.9699,
+							3.2342,
+							3.9683
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 232,
+							"length": 6
+						}
+					},
+					{
+						"content": "Hall",
+						"polygon": [
+							3.6496,
+							3.8239,
+							3.8965,
+							3.8239,
+							3.8979,
+							3.9709,
+							3.6514,
+							3.97
+						],
+						"confidence": 0.988,
+						"span": {
+							"offset": 239,
+							"length": 4
+						}
+					},
+					{
+						"content": "closet",
+						"polygon": [
+							3.925,
+							3.8239,
+							4.2858,
+							3.8241,
+							4.2866,
+							3.9722,
+							3.9263,
+							3.971
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 244,
+							"length": 6
+						}
+					},
+					{
+						"content": "door",
+						"polygon": [
+							4.3143,
+							3.8241,
+							4.5802,
+							3.8243,
+							4.5805,
+							3.973,
+							4.315,
+							3.9723
+						],
+						"confidence": 0.988,
+						"span": {
+							"offset": 251,
+							"length": 4
+						}
+					},
+					{
+						"content": "is",
+						"polygon": [
+							4.6087,
+							3.8243,
+							4.7131,
+							3.8244,
+							4.7132,
+							3.9734,
+							4.6089,
+							3.9731
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 256,
+							"length": 2
+						}
+					},
+					{
+						"content": "falling",
+						"polygon": [
+							4.7416,
+							3.8244,
+							5.1024,
+							3.8249,
+							5.1019,
+							3.9742,
+							4.7416,
+							3.9734
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 259,
+							"length": 7
+						}
+					},
+					{
+						"content": "off",
+						"polygon": [
+							5.1309,
+							3.8249,
+							5.2924,
+							3.8252,
+							5.2915,
+							3.9746,
+							5.1304,
+							3.9743
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 267,
+							"length": 3
+						}
+					},
+					{
+						"content": "hinges.",
+						"polygon": [
+							5.3208,
+							3.8252,
+							5.76,
+							3.826,
+							5.7585,
+							3.9753,
+							5.32,
+							3.9746
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 271,
+							"length": 7
+						}
+					},
+					{
+						"content": "Suggested",
+						"polygon": [
+							1.0722,
+							4.7618,
+							1.8633,
+							4.7618,
+							1.8633,
+							4.9285,
+							1.0722,
+							4.9285
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 279,
+							"length": 9
+						}
+					},
+					{
+						"content": "Solutions:",
+						"polygon": [
+							1.9282,
+							4.7614,
+							2.6902,
+							4.7614,
+							2.6902,
+							4.8956,
+							1.9282,
+							4.8956
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 289,
+							"length": 10
+						}
+					},
+					{
+						"content": "Replace",
+						"polygon": [
+							2.7294,
+							4.793,
+							3.203,
+							4.7931,
+							3.2027,
+							4.9412,
+							2.7294,
+							4.9396
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 300,
+							"length": 7
+						}
+					},
+					{
+						"content": "office",
+						"polygon": [
+							3.2321,
+							4.7931,
+							3.5624,
+							4.7933,
+							3.562,
+							4.9423,
+							3.2318,
+							4.9413
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 308,
+							"length": 6
+						}
+					},
+					{
+						"content": "chair",
+						"polygon": [
+							3.5915,
+							4.7934,
+							3.8927,
+							4.7938,
+							3.8921,
+							4.9431,
+							3.5911,
+							4.9424
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 315,
+							"length": 5
+						}
+					},
+					{
+						"content": "and",
+						"polygon": [
+							3.9218,
+							4.7938,
+							4.155,
+							4.7942,
+							4.1542,
+							4.9436,
+							3.9212,
+							4.9431
+						],
+						"confidence": 0.998,
+						"span": {
+							"offset": 321,
+							"length": 3
+						}
+					},
+					{
+						"content": "replace",
+						"polygon": [
+							4.1841,
+							4.7943,
+							4.631,
+							4.7952,
+							4.63,
+							4.9443,
+							4.1833,
+							4.9437
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 325,
+							"length": 7
+						}
+					},
+					{
+						"content": "all",
+						"polygon": [
+							4.6601,
+							4.7953,
+							4.8059,
+							4.7957,
+							4.8047,
+							4.9446,
+							4.6591,
+							4.9444
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 333,
+							"length": 3
+						}
+					},
+					{
+						"content": "closet",
+						"polygon": [
+							4.835,
+							4.7958,
+							5.1847,
+							4.7968,
+							5.1834,
+							4.9448,
+							4.8339,
+							4.9446
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 337,
+							"length": 6
+						}
+					},
+					{
+						"content": "hinges.",
+						"polygon": [
+							5.2139,
+							4.7969,
+							5.6534,
+							4.7985,
+							5.6519,
+							4.9449,
+							5.2125,
+							4.9448
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 344,
+							"length": 7
+						}
+					},
+					{
+						"content": "Submitter:",
+						"polygon": [
+							1.0038,
+							5.8934,
+							1.8241,
+							5.8934,
+							1.8241,
+							6.0275,
+							1.0038,
+							6.0275
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 352,
+							"length": 10
+						}
+					},
+					{
+						"content": "Bill",
+						"polygon": [
+							1.8736,
+							5.8621,
+							2.1174,
+							5.8607,
+							2.1213,
+							6.0299,
+							1.8798,
+							6.0298
+						],
+						"confidence": 0.979,
+						"span": {
+							"offset": 363,
+							"length": 4
+						}
+					},
+					{
+						"content": "Smith",
+						"polygon": [
+							2.1511,
+							5.8605,
+							2.6528,
+							5.8565,
+							2.6514,
+							6.0299,
+							2.1546,
+							6.0299
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 368,
+							"length": 5
+						}
+					},
+					{
+						"content": "Department:",
+						"polygon": [
+							1.0134,
+							6.2494,
+							1.9995,
+							6.2494,
+							1.9995,
+							6.4072,
+							1.0134,
+							6.4072
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 374,
+							"length": 11
+						}
+					},
+					{
+						"content": "Tower",
+						"polygon": [
+							2.045,
+							6.2318,
+							2.569,
+							6.2241,
+							2.5717,
+							6.4062,
+							2.045,
+							6.4113
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 386,
+							"length": 5
+						}
+					},
+					{
+						"content": "Room",
+						"polygon": [
+							2.6048,
+							6.2238,
+							3.0664,
+							6.2224,
+							3.0716,
+							6.405,
+							2.6076,
+							6.406
+						],
+						"confidence": 0.989,
+						"span": {
+							"offset": 392,
+							"length": 4
+						}
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							4.3421,
+							6.2494,
+							4.7385,
+							6.2494,
+							4.7385,
+							6.3742,
+							4.3421,
+							6.3742
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 397,
+							"length": 5
+						}
+					},
+					{
+						"content": "July",
+						"polygon": [
+							4.7817,
+							6.222,
+							5.1048,
+							6.2174,
+							5.1056,
+							6.431,
+							4.7817,
+							6.431
+						],
+						"confidence": 0.988,
+						"span": {
+							"offset": 403,
+							"length": 4
+						}
+					},
+					{
+						"content": "26,",
+						"polygon": [
+							5.1474,
+							6.2168,
+							5.4315,
+							6.2127,
+							5.4331,
+							6.4305,
+							5.1484,
+							6.431
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 408,
+							"length": 3
+						}
+					},
+					{
+						"content": "2021",
+						"polygon": [
+							5.4741,
+							6.212,
+							5.8896,
+							6.2058,
+							5.8923,
+							6.4268,
+							5.4759,
+							6.4302
+						],
+						"confidence": 0.988,
+						"span": {
+							"offset": 412,
+							"length": 4
+						}
+					},
+					{
+						"content": "Owner:",
+						"polygon": [
+							1.1047,
+							6.836,
+							1.6696,
+							6.836,
+							1.6696,
+							6.9625,
+							1.1047,
+							6.9625
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 417,
+							"length": 6
+						}
+					},
+					{
+						"content": "Etleva",
+						"polygon": [
+							1.7002,
+							6.8209,
+							2.2272,
+							6.8281,
+							2.2279,
+							7.0326,
+							1.7049,
+							7.0276
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 424,
+							"length": 6
+						}
+					},
+					{
+						"content": "Hysa",
+						"polygon": [
+							2.2706,
+							6.8282,
+							2.7343,
+							6.8278,
+							2.7312,
+							7.024,
+							2.271,
+							7.0326
+						],
+						"confidence": 0.988,
+						"span": {
+							"offset": 431,
+							"length": 4
+						}
+					},
+					{
+						"content": "Solutions:",
+						"polygon": [
+							1.1022,
+							7.2017,
+							1.8636,
+							7.2017,
+							1.8636,
+							7.3359,
+							1.1022,
+							7.3359
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 436,
+							"length": 10
+						}
+					},
+					{
+						"content": "Fix",
+						"polygon": [
+							1.9033,
+							7.2046,
+							2.1558,
+							7.2056,
+							2.1528,
+							7.3815,
+							1.8979,
+							7.3801
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 447,
+							"length": 3
+						}
+					},
+					{
+						"content": "ASAP",
+						"polygon": [
+							2.1939,
+							7.2057,
+							2.6841,
+							7.2011,
+							2.6864,
+							7.3855,
+							2.1914,
+							7.3818
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 451,
+							"length": 4
+						}
+					},
+					{
+						"content": "Target",
+						"polygon": [
+							1.0967,
+							7.5744,
+							1.5998,
+							7.5744,
+							1.5998,
+							7.7322,
+							1.0967,
+							7.7322
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 456,
+							"length": 6
+						}
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							1.6649,
+							7.5744,
+							2.0614,
+							7.5744,
+							2.0614,
+							7.6992,
+							1.6649,
+							7.6992
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 463,
+							"length": 5
+						}
+					},
+					{
+						"content": "12/31/2022",
+						"polygon": [
+							2.1146,
+							7.5831,
+							3.0431,
+							7.5702,
+							3.0431,
+							7.745,
+							2.1146,
+							7.752
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 469,
+							"length": 10
+						}
+					},
+					{
+						"content": "Close",
+						"polygon": [
+							4.3032,
+							7.5517,
+							4.7096,
+							7.5517,
+							4.7096,
+							7.6859,
+							4.3032,
+							7.6859
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 480,
+							"length": 5
+						}
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							4.7786,
+							7.5611,
+							5.175,
+							7.5611,
+							5.175,
+							7.6859,
+							4.7786,
+							7.6859
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 486,
+							"length": 5
+						}
+					},
+					{
+						"content": "12/24/2022",
+						"polygon": [
+							5.2294,
+							7.5587,
+							6.1651,
+							7.5586,
+							6.1621,
+							7.733,
+							5.2309,
+							7.7261
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 492,
+							"length": 10
+						}
+					},
+					{
+						"content": "Submitter",
+						"polygon": [
+							1.1022,
+							7.87,
+							1.8814,
+							7.87,
+							1.8814,
+							8.0042,
+							1.1022,
+							8.0042
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 503,
+							"length": 9
+						}
+					},
+					{
+						"content": "Approval:",
+						"polygon": [
+							1.9321,
+							7.87,
+							2.6789,
+							7.87,
+							2.6789,
+							8.0372,
+							1.9321,
+							8.0372
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 513,
+							"length": 9
+						}
+					},
+					{
+						"content": "Tim",
+						"polygon": [
+							2.7218,
+							7.8767,
+							2.9675,
+							7.8745,
+							2.9663,
+							8.0485,
+							2.7191,
+							8.0462
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 523,
+							"length": 3
+						}
+					},
+					{
+						"content": "Smith",
+						"polygon": [
+							3.0732,
+							7.8735,
+							3.5617,
+							7.8692,
+							3.5643,
+							8.0447,
+							3.0727,
+							8.0488
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 527,
+							"length": 5
+						}
+					}
+				],
+				"selectionMarks": [
+					{
+						"state": "selected",
+						"polygon": [
+							1.0485,
+							1.5939,
+							1.2985,
+							1.5939,
+							1.2985,
+							1.8439,
+							1.0485,
+							1.8439
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 533,
+							"length": 10
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							2.6667,
+							1.5939,
+							2.9167,
+							1.5939,
+							2.9167,
+							1.8439,
+							2.6667,
+							1.8439
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 544,
+							"length": 12
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							4.2879,
+							1.5909,
+							4.5379,
+							1.5909,
+							4.5379,
+							1.8409,
+							4.2879,
+							1.8409
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 557,
+							"length": 12
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							5.903,
+							1.5909,
+							6.153,
+							1.5909,
+							6.153,
+							1.8409,
+							5.903,
+							1.8409
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 570,
+							"length": 12
+						}
+					},
+					{
+						"state": "selected",
+						"polygon": [
+							1.1061,
+							3.2182,
+							1.3561,
+							3.2182,
+							1.3561,
+							3.4682,
+							1.1061,
+							3.4682
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 583,
+							"length": 10
+						}
+					},
+					{
+						"state": "unselected",
+						"polygon": [
+							4.3091,
+							3.2212,
+							4.5591,
+							3.2212,
+							4.5591,
+							3.4712,
+							4.3091,
+							3.4712
+						],
+						"confidence": 1,
+						"span": {
+							"offset": 594,
+							"length": 12
+						}
+					}
+				],
+				"lines": [
+					{
+						"content": "Contoso Safety 360",
+						"polygon": [
+							2.6585,
+							1.1047,
+							5.686,
+							1.1047,
+							5.686,
+							1.439,
+							2.6585,
+							1.439
+						],
+						"spans": [
+							{
+								"offset": 0,
+								"length": 18
+							}
+						]
+					},
+					{
+						"content": "Hazardous",
+						"polygon": [
+							1.3267,
+							1.6431,
+							2.1401,
+							1.6431,
+							2.1401,
+							1.7768,
+							1.3267,
+							1.7768
+						],
+						"spans": [
+							{
+								"offset": 19,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "At Risk",
+						"polygon": [
+							2.9307,
+							1.6427,
+							3.4617,
+							1.6427,
+							3.4617,
+							1.7768,
+							2.9307,
+							1.7768
+						],
+						"spans": [
+							{
+								"offset": 29,
+								"length": 7
+							}
+						]
+					},
+					{
+						"content": "Safety",
+						"polygon": [
+							4.5578,
+							1.6419,
+							5.0408,
+							1.6419,
+							5.0408,
+							1.8098,
+							4.5578,
+							1.8098
+						],
+						"spans": [
+							{
+								"offset": 37,
+								"length": 6
+							}
+						]
+					},
+					{
+						"content": "Safety",
+						"polygon": [
+							6.1828,
+							1.6419,
+							6.6658,
+							1.6419,
+							6.6658,
+							1.8098,
+							6.1828,
+							1.8098
+						],
+						"spans": [
+							{
+								"offset": 44,
+								"length": 6
+							}
+						]
+					},
+					{
+						"content": "Recognition",
+						"polygon": [
+							5.9757,
+							1.9056,
+							6.8856,
+							1.9056,
+							6.8856,
+							2.0665,
+							5.9757,
+							2.0665
+						],
+						"spans": [
+							{
+								"offset": 51,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "Condition",
+						"polygon": [
+							1.1012,
+							1.8997,
+							1.8484,
+							1.8997,
+							1.8484,
+							2.0335,
+							1.1012,
+							2.0335
+						],
+						"spans": [
+							{
+								"offset": 63,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "Behavior",
+						"polygon": [
+							2.7254,
+							1.8993,
+							3.4069,
+							1.8993,
+							3.4069,
+							2.0335,
+							2.7254,
+							2.0335
+						],
+						"spans": [
+							{
+								"offset": 73,
+								"length": 8
+							}
+						]
+					},
+					{
+						"content": "Suggestion",
+						"polygon": [
+							4.3392,
+							1.9056,
+							5.1804,
+							1.9056,
+							5.1804,
+							2.0665,
+							4.3392,
+							2.0665
+						],
+						"spans": [
+							{
+								"offset": 82,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Time",
+						"polygon": [
+							1.0147,
+							2.1543,
+							1.3159,
+							2.1543,
+							1.3159,
+							2.2548,
+							1.0147,
+							2.2548
+						],
+						"spans": [
+							{
+								"offset": 93,
+								"length": 4
+							}
+						]
+					},
+					{
+						"content": "Date",
+						"polygon": [
+							3.1869,
+							2.1567,
+							3.4628,
+							2.1567,
+							3.4628,
+							2.2548,
+							3.1869,
+							2.2548
+						],
+						"spans": [
+							{
+								"offset": 98,
+								"length": 4
+							}
+						]
+					},
+					{
+						"content": "Location",
+						"polygon": [
+							5.3522,
+							2.1543,
+							5.86,
+							2.1543,
+							5.86,
+							2.2548,
+							5.3522,
+							2.2548
+						],
+						"spans": [
+							{
+								"offset": 103,
+								"length": 8
+							}
+						]
+					},
+					{
+						"content": "1:00pm",
+						"polygon": [
+							1.8815,
+							2.3728,
+							2.3065,
+							2.3776,
+							2.3065,
+							2.5113,
+							1.8815,
+							2.5017
+						],
+						"spans": [
+							{
+								"offset": 112,
+								"length": 6
+							}
+						]
+					},
+					{
+						"content": "11/01/2021",
+						"polygon": [
+							3.9396,
+							2.3728,
+							4.5556,
+							2.3681,
+							4.5604,
+							2.4874,
+							3.9396,
+							2.4922
+						],
+						"spans": [
+							{
+								"offset": 119,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Office",
+						"polygon": [
+							6.2508,
+							2.3728,
+							6.5851,
+							2.3776,
+							6.5851,
+							2.4874,
+							6.2461,
+							2.4874
+						],
+						"spans": [
+							{
+								"offset": 130,
+								"length": 6
+							}
+						]
+					},
+					{
+						"content": "10:15am",
+						"polygon": [
+							1.8337,
+							2.5829,
+							2.3351,
+							2.5877,
+							2.3351,
+							2.707,
+							1.8337,
+							2.7023
+						],
+						"spans": [
+							{
+								"offset": 137,
+								"length": 7
+							}
+						]
+					},
+					{
+						"content": "02/14/2022",
+						"polygon": [
+							3.9348,
+							2.5829,
+							4.5747,
+							2.5829,
+							4.5747,
+							2.7023,
+							3.9348,
+							2.7023
+						],
+						"spans": [
+							{
+								"offset": 145,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Hall Closet",
+						"polygon": [
+							6.1076,
+							2.5877,
+							6.7284,
+							2.5829,
+							6.7284,
+							2.7023,
+							6.1076,
+							2.7023
+						],
+						"spans": [
+							{
+								"offset": 156,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "Significant",
+						"polygon": [
+							1.3755,
+							3.2786,
+							2.1832,
+							3.2786,
+							2.1832,
+							3.4465,
+							1.3755,
+							3.4465
+						],
+						"spans": [
+							{
+								"offset": 168,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "Not Significant",
+						"polygon": [
+							4.5807,
+							3.2786,
+							5.716,
+							3.2786,
+							5.716,
+							3.4465,
+							4.5807,
+							3.4465
+						],
+						"spans": [
+							{
+								"offset": 180,
+								"length": 15
+							}
+						]
+					},
+					{
+						"content": "Findings:",
+						"polygon": [
+							1.0917,
+							3.7935,
+							1.7681,
+							3.7935,
+							1.7681,
+							3.9602,
+							1.0917,
+							3.9602
+						],
+						"spans": [
+							{
+								"offset": 196,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "Office chair is missing a wheel. Hall closet door is falling off hinges.",
+						"polygon": [
+							1.8003,
+							3.8194,
+							5.7638,
+							3.8242,
+							5.7638,
+							3.9722,
+							1.8003,
+							3.9627
+						],
+						"spans": [
+							{
+								"offset": 206,
+								"length": 72
+							}
+						]
+					},
+					{
+						"content": "Suggested Solutions:",
+						"polygon": [
+							1.0722,
+							4.7614,
+							2.6902,
+							4.7614,
+							2.6902,
+							4.9285,
+							1.0722,
+							4.9285
+						],
+						"spans": [
+							{
+								"offset": 279,
+								"length": 20
+							}
+						]
+					},
+					{
+						"content": "Replace office chair and replace all closet hinges.",
+						"polygon": [
+							2.7267,
+							4.7886,
+							5.6492,
+							4.7934,
+							5.6492,
+							4.9414,
+							2.7267,
+							4.9366
+						],
+						"spans": [
+							{
+								"offset": 300,
+								"length": 51
+							}
+						]
+					},
+					{
+						"content": "Submitter:",
+						"polygon": [
+							1.0038,
+							5.8934,
+							1.8241,
+							5.8934,
+							1.8241,
+							6.0275,
+							1.0038,
+							6.0275
+						],
+						"spans": [
+							{
+								"offset": 352,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Bill Smith",
+						"polygon": [
+							1.8719,
+							5.8581,
+							2.6742,
+							5.8533,
+							2.6742,
+							6.0252,
+							1.8719,
+							6.0252
+						],
+						"spans": [
+							{
+								"offset": 363,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Department:",
+						"polygon": [
+							1.0134,
+							6.2494,
+							1.9995,
+							6.2494,
+							1.9995,
+							6.4072,
+							1.0134,
+							6.4072
+						],
+						"spans": [
+							{
+								"offset": 374,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "Tower Room",
+						"polygon": [
+							2.0343,
+							6.2257,
+							3.1374,
+							6.2209,
+							3.1374,
+							6.3976,
+							2.0343,
+							6.4071
+						],
+						"spans": [
+							{
+								"offset": 386,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							4.3421,
+							6.2494,
+							4.7385,
+							6.2494,
+							4.7385,
+							6.3742,
+							4.3421,
+							6.3742
+						],
+						"spans": [
+							{
+								"offset": 397,
+								"length": 5
+							}
+						]
+					},
+					{
+						"content": "July 26, 2021",
+						"polygon": [
+							4.7801,
+							6.2161,
+							5.8975,
+							6.2018,
+							5.8975,
+							6.4214,
+							4.7801,
+							6.431
+						],
+						"spans": [
+							{
+								"offset": 403,
+								"length": 13
+							}
+						]
+					},
+					{
+						"content": "Owner:",
+						"polygon": [
+							1.1047,
+							6.836,
+							1.6696,
+							6.836,
+							1.6696,
+							6.9625,
+							1.1047,
+							6.9625
+						],
+						"spans": [
+							{
+								"offset": 417,
+								"length": 6
+							}
+						]
+					},
+					{
+						"content": "Etleva Hysa",
+						"polygon": [
+							1.7,
+							6.8177,
+							2.7362,
+							6.8225,
+							2.7362,
+							7.0278,
+							1.7,
+							7.0278
+						],
+						"spans": [
+							{
+								"offset": 424,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "Solutions:",
+						"polygon": [
+							1.1022,
+							7.2017,
+							1.8636,
+							7.2017,
+							1.8636,
+							7.3359,
+							1.1022,
+							7.3359
+						],
+						"spans": [
+							{
+								"offset": 436,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Fix ASAP",
+						"polygon": [
+							1.8958,
+							7.1997,
+							2.7315,
+							7.1997,
+							2.7315,
+							7.3811,
+							1.8958,
+							7.3811
+						],
+						"spans": [
+							{
+								"offset": 447,
+								"length": 8
+							}
+						]
+					},
+					{
+						"content": "Target Date:",
+						"polygon": [
+							1.0967,
+							7.5744,
+							2.0614,
+							7.5744,
+							2.0614,
+							7.7322,
+							1.0967,
+							7.7322
+						],
+						"spans": [
+							{
+								"offset": 456,
+								"length": 12
+							}
+						]
+					},
+					{
+						"content": "12/31/2022",
+						"polygon": [
+							2.1107,
+							7.572,
+							3.061,
+							7.5673,
+							3.061,
+							7.7392,
+							2.1107,
+							7.7487
+						],
+						"spans": [
+							{
+								"offset": 469,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Close Date:",
+						"polygon": [
+							4.3032,
+							7.5517,
+							5.175,
+							7.5517,
+							5.175,
+							7.6859,
+							4.3032,
+							7.6859
+						],
+						"spans": [
+							{
+								"offset": 480,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "12/24/2022",
+						"polygon": [
+							5.2194,
+							7.553,
+							6.184,
+							7.5577,
+							6.184,
+							7.7296,
+							5.2194,
+							7.7248
+						],
+						"spans": [
+							{
+								"offset": 492,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Submitter Approval:",
+						"polygon": [
+							1.1022,
+							7.87,
+							2.6789,
+							7.87,
+							2.6789,
+							8.0372,
+							1.1022,
+							8.0372
+						],
+						"spans": [
+							{
+								"offset": 503,
+								"length": 19
+							}
+						]
+					},
+					{
+						"content": "Tim Smith",
+						"polygon": [
+							2.7171,
+							7.8728,
+							3.5815,
+							7.8681,
+							3.5815,
+							8.0399,
+							2.7171,
+							8.0447
+						],
+						"spans": [
+							{
+								"offset": 523,
+								"length": 9
+							}
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 0,
+						"length": 606
+					}
+				],
+				"kind": "document"
+			}
+		],
+		"tables": [
+			{
+				"rowCount": 4,
+				"columnCount": 3,
+				"cells": [
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 0,
+						"content": "Time",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.0092,
+									2.0999,
+									3.1678,
+									2.0999,
+									3.1678,
+									2.3139,
+									1.0025,
+									2.3206
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 93,
+								"length": 4
+							}
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 1,
+						"content": "Date",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.1678,
+									2.0999,
+									5.333,
+									2.0999,
+									5.333,
+									2.3139,
+									3.1678,
+									2.3139
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 98,
+								"length": 4
+							}
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 2,
+						"content": "Location",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.333,
+									2.0999,
+									7.5051,
+									2.0999,
+									7.5051,
+									2.3139,
+									5.333,
+									2.3139
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 103,
+								"length": 8
+							}
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 0,
+						"content": "1:00pm",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.0025,
+									2.3206,
+									3.1678,
+									2.3139,
+									3.1678,
+									2.528,
+									1.0025,
+									2.528
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 112,
+								"length": 6
+							}
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 1,
+						"content": "11/01/2021",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.1678,
+									2.3139,
+									5.333,
+									2.3139,
+									5.333,
+									2.528,
+									3.1678,
+									2.528
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 119,
+								"length": 10
+							}
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 2,
+						"content": "Office",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.333,
+									2.3139,
+									7.5051,
+									2.3139,
+									7.5051,
+									2.5347,
+									5.333,
+									2.528
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 130,
+								"length": 6
+							}
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 0,
+						"content": "10:15am",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.0025,
+									2.528,
+									3.1678,
+									2.528,
+									3.1678,
+									2.742,
+									1.0025,
+									2.7487
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 137,
+								"length": 7
+							}
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 1,
+						"content": "02/14/2022",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.1678,
+									2.528,
+									5.333,
+									2.528,
+									5.333,
+									2.742,
+									3.1678,
+									2.742
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 145,
+								"length": 10
+							}
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 2,
+						"content": "Hall Closet",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.333,
+									2.528,
+									7.5051,
+									2.5347,
+									7.5051,
+									2.7487,
+									5.333,
+									2.742
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 156,
+								"length": 11
+							}
+						]
+					},
+					{
+						"rowIndex": 3,
+						"columnIndex": 0,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.0025,
+									2.7487,
+									3.1678,
+									2.742,
+									3.1678,
+									2.9628,
+									1.0025,
+									2.9628
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 3,
+						"columnIndex": 1,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.1678,
+									2.742,
+									5.333,
+									2.742,
+									5.333,
+									2.9628,
+									3.1678,
+									2.9628
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 3,
+						"columnIndex": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.333,
+									2.742,
+									7.5051,
+									2.7487,
+									7.5051,
+									2.9628,
+									5.333,
+									2.9628
+								]
+							}
+						],
+						"spans": []
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.999,
+							2.0841,
+							7.5237,
+							2.0799,
+							7.5212,
+							2.9757,
+							0.9955,
+							2.9802
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 93,
+						"length": 74
+					}
+				]
+			},
+			{
+				"rowCount": 2,
+				"columnCount": 2,
+				"cells": [
+					{
+						"rowIndex": 0,
+						"columnIndex": 0,
+						"content": "Submitter: Bill Smith",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9876,
+									5.6925,
+									3.7115,
+									5.6925,
+									3.7183,
+									6.0998,
+									0.9876,
+									6.0935
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 352,
+								"length": 21
+							}
+						]
+					},
+					{
+						"rowIndex": 0,
+						"columnIndex": 1,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.7115,
+									5.6925,
+									7.4993,
+									5.6925,
+									7.4993,
+									6.0998,
+									3.7183,
+									6.0998
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 0,
+						"content": "Department: Tower Room",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.9876,
+									6.0935,
+									3.7183,
+									6.0998,
+									3.7319,
+									6.4945,
+									0.9876,
+									6.4883
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 374,
+								"length": 22
+							}
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 1,
+						"content": "Date: July 26, 2021",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.7183,
+									6.0998,
+									7.4993,
+									6.0998,
+									7.4993,
+									6.4945,
+									3.7319,
+									6.4945
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 397,
+								"length": 19
+							}
+						]
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9724,
+							5.6771,
+							7.5017,
+							5.6856,
+							7.4989,
+							6.5018,
+							0.9686,
+							6.4932
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 352,
+						"length": 64
+					}
+				]
+			}
+		],
+		"paragraphs": [
+			{
+				"spans": [
+					{
+						"offset": 0,
+						"length": 18
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.6585,
+							1.1047,
+							5.686,
+							1.1047,
+							5.686,
+							1.439,
+							2.6585,
+							1.439
+						]
+					}
+				],
+				"role": "title",
+				"content": "Contoso Safety 360"
+			},
+			{
+				"spans": [
+					{
+						"offset": 19,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.3267,
+							1.6431,
+							2.1401,
+							1.6431,
+							2.1401,
+							1.7768,
+							1.3267,
+							1.7768
+						]
+					}
+				],
+				"content": "Hazardous"
+			},
+			{
+				"spans": [
+					{
+						"offset": 29,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.9307,
+							1.6427,
+							3.4617,
+							1.6427,
+							3.4617,
+							1.7768,
+							2.9307,
+							1.7768
+						]
+					}
+				],
+				"content": "At Risk"
+			},
+			{
+				"spans": [
+					{
+						"offset": 37,
+						"length": 6
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.5578,
+							1.6419,
+							5.0408,
+							1.6419,
+							5.0408,
+							1.8098,
+							4.5578,
+							1.8098
+						]
+					}
+				],
+				"content": "Safety"
+			},
+			{
+				"spans": [
+					{
+						"offset": 44,
+						"length": 18
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.9757,
+							1.6419,
+							6.8856,
+							1.6419,
+							6.8856,
+							2.0665,
+							5.9757,
+							2.0665
+						]
+					}
+				],
+				"content": "Safety Recognition"
+			},
+			{
+				"spans": [
+					{
+						"offset": 63,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.1012,
+							1.8997,
+							1.8484,
+							1.8997,
+							1.8484,
+							2.0335,
+							1.1012,
+							2.0335
+						]
+					}
+				],
+				"content": "Condition"
+			},
+			{
+				"spans": [
+					{
+						"offset": 73,
+						"length": 8
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.7254,
+							1.8993,
+							3.4069,
+							1.8993,
+							3.4069,
+							2.0335,
+							2.7254,
+							2.0335
+						]
+					}
+				],
+				"content": "Behavior"
+			},
+			{
+				"spans": [
+					{
+						"offset": 82,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.3392,
+							1.9056,
+							5.1804,
+							1.9056,
+							5.1804,
+							2.0665,
+							4.3392,
+							2.0665
+						]
+					}
+				],
+				"content": "Suggestion"
+			},
+			{
+				"spans": [
+					{
+						"offset": 93,
+						"length": 4
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0092,
+							2.0999,
+							3.1678,
+							2.0999,
+							3.1678,
+							2.3139,
+							1.0025,
+							2.3206
+						]
+					}
+				],
+				"content": "Time"
+			},
+			{
+				"spans": [
+					{
+						"offset": 98,
+						"length": 4
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.1678,
+							2.0999,
+							5.333,
+							2.0999,
+							5.333,
+							2.3139,
+							3.1678,
+							2.3139
+						]
+					}
+				],
+				"content": "Date"
+			},
+			{
+				"spans": [
+					{
+						"offset": 103,
+						"length": 8
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.333,
+							2.0999,
+							7.5051,
+							2.0999,
+							7.5051,
+							2.3139,
+							5.333,
+							2.3139
+						]
+					}
+				],
+				"content": "Location"
+			},
+			{
+				"spans": [
+					{
+						"offset": 112,
+						"length": 6
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0025,
+							2.3206,
+							3.1678,
+							2.3139,
+							3.1678,
+							2.528,
+							1.0025,
+							2.528
+						]
+					}
+				],
+				"content": "1:00pm"
+			},
+			{
+				"spans": [
+					{
+						"offset": 119,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.1678,
+							2.3139,
+							5.333,
+							2.3139,
+							5.333,
+							2.528,
+							3.1678,
+							2.528
+						]
+					}
+				],
+				"content": "11/01/2021"
+			},
+			{
+				"spans": [
+					{
+						"offset": 130,
+						"length": 6
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.333,
+							2.3139,
+							7.5051,
+							2.3139,
+							7.5051,
+							2.5347,
+							5.333,
+							2.528
+						]
+					}
+				],
+				"content": "Office"
+			},
+			{
+				"spans": [
+					{
+						"offset": 137,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0025,
+							2.528,
+							3.1678,
+							2.528,
+							3.1678,
+							2.742,
+							1.0025,
+							2.7487
+						]
+					}
+				],
+				"content": "10:15am"
+			},
+			{
+				"spans": [
+					{
+						"offset": 145,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.1678,
+							2.528,
+							5.333,
+							2.528,
+							5.333,
+							2.742,
+							3.1678,
+							2.742
+						]
+					}
+				],
+				"content": "02/14/2022"
+			},
+			{
+				"spans": [
+					{
+						"offset": 156,
+						"length": 11
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.333,
+							2.528,
+							7.5051,
+							2.5347,
+							7.5051,
+							2.7487,
+							5.333,
+							2.742
+						]
+					}
+				],
+				"content": "Hall Closet"
+			},
+			{
+				"spans": [
+					{
+						"offset": 168,
+						"length": 11
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.3755,
+							3.2786,
+							2.1832,
+							3.2786,
+							2.1832,
+							3.4465,
+							1.3755,
+							3.4465
+						]
+					}
+				],
+				"content": "Significant"
+			},
+			{
+				"spans": [
+					{
+						"offset": 180,
+						"length": 15
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.5807,
+							3.2786,
+							5.716,
+							3.2786,
+							5.716,
+							3.4465,
+							4.5807,
+							3.4465
+						]
+					}
+				],
+				"content": "Not Significant"
+			},
+			{
+				"spans": [
+					{
+						"offset": 196,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0917,
+							3.7935,
+							1.7681,
+							3.7935,
+							1.7681,
+							3.9602,
+							1.0917,
+							3.9602
+						]
+					}
+				],
+				"content": "Findings:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 206,
+						"length": 72
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.8003,
+							3.8194,
+							5.7638,
+							3.8242,
+							5.7638,
+							3.9722,
+							1.8003,
+							3.9627
+						]
+					}
+				],
+				"content": "Office chair is missing a wheel. Hall closet door is falling off hinges."
+			},
+			{
+				"spans": [
+					{
+						"offset": 279,
+						"length": 20
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0722,
+							4.7614,
+							2.6902,
+							4.7614,
+							2.6902,
+							4.9285,
+							1.0722,
+							4.9285
+						]
+					}
+				],
+				"content": "Suggested Solutions:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 300,
+						"length": 51
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.7267,
+							4.7886,
+							5.6492,
+							4.7934,
+							5.6492,
+							4.9414,
+							2.7267,
+							4.9366
+						]
+					}
+				],
+				"content": "Replace office chair and replace all closet hinges."
+			},
+			{
+				"spans": [
+					{
+						"offset": 352,
+						"length": 21
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9876,
+							5.6925,
+							3.7115,
+							5.6925,
+							3.7183,
+							6.0998,
+							0.9876,
+							6.0935
+						]
+					}
+				],
+				"content": "Submitter: Bill Smith"
+			},
+			{
+				"spans": [
+					{
+						"offset": 374,
+						"length": 22
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.9876,
+							6.0935,
+							3.7183,
+							6.0998,
+							3.7319,
+							6.4945,
+							0.9876,
+							6.4883
+						]
+					}
+				],
+				"content": "Department: Tower Room"
+			},
+			{
+				"spans": [
+					{
+						"offset": 397,
+						"length": 19
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.7183,
+							6.0998,
+							7.4993,
+							6.0998,
+							7.4993,
+							6.4945,
+							3.7319,
+							6.4945
+						]
+					}
+				],
+				"content": "Date: July 26, 2021"
+			},
+			{
+				"spans": [
+					{
+						"offset": 417,
+						"length": 6
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.1047,
+							6.836,
+							1.6696,
+							6.836,
+							1.6696,
+							6.9625,
+							1.1047,
+							6.9625
+						]
+					}
+				],
+				"content": "Owner:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 424,
+						"length": 11
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.7,
+							6.8177,
+							2.7362,
+							6.8225,
+							2.7362,
+							7.0278,
+							1.7,
+							7.0278
+						]
+					}
+				],
+				"content": "Etleva Hysa"
+			},
+			{
+				"spans": [
+					{
+						"offset": 436,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.1022,
+							7.2017,
+							1.8636,
+							7.2017,
+							1.8636,
+							7.3359,
+							1.1022,
+							7.3359
+						]
+					}
+				],
+				"content": "Solutions:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 447,
+						"length": 8
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.8958,
+							7.1997,
+							2.7315,
+							7.1997,
+							2.7315,
+							7.3811,
+							1.8958,
+							7.3811
+						]
+					}
+				],
+				"content": "Fix ASAP"
+			},
+			{
+				"spans": [
+					{
+						"offset": 456,
+						"length": 12
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.0967,
+							7.5744,
+							2.0614,
+							7.5744,
+							2.0614,
+							7.7322,
+							1.0967,
+							7.7322
+						]
+					}
+				],
+				"content": "Target Date:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 469,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.1107,
+							7.572,
+							3.061,
+							7.5673,
+							3.061,
+							7.7392,
+							2.1107,
+							7.7487
+						]
+					}
+				],
+				"content": "12/31/2022"
+			},
+			{
+				"spans": [
+					{
+						"offset": 480,
+						"length": 11
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.3032,
+							7.5517,
+							5.175,
+							7.5517,
+							5.175,
+							7.6859,
+							4.3032,
+							7.6859
+						]
+					}
+				],
+				"content": "Close Date:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 492,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.2194,
+							7.553,
+							6.184,
+							7.5577,
+							6.184,
+							7.7296,
+							5.2194,
+							7.7248
+						]
+					}
+				],
+				"content": "12/24/2022"
+			},
+			{
+				"spans": [
+					{
+						"offset": 503,
+						"length": 19
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.1022,
+							7.87,
+							2.6789,
+							7.87,
+							2.6789,
+							8.0372,
+							1.1022,
+							8.0372
+						]
+					}
+				],
+				"content": "Submitter Approval:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 523,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.7171,
+							7.8728,
+							3.5815,
+							7.8681,
+							3.5815,
+							8.0399,
+							2.7171,
+							8.0447
+						]
+					}
+				],
+				"content": "Tim Smith"
+			}
+		],
+		"styles": []
+	}
+}

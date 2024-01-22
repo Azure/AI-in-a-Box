@@ -1,0 +1,31 @@
+
+Function Auth Level value and Description:
+
+anonymous: No API key is required.
+function: A function-specific API key is required. 
+		  This is the default value when a level isn't specifically set.
+admin: The master key is required.
+
+Functions auth level is set to "function". 
+Host key and function key will both work. 
+Limited to HTTP Post
+
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "post"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "$return"
+    }
+  ]
+}
