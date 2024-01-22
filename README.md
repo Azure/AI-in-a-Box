@@ -36,3 +36,4 @@ Embarking on an Azure AI/ML journey can appear challenging for certain organizat
 | Neeraj Jhaveri | @neerajjhaveri | neeraj.jhaveri@microsoft.com |
 | Thiago Rotta | @rottathiago | thiago.rotta@microsoft.com |
 | Victor Santana | @Welasco | vsantana@microsoft.com |
+| Sabyasachi Samaddar | @ssamadda | ssamadda@microsoft.com |
