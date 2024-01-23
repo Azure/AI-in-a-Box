@@ -30,13 +30,13 @@ And with Azure Speech Services, we will convert your speech into text and synthe
 * Install [ODBC Driver for SQL Server](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server) 
 
 ## Deployment Flow 
-(Leverage the following article for reference: [SQL Queries with Azure Open AI and Semantic Kernel](https://techcommunity.microsoft.com/t5/analytics-on-azure-blog/revolutionizing-sql-queries-with-azure-open-ai-and-semantic/ba-p/3913513))
+(Leverage the following article for reference as you deploy the solution: [SQL Queries with Azure Open AI and Semantic Kernel](https://techcommunity.microsoft.com/t5/analytics-on-azure-blog/revolutionizing-sql-queries-with-azure-open-ai-and-semantic/ba-p/3913513))
 
 **Step 1.** Clone the [AI-in-a-Box repository](https://github.com/Azure/AI-in-a-Box)
 
 **Step 2.** Create Azure Resources (User Assigned Managed Identity, SQL Server, SQL DB, Azure OpenAI and Azure AI Speech Service)
 
-**Step 2.** Create some fake data in Azure SQL Server
+**Step 2.** Create some mock data in Azure SQL Server
 
 **Step 3.** Create the Enviornment file .env
 
@@ -57,7 +57,7 @@ And with Azure Speech Services, we will convert your speech into text and synthe
 
     ```
     git clone https://github.com/Azure/AI-in-a-Box
-    cd nlp-sql-in-a-box
+    cd gen-ai/nlp-sql-in-a-box
     ```
 
 2. Deploy resources:
@@ -69,9 +69,90 @@ And with Azure Speech Services, we will convert your speech into text and synthe
 
 
 ## Post Deployment
-* Once the VM is deployed or your physical device is setup you can ssh into the VM/device using the below command   
-    * ssh NodeVMAdmin@edgevm1.eastus.cloudapp.azure.com -p 2222 
-* Once connected to your virtual machine, [verify](https://learn.microsoft.com/en-us/azure/iot-edge/quickstart-linux) that the runtime was successfully installed and configured on your IoT Edge device.
-    * sudo iotedge system status
-    * sudo iotedge list
-    * sudo iotedge check
+Once your resources have been deployed you will need to do the following to get the app up and running:
+
+1. Add your client IP4 addres in the Azure SQL Server Firewall rules:       
+    * If you don't know how to add your IP Address to your SQL Server follow this link -> [Create a server-level firewall rule in Azure portal](https://learn.microsoft.com/en-us/azure/azure-sql/database/firewall-create-server-level-portal-quickstart)
+
+2. Create some mock data in Azure SQL Server. 
+    * Log in to the Azure SQL Server Query Editor or through SQL Server Management Studio and create a fake table
+    ```
+    CREATE TABLE ExplorationProduction (
+        WellID INT PRIMARY KEY,
+        WellName VARCHAR(50),
+        Location VARCHAR(100),
+        ProductionDate DATE,
+        ProductionVolume DECIMAL(10, 2),
+        Operator VARCHAR(50),
+        FieldName VARCHAR(50),
+        Reservoir VARCHAR(50),
+        Depth DECIMAL(10, 2),
+        APIGravity DECIMAL(5, 2),
+        WaterCut DECIMAL(5, 2),
+        GasOilRatio DECIMAL(10, 2)
+    );
+    ```
+3. Create/Update config.ini within the data folder and add in your sql server/sql db information:
+
+    ```
+    [database]
+    server_name = <servername>.database.windows.net
+    database_name = <databasename>
+    username = <username>
+    password = <password>
+    ```
+
+4. Create/Update environment file, you can rename the .env-sample file to .env which is located in the root (nlp-sql-in-a-box) folder. Please fill in the details in the file in the below format:
+
+    ```
+    AZURE_OPENAI_DEPLOYMENT_NAME="gpt-35-turbo"
+    AZURE_OPENAI_ENDPOINT="https://YOURAOAIINSTANCE.openai.azure.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2023-07-01-preview"
+    AZURE_OPENAI_API_KEY="<key>"
+    SPEECH_KEY="<speech key>"
+    SPEECH_REGION="eastus"
+    server_name = <server name>
+    database_name = <database name>
+    SQLADMIN_USER = <username>
+    SQL_PASSWORD = <password>
+    ```
+
+5. Log in to the Azure Open AI Studio [https://oai.azure.com](https://oai.azure.com/) and under Deployments make sure that the gpt-35-turbo version 0301 deployment is created.
+
+6. Now lets insert in new data into the ExplorationProduction table we created above by running the create_data.py script:
+    * Run the create_data.py in either a command prompt or vscode debugger.
+        * If you use the vscode debugger make sure to open up the nlp-sql-in-a-box folder directly in vscode.
+    * This will generate and insert 1,000 fake records. 
+    * Go back Azure SQL Server Query Editor or through SQL Server Management Studio and check that the new entries were inserted.
+
+7. Run the Final Orchestrator by running the main_app.py
+    * The code in this file is a Python script that uses the Semantic Kernel to build a conversational agent that can process natural language queries and generate SQL queries to retrieve data from a database. The script uses the Azure Cognitive Services Speech SDK to recognize speech input from the user and synthesize speech output to the user.
+     * Make sure you pip install any dependencies that are mentioned in the requirements.txt file.
+     * Run the main_app.py in either a command prompt or vscode debugger.
+
+8. Sample Demo
+    * Here is a screenshot of a sample demo of the application. The speech is printed to show the conversation.
+
+    ```
+    Speech synthesized to speaker for text [....Welcome to the Kiosk Bot!! I am here to help you with your queries. I am still learning. So, please bear with me.]
+    Speech synthesized to speaker for text [Please ask your query through the Microphone:]
+    Listening:
+    Processing........
+    The query is: How many locations are there?
+    The SQL query is: SELECT COUNT(DISTINCT Location) AS 'Number of Locations'
+    FROM ExplorationProduction
+    Speech synthesized to speaker for text [The result of your query is: 9985]
+    Speech synthesized to speaker for text [Do you have any other query? Say Yes to Continue]
+    Listening:
+    Speech synthesized to speaker for text [Please ask your query through the Microphone:]
+    Listening:
+    Processing........
+    The query is: How many wells are there were water cut is more than 95?
+    The SQL query is: SELECT COUNT(*) FROM ExplorationProduction WHERE WaterCut > 95
+    Speech synthesized to speaker for text [The result of your query is: 245]
+    Speech synthesized to speaker for text [Do you have any other query? Say Yes to Continue]
+    Listening:
+    Speech synthesized to speaker for text [Thank you for using the Kiosk Bot. Have a nice day.]
+    Time taken Overall(mins):  1.3298223217328389
+    ```
+
+

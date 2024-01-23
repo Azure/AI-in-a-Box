@@ -1,0 +1,65 @@
+#PARAMETERS
+#region Login
+    $TenantID          = "YOUR-TENANT-ID"
+    $SubscriptionID    = "YOUR-Subscription-ID"
+    $appID             = "YOUR-ServicePrincipal-ClientID"
+    $password          = "YOUR-ServicePrincipal-CLIENTSECRET"
+    $location          = "eastus"
+    $rgName            = "aibx-nlptosql-rg"
+    $DeploymentName    = "main"
+    $BicepFile         = "main.bicep"
+    $parameterFile     = "main.parameters.json" 
+    $spObjectId        = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+#endregion
+
+#First - Make sure you already have a Service Principal Created and gather the SP's Application ID, Client Secret and Tenant ID.
+#https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac
+
+#CD into appropriate directory
+#cd nlp-sql-in-a-box\infra
+
+#Login with Service Principal - Make sure you login and run deployment with a user that has a high enough RBAC to create role assignments (Owner Role). 
+az login --service-principal --username $appID --password $password --tenant $TenantID 
+
+#Set the default subscription for all of the Azure CLI commands that you run in this session
+az account set --subscription $SubscriptionID
+az account show 
+
+#Create your Resource Group where you are going to land all your Resources and Dependencies
+az group create --name $rgName --location $location
+
+#Create a service principal in Azure that will have contributor access to that resource group where you will deploy the ML Workspace and other resources. 
+#Do this step in the Azure Cloud Shell.
+#You will use this service principal to automate the deployment in GitHub Actions.
+#Make sure to copy the service principal's output over to GitHub, your repo will have Contributor access to the resource group in Azure.
+az ad sp create-for-rbac --name $rgName    --role contributor --scopes /subscriptions/<subscription-id>/resourceGroups/aibx-ml-rg
+az ad sp create-for-rbac --name ap-aibx-sp --role contributor --scopes /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aibx-edge-iotedge-rg
+
+#Get your Service Principal or User Object ID (You will more than likely need to run the command in the Cloud Shell)
+# It will use your AAD email to get AAD objectId to grant you Key vault permission
+$spObjectId = az ad user show --id 'email@youremail.com' --query id 
+
+#Build and convert your Bicep file to an Azure Resource Manager template (ARM template)
+#(Make sure that you run the below command within the \edge-ai-in-a-box\iotedge-ai-in-a-box\infra directory. So change directory (cd) at the command prompt)
+az bicep build --file $BicepFile
+
+#Preview the changes that will happen. Azure Resource Manager provides the what-if operation to let you see how resources will change if you deploy the template.
+az deployment sub what-if --location $location --template-file $BicepFile --parameters $parameterFile --verbose
+
+#Deploy your Bicep template to Azure 
+az deployment group create --resource-group $rgName --template-file $BicepFile --parameters $parameterFile --name $DeploymentName --query properties.outputs --verbose 
+
+#Clean Up the Resources and Delete the Resource Group
+#az group delete --name $rgName --yes
+#make sure to purge your key vault and document intelligence resources from the portal if you want to start from scratch
+#az keyvault purge --name $keyVaultName
+#az cognitiveservices account list-deleted
+#az cognitiveservices account purge --name $cognitiveServicesName --resource-group $rgName
+
+#Decompile ARM template
+#az bicep decompile --file template.json
+
+#Note - RUN THE FOLLOWING AZURE CLI COMMAND. You are going to need to GET your Service Principal ID If you run the deployment with Azure DevOps. 
+#The service principal ID is different. You can get your Service Principal Application ID and Service Principal Object ID from the Portal but not the ID. 
+#So you need to get your Service Principal ID if you run the deployment through Azure DevOps
+#az ad sp show --id <YourServicePrincipalAppID>

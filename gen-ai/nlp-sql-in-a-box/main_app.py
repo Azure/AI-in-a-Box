@@ -28,17 +28,17 @@ def speak_out_response(kernel, context, content):
     context["content"] = content
     context["speech_key"] = os.getenv("speech_key")
     context["speech_region"] = os.getenv("speech_region")
-    nativeFunctions(kernel, context, TTSPlugin(),"ttsPlugin","speak_out_response")
+    nativeFunctions(kernel, context, TTSPlugin(), "ttsPlugin", "speak_out_response")
 
 # Create text from user's voice through microphone
 def recognize_from_microphone(kernel, context):
     context["speech_key"] = os.getenv("speech_key")
     context["speech_region"] = os.getenv("speech_region")
-    return nativeFunctions(kernel, context, STTPlugin(),"sttPlugin","recognize_from_microphone")    
+    return nativeFunctions(kernel, context, STTPlugin(), "sttPlugin", "recognize_from_microphone")    
 
 # Semantic functions are used to call the semantic skills
 # 1. nlp_sql: Create SQL query from the user's query
-def semanticFunctions(kernel, skills_directory, skill_name,input):
+def semanticFunctions(kernel, skills_directory, skill_name, input):
     functions = kernel.import_semantic_skill_from_directory(skills_directory, "plugins")
     summarizeFunction = functions[skill_name]
     loop = asyncio.new_event_loop()
@@ -56,6 +56,7 @@ def get_result_from_database(sql_query):
     username = os.environ.get("SQLADMIN_USER")
     password = os.environ.get("SQL_PASSWORD")
     conn = pyodbc.connect('DRIVER={driver};SERVER={server_name};DATABASE={database_name};UID={username};PWD={password}'.format(driver="ODBC Driver 18 for SQL Server",server_name=server_name, database_name=database_name, username=username, password=password))
+    
     cursor = conn.cursor()
     try:
         cursor.execute(sql_query)
@@ -98,7 +99,7 @@ def main():
         # Processing the query
         # Generating summary
         skills_directory = "."
-        sql_query = semanticFunctions(kernel, skills_directory,"nlpToSqlPlugin",query)
+        sql_query = semanticFunctions(kernel, skills_directory, "nlpToSQLPlugin", query)
         sql_query = sql_query.result.split(';')[0]
         print("The SQL query is: {}".format(sql_query))
 
