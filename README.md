@@ -16,8 +16,8 @@ Embarking on an Azure AI/ML journey can appear challenging for certain organizat
 
 |Topic|Description|
 |---|---|
-|[Responsible AI]() | (coming soon) | 
-|[Security for Generative AI Applications](./genai-security/)| (coming soon)  |
+|[Responsible AI](./responsible-ai/) | This provides essential guidance on the responsible use of AI and LLM technologies. | 
+|[Security for Generative AI Applications](./gen-ai/genai-security/)| This document provides specific security guidance for Generative AI (GenAI) applications. |
 
 ## Available Patterns
 

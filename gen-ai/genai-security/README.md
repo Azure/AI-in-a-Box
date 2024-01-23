@@ -1,5 +1,5 @@
 # Guidance: Security for Genenerative AI (GenAI) Applications
-![ Need Banner](./readme_assets/banner-genai-in-a-box.png)
+![ Need Banner](../../media/images/banner-genai-security.png)
 
 ## Introduction
 As LLMs become more easily available and integrated into our work and personal lives, the promise of the technology is tempered by the potential for it to be misused. And the potential for misuse becomes even more significant when you realize LLMs can be combined with other powerful software components and agents to orchestrate a pipeline of actions. OR combined with propriatary and personal data to introduce new avenues for data disclosure and leakage.   

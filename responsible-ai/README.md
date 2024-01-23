@@ -1,5 +1,5 @@
 # Guidance: Responsible AI (RAI)
-![ Need Banner](./readme_assets/banner-rai-in-a-box.png)
+![ Need Banner](../media/images/banner-rai.png)
 
 ## Introduction
 There is a lot to be excited about with recent advances in AI and LLM technology, but every day there are examples in the media about where and how it has gone wrong. As AI is integrated into more of our daily work and personal lives it can cause minor inconveniences, such as mistakenly canceled appointments, to more serious issues, such as potential job displacement and privacy compromises — and may even compound already existing social or economic inequities. All of us who design, develop, and deploy AI have a responsibility to confront the risks that the technology introduces.
