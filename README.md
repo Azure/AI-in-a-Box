@@ -16,18 +16,11 @@ Embarking on an Azure AI/ML journey can appear challenging for certain organizat
 
 |Pattern|Description|Category|Supported Use Cases and Features|
 |---|---|---|---|
-<<<<<<< HEAD
-|[Azure ML Operationalization in-a-box](./ml-ops-in-a-box)|Boilerplate Data Science project from model development to deployment and monitoring | ML-in-a-Box |<li>End-to-end MLOps project template <li>Outer Loop (infrastructure setup) <br> <li>Inner Loop (model creation and deployment lifecycle)|
-|[Cognitive Services Landing Zone in-a-box](./cognitive-services-landing-zone-in-a-box)|Minimal enterprise-ready networking and AI Services setup to support most Cognitive Services scenarios in a secure environment| AOAI-in-a-Box |<li>Hub-and-Spoke Vnet setup and peering <br> <li>Cognitive Service deployment <br> <li>Private Endpoint setup <br> <li>Private DNS integration with PaaS DNS resolver|
-|[Doc Intelligence in-a-box](./doc-intelligence-in-a-box) | This accelerator enables companies to automate PDF form processing, modernize operations, save time, and cut costs as part of their digital transformation journey. | AI Services-in-a-Box |<li>Receive PDF Forms<br> <li>Function App and Logic App for Orchestration<br> <li>Document Intelligence Model creation for form processing and content extraction <br> <li> Saves PDF data in Azure Cosmos DB |
-|[Semantic Kernel Bot in-a-box](./semantic-kernel-bot-in-a-box)|Extendable solution accelerator for advanced Azure OpenAI Bots| AOAI-in-a-Box |<li>Deploy Azure OpenAI bot to multiple channels (Web, Teams, Slack, etc) <br> <li>Built-in Retrieval-Augmented Generation (RAG) support <br> <li>Implement custom AI Plugins|
-|[Edge AI in-a-box (WIP)](./edge-ai-in-a-box)|Edge AI from model creation to deployment on Edge Device(s) | EdgeAI-in-a-Box |<li>Create a model and deploy to Edge Device <li>Outer Loop Infrastructure Setup (IoT Hub, IoT Edge, Edge VM, Container Registry, Azure ML) <br> <li>Inner Loop (model creation and deployment lifecycle)|
-=======
 |[Azure ML Operationalization in-a-box](./machine-learning/ml-ops-in-a-box)|Boilerplate Data Science project from model development to deployment and monitoring | ML-in-a-Box |<li>End-to-end MLOps project template <li>Outer Loop (infrastructure setup) <br> <li>Inner Loop (model creation and deployment lifecycle)|
 |[Cognitive Services Landing Zone in-a-box](./ai-services/ai-landing-zone)|Minimal enterprise-ready networking and AI Services setup to support most Cognitive Services scenarios in a secure environment| AOAI-in-a-Box |<li>Hub-and-Spoke Vnet setup and peering <br> <li>Cognitive Service deployment <br> <li>Private Endpoint setup <br> <li>Private DNS integration with PaaS DNS resolver|
 |[Doc Intelligence in-a-box](./ai-services/doc-intelligence-in-a-box) | This accelerator enables companies to automate PDF form processing, modernize operations, save time, and cut costs as part of their digital transformation journey. | AI Services-in-a-Box |<li>Receive PDF Forms<br> <li>Function App and Logic App for Orchestration<br> <li>Document Intelligence Model creation for form processing and content extraction <br> <li> Saves PDF data in Azure Cosmos DB |
 |[Semantic Kernel Bot in-a-box](./gen-ai/semantic-kernel-bot-in-a-box)|Extendable solution accelerator for advanced Azure OpenAI Bots| AOAI-in-a-Box |<li>Deploy Azure OpenAI bot to multiple channels (Web, Teams, Slack, etc) <br> <li>Built-in Retrieval-Augmented Generation (RAG) support <br> <li>Implement custom AI Plugins|
->>>>>>> main
+|[Edge AI in-a-box (WIP)](./edge-ai/iotedge-ai-in-a-box)|Edge AI from model creation to deployment on Edge Device(s) | EdgeAI-in-a-Box |<li>Create a model and deploy to Edge Device <li>Outer Loop Infrastructure Setup (IoT Hub, IoT Edge, Edge VM, Container Registry, Azure ML) <br> <li>Inner Loop (model creation and deployment lifecycle)|
 
 ## Key contacts
 
