@@ -1,4 +1,4 @@
-# AI Edge in-a-box
+# NLP to SQL in-a-box
 ![Banner](./readme_assets/banner-nlp-to-sql-in-a-box.png)
 
 ## Use Case
