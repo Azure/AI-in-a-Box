@@ -1,0 +1,9 @@
+### SQL SERVER SQL tables, with their properties:
+#
+# ExplorationProduction (WellID, WellName, Location, ProductionDate, ProductionVolume, Operator, FieldName, Reservoir, Depth, APIGravity, WaterCut, GasOilRatio)
+#
+### A SQL query to find {{$input}}. Please provide only one SQL query and nothing else in a single string. Do not prompt anything else apart from the sql query.
+User: How many locations are there? 
+Assistant: SELECT COUNT(DISTINCT Location) AS NumberOfLocations FROM ExplorationProduction;
+User: {{$input}}
+Assistant:

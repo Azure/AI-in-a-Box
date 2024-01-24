@@ -20,7 +20,7 @@ Embarking on an Azure AI/ML journey can appear challenging for certain organizat
 |[Cognitive Services Landing Zone in-a-box](./ai-services/ai-landing-zone)|Minimal enterprise-ready networking and AI Services setup to support most Cognitive Services scenarios in a secure environment| AOAI-in-a-Box |<li>Hub-and-Spoke Vnet setup and peering <br> <li>Cognitive Service deployment <br> <li>Private Endpoint setup <br> <li>Private DNS integration with PaaS DNS resolver|
 |[Doc Intelligence in-a-box](./ai-services/doc-intelligence-in-a-box) | This accelerator enables companies to automate PDF form processing, modernize operations, save time, and cut costs as part of their digital transformation journey. | AI Services-in-a-Box |<li>Receive PDF Forms<br> <li>Function App and Logic App for Orchestration<br> <li>Document Intelligence Model creation for form processing and content extraction <br> <li> Saves PDF data in Azure Cosmos DB |
 |[Semantic Kernel Bot in-a-box](./gen-ai/semantic-kernel-bot-in-a-box)|Extendable solution accelerator for advanced Azure OpenAI Bots| AOAI-in-a-Box |<li>Deploy Azure OpenAI bot to multiple channels (Web, Teams, Slack, etc) <br> <li>Built-in Retrieval-Augmented Generation (RAG) support <br> <li>Implement custom AI Plugins|
-|[Edge AI in-a-box (WIP)](./edge-ai/iotedge-ai-in-a-box)|Edge AI from model creation to deployment on Edge Device(s) | EdgeAI-in-a-Box |<li>Create a model and deploy to Edge Device <li>Outer Loop Infrastructure Setup (IoT Hub, IoT Edge, Edge VM, Container Registry, Azure ML) <br> <li>Inner Loop (model creation and deployment lifecycle)|
+|[NLP to SQL in-a-box](./gen-ai/nlp-sql-in-a-box)|Unleash the power of a cutting-edge speech-enabled SQL query system with Azure Open AI, Semantic Kernel, and Azure Speech Services. Simply speak your data requests in natural language, and let the magic happen.| AOAI-in-a-Box |<li>Allows users to verbally express natural language queries <br> <li>Translate into SQL statements using Azure Speech & AOAI <br> <li> Execute  on an Azure SQL DB |
 
 ## Key contacts
 
@@ -38,3 +38,4 @@ If you have any questions or would like to contribute please reach out to: aibox
 | Neeraj Jhaveri | @neerajjhaveri | neeraj.jhaveri@microsoft.com |
 | Thiago Rotta | @rottathiago | thiago.rotta@microsoft.com |
 | Victor Santana | @Welasco | vsantana@microsoft.com |
+| Sabyasachi Samaddar | @ssamadda | ssamadda@microsoft.com |
