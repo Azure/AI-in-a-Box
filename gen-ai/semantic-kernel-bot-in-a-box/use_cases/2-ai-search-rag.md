@@ -106,4 +106,11 @@ Ask the sample questions to verify that the deployment was successful:
 
 ## Customization steps
 
-Once the sample is deployed, you will likely want to connect the assistant to your own document collection. To do this, simply add any other documents you would like added to the bot and re-run the indexing process.
+Once the sample is deployed, you will likely want to connect the assistant to your own document collection. To do this, follow the steps below:
+
+- Add any other documents you would like added to the bot
+- Re-run the indexing process to update the index
+- Create a new plugin similar to [src/Plugins/HRHandbookPlugin.cs](../src/Plugins/HRHandbookPlugin.cs) with information about your document collection. This includes:
+    1. The method descriptions should describe the type of information found on the document collection;
+    2. Any additional information about the data that might help the model consume it;
+    3. Optionally, add other pre-canned methods that might be more targeted to your documents, or use custom filters
