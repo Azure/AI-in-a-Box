@@ -114,3 +114,4 @@ Once the sample is deployed, you will likely want to connect the assistant to yo
     1. The method descriptions should describe the type of information found on the document collection;
     2. Any additional information about the data that might help the model consume it;
     3. Optionally, add other pre-canned methods that might be more targeted to your documents, or use custom filters
+- Add your plugin to [src/Bots/SemanticKernelBot.cs](../src/Bots/SemanticKernelBot.cs)
