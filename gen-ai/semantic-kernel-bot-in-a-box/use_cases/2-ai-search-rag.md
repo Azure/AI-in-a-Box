@@ -5,9 +5,9 @@ This sample will consider a sample HR Handbook.
 
 ## Sample questions
 
-- What's my company's PTO policy?
-- Where do I report an IT security incident?
-- How do I request a new workstation?
+- Can you give me information about PTO?
+- Are my messages transmitted using company software private?
+- How is equal opportunity employment defined?
 
 ## Recommended deployment parameters
 
@@ -24,11 +24,20 @@ To deploy this solution, use the [Semantic Kernel Bot in-a-box](../README.md) ac
 In addition to deploying the sample, You will need to configure the documents and search index to be used by the bot. Follow the steps below to do this:
 
 - Go to the Storage Account created as part of the deployment and add a container.
+
+![Create a blob container](../readme_assets/2-stg-container.png)
+
 - Drop any files you would like to be searched by the bot into the container. Supported file formats include. It is recommended to start with PDF, DOCX or PPTX. A great example to quickly validate the solution is an HR Handbook template, which can be easily found online.
+
+![Add a sample document to blob storage](../readme_assets/2-add-doc.png)
+
 - Go to your Azure AI Search resource and use the Import and Vectorize data feature. It will take care of the entire process of chunking, vectorizing and adding each document in the blob storage container to your search index.
+
+![Import and Vectorize documents](../readme_assets/2-import-vectorize.png)
+
 - Back to App Services, add the relevant environment variables:
     - **SEARCH_INDEX**: The name of the search index created.
-    - **SEARCH_SEMANTIC_CONFIG**: The name of the semantic configuration created, if you chose to do so. If not, leave this field empty. You can locate this value by going to Indexes -> Selec your index -> Semantic Configurations
+    - **SEARCH_SEMANTIC_CONFIG**: The name of the semantic configuration created. You can locate this value by going to Indexes -> Selec your index -> Semantic Configurations
 - (Optional) To enable linked citations:
     - Go to the created Index and add a "path" field, with the Retrievable option enabled.
     - Go to the created Indexer's JSON definition and add a field mapping to the path field
@@ -93,7 +102,7 @@ In addition to deploying the sample, You will need to configure the documents an
 
 Ask the sample questions to verify that the deployment was successful:
 
-![AI Search scenario](../readme_assets/webchat-rag.png)
+![AI Search scenario](../readme_assets/2-test.png)
 
 ## Customization steps
 
