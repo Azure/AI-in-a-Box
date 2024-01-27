@@ -22,9 +22,24 @@ Edge AI is pivotal in extending AI and ML capabilities directly to edge devices,
 The provided accelerators introduce a comprehensive flow that streamlines the deployment of deep learning models on Edge devices or Edge-compatible Docker containers. These accelerators pave the way for seamless integration into real-world applications.
 
 ## Solution Architecture
-<img src="./readme_assets/edgai-iotedge-architecture.png" />
+<img src="./readme_assets/edgai-iotedge-architecture2.png" />
 
 ### The above architecture is explained step-by-step below:
+1. You create all your necessary Azure Resources
+    * (IoT Hub, Azure ML Workspace, Container Registry, Azure Cognitive Services for Vision (if applicable), Storage, Edge VM (for testing), and register your IoT Edge Devices)
+1. Within Azure ML Studio you start creating/working your model:
+    1. Connect to Azure Machine Learning Workspace
+    2. Grab your Training Data and create your JSONL and MLTable(s)
+    3. Create your Compute so you can train your data
+    4. Configure and run the AutoML training job
+    5. Convert model to appropriate format: ONNX, OpenVino
+    6. Using MFLow Retrieve the Best Trial (Best Model's trial/run)
+    7. Register best Model and Deploy
+    8. Test: Visualize Model Results
+1. Once you have your model you deploy it to your Edge Device
+    1. You will build your model into a docker image and place that image in your container registry
+    1. Using IoT Edge you will leverage a deployment manifest as the instructions to pull the appropriate model from ACR into your IoT Edge Device
+
 
 ## Prerequisites
 * An [Azure subscription](https://azure.microsoft.com/en-us/free/).
@@ -36,6 +51,7 @@ The provided accelerators introduce a comprehensive flow that streamlines the de
 * Prepare your Linux virtual machine or physical device for [IoT Edge](https://learn.microsoft.com/en-us/azure/iot-edge/how-to-provision-single-device-linux-symmetric)
 
 ## Deployment Flow 
+<img src="./readme_assets/edgai-iotedge-architecture.png" />
 
 **Step 1.** Clone the [AI-in-a-Box repository](https://github.com/Azure/AI-in-a-Box)
 
