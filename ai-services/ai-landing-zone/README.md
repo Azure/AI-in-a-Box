@@ -80,4 +80,4 @@ This sample is available on GitHub.
 
 ### 3. Deploy the Semantic Kernel Bot in-a-box pattern privately
 
-The [Semantic Kernel Bot in-a-box](../gen-ai/semantic-kernel-bot-in-a-box) sample is compatible with this template. See the README for integration instructions.
+The [Semantic Kernel Bot in-a-box](/gen-ai/semantic-kernel-bot-in-a-box) sample is compatible with this template. See the README for integration instructions.
