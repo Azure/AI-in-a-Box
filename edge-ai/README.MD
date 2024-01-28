@@ -1,6 +1,8 @@
 # EdgeAI in-a-box
 ![Banner](../media/images/banner-edgeai-in-a-box.png)
 
+[ML/AI Edge MindMap](https://aka.ms/mledge-mm)
+
 ## Why Edge AI?
 Edge AI excels in diverse applications like image classification, object detection, body, face, and gesture analysis, as well as image manipulation. Moreover, in this swiftly evolving Generative AI (Gen AI) landscape, the move from cloud-based Gen AI to Edge Gen AI is becoming more prominent. This shift is not just desirable but increasingly necessary, propelled by demands for privacy, security, hyper-personalization, accuracy, cost-effectiveness, energy efficiency, and more. While the commercialization of today's cloud-based Gen AI is in full swing, there are efforts underway to optimize the models built for power-guzzling GPU server farms to run on power-sipping edge devices with efficient mobile GPUs, Neural and Tensor processors (NPU and TPU).
 
@@ -21,13 +23,33 @@ AI-in-a-Box encompasses four vital domains within Azure AI/ML:
 The provided series introduce a comprehensive and simple flow that streamlines the understanding and deployment of deep learning models on Edge devices or Edge-compatible Docker containers and working our way towards AKS and the Heavy Edge. These accelerators will help you pave the way for seamless integration into real-world applications.
 
 We will start the series with:
+
+![Banner](../media/images/edgeai-tree-options.png)
+
 1. [AML Edge](./aml-edge-in-a-box/) - Creating a model in Azure ML, leveraging AutoML, packaging it correctly and deploying with IoT Edge to an Edge Device.
-2. [Custom Vision Edge](./aml-edge-in-a-box/) - Creating a model with Azure's [Custom Vision Edge](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/overview) and deploying with IoT Edge and running that AI model in a docker container.
+2. [Custom Vision Edge](./aml-edge-in-a-box/) - Creating a model with Azure's [Custom Vision](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/overview) and deploying with IoT Edge and running that AI model in a docker container.
 
 We will then expand the series to include the following:
 
-3. [AI Vision Edge](./aml-edge-in-a-box/) - Creating a model with Azure AI vision and the new  new Image Analysis 4.0 system, which is based on the Florence Foundational Model, which now supports custom models with few-shot learning capabilities.
+3. [AI Vision Edge](./aml-edge-in-a-box/) - Creating a model with [Azure AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) and the new Image Analysis 4.0 system, which is based on the Florence Foundational Model, which now supports custom models with few-shot learning capabilities.
 
-We will finally end the series by showcasing you how to create a model and deploy that model within AKS, AKS Edge, and Heavy Edge scenarios that are managed by Azure ARC and Azure IoT Operations.
+We will then evolve this series to showcase how can create and deploy a model within AKS, [AKS Edge](https://learn.microsoft.com/en-us/azure/aks/hybrid/aks-edge-overview), (*Light Edge, Medium Edge and Heavy Edge*) scenarios and [Azure IoT Operations](https://learn.microsoft.com/en-us/azure/iot-operations/get-started/overview-iot-operations).
 
-4. [AKS Edge AI]() - Creating a model and deploying that model in AKS, AKS Edge, Heavy Edge and Azure IoT Operations Scenarios
+4. [AKS Edge AI]() - Creating a model and deploying that model in AKS, AKS Edge, Heavy Edge and [Azure IoT Operations](https://learn.microsoft.com/en-us/azure/iot-operations/get-started/overview-iot-operations) Scenarios
+
+## Quick Note: Model customization in Azure Custom Vision and/or Azure AI Services
+
+You can train a custom model using either the [Custom Vision](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/overview) service or the Image Analysis 4.0 service (within [Azure AI Services](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)) with model customization. The [following table](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/concept-model-customization) compares the two services.
+
+|Areas|Custom Vision service|Image Analysis 4.0 service|
+|---|---|---|
+|Tasks | Image classification<br>Object detection | Image classification <br> Object detection|
+|Base model | CNN |	Transformer model |
+|Labeling |	[CustomVision.ai](https://www.customvision.ai/) | [AML Studio](https://ml.azure.com/) |
+|Web Portal | [CustomVision.ai](https://www.customvision.ai/) | [Vision Studio](http://aka.ms/VisionStudio) |
+|Libraries | REST, SDK | REST, Python Sample |
+|Minimum training data needed |	15 images per category |2-5 images per category |
+|Training data storage | Uploaded to service | Customer’s blob storage account |
+|Model hosting | Cloud and **Edge**	| Cloud hosting only,<br>***Edge container hosting to come***
+
+

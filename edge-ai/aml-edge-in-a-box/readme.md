@@ -1,5 +1,5 @@
 # EdgeAI in-a-box
-![Banner](./readme_assets/banner-edgeai-in-a-box.png)
+![Banner](./readme_assets/banner-aml-edge-in-a-box.png)
 
 ## Use Case
 Orchestration of resources for the entire Edge AI model lifecycle, including creation, deployment, and proper packaging through Azure ML and IoT Edge. This involves leveraging key components such as IoT Hub, IoT Edge, Azure ML, and Azure ML CLI V2.
