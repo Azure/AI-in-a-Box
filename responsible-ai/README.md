@@ -38,7 +38,7 @@ The pace of AI is moving quickly and a variety of methods are needed to help mea
 #### Adopt a layered mitigation approach for RAI
   At Microsoft, we recommend a layered mitigation approach that combines technical, operational, and governance measures to reduce the potential harms of LLMs. A layered approach applies different measures at different stages of development and deployment as documented in the article [Deploy large language models responsibly with Azure AI](https://techcommunity.microsoft.com/t5/ai-machine-learning-blog/deploy-large-language-models-responsibly-with-azure-ai/ba-p/3876792) and depicted below:
 ![Responsible AI (RAI)](../media/images/Rai-mitigation-layers.png)
-
+See [Harms mitigation strategies with Azure AI](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/evaluation-improvement-strategies) for a walk-through of the mitigation layers.  
  
 #### Get started with RAI metrics 
   Measuring RAI involves both *technical attributes*, like accuracy and security, and *socio-technical attributes* such as fairness, representational harms, or safety and reliability. A starter set of metrics could include platform, usage, and operational level metrics like:
