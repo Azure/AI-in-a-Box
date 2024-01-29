@@ -1,7 +1,7 @@
 /*region Header
       =========================================================================================================
       Created by:       Author: Your Name | your.name@azurestream.io 
-      Description:      Edge AI in-a-box - Deploy your AI Model on Edge Devices with Azure ML and IoT Edge
+      Description:      Custom Vision I in-a-box - Deploy your AI Model on Edge Devices with Custom Vision
       =========================================================================================================
 
       Dependencies:

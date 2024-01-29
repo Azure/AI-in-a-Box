@@ -18,6 +18,8 @@
     "cognitiveServicesSpeech": "cog-sp-",
     "cognitiveServicesTextAnalytics": "cog-ta-",
     "cognitiveServicesBot": "cog-bot-",
+    "cognitiveServicesComputerVision": "cog-av-",
+    "cognitiveServicesCustomVision": "cog-cv-",
     "computeAvailabilitySets": "avail-",
     "computeCloudServices": "cld-",
     "computeDiskEncryptionSets": "des",

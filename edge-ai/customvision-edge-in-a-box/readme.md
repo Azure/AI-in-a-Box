@@ -61,7 +61,7 @@ The technology is demonstrated in this sample which focuses on graffiti detectio
 
     ```
     git clone https://github.com/Azure/AI-in-a-Box
-    cd edge-ai-in-a-box/iotedge-ai-in-a-box
+    cd edge-ai/customvision-edge-in-a-box
     ```
 
 2. Deploy resources:
