@@ -5,7 +5,7 @@
     $appID             = "YOUR-ServicePrincipal-ClientID"
     $password          = "YOUR-ServicePrincipal-CLIENTSECRET"
     $location          = "eastus"
-    $rgName            = "aibx-iotedge-rg"
+    $rgName            = "aibx-customvision-rg"
     $DeploymentName    = "main"
     $BicepFile         = "main.bicep"
     $parameterFile     = "main.parameters.json" 

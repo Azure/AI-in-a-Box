@@ -81,6 +81,7 @@ if [ "$deviceExists" == false ]; then
         echo "$device"
         echo "";
         az iot hub device-identity create --device-id "$device" --hub-name "$iotHubName" --edge-enabled --output none
+        az iot hub device-twin update --device-id "$device" --hub-name "$iotHubName" --set tags='{"environment":"e2e-edgeai"}'
     done
 
     echo "   Devices were registered successfully in IoT Hub"

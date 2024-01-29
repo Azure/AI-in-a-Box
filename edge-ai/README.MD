@@ -27,15 +27,21 @@ We will start the series with:
 ![Banner](../media/images/edgeai-tree-options.png)
 
 1. [AML Edge](./aml-edge-in-a-box/) - Creating a model in Azure ML, leveraging AutoML, packaging it correctly and deploying with IoT Edge to an Edge Device.
-2. [Custom Vision Edge](./aml-edge-in-a-box/) - Creating a model with Azure's [Custom Vision](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/overview) and deploying with IoT Edge and running that AI model in a docker container.
+2. [Custom Vision Edge](./customvision-edge-in-a-box/) - Creating a model with Azure's [Custom Vision](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/overview) and deploying with IoT Edge and running that AI model in a docker container.
 
 We will then expand the series to include the following:
 
-3. [AI Vision Edge](./aml-edge-in-a-box/) - Creating a model with [Azure AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) and the new Image Analysis 4.0 system, which is based on the Florence Foundational Model, which now supports custom models with few-shot learning capabilities.
+3. [AI Vision Edge]() - Creating a model with [Azure AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) and the new Image Analysis 4.0 system, which is based on the Florence Foundational Model, which now supports custom models with few-shot learning capabilities.
 
-We will then evolve this series to showcase how can create and deploy a model within AKS, [AKS Edge](https://learn.microsoft.com/en-us/azure/aks/hybrid/aks-edge-overview), (*Light Edge, Medium Edge and Heavy Edge*) scenarios and [Azure IoT Operations](https://learn.microsoft.com/en-us/azure/iot-operations/get-started/overview-iot-operations).
+Finally, we are actively advancing this series to showcase the creation and deployment of models within  AKS/[AKS Edge](https://learn.microsoft.com/en-us/azure/aks/hybrid/aks-edge-overview) and [Azure IoT Operations](https://learn.microsoft.com/en-us/azure/iot-operations/get-started/overview-iot-operations) scenarios.
 
-4. [AKS Edge AI]() - Creating a model and deploying that model in AKS, AKS Edge, Heavy Edge and [Azure IoT Operations](https://learn.microsoft.com/en-us/azure/iot-operations/get-started/overview-iot-operations) Scenarios
+4. [AKS Edge AI]() - Creating a model and deploying that model in AKS, AKS Edge and [Azure IoT Operations](https://learn.microsoft.com/en-us/azure/iot-operations/get-started/overview-iot-operations) scenarios
+
+Furthermore, we have plans to enrich the series by providing knowledge and essential building blocks to help you navigate GenAI scenarios at the Edge—such as practical insights into managing intent at the edge.
+
+5. [GenAI Edge]() - Working with GenAI at the edge scenarios
+
+Stay tuned for more exciting accelerators in the pipeline, as there's much more to come!
 
 ## Quick Note: Model customization in Azure Custom Vision and/or Azure AI Services
 

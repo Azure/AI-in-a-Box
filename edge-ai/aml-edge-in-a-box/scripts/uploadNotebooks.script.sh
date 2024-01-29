@@ -17,7 +17,9 @@ if [[ -n "$1" ]]; then
     dataStoreName=$3
     storageAccountName=$4
     storageAccountKey=$5
-    urlNotebook=$6
+    urlNotebookAutoML=$6
+    urlNotebookOnnx=$7
+    urlNotebookOpenVino=$8
 
     echo "Executing from command line";
 else
@@ -32,7 +34,9 @@ echo "   Machine Learning Service Name: $amlworkspaceName"
 echo "   Datastore Name: $dataStoreName"
 echo "   Storage Account Name: $storageAccountName"
 #echo "   Storage Account Key: $storageAccountKey"
-echo "   URL Notebook: $urlNotebook"
+echo "   URL Notebook: $urlNotebookAutoML"
+echo "   URL Notebook: $urlNotebookOnnx"
+echo "   URL Notebook: $urlNotebookOpenVino"
 
 workspace=$(az ml workspace show --name $amlworkspaceName --resource-group $resourceGroupName)
 shareName=$(az ml datastore show --name $dataStoreName --resource-group $resourceGroupName --workspace-name $amlworkspaceName --query "file_share_name" -otsv)
@@ -46,7 +50,9 @@ az storage directory create --share-name "$shareName" --name "edgeai" --account-
 
 # Download Notebook Files
 echo "URL Notebook: $urlNotebook"
-wget "$urlNotebook"
+wget "$urlNotebookAutoML"
+wget "$urlNotebookOnnx"
+wget "$urlNotebookOpenVino"
 echo "$PWD"
   
 for entry in "$PWD"/*
@@ -54,8 +60,19 @@ do
 echo "$entry"
 done
 
-filepath="$PWD/train-classification-model.ipynb"
-echo "File Path: $filepath"
+file1="1-AutoML-ObjectDetection.ipynb"
+file2="2-Onnx.ipynb"
+file3="3-OpenVino.ipynb"    
+
+filepath1="$PWD/1-AutoML-ObjectDetection.ipynb"
+filepath2="$PWD/2-Onnx.ipynb"
+filepath3="$PWD/3-OpenVino.ipynb"
+
+echo "File Path: $filepath1"
+echo "File Path: $filepath2"
+echo "File Path: $filepath3"
 
 # Upload Notebooks to File Shares in the "Notebooks" folder
-az storage file upload -s $shareName --source train-classification-model.ipynb --path edgeai/train-classification-model.ipynb --account-key $storageAccountKey --account-name $storageAccountName
+az storage file upload -s $shareName --source $filepath1 --path edgeai/1-AutoML-ObjectDetection.ipynb --account-key $storageAccountKey --account-name $storageAccountName
+az storage file upload -s $shareName --source $filepath2 --path edgeai/2-Onnx.ipynb --account-key $storageAccountKey --account-name $storageAccountName
+az storage file upload -s $shareName --source $filepath3 --path edgeai/3-OpenVino.ipynb --account-key $storageAccountKey --account-name $storageAccountName

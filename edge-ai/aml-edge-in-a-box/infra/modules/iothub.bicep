@@ -39,7 +39,8 @@ param consumergroupeNames array = [
   'vscode-cg'
 ]
 
-// Create a log analytics workspace
+// Create a Log Analytics Workspace
+// https://docs.microsoft.com/en-us/azure/templates/microsoft.operationalinsights/workspaces
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
   name: 'iot-hub-log-analytics'
   location: location
@@ -50,8 +51,8 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2020-08
   }
 }
 
-//https://learn.microsoft.com/en-us/azure/templates/microsoft.devices/iothubs
 //1. Create IoT Hub Instance
+//https://learn.microsoft.com/en-us/azure/templates/microsoft.devices/iothubs
 resource iotHub 'Microsoft.Devices/IotHubs@2022-04-30-preview' = {
   name: iotHubName
   location: location

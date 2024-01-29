@@ -29,6 +29,10 @@
       6 - Create Application Insights
       7 - Create ML Workspace 
       8 - Create ACR
+      9 - Assign Role to UAMI
+      10 - Upload Notebooks to Azure ML Studio
+      11 - Create IoT Edge Devices inside of the IoT Hub with a Deployment Script
+      12 - Deploy Edge VM (A) - Deploy with a Script
       
       //=====================================================================================
 
@@ -80,7 +84,9 @@ var applicationInsightsName = ''
 //Azure ML
 var workspaceName = ''
 @description('Specifies the name of the Azure Machine Learning workspace Compute Name.')
-param amlcomputename string = 'aml-cluster'
+param amlcompclustername string = 'aml-cluster'
+@description('Specifies the name of the Azure Machine Learning workspace Compute Name.')
+param amlcompinstancename string = 'ml-instance'
 @description('Specifies whether to reduce telemetry collection and enable additional encryption.')
 param hbi_workspace bool = false
 @description('Identity type of storage account services for your azure ml workspace.')
@@ -224,7 +230,8 @@ module m_aml './modules/azureml.bicep' = {
   params: {
     location: location
     aisnId: m_aisn.outputs.applicationInsightId
-    amlcomputename: !empty(amlcomputename) ? amlcomputename : '${abbrs.machineLearningServicesComputeCPU}${environmentName}-${uniqueSuffix}'
+    amlcompclustername: !empty(amlcompclustername) ? amlcompclustername : '${abbrs.machineLearningServicesComputeCPU}${environmentName}-${uniqueSuffix}'
+    amlcompinstancename: !empty(amlcompinstancename) ? amlcompinstancename : '${abbrs.machineLearningServicesComputeCPU}${environmentName}-${uniqueSuffix}'
     keyvaultId: m_kvn.outputs.keyVaultId
     storageAccountId: m_stg.outputs.stgId
     workspaceName: !empty(workspaceName) ? workspaceName : '${abbrs.machineLearningServicesWorkspaces}${environmentName}-${uniqueSuffix}'
@@ -235,7 +242,7 @@ module m_aml './modules/azureml.bicep' = {
   }
 }
 
-//8. Assign Role to UAMI
+//9. Assign Role to UAMI
 module m_RBACRoleAssignment 'modules/rbac.bicep' = {
   name: 'deploy_RBAC'
   scope: resourceGroup

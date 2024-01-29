@@ -25,10 +25,10 @@
       2 - Create Key Vault
       3 - Create Storage Account
       4 - Create IoT Hub
-      5 - Create DPS
-      6 - Create Application Insights
-      7 - Create ML Workspace 
-      8 - Create ACR
+      5 - Create Azure Container Registry
+      6 - Create Custom Vision
+      7 - Assign Role to UAMI
+      8 - Create IoT Edge Devices inside of the IoT Hub with a Deployment Script  
       
       //=====================================================================================
 
@@ -54,7 +54,7 @@ var abbrs = loadJsonContent('abbreviations.json')
 var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup.id), 1, 3) 
 param tags object
 
-//UAMI Module Parameters
+// UAMI Module Parameters
 param msiName string = ''
 
 //Key Vault
@@ -71,45 +71,17 @@ param skuName string = 'S1'
 @description('The number of IoT Hub units.')
 param skuUnits int = 1
 
-//DPS Module Parameters
-//param dpsName string = ''
-
-//Application Insights
-var applicationInsightsName = ''
-
-//Azure ML
-var workspaceName = ''
-@description('Specifies the name of the Azure Machine Learning workspace Compute Name.')
-param amlcomputename string = 'aml-cluster'
-@description('Specifies whether to reduce telemetry collection and enable additional encryption.')
-param hbi_workspace bool = false
-@description('Identity type of storage account services for your azure ml workspace.')
-param systemDatastoresAuthMode string = 'identity'
-
 //ACR Module Parameters
 param acrName string = ''
 @description('The SKU to use for the Azure Container Registry.')
 param acrSku string = 'Standard'
 
-//Edge VM Module Parameters
-@description('Deploy Document Intelligence service? (required for Upload Plugin demo)')
-param deployEdgeVM bool = true
-@description('EdgeDevice Name that you want to associate with your Edge VM')
-param edgeDeviceName string = 'EdgeDevice1'
-@description('Unique DNS Name for the Storage Account where the Virtual Machine\'s disks will be placed.')
-param dnsLabelPrefix string = 'edgevm1'
-@description('Type of authentication to use on the Virtual Machine. SSH key is recommended.')
-@allowed([
-  'sshPublicKey'
-  'password'
-])
-param authenticationType string = 'password'
-@description('User name for the Edge Virtual Machine.')
-param adminUsername string = 'NodeVMAdmin'
-@description('SSH Key or password for the Virtual Machine. SSH key is recommended.')
-@secure()
-param adminPasswordOrKey string
+//Custom Vision Module Parameters
+param customVisionName string = ''
 
+//Function App Module Parameters
+// var funcAppName = '${prefix}-funcapp'
+// var funAppStorageName = '${prefix}funcapp${uniqueSuffix}'
 
 
 //====================================================================================
@@ -140,11 +112,15 @@ module m_kvn 'modules/keyvault.bicep' = {
   params: {
     keyVaultName: !empty(keyVaultName) ? keyVaultName : '${abbrs.keyVaultVaults}${environmentName}-${uniqueSuffix}'
     location: location
+    principalId: m_msi.outputs.msiPrincipalID
+
+    //Send in Service Principal and/or User Oject ID
+    //spObjectId: spObjectId
   }
 }
 
 //3. Deploy Required Storage Account(s)
-//Deploy Storage Accounts (Create your Storage Account (ADLS Gen2 & HNS Enabled) for your ML Workspace)
+//Deploy Storage Accounts (Create your Storage Account (ADLS Gen2 & HNS Enabled))
 //https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts?tabs=bicep
 module m_stg 'modules/storage.bicep' = {
   name: 'deploy_storageaccount'
@@ -175,35 +151,7 @@ module m_iot 'modules/iothub.bicep' = {
   ]
 }
 
-//5. Deploy DPS
-// module m_dps 'modules/dps.bicep' = {
-//   name: 'deploy_dps'
-//   scope: resourceGroup
-//   params: {
-//     location: location
-//     dpsName: !empty(dpsName) ? dpsName : '${abbrs.devicesProvisioningServices}${environmentName}-${uniqueSuffix}'
-//     iotHubName: m_iot.outputs.iotHubName
-//     skuName: skuName
-//     skuUnits: skuUnits
-//     tags: tags
-//   }
-//   dependsOn: [
-//     m_iot
-//   ]
-// }
-
-//6. Deploy Application Insights Instance
-//https://learn.microsoft.com/en-us/azure/templates/microsoft.insights/components?pivots=deployment-language-bicep
-module m_aisn 'modules/insights.bicep' = {
-  name: 'deploy_appinsights'
-  scope: resourceGroup
-  params: {
-    location: location
-    applicationInsightsName:  !empty(applicationInsightsName) ? applicationInsightsName : '${abbrs.insightsComponents}${environmentName}-${uniqueSuffix}'
-  }
-}
-
-//7. Deploy Azure Container Registry
+//5. Deploy Azure Container Registry
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces?pivots=deployment-language-bicep
 module m_acr './modules/acr.bicep' = {
   name: 'deploy_acr'
@@ -216,26 +164,24 @@ module m_acr './modules/acr.bicep' = {
   }
 }
 
-//8. Deploy Machine Learning Workspace
-//https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces?pivots=deployment-language-bicep
-module m_aml './modules/azureml.bicep' = {
-  name: 'deploy_azureml'
+//6. Create Custom Vision
+module m_customvision 'modules/customVision.bicep' = {
+  name: 'deploy_customvision'
   scope: resourceGroup
   params: {
     location: location
-    aisnId: m_aisn.outputs.applicationInsightId
-    amlcomputename: !empty(amlcomputename) ? amlcomputename : '${abbrs.machineLearningServicesComputeCPU}${environmentName}-${uniqueSuffix}'
-    keyvaultId: m_kvn.outputs.keyVaultId
-    storageAccountId: m_stg.outputs.stgId
-    workspaceName: !empty(workspaceName) ? workspaceName : '${abbrs.machineLearningServicesWorkspaces}${environmentName}-${uniqueSuffix}'
-    hbi_workspace: hbi_workspace
-    acrId: m_acr.outputs.acrId
-    systemDatastoresAuthMode: ((systemDatastoresAuthMode != 'accessKey') ? systemDatastoresAuthMode : 'identity')
-    tags: tags
+    cognitiveServiceName: !empty(customVisionName) ? customVisionName : '${abbrs.cognitiveServicesCustomVision}${environmentName}-${uniqueSuffix}'
+    sku: 'S0'
+    keyVaultName: m_kvn.outputs.keyVaultName
   }
+  dependsOn: [
+    m_kvn
+  ]
 }
 
-//8. Assign Role to UAMI
+
+
+//7. Assign Role to UAMI
 module m_RBACRoleAssignment 'modules/rbac.bicep' = {
   name: 'deploy_RBAC'
   scope: resourceGroup
@@ -245,29 +191,10 @@ module m_RBACRoleAssignment 'modules/rbac.bicep' = {
   }
   dependsOn:[
     m_msi
-    m_aml
   ]
 }
 
-//********************************************************
-//Deployment Scripts
-//********************************************************
-//Upload Notebooks to Azure ML Studio
-module script_UploadNotebooks './modules/scriptNotebookUpload.bicep' = {
-  name: 'script_UploadNotebooks'
-  scope: resourceGroup
-  params: {
-    location: location
-    resourceGroupName: resourceGroup.name
-    amlworkspaceName: m_aml.outputs.amlworkspaceName
-    storageAccountName: m_stg.outputs.stgName
 
-    uamiId: m_msi.outputs.msiID
-  }
-  dependsOn:[
-    m_aml
-  ]
-}
 
 //Create IoT Edge Devices inside of the IoT Hub with a Deployment Script
 //https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deployment-script-develop
@@ -284,35 +211,7 @@ module script_RegisterEdgeDevices './modules/scriptRegisterEdgeDevices.bicep' = 
   ]
 }
 
-//Deploy Edge VM (A) - Deploy with a Script
-module script_DeployEdgeVM './modules/scriptDeployEdgeVM.bicep' = if (deployEdgeVM) {
-  name: 'script_DeployEdgeVM'
-  scope: resourceGroup
-  params: {
-    location: location
-    environmentName: environmentName
-    resourceGroupName: resourceGroup.name
-    iotHubName: m_iot.outputs.iotHubName
-    edgeDeviceName: edgeDeviceName
-    dnsLabelPrefix: dnsLabelPrefix
-    authenticationType: authenticationType
-    adminUsername : adminUsername
-    adminPasswordOrKey: adminPasswordOrKey
-
-    uamiId: m_msi.outputs.msiID
-  }
-  dependsOn:[
-    m_iot
-    script_RegisterEdgeDevices
-  ]
-}
-
 output AZURE_RESOURCE_GROUP string = resourceGroup.name
 output AZURE_IOTHUB_NAME string = m_iot.outputs.iotHubName
 output AZURE_ACR_NAME string = m_acr.outputs.acrName
 output AZURE_ACR_LOGIN_SERVER string = m_acr.outputs.acrloginServer
-output AZURE_ML_WORKSPACE string = m_aml.outputs.amlworkspaceName
-output AZURE_DNS_LABEL_PREFIX string = dnsLabelPrefix
-output AZURE_AUTHENTICATION_TYPE string = authenticationType
-output AZURE_ADMIN_USERNAME string = adminUsername
-output deployEdgeVM bool = deployEdgeVM

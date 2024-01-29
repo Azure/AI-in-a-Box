@@ -8,7 +8,8 @@
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
 param location string
 param workspaceName string
-param amlcomputename string
+param amlcompclustername string
+param amlcompinstancename string
 param storageAccountId string
 param keyvaultId string
 param aisnId string
@@ -40,9 +41,9 @@ resource amlwn 'Microsoft.MachineLearningServices/workspaces@2023-06-01-preview'
 
 //2. Deploy ML Workspace Compute Instance
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces/computes?pivots=deployment-language-bicep
-resource amlwcompute 'Microsoft.MachineLearningServices/workspaces/computes@2023-06-01-preview' = {
+resource amlcompcluster 'Microsoft.MachineLearningServices/workspaces/computes@2023-06-01-preview' = {
   parent: amlwn
-  name: amlcomputename
+  name: amlcompclustername
   location: location
   properties: {
     computeType: 'AmlCompute'
@@ -58,6 +59,56 @@ resource amlwcompute 'Microsoft.MachineLearningServices/workspaces/computes@2023
   }
 }
 
+//https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces/computes?pivots=deployment-language-bicep
+resource amlcompinstance 'Microsoft.MachineLearningServices/workspaces/computes@2023-06-01-preview' = {
+  parent: amlwn
+  name: amlcompinstancename
+  location: location
+  properties: {
+    computeType: 'ComputeInstance'
+    computeLocation: location
+    description: 'Machine Learning compute instance 001'
+    properties: {
+      // schedules: {
+      //   computeStartStop: [
+      //     {
+      //       action: 'Stop'
+      //       // cron: {
+      //       //   expression: '*/30 * * * *'
+      //       //   startTime: 'string'
+      //       //   timeZone: 'eastus'
+      //       // }
+      //       recurrence: {
+      //         frequency: 'Week'
+      //         interval: 1
+      //         schedule: {
+      //           hours: [
+      //             6
+      //           ]
+      //           minutes: [
+      //             30
+      //           ]
+      //           weekDays: [
+      //             'Monday'
+      //             'Tuesday'
+      //             'Wednesday'
+      //             'Thursday'
+      //             'Friday'
+      //           ]
+      //         }
+      //         startTime:  '2024-01-29T18:30:30'  
+      //         timeZone: 'Eastern Standard Time'
+      //       }
+      //       status: 'Enabled'
+      //       triggerType: 'Recurrence'
+      //     }
+      //   ]
+      // }
+
+      vmSize: 'Standard_DS3_v2'
+    }
+  }
+}
 
 // var azureRBACStorageBlobDataContributorRoleID = 'ba92f5b4-2d11-453d-a403-e96b0029c9fe' //Storage Blob Data Contributor Role: https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor
 // //var azureRBACOwnerRoleID = '8e3af657-a8ff-443c-a75c-2fe8c4bcb635' //Owner: https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#owner

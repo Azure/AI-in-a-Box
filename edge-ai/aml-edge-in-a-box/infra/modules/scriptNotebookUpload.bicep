@@ -14,7 +14,9 @@ param storageAccountName string
 param uamiId string
 
 // Change the URL below with that of your notebook
-var urlNotebook= 'https://raw.githubusercontent.com/AndresPad/AI-in-a-Box/main/edge-ai-in-a-box/iotedge-ai-in-a-box/notebooks/train-classification-model.ipynb'
+var urlNotebookAutoML= 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/main/edge-ai/aml-edge-in-a-box/notebooks/1-AutoML-ObjectDetection.ipynb'
+var urlNotebookOnnx= 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/main/edge-ai/aml-edge-in-a-box/notebooks/2-Onnx.ipynb'
+var urlNotebookOpenVino= 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/main/edge-ai/aml-edge-in-a-box/notebooks/3-OpenVino.ipynb'
 var dataStoreName = 'workspaceworkingdirectory' // Note: name auto-created by ML Workspace, DO NOT CHANGE
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
@@ -61,8 +63,16 @@ resource notebooksUploadScriptCLI 'Microsoft.Resources/deploymentScripts@2023-08
         secureValue: storageAccount.listKeys().keys[0].value
       }
       {
-        name: 'urlNotebook'
-        value: urlNotebook
+        name: 'urlNotebookAutoML'
+        value: urlNotebookAutoML
+      }
+      {
+        name: 'urlNotebookOnnx'
+        value: urlNotebookOnnx
+      }
+      {
+        name: 'urlNotebookOpenVino'
+        value: urlNotebookOpenVino
       }
     ]
   }

@@ -57,7 +57,7 @@ echo "   adminUsername: $adminUsername";
 
 edgedevice=("EdgeDevice1" "EdgeDevice2" "EdgeDevice3")
 edgedeviceName=${edgedevice[0]}
-BicepJson="https://raw.githubusercontent.com/AndresPad/AI-in-a-Box/main/edge-ai-in-a-box/iotedge-ai-in-a-box/infra/edge/edgeDeploy.json"
+BicepJson="https://raw.githubusercontent.com/Azure/AI-in-a-Box/main/edge-ai/aml-edge-in-a-box/infra/edge/edgeDeploy.json"
 BicepJsonOrg="https://raw.githubusercontent.com/Azure/iotedge-vm-deploy/1.4/edgeDeploy.json"
 #------------------------------------------------------------------------------------------------------"
 # Deploy IoT Edge VM
