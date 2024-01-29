@@ -2,10 +2,12 @@
 ![Banner](./readme_assets/banner-customvision-edge-in-a-box.png)
 
 ## Use Case
-Orchestration of resources for the entire Edge AI model lifecycle, including creation, deployment, and proper packaging through Azure ML and IoT Edge. This involves leveraging key components such as IoT Hub, IoT Edge, Azure ML, and Azure ML CLI V2.
+In situations requiring real-time decisions and facing latency issues with cloud computing, Edge AI analyzes videos directly on the edge for prompt responsiveness. It ensures uninterrupted device functionality offline, crucial for limited cloud connectivity, and optimizes bandwidth by processing data locally.
+
+The technology is demonstrated in this sample which focuses on graffiti detection on trains using Azure IoT Edge and [Custom Vision AI](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/overview). The process involves cloud training, exporting, and deploying a graffiti detection model as a Docker container on the edge device, allowing quick analysis. When graffiti is detected, the video is stored locally in Blob on Edge and then uploaded to Azure Storage, showcasing the seamless integration of cloud and edge components for efficient problem-solving.
 
 ## Solution Architecture
-<img src="./readme_assets/edgai-mledge-architecture.png" />
+<img src="./readme_assets/edgeai-customvision-architecture.png" />
 
 ### The above architecture is explained step-by-step below:
 1. You create all your necessary Azure Resources
@@ -71,13 +73,3 @@ Orchestration of resources for the entire Edge AI model lifecycle, including cre
 
 
 ## Post Deployment
-Once your resources have been deployed you will need to do the following to get the notebooks up running and your Edge VM or device functioning properly:
-
-* When running the notebooks your user won't have permission to alter the storage account. Please Ensure that you have been assigned both Storage Blob Data Reader and Storage Blob Data Contributor roles.
-
-* Once the VM is deployed or your physical device is setup you can ssh into the VM/device using the below command   
-    * ssh NodeVMAdmin@edgevm1.eastus.cloudapp.azure.com -p 2222 
-* Once connected to your virtual machine, [verify](https://learn.microsoft.com/en-us/azure/iot-edge/quickstart-linux) that the runtime was successfully installed and configured on your IoT Edge device.
-    * sudo iotedge system status
-    * sudo iotedge list
-    * sudo iotedge check

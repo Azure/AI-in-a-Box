@@ -5,7 +5,7 @@
 Orchestration of resources for the entire Edge AI model lifecycle, including creation, deployment, and proper packaging through Azure ML and IoT Edge. This involves leveraging key components such as IoT Hub, IoT Edge, Azure ML, and Azure ML CLI V2.
 
 ## Solution Architecture
-<img src="./readme_assets/edgai-mledge-architecture.png" />
+<img src="./readme_assets/edgeai-mledge-architecture.png" />
 
 ### The above architecture is explained step-by-step below:
 1. You create all your necessary Azure Resources
@@ -34,7 +34,7 @@ Orchestration of resources for the entire Edge AI model lifecycle, including cre
 * Prepare your Linux virtual machine or physical device for [IoT Edge](https://learn.microsoft.com/en-us/azure/iot-edge/how-to-provision-single-device-linux-symmetric)
 
 ## Deployment Flow 
-<img src="./readme_assets/edgai-mledge-flow.png" />
+<img src="./readme_assets/edgeai-mledge-flow.png" />
 
 **Step 1.** Clone the [AI-in-a-Box repository](https://github.com/Azure/AI-in-a-Box)
 
@@ -73,7 +73,7 @@ Orchestration of resources for the entire Edge AI model lifecycle, including cre
 ## Post Deployment
 Once your resources have been deployed you will need to do the following to get the notebooks up running and your Edge VM or device functioning properly:
 
-* When running the notebooks your user won't have permission to alter the storage account. Please Ensure that you have been assigned both Storage Blob Data Reader and Storage Blob Data Contributor roles.
+* When running the notebooks your user won't have permission to alter the storage account. Please ensure that you have been assigned both **Storage Blob Data Reader** and ****Storage Blob Data Contributor** roles.
 
 * Once the VM is deployed or your physical device is setup you can ssh into the VM/device using the below command   
     * ssh NodeVMAdmin@edgevm1.eastus.cloudapp.azure.com -p 2222 
@@ -81,3 +81,5 @@ Once your resources have been deployed you will need to do the following to get 
     * sudo iotedge system status
     * sudo iotedge list
     * sudo iotedge check
+
+* Once you get access to your VM you will need to deploy your Model through a Deployment Manifest.
