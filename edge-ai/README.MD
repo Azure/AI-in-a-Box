@@ -54,4 +54,6 @@ You can train a custom model using either the [Custom Vision](https://learn.micr
 
 
 ## Additional Resources
-<img src="../media//images/mindmap.png" alt="ml edge mindmap" width="30" style="padding-right: 10px;"  />  [ML/AI Edge MindMap](https://aka.ms/mledge-mm)
+
+### Check out our <img src="../media//images/mindmap.png" alt="ml edge mindmap" width="30" style="padding-left: 10px;padding-right: 10px; f"  /> [ML/AI Edge MindMap](https://aka.ms/mledge-mm)
+
