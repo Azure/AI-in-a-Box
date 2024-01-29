@@ -1,7 +1,7 @@
 # EdgeAI in-a-box
 ![Banner](../media/images/banner-edgeai-in-a-box.png)
 
-[ML/AI Edge MindMap](https://aka.ms/mledge-mm)
+
 
 ## Why Edge AI?
 Edge AI excels in diverse applications like image classification, object detection, body, face, and gesture analysis, as well as image manipulation. Moreover, in this swiftly evolving Generative AI (Gen AI) landscape, the move from cloud-based Gen AI to Edge Gen AI is becoming more prominent. This shift is not just desirable but increasingly necessary, propelled by demands for privacy, security, hyper-personalization, accuracy, cost-effectiveness, energy efficiency, and more. While the commercialization of today's cloud-based Gen AI is in full swing, there are efforts underway to optimize the models built for power-guzzling GPU server farms to run on power-sipping edge devices with efficient mobile GPUs, Neural and Tensor processors (NPU and TPU).
@@ -53,3 +53,5 @@ You can train a custom model using either the [Custom Vision](https://learn.micr
 |Model hosting | Cloud and **Edge**	| Cloud hosting only,<br>***Edge container hosting to come***
 
 
+## Additional Resources
+<img src="../media//images/mindmap.png" alt="ml edge mindmap" width="30" style="padding-right: 10px;"  />  [ML/AI Edge MindMap](https://aka.ms/mledge-mm)
