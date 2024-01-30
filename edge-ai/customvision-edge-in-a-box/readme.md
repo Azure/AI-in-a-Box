@@ -11,10 +11,13 @@ The technology is demonstrated in this sample which focuses on graffiti detectio
 
 ### The above architecture is explained step-by-step below:
 1. You create all your necessary Azure Resources
-    * (IoT Hub, Azure ML Workspace, Container Registry, Azure Cognitive Services for Vision (if applicable), Storage, Edge VM (for testing), and register your IoT Edge Devices)
-1. Within Azure ML Studio you start creating/working your model:
-    1. Connect to Azure Machine Learning Workspace
-    2. Grab your Training Data and create your JSONL and MLTable(s)
+    * (IoT Hub, Container Registry, Azure Custom Vision, Storage, Edge VM (for testing), and register your IoT Edge Devices)
+1. Within Azure Custom Vision you start creating/working your model:
+    1. Connect to Azure Custom Vision Studio
+    2. Create and export AI model
+        * Train Custom Vision model to detect graffiti on trains.
+        * Export Custom Vision model as docker file
+        * Add exported model to Visual Studio Code project
     3. Create your Compute so you can train your data
     4. Configure and run the AutoML training job
     5. Convert model to appropriate format: ONNX, OpenVino
@@ -36,6 +39,7 @@ The technology is demonstrated in this sample which focuses on graffiti detectio
 * Prepare your Linux virtual machine or physical device for [IoT Edge](https://learn.microsoft.com/en-us/azure/iot-edge/how-to-provision-single-device-linux-symmetric)
 
 ## Deployment Flow 
+(Leverage the following article for reference as you deploy the solution: [How to deploy your AI model on Edge devices with Azure](https://towardsdatascience.com/how-to-deploy-your-ai-model-on-edge-devices-8c38a9519c58))
 
 **Step 1.** Clone the [AI-in-a-Box repository](https://github.com/Azure/AI-in-a-Box)
 
@@ -44,8 +48,21 @@ The technology is demonstrated in this sample which focuses on graffiti detectio
 **Step 2.** Configure Edge Device and Create Edge VM if you would like
 
 **Step 3.** Buld ML model into docker image using Custom Vision Studio
+* Train and deploy Custom vision model to detect graffiti on trains
+* Create a Custom Vision project with properties “classification” and multiclass (Single tag per image)”
+* Make sure you select General (compact) as domain, otherwise the model cannot be exported as a container
+* Upload the images from the /CustomVisionImage folder into your project
+* Tag your images
+    * First step, add the graffiti pictures with tag graffiti to your project
+    * Second step, add the no graffiti pictures with tag graffiti but select NEGATIVE to your project.
+    <img src="./readme_assets/cvtags.png" />
+    * Third step, click on green button and train your model.
+* Export 
+    * Export Custom Vision model as docker file
+    * Once you trained and tested the model, you can either create an endpoint of your model or export it. In this scenario, the model is exported as dockerfile. Go to your project, select the iteration you want to export and then select export. Subsequently, select to export the model as dockerfile which contains a TensorFlow .pb file.
+    <img src="./readme_assets/exportmodel.png" />
 
-**Step 4.** Push model to Azure Container Registry
+**Step 4.** Push model to Azure Container Registry if you would like
 
 **Step 5.** Deploy model onto Edge Device via a deployment manifest build & deploy
 
