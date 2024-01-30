@@ -50,7 +50,7 @@ The technology is demonstrated in this sample which focuses on graffiti detectio
     * First step, add the graffiti pictures with tag graffiti to your project
     * Second step, add the no graffiti pictures with tag graffiti but select NEGATIVE to your project.
     <img src="./readme_assets/cvtags.png" />
-    
+
     * Third step, click on green button and train your model.
 * Export 
     * Export Custom Vision model as docker file
@@ -59,7 +59,7 @@ The technology is demonstrated in this sample which focuses on graffiti detectio
 
 **Step 4.** Push model to Azure Container Registry if you would like
 
-**Step 5.** Deploy model onto Edge Device via a deployment manifest build & deploy
+**Step 5.** Deploy model onto Edge Device via a [Deployment Manifest](https://learn.microsoft.com/en-us/azure/iot-edge/module-composition) build & deploy process. Please visit how to [Develop IoT Edge Modules using VS Code](https://learn.microsoft.com/en-us/azure/iot-edge/tutorial-develop-for-linux?view=iotedge-1.4&tabs=csharp&pivots=iotedge-dev-cli)
 
 ## Deploy to Azure
 
@@ -80,6 +80,6 @@ The technology is demonstrated in this sample which focuses on graffiti detectio
     azd up
     ```
 
-    You will be prompted for a subcription, and region.
+    You will be prompted for a subcription, region and additional parameters.
 
 

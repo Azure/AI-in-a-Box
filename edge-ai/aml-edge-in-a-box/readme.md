@@ -67,7 +67,7 @@ Orchestration of resources for the entire Edge AI model lifecycle, including cre
     azd up
     ```
 
-    You will be prompted for a subcription, and region.
+    You will be prompted for a subcription, region and additional parameters.
 
 
 ## Post Deployment
