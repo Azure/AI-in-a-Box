@@ -1,4 +1,4 @@
-# EdgeAI in-a-box
+# AML Edge in-a-box
 ![Banner](./readme_assets/banner-aml-edge-in-a-box.png)
 
 ## Use Case
@@ -44,9 +44,9 @@ Orchestration of resources for the entire Edge AI model lifecycle, including cre
 
 **Step 3.** Buld ML model into docker image
 
-**Step 4.** Deploy ML model on IoT Edge
+**Step 4.** Push model to Azure Container Registry
 
-**Step 5.** Test ML Module
+**Step 5.** Deploy model onto Edge Device via a deployment manifest build & deploy
 
 ## Deploy to Azure
 

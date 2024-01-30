@@ -36,19 +36,18 @@ The technology is demonstrated in this sample which focuses on graffiti detectio
 * Prepare your Linux virtual machine or physical device for [IoT Edge](https://learn.microsoft.com/en-us/azure/iot-edge/how-to-provision-single-device-linux-symmetric)
 
 ## Deployment Flow 
-<img src="./readme_assets/edgai-mledge-flow.png" />
 
 **Step 1.** Clone the [AI-in-a-Box repository](https://github.com/Azure/AI-in-a-Box)
 
-**Step 2.** Create Azure Resources (User Assigned Managed Identity, IoT Hub, Azure ML Workspace, Container Registry, IoT Edge Devices, IoT Edge VM)
+**Step 2.** Create Azure Resources (User Assigned Managed Identity, IoT Hub, Custom Vision Account, Container Registry, IoT Edge Devices, and if you would like an IoT Edge VM)
 
 **Step 2.** Configure Edge Device and Create Edge VM if you would like
 
-**Step 3.** Buld ML model into docker image
+**Step 3.** Buld ML model into docker image using Custom Vision Studio
 
-**Step 4.** Deploy ML model on IoT Edge
+**Step 4.** Push model to Azure Container Registry
 
-**Step 5.** Test ML Module
+**Step 5.** Deploy model onto Edge Device via a deployment manifest build & deploy
 
 ## Deploy to Azure
 
@@ -72,4 +71,3 @@ The technology is demonstrated in this sample which focuses on graffiti detectio
     You will be prompted for a subcription, and region.
 
 
-## Post Deployment
