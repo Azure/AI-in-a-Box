@@ -15,7 +15,7 @@ Orchestration of resources for the entire Edge AI model lifecycle, including cre
     2. Grab your Training Data and create your JSONL and MLTable(s)
     3. Create your Compute so you can train your data
     4. Configure and run the AutoML training job
-    5. Convert model to appropriate format: ONNX, OpenVino
+    5. Convert model to appropriate format (Onnx) if necessary
     6. Using MFLow Retrieve the Best Trial (Best Model's trial/run)
     7. Register best Model and Deploy
     8. Test: Visualize Model Results

@@ -45,7 +45,7 @@ This technology is exemplified in a sample focusing on graffiti detection on tra
 * Train and deploy Custom vision model to detect graffiti on trains
 * Create a Custom Vision project with properties “classification” and multiclass (Single tag per image)”
 * Make sure you select General (compact) as domain, otherwise the model cannot be exported as a container
-* Upload the images from the /CustomVisionImage folder into your project
+* Upload the images from the /trainingimages folder into your project
 * Tag your images
     * First step, add the graffiti pictures with tag graffiti to your project
     * Second step, add the no graffiti pictures with tag graffiti but select NEGATIVE to your project.
