@@ -50,6 +50,7 @@ The technology is demonstrated in this sample which focuses on graffiti detectio
     * First step, add the graffiti pictures with tag graffiti to your project
     * Second step, add the no graffiti pictures with tag graffiti but select NEGATIVE to your project.
     <img src="./readme_assets/cvtags.png" />
+    
     * Third step, click on green button and train your model.
 * Export 
     * Export Custom Vision model as docker file
