@@ -19,7 +19,7 @@ if [[ -n "$1" ]]; then
     storageAccountKey=$5
     urlNotebookAutoML=$6
     urlNotebookOnnx=$7
-    urlNotebookOpenVino=$8
+    urlOnnxTrainingScript=$8
 
     echo "Executing from command line";
 else
@@ -36,7 +36,7 @@ echo "   Storage Account Name: $storageAccountName"
 #echo "   Storage Account Key: $storageAccountKey"
 echo "   URL Notebook: $urlNotebookAutoML"
 echo "   URL Notebook: $urlNotebookOnnx"
-echo "   URL Notebook: $urlNotebookOpenVino"
+echo "   URL Notebook: $urlOnnxTrainingScript"
 
 workspace=$(az ml workspace show --name $amlworkspaceName --resource-group $resourceGroupName)
 shareName=$(az ml datastore show --name $dataStoreName --resource-group $resourceGroupName --workspace-name $amlworkspaceName --query "file_share_name" -otsv)
@@ -52,7 +52,8 @@ az storage directory create --share-name "$shareName" --name "edgeai" --account-
 echo "URL Notebook: $urlNotebook"
 wget "$urlNotebookAutoML"
 wget "$urlNotebookOnnx"
-wget "$urlNotebookOpenVino"
+wget "$urlOnnxTrainingScript"
+#wget "$urlNotebookOpenVino"
 echo "$PWD"
   
 for entry in "$PWD"/*
@@ -61,12 +62,14 @@ echo "$entry"
 done
 
 file1="1-AutoML-ObjectDetection.ipynb"
-file2="2-Onnx.ipynb"
-file3="3-OpenVino.ipynb"    
+file2="2-Onnx-HandwrittenDigitClassification.ipynb"
+file3="mnist.py"
+#file3="3-OpenVino.ipynb"    
 
 filepath1="$PWD/1-AutoML-ObjectDetection.ipynb"
-filepath2="$PWD/2-Onnx.ipynb"
-filepath3="$PWD/3-OpenVino.ipynb"
+filepath2="$PWD/2-Onnx-HandwrittenDigitClassification.ipynb"
+filepath3="$PWD/mnist.py"
+#filepath3="$PWD/3-OpenVino.ipynb"
 
 echo "File Path: $filepath1"
 echo "File Path: $filepath2"
@@ -74,5 +77,6 @@ echo "File Path: $filepath3"
 
 # Upload Notebooks to File Shares in the "Notebooks" folder
 az storage file upload -s $shareName --source $filepath1 --path edgeai/1-AutoML-ObjectDetection.ipynb --account-key $storageAccountKey --account-name $storageAccountName
-az storage file upload -s $shareName --source $filepath2 --path edgeai/2-Onnx.ipynb --account-key $storageAccountKey --account-name $storageAccountName
-az storage file upload -s $shareName --source $filepath3 --path edgeai/3-OpenVino.ipynb --account-key $storageAccountKey --account-name $storageAccountName
+az storage file upload -s $shareName --source $filepath2 --path edgeai/2-Onnx-HandwrittenDigitClassification.ipynb --account-key $storageAccountKey --account-name $storageAccountName
+az storage file upload -s $shareName --source $filepath3 --path edgeai/mnist.py --account-key $storageAccountKey --account-name $storageAccountName
+#az storage file upload -s $shareName --source $filepath3 --path edgeai/3-OpenVino.ipynb --account-key $storageAccountKey --account-name $storageAccountName

@@ -71,15 +71,19 @@ Orchestration of resources for the entire Edge AI model lifecycle, including cre
 
 
 ## Post Deployment
-Once your resources have been deployed you will need to do the following to get the notebooks up running and your Edge VM or device functioning properly:
+Once your resources have been deployed you will need to do the following to get the notebooks up running in Azure ML Studio and your Edge VM or device functioning properly:
 
-* When running the notebooks your user won't have permission to alter the storage account. Please ensure that you have been assigned both **Storage Blob Data Reader** and ****Storage Blob Data Contributor** roles.
+* When running the notebooks in AML your user (jim@contoso.com for instance) won't have permission to alter the storage account or add data to the storage. Please ensure that you have been assigned both **Storage Blob Data Reader** and **Storage Blob Data Contributor** roles.
 
-* Once the VM is deployed or your physical device is setup you can ssh into the VM/device using the below command   
+* Run the Notebook(s) 
+    * 1-AutoML-ObjectDetection.ipynb
+
+* Once the VM is deployed, or your physical device is setup, you can ssh into the VM/device using the below command   
     * ssh NodeVMAdmin@edgevm1.eastus.cloudapp.azure.com -p 2222 
+
 * Once connected to your virtual machine, [verify](https://learn.microsoft.com/en-us/azure/iot-edge/quickstart-linux) that the runtime was successfully installed and configured on your IoT Edge device.
     * sudo iotedge system status
     * sudo iotedge list
     * sudo iotedge check
 
-* Once you get access to your VM you will need to deploy your Model through a Deployment Manifest.
+* Once you get access to your VM you will need to deploy your Model through a [Deployment Manifest](https://learn.microsoft.com/en-us/azure/iot-edge/module-composition). Please visit how to [Develop IoT Edge Modules using VS Code](https://learn.microsoft.com/en-us/azure/iot-edge/tutorial-develop-for-linux?view=iotedge-1.4&tabs=csharp&pivots=iotedge-dev-cli)

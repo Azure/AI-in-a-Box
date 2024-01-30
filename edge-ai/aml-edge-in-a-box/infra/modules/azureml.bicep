@@ -39,7 +39,7 @@ resource amlwn 'Microsoft.MachineLearningServices/workspaces@2023-06-01-preview'
   tags: tags
 }
 
-//2. Deploy ML Workspace Compute Instance
+//2. Deploy ML Workspace Compute Cluster
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces/computes?pivots=deployment-language-bicep
 resource amlcompcluster 'Microsoft.MachineLearningServices/workspaces/computes@2023-06-01-preview' = {
   parent: amlwn
@@ -58,6 +58,26 @@ resource amlcompcluster 'Microsoft.MachineLearningServices/workspaces/computes@2
     }
   }
 }
+
+//3. Deploy ML Workspace Compute Cluster with GPU
+//https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces/computes?pivots=deployment-language-bicep
+// resource amlcompclusterGPU 'Microsoft.MachineLearningServices/workspaces/computes@2023-06-01-preview' = {
+//   parent: amlwn
+//   name: 'gpu-cluster-lowpriority'
+//   location: location
+//   properties: {
+//     computeType: 'AmlCompute'
+//     properties: {
+//       scaleSettings: {
+//         minNodeCount: 0
+//         maxNodeCount: 1
+//         nodeIdleTimeBeforeScaleDown: 'PT120S'
+//       }
+//       vmPriority: 'LowPriority'
+//       vmSize: 'Standard_DS3_v2'
+//     }
+//   }
+// }
 
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces/computes?pivots=deployment-language-bicep
 resource amlcompinstance 'Microsoft.MachineLearningServices/workspaces/computes@2023-06-01-preview' = {
