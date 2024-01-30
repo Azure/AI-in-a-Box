@@ -11,22 +11,16 @@ The technology is demonstrated in this sample which focuses on graffiti detectio
 
 ### The above architecture is explained step-by-step below:
 1. You create all your necessary Azure Resources
-    * (IoT Hub, Container Registry, Azure Custom Vision, Storage, Edge VM (for testing), and register your IoT Edge Devices)
-1. Within Azure Custom Vision you start creating/working your model:
-    1. Connect to Azure Custom Vision Studio
-    2. Create and export AI model
+    * (IoT Hub, Container Registry, Azure Custom Vision Account, Storage, Edge VM (for testing), and register your IoT Edge Devices)
+1. Within [Custom Vision Studio](https://www.customvision.ai/) you start creating/working your model:
+    * Create and export AI model
         * Train Custom Vision model to detect graffiti on trains.
         * Export Custom Vision model as docker file
-        * Add exported model to Visual Studio Code project
-    3. Create your Compute so you can train your data
-    4. Configure and run the AutoML training job
-    5. Convert model to appropriate format: ONNX, OpenVino
-    6. Using MFLow Retrieve the Best Trial (Best Model's trial/run)
-    7. Register best Model and Deploy
-    8. Test: Visualize Model Results
-1. Once you have your model you deploy it to your Edge Device
-    1. You will build your model into a docker image and place that image in your container registry
-    1. Using IoT Edge you will leverage a deployment manifest as the instructions to pull the appropriate model from ACR into your IoT Edge Device
+        * Deploy AI model as container on edge device
+            * Deploy model via a deployment manifest
+2. Detection is done to the edge using Custom Vision model
+3. If graffiti is detected, the video is added to Azure Storage account using Blob on Edge
+4. Video is synced upto Azure for further analysis and possibly OCR (Optical Character Recognition)
 
 
 ## Prerequisites
