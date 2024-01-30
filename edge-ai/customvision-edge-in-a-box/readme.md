@@ -2,9 +2,9 @@
 ![Banner](./readme_assets/banner-customvision-edge-in-a-box.png)
 
 ## Use Case
-In situations requiring real-time decisions and facing latency issues with cloud computing, Edge AI analyzes videos directly on the edge for prompt responsiveness. It ensures uninterrupted device functionality offline, crucial for limited cloud connectivity, and optimizes bandwidth by processing data locally.
+In scenarios demanding real-time decisions and grappling with cloud latency, Edge AI directly analyzes videos for swift responsiveness, ensuring continuous device functionality even offline, crucial for limited cloud connectivity. It optimizes bandwidth by locally processing data.
 
-The technology is demonstrated in this sample which focuses on graffiti detection on trains using Azure IoT Edge and [Custom Vision AI](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/overview). The process involves cloud training, exporting, and deploying a graffiti detection model as a Docker container on the edge device, allowing quick analysis. When graffiti is detected, the video is stored locally in Blob on Edge and then uploaded to Azure Storage, showcasing the seamless integration of cloud and edge components for efficient problem-solving.
+This technology is exemplified in a sample focusing on graffiti detection on trains using Azure IoT Edge and [Custom Vision AI](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/overview). The process includes cloud training, exporting, and deploying a graffiti detection model as a Docker container on the edge device, facilitating rapid analysis. Upon graffiti detection, the video is stored locally in Blob on Edge before uploading to Azure Storage, highlighting the seamless integration of cloud and edge components for efficient problem-solving.
 
 ## Solution Architecture
 <img src="./readme_assets/edgeai-customvision-architecture.png" />
