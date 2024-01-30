@@ -2,9 +2,10 @@
 ![Banner](./readme_assets/banner-customvision-edge-in-a-box.png)
 
 ## Use Case
-In scenarios demanding real-time decisions and grappling with cloud latency, Edge AI directly analyzes videos for swift responsiveness, ensuring continuous device functionality even offline, crucial for limited cloud connectivity. It optimizes bandwidth by locally processing data.
 
-This technology is exemplified in a sample focusing on graffiti detection on trains using Azure IoT Edge and [Custom Vision AI](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/overview). The process includes cloud training, exporting, and deploying a graffiti detection model as a Docker container on the edge device, facilitating rapid analysis. Upon  detection, the video is stored locally in Blob on Edge before uploading to Azure Storage, highlighting the seamless integration of cloud and edge components for efficient problem-solving.
+In real-time decision scenarios with cloud latency challenges, Edge AI enables us to shift analysis closer to the data source, extracting responsive results. These advantages are exemplified in the architecture below. In this accelerator, we aim to demonstrate how easy it is to leverage [Custom Vision](https://www.customvision.ai/)  for training a classification model and exporting it to a specific format, such as ONNX or a Dockerfile, ready for deployment to an edge container.
+
+The sample includes deploying the necessary infrastructure and guides you through the model creation and export process within [Custom Vision Studio](https://www.customvision.ai/).
 
 ## Solution Architecture
 <img src="./readme_assets/edgeai-customvision-architecture.png" />
@@ -21,7 +22,6 @@ This technology is exemplified in a sample focusing on graffiti detection on tra
 2. Detection is done to the edge using Custom Vision model
 3. If graffiti is detected, the video is added to Azure Storage account using Blob on Edge
 4. Video is synced upto Azure for further analysis and possibly OCR (Optical Character Recognition)
-
 
 ## Prerequisites
 * An [Azure subscription](https://azure.microsoft.com/en-us/free/).
@@ -41,9 +41,9 @@ This technology is exemplified in a sample focusing on graffiti detection on tra
 
 **Step 2.** Configure Edge Device and Create Edge VM if you would like
 
-**Step 3.** Buld ML model into docker image using Custom Vision Studio
-* Train and deploy Custom vision model to detect graffiti on trains
+**Step 3.** Buld ML model into docker image using [Custom Vision Studio](https://www.customvision.ai/)
 * Create a Custom Vision project with properties “classification” and multiclass (Single tag per image)”
+    <img src="./readme_assets/cvproject.png" />
 * Make sure you select General (compact) as domain, otherwise the model cannot be exported as a container
 * Upload the images from the /trainingimages folder into your project
 * Tag your images
@@ -83,3 +83,5 @@ This technology is exemplified in a sample focusing on graffiti detection on tra
     You will be prompted for a subcription, region and additional parameters.
 
 
+## Post Deployment
+(Note: To fully deploy the entire architecture mentioned above, you'll need to adapt the deployment process to include the deployment manifest step, the creation of the function app, and the Azure Blob on Edge IoT Edge Module.)
