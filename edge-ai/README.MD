@@ -2,23 +2,14 @@
 ![Banner](../media/images/banner-edgeai-in-a-box.png)
 
 ## Why Edge AI?
-Edge AI excels in diverse applications like image classification, object detection, body, face, and gesture analysis, as well as image manipulation. Moreover, in this swiftly evolving Generative AI (Gen AI) landscape, the move from cloud-based Gen AI to Edge Gen AI is becoming more prominent. This shift is not just desirable but increasingly necessary, propelled by demands for privacy, security, hyper-personalization, accuracy, cost-effectiveness, energy efficiency, and more. While the commercialization of today's cloud-based Gen AI is in full swing, there are efforts underway to optimize the models built for power-guzzling GPU server farms to run on power-sipping edge devices with efficient mobile GPUs, Neural and Tensor processors (NPU and TPU).
+Edge AI excels in diverse applications like image classification, object detection, body, face, and gesture analysis, as well as image manipulation. Moreover, in this swiftly evolving Generative AI (Gen AI) landscape, the move from cloud-based Gen AI to Edge Gen AI is becoming more prominent. This shift is not just desirable but increasingly necessary, propelled by demands for privacy, security, hyper-personalization, accuracy, cost-effectiveness, energy efficiency, and more. While the commercialization of today's cloud-based Gen AI is in full swing, there are efforts underway to optimize models to run on power-sipping edge devices with efficient mobile GPUs, Neural and Tensor processors (NPU and TPU).
 
-With this in mind, we aim to simplify the process of: creating a model, packaging it, and deploying it to the edge. The series kicks off by establishing the baseline of creating and deploying a model with Azure ML and IoT Edge. We'll then explore more specific scenarios, such as deploying a model with AKS and AKS Edge, dive into creating a model with ONNX Runtime to highlight its advantages allowing training in a preferred environment and deployment anywhere, and finally guide you into the realm of Edge Gen AI. Our ultimate goal is to provide you with a clearer understanding of your options within Azure for Edge AI scenarios. 
+With this in mind, we aim to simplify your understanding of creating a model, packaging it, and deploying it to the edge. The series kicks off by establishing the baseline of creating and deploying a model with Azure ML and IoT Edge. We'll then explore more specific scenarios, such as deploying a model with AKS and AKS Edge, dive into creating a model with ONNX Runtime, and finally guide you into the realm of Edge Gen AI. Our ultimate goal is to provide you with a clearer understanding of your options within Azure for Edge AI scenarios. 
 
 ## Why does AI-in-a-Box have an Edge AI Section?
-### Because we want to show you the secrets of crafting and deploying your own model anywhere; We want to help you take your AI game to the next level!
+### Because we want to show you the options of crafting and deploying a model anywhere
 
-AI-in-a-Box encompasses four vital domains within Azure AI/ML:
-
-1.	**Azure ML:** This involves exploring the Azure ML Workspace and leveraging its capabilities to operationalize the creation of AI models.
-2.	**Azure AI Services Integration:** This domain focuses on the seamless integration and utilization of prebuilt models through APIs on the Azure AI Services front.
-3.	**GenAI Exploration & Acceleration:** This area delves into the realm of Generative AI (GenAI) and the effective utilization of Large Language Models (LLMs).
-4.	**Edge AI:** Within this domain we address the creation of crucial Azure Resources for Edge AI scenarios, delve into model development, packaging and deployment. The central focus is on orchestrating the synergy between Azure Resources and positioning AI models as close to the edge as possible.
-
-**Edge AI** is pivotal in extending AI and ML capabilities directly to edge devices, emphasizing the significance of running AI models on these devices and highlighting the essential interplay between various services in Azure. In summary, Edge AI enhances operational efficiency by bringing AI capabilities closer to the data source.
-
-The provided series introduces an evolutionary flow that streamlines your understanding and deployment of models on Edge devices or Edge-compatible containers and helps us work our way towards AKS deployments, and down the line towards GenAI Edge scenarios. These samples will help accentuate your understanding of what is possible within Azure for Edge AI scenarios.
+**Edge AI** plays a crucial role in expanding AI and ML capabilities by bringing them directly to edge devices. This emphasizes the importance of running AI models on these devices and underscores the essential interplay between various Azure services. This series introduces a progressive flow designed to enhance your comprehension of model creation and deployment on Edge devices or Edge-compatible containers. It guides you through the journey, starting with fundamental concepts, advancing towards AKS deployments, and eventually delving into more advanced GenAI Edge scenarios. These practical examples aim to deepen your understanding of the possibilities within Azure for Edge AI scenarios, providing valuable insights into the diverse applications of this technology.
 
 ![Banner](../media/images/edgeai-tree-options.png)
 
