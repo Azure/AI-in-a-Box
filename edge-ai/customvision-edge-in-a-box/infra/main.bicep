@@ -179,8 +179,6 @@ module m_customvision 'modules/customVision.bicep' = {
   ]
 }
 
-
-
 //7. Assign Role to UAMI
 module m_RBACRoleAssignment 'modules/rbac.bicep' = {
   name: 'deploy_RBAC'
@@ -193,8 +191,6 @@ module m_RBACRoleAssignment 'modules/rbac.bicep' = {
     m_msi
   ]
 }
-
-
 
 //Create IoT Edge Devices inside of the IoT Hub with a Deployment Script
 //https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deployment-script-develop
