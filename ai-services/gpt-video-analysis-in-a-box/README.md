@@ -74,7 +74,7 @@ This solution examines vehicles for damage using Azure Open AI GPT-4 Turbo with 
     ```bash
     az deployment group create --resource-group <your resource group name>  --template-file main.bicep --parameters main.bicepparam
     ```
-1. Upload the videos in the **test-videos** folder to your new storage account **videosin** container using [Azure Storage Explorer](https://learn.microsoft.com/en-us/azure/vs-azure-tools-storage-manage-with-storage-explorer), [AzCopy](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-files#upload-the-contents-of-a-directory) or within [the Azure portal](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal#upload-a-block-blob).
+1. Upload videos of vehicles to your new storage account's **videosin** container using [Azure Storage Explorer](https://learn.microsoft.com/en-us/azure/vs-azure-tools-storage-manage-with-storage-explorer), [AzCopy](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-files#upload-the-contents-of-a-directory) or within [the Azure portal](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal#upload-a-block-blob). You can find some sample videos at the bottom of this blog, [Analyze Videos with Azure Open AI GPT-4 Turbo with Vision and Azure Data Factory](https://techcommunity.microsoft.com/t5/fasttrack-for-azure/analyze-videos-with-azure-open-ai-gpt-4-turbo-with-vision-and/ba-p/4032778).
 
 ## Run the solution
 
@@ -97,5 +97,27 @@ SUBSTRING(gptoutput.content, INDEX_OF(gptoutput.content, "Severity[") + 9, INDEX
 gptoutput.content
 FROM gptoutput
 ```
+
+## Enhance the solution in your environment for your own use cases
+
+This solution is highly customizable due to the parameterization capabilities in Azure Data Factory. Below are the features you can parameterize out-of-th-box, or should I say, out of the AI-in-Box (insert-nerdy-laugh-here.)
+
+![parms](./readme-assets/adf-parms.jpg)
+
+#### Test prompts and other settings
+
+When developing your solution, you can rerun it with different settings to get the best results from GPT-4V by tweaking the **sys-message**, **user_prompt**, **temperature**, and **top_p** values.
+
+#### Change from batch to real-time
+This solution is set to run against a container of videos, which is ideal for testing. However, when you move to production, you may want the video to be analyzed in real-time. To do this, you can set up a storage event trigger which will run when a file is landed in blob storage. 
+![trigger](./readme-assets/blob-event-trigger.jpg)
+Then eliminate the Get Metadata and For Each activities and call the ChildAnalyzeVideo pipeline after the variables are set and the parameters are retrieved from Key Vault. You will be able to get the file name from the trigger metadata [Read more about ADF Storage Event triggers here](https://learn.microsoft.com/en-us/azure/data-factory/how-to-create-event-trigger?tabs=data-factory)
+
+#### Use the same Data Factory for other video analysis use cases
+
+You can set up multiple triggers over your Azure Data Factory and pass different parameter values for each:
+![trigers](./readme-assets/new-trigger-parm.png)
+
+You can set up different storage accounts to land other videos by adjusting the **storageaccounturl** and **storageaccountcontainer** paremeters. You can have different prompts and other values sent to GPT-4V in the **sys_message**, **user_prompt**, **temperature**, and **top_p** values for different triggers. You can land the data in a different Cosmos Account, Database and/or Container when setting the **cosmosaccount**, and **cosmosdb**, and **cosmoscontainer** values.
 
 For more details on this solution, check out this blog: [Analyze Videos with Azure Open AI GPT-4 Turbo with Vision and Azure Data Factory](https://techcommunity.microsoft.com/t5/fasttrack-for-azure/analyze-videos-with-azure-open-ai-gpt-4-turbo-with-vision-and/ba-p/4032778)!
