@@ -1,8 +1,12 @@
 # Video Analysis-Azure Open AI in-a-box
 ![banner](./readme-assets/banner-aoai-video-analysis-in-a-box.png)
-This solution examines vehicles for damage using Azure Open AI GPT-4 Turbo with Vision and Computer Vision Image Analysis 4.0. All orchestration is done with Azure Data Factory, allowing this solution to be easily customized for your own use cases. 
+This solution examines vehicles for damage using Azure Open AI GPT-4 Turbo with Vision and Computer Vision Image Analysis 4.0. All orchestration is done with Azure Data Factory, allowing this solution to be easily customized for your own use cases.
 
-Please note that as of this 1/31/2024, Azure Open AI GPT-4 Turbo with Vision and Computer Vision Image Analysis 4 are in Public Preview for limited regions. [Check here for available regions for Computer Vision Image Analysis 4.0.](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0#image-analysis-versions) [Check here for available regions for GPt-4 Turbo with Vision.](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-preview-model-availability)
+Please note that as of this 1/31/2024, Azure Open AI GPT-4 Turbo with Vision and Computer Vision Image Analysis 4 are in Public Preview for limited regions.
+
+    [Check here for available regions for Computer Vision Image Analysis 4.0.}(https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0#image-analysis-versions)
+    
+     [Check here for available regions for GPT-4 Turbo with Vision.](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-preview-model-availability)
 
 ## Solution Architecture
 
@@ -83,11 +87,14 @@ Please note that as of this 1/31/2024, Azure Open AI GPT-4 Turbo with Vision and
 
 1. In the Azure portal, go to your newly created Azure Data Factory Resource and click launch:
 ![launch](./readme-assets/launchadf.jpg)
-1. Select the **orchestratorGetandAnalyzeVideos** pipeline, click **Debug**, and examine your preset pipeline parameter values:
+
+1. Select the **orchestratorGetandAnalyzeVideos** pipeline, click **Debug**, and examine your preset pipeline parameter values. Then click OK to run.
 ![run](./readme-assets/run-from-adf.png)
+
 1. After it runs successfully, go to your Azure Cosmos DB resource and examine the results in Data Explorer:
 ![cosmos](./readme-assets/cosmos-data-explorer.png)
-1. Because the way the completion was instructed to format the results, we can run queries with expressions like the one below to easily see the probability of damage, the severity of any damage, and the kind of damage that occurred:
+
+1. Because the way the system message was instructed to format the results, we can run queries with expressions like the one below to easily see the probability of damage, the severity of any damage, and the kind of damage that occurred:
 ![cosmos query](./readme-assets/cosmos-query.png)
 
 ```sql
@@ -113,7 +120,7 @@ When developing your solution, you can rerun it with different settings to get t
 
 ### Change from batch to real-time
 
-This solution is set to loop against a container of videos in batch, which is ideal for testing. However, when you move to production, you may want the video to be analyzed in real-time. To do this, you can set up a storage event trigger which will run when a file is landed in blob storage. 
+This solution is set to loop against a container of videos in batch, which is ideal for testing. However, when you move to production, you may want the video to be analyzed in real-time. To do this, you can set up a storage event trigger which will run when a file is landed in blob storage.
 ![trigger](./readme-assets/blob-event-trigger.jpg)
 Then eliminate the Get Metadata and For Each activities and call the ChildAnalyzeVideo pipeline after the variables are set and the parameters are retrieved from Key Vault. You can get the file name from the trigger metadata. [Read more about ADF Storage Event triggers here](https://learn.microsoft.com/en-us/azure/data-factory/how-to-create-event-trigger?tabs=data-factory).
 
