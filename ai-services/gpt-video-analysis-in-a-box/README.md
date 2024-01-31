@@ -4,9 +4,8 @@ This solution examines vehicles for damage using Azure Open AI GPT-4 Turbo with 
 
 Please note that as of this 1/31/2024, Azure Open AI GPT-4 Turbo with Vision and Computer Vision Image Analysis 4 are in Public Preview for limited regions.
 
-    [Check here for available regions for Computer Vision Image Analysis 4.0.}(https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0#image-analysis-versions)
-    
-     [Check here for available regions for GPT-4 Turbo with Vision.](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-preview-model-availability)
+- [Check here for available regions for Computer Vision Image Analysis 4.0.](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0#image-analysis-versions)
+- [Check here for available regions for GPT-4 Turbo with Vision.](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-preview-model-availability)
 
 ## Solution Architecture
 
