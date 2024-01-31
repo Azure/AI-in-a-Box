@@ -1,0 +1,29 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "environmentName": {
+        "value": "${AZURE_ENV_NAME}"
+      },
+      "location": {
+        "value": "${AZURE_LOCATION}"
+      },
+      "resourceGroupName": {
+        "value": "aibx-amledge-rg"
+      },
+      "iotHubName": {
+        "value": "${AZURE_IOTHUB_NAME}"
+      },
+      "deployEdgeVM": {
+        "value": "${DEPLOY_EDGE_VM}"
+      },
+      "tags": {
+        "value": {
+          "Owner": "AI Team",
+          "Project": "EdgeAI",
+          "Environment": "Dev",
+          "Toolkit": "Bicep"
+        }
+      }
+    }
+  }
