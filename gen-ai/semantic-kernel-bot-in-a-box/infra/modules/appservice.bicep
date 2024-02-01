@@ -189,6 +189,10 @@ resource appService 'Microsoft.Web/sites@2022-09-01' = {
           name: 'BLOB_API_KEY'
           value: storage.listKeys().keys[0].value
         }
+        {
+          name: 'PLUGINS_USE_WIKIPEDIA'
+          value: 'false'
+        }
       ]
     }
   }

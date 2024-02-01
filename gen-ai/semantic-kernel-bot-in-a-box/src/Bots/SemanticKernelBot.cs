@@ -38,6 +38,7 @@ namespace Microsoft.BotBuilderSamples
         private readonly List<string> _suggestedQuestions;
         private readonly bool _useStepwisePlanner;
         private readonly string _searchSemanticConfig;
+        private readonly bool _useWikipedia;
 
         public SemanticKernelBot(
             IConfiguration config,
@@ -66,6 +67,7 @@ namespace Microsoft.BotBuilderSamples
             _embeddingsClient = embeddingsClient;
             _documentAnalysisClient = documentAnalysisClient;
             _sqlConnectionFactory = sqlConnectionFactory;
+            _useWikipedia = config.GetValue<bool>("PLUGINS_USE_WIKIPEDIA");
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
@@ -104,6 +106,7 @@ namespace Microsoft.BotBuilderSamples
             if (_searchClient != null) kernel.ImportPluginFromObject(new HRHandbookPlugin(conversationData, turnContext, _embeddingsClient, _searchClient, _blobServiceClient, _searchSemanticConfig), "HRHandbookPlugin");
             kernel.ImportPluginFromObject(new DALLEPlugin(conversationData, turnContext, _aoaiClient), "DALLEPlugin");
             if (_bingClient != null) kernel.ImportPluginFromObject(new BingPlugin(conversationData, turnContext, _bingClient), "BingPlugin");
+            kernel.ImportPluginFromObject(new WikipediaPlugin(conversationData, turnContext), "WikipediaPlugin");
             if (!_useStepwisePlanner) kernel.ImportPluginFromObject(new HumanInterfacePlugin(conversationData, turnContext, _aoaiClient), "HumanInterfacePlugin");
 
             if (_useStepwisePlanner)
