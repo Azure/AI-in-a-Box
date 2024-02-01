@@ -28,7 +28,9 @@ To deploy this solution, use the [Semantic Kernel Bot in-a-box](../README.md) ac
 
 ## Additional steps
 
-After the solution is deployed, enable the Wikipedia plugin by changing the ´PLUGIN_USE_WIKIPEDIA´ to ´true´
+After the solution is deployed, enable the Wikipedia plugin by changing the ´PLUGIN_USE_WIKIPEDIA´ environment variable to ´true´.
+
+![Use Wikipedia environment variable](../readme_assets/3-environment-variable.png)
 
 ## Deployment validation
 
