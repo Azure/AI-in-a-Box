@@ -33,13 +33,14 @@ Pattern|Description|Supported Use Cases and Features|
 |[Assistants API in-a-box](./gen-ai/Assistants/api-in-a-box)|Harnessing the simplicity of the Assistants API, developers can seamlessly integrate assistants with diverse functionalities, from executing code to retrieving data, empowering users with versatile and dynamic digital assistants tailored to their needs.| <li>Offers three main capabilities: Code Interpreter (tech tasks), Retrieval (finding info), and Function calling (task execution) <br> <li>These powers combine to form a versatile super-assistant for handling diverse tasks |
 |[Assistants API Bot in-a-box](./gen-ai/Assistants/bot-in-a-box)|This sample provides a step-by-step guide on how to deploy a virtual assistant leveraging the Azure OpenAI Assistants API. It covers the infrastructure deployment, configuration on the AI Studio and Azure Portal, and end-to-end testing examples.| <li>Deploy the necessary infrastructure to support an Azure OpenAI Assistant <br> <li>Configure as Assistant with the required tools <li>Connect a Bot Framework application to your Assistant to deploy the chat to multiple channels |
 
-## Key contacts
+## Key Contacts & Contributors
 
 If you have any questions or would like to contribute please reach out to: aibox@microsoft.com
 
 | Contact | GitHub ID | Email |
 |--------------|------|-----------|
 | Alex Morales | @msalemor | alemor@microsoft.com |
+| Andre Dewes  | @andredewes | andredewes@microsoft.com |
 | Andrés Padilla | @AndresPad | andres.padilla@microsoft.com | 
 | Chris Ayers | @codebytes | chrisayers@microsoft.com |
 | Eduardo Noriega | @EduardoN | ednorieg@microsoft.com |
