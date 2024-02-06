@@ -1,5 +1,5 @@
-## Assistant API Bot in-a-box
-![Banner](./readme_assets/banner.png)
+# Assistants API Bot in-a-Box
+![Banner](./readme_assets/banner-assistants-api-bot-in-a-box.png)
 
 ### Overview
 

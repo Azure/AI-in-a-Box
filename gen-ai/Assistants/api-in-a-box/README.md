@@ -1,6 +1,6 @@
-# API-in-a-Box
+# Assistants API in-a-Box
 
-![Banner](./banner-assistants-api-in-a-box.png)
+![Banner](./readme_assets/banner-assistants-api-in-a-box.png)
 
 ## Use Case
 
@@ -21,7 +21,7 @@ At a high level, a typical integration of the Assistants API has the following f
 3. Add [Messages](https://platform.openai.com/docs/api-reference/messages) to the Thread as the user ask questions.
 4. [Run](https://platform.openai.com/docs/api-reference/runs) the Assistant on the Thread to trigger responses. This automatically calls the relevant tools.
 
-![Banner](./assistantsapi-flow-overview.svg)
+![Banner](./readme_assets/assistantsapi-flow-overview.svg)
 
 ## Benefits of using assistants
 
