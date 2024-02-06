@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <UserSecretsId>73c2a03b-aae7-4833-b3a8-c01744ad2b7e</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AdaptiveCards" Version="3.1.0" />
+    <PackageReference Include="Azure.AI.FormRecognizer" Version="4.1.0" />
+    <PackageReference Include="Azure.Identity" Version="1.10.4" />
+    <PackageReference Include="Azure.Search.Documents" Version="11.5.1" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.57" />
+    <PackageReference Include="Microsoft.Azure.CognitiveServices.Search.WebSearch" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Azure.KeyVault.Core" Version="3.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.7" />
+    <PackageReference Include="Microsoft.Bot.Builder.Azure" Version="4.21.1" />
+    <PackageReference Include="Microsoft.Bot.Builder.Azure.Blobs" Version="4.20.1" />
+    <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.21.2" />
+    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.20.1" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
+    <PackageReference Include="Microsoft.Graph" Version="5.38.0" />
+    <PackageReference Include="Microsoft.Graph.Core" Version="3.1.4" />
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.0.1" />
+    <PackageReference Include="Microsoft.SemanticKernel.Planners.Handlebars" Version="1.0.1-preview" />
+    <PackageReference Include="Microsoft.SemanticKernel.Planners.OpenAI" Version="1.0.1-preview" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <!-- The KeyVault package, picked up as a transitive dependency of the Azure Storage libraries
+        doesn't yet support NetStandard20. I confirmed with the Azure Storage team that this warning
+        is fine, and can be supressed.
+
+        It does appear the Azure SDK team is "in-process" of supporting NetStandard20 as seen in this
+        Commit: https://github.com/Azure/azure-sdk-for-net/commit/b0d42d14bfe92a24996826b2487ba592e644f581
+
+        We cannot apply the no-warn supression directly to the package links below as
+        they're not picked up across transitive dependencies. See this GitHub Issue for details:
+        https://github.com/NuGet/Home/issues/5740
+        -->
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

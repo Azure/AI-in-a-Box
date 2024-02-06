@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: assistant-bot-in-a-box
+metadata:
+    template: azd-init@1.4.4
+services:
+    assistant-bot-app:
+        project: src
+        host: appservice
+        language: dotnet

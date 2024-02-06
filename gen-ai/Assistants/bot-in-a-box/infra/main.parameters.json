@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourceGroupName": {
+      "value": "${AZURE_APP_RG}"
+    },
+    "environmentName": {
+      "value": "${AZURE_ENV_NAME}"
+    },
+    "location": {
+      "value": "${AZURE_LOCATION}"
+    },
+    "gptModel": {
+      "value": "${AZURE_GPT_MODEL}"
+    },
+    "gptVersion": {
+      "value": "${AZURE_GPT_VERSION}"
+    },
+    "openaiName": {
+      "value": "${AZURE_OPENAI_NAME}"
+    },
+    "msiName": {
+      "value": "${AZURE_MSI_NAME}"
+    },
+    "appServicePlanName": {
+      "value": "${AZURE_APP_SERVICE_PLAN_NAME}"
+    },
+    "appServiceName": {
+      "value": "${AZURE_APP_SERVICE_NAME}"
+    },
+    "botServiceName": {
+      "value": "${AZURE_BOT_SERVICE_NAME}"
+    },
+    "cosmosName": {
+      "value": "${AZURE_COSMOS_NAME}"
+    },
+    "tags": {
+      "value": {
+        "Owner": "AI Team",
+        "Project": "GPTBot",
+        "Environment": "Dev",
+        "Toolkit": "Bicep"
+      }
+    }
+  }
+}
