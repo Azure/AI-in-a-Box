@@ -11,7 +11,7 @@ The Assistants API enables you to create AI assistants within your own apps. The
 - **Threads:** A Thread represents a conversation. The Assistant will ensure that requests to the model fit within the maximum context window, using relevant optimization techniques such as truncation
 
 ## Use Case
-Imagine an assistant that helps you figure out your finances, retrieves useful info, and executes special functions—all in one go! It's like giving your app a brain that keeps getting smarter! By leveraging the Assistants API, developers can create assistants with easy-to-follow instructions that use special tools to get things done. Right now, it has three superpowers: Code Interpreter (for doing techy stuff), Retrieval (for finding info), and Function calling (for making things happen). You can even mix these powers to create a super-assistant that can handle all sorts of tasks.
+Envision an all-in-one assistant aiding with finances, fetching information, and handling tasks effortlessly. The Assistants API offers developers a toolkit to enrich their apps. Key features like Function Calling enable seamless integration for tasks like messaging and device control. With Knowledge, developers can tap into vast data, ensuring accurate user responses. The API's Code Interpreter provides calculation abilities, while blending these powers crafts a versatile, super-assistant for diverse tasks.
 
 ## How It Works
 The Assistants API operates through a straightforward flow:
@@ -36,6 +36,9 @@ Check out the provided samples to get started with integrating the Assistants AP
 | [Failed Banks](./api-in-a-box/failed_banks/assistant-failed_banks.ipynb) | Using Assistant tools Code Interpreter and Function calling, this bot can get a CSV file, gather a list of failed banks by state, and generate a chart to visually represent the data. |
 | [Wind Farm](./api-in-a-box/wind_farm/assistant-wind_farm.ipynb) | Utilizing Assistant tools such as the Code Interpreter and Function calling, this bot is capable of retrieving a CSV file that illustrates turbine wind speed, voltage, and the last maintenance date. It assists you in reviewing the file contents and aids in determining whether a specific turbine is in need of maintenance. |
 | [Assistants Bot-in-a-Box](./bot-in-a-box/) | The Assistants API Bot in-a-box automates virtual assistant deployment on Azure, facilitating seamless communication between users and assistants across various messaging channels. It streamlines message processing and response delivery through Azure Bot Services and the Assistants API. |
+
+
+use the assistant to analyze the failed
 
 ## Prerequisites
 Before using the Assistants API, ensure you have:

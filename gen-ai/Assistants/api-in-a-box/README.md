@@ -4,7 +4,7 @@
 
 ## Use Case
 
-Imagine an assistant that helps you figure out your finances, retrieves useful info, and does special functions—all in one go! It's like giving your app a brain that keeps getting smarter!
+Imagine an assistant that helps you figure out your finances, retrieves useful info, and does special functions—all in one go! 
 
 Using the Assistants API is simple. Just tell your assistant what to do, like having a conversation. It can understand different file formats, execute code (super techy!), and do all sorts of cool tricks. As Azure OpenAI adds more tools, your assistant can do even cooler things. It's a fun and easy way to add some brainpower to your GenAI app!
 
