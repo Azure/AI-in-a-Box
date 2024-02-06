@@ -5,12 +5,10 @@
 The Assistants API enables you to create AI assistants within your own apps. These assistants have instructions and can use models, tools, and knowledge to answer user questions. The API currently offers three types of tools: Code Interpreter, Retrieval, and Function calling.
 
 ## Key Features and Benefits
-
-- **Versatile Functionality:** Assistants can handle finances, retrieve information, and execute custom functions, all within a single interface.
-- **Ease of Use:** Developers can interact with the Assistants API through simple conversational commands, enabling seamless integration into applications.
-- **Extensible:** With ongoing updates and additions to the API, assistants can continuously expand their capabilities to perform even more tasks.
-- **Customizable:** Developers can tailor assistants to specific needs by combining different tools, such as Code Interpreter, Retrieval, and Function calling.
-- **Simplified Integration:** The API offers straightforward integration with clear instructions, enabling developers to quickly grasp fundamental concepts and explore advanced capabilities.
+- **Code Interpreter Tool:** The Code Interpreter feature of the Assistants API enables the writing and execution of Python code within a secure environment. This functionality is capable of handling various types of files, including those with different data and formatting, and can produce output files containing data and graphical representations.
+- **Function Calling Tool:** The Assistants API, like the Chat Completions API, enables function calling. With function calling, you can define functions for the Assistants and it will intelligently provide the necessary functions to be called, along with their respective arguments.
+- **Knowledge Retrieval:** The Assistant can enhance its knowledge by incorporating information from external sources, such as exclusive product details or documents shared by users. When a file is uploaded and given to the Assistant, OpenAI will automatically break down the documents into smaller parts, organize and store the embeddings, and utilize vector search to find relevant content that can be used to respond to user inquiries.
+- **Threads:** A Thread represents a conversation. The Assistant will ensure that requests to the model fit within the maximum context window, using relevant optimization techniques such as truncation
 
 ## Use Case
 Imagine an assistant that helps you figure out your finances, retrieves useful info, and executes special functions—all in one go! It's like giving your app a brain that keeps getting smarter! By leveraging the Assistants API, developers can create assistants with easy-to-follow instructions that use special tools to get things done. Right now, it has three superpowers: Code Interpreter (for doing techy stuff), Retrieval (for finding info), and Function calling (for making things happen). You can even mix these powers to create a super-assistant that can handle all sorts of tasks.
