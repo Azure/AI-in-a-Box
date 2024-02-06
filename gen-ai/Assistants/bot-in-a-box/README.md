@@ -1,9 +1,25 @@
-# Assistant API Bot in-a-box
+## Assistant API Bot in-a-box
 ![Banner](./readme_assets/banner.png)
 
-This project deploys a virtual Assistant template to Azure.
+### Overview
 
-## Solution Architecture
+This tutorial provides a step-by-step guide on how to deploy a virtual assistant leveraging the Azure OpenAI Assistants API. It covers the infrastructure deployment, configuration on the AI Studio and Azure Portal, and end-to-end testing examples.
+
+### Objective
+
+The main objective of this tutorial is to help users understand how to leverage the Assistants API to create a fully-fledged virtual assistant application.
+By the end of this tutorial, you should be able to:
+
+ - Deploy the necessary infrastructure to support an Azure OpenAI Assistant
+ - Configure as Assistant with the required tools
+ - Connect a Bot Framework application to your Assistant to deploy the chat to multiple channels
+
+### Programming Languages
+ - C#
+
+### Estimated Runtime: 30 mins
+
+### Solution Architecture
 
 The solution architecture is described in the diagram below.
 
@@ -15,10 +31,10 @@ The flow of messages is as follows:
 - Messages get processed through Azure Bot Services, which communicates with a .NET application running on App Services.
 - The .NET application connects to the Assistants API, creates a new thread for each conversation.
 - Every time a new message comes through, it is added to the thread, and an Assistant is executed on the thread to respond.
-- The .NET application waits for the Assistant to conclude processing, while providing feedback to the user.
+- The .NET application waits for the Assistant to conclude processing, while providing progress updates to the user.
 - Once the Assistant completes work, its response is posted to the user.
 
-## Pre-requisites
+### Pre-requisites
 
 - For running locally:
     - [Install .NET](https://dotnet.microsoft.com/en-us/download);
@@ -33,7 +49,7 @@ The flow of messages is as follows:
     azd auth login
     ```
 
-## Deploy to Azure
+### Deploy to Azure
 
 1. Clone this repository locally: 
 
@@ -61,7 +77,7 @@ You will be prompted for a subcription, region and model information. Keep regio
 
 ![Test Web Chat](./readme_assets/assistant-test.png)
 
-## Running Locally (must deploy resources to Azure first)
+### Running Locally (must deploy resources to Azure first)
 
 After running the deployment template, you may also run the application locally for development and debugging.
 
@@ -74,12 +90,12 @@ After running the deployment template, you may also run the application locally 
 - Open Bot Framework Emulator and connect to http://localhost:3987/api/messages
 - Don't forget to enable firewall access to any services where it may be restricted. By default, SQL Server will disable public connections.
 
-## Keywords
+### Keywords
 
 - Send "clear" to delete the current thread;
 - Send "logout" to sign out when SSO is enabled;
 
-## Enabling Web Chat
+### Enabling Web Chat
 
 To deploy a Web Chat version of your app:
 
@@ -91,25 +107,3 @@ To deploy a Web Chat version of your app:
 - Your bot will be available at https://APP_NAME.azurewebsites.net.
 
 Please note that doing so will make your bot public, unless you implement authentication / SSO.
-
-## Contributing
-
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
-
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-## Trademarks
-
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
