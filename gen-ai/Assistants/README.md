@@ -2,7 +2,7 @@
 ![Banner](../../media/images/banner-assistants-in-a-box.png)
 
 ## Overview
-The Assistant API empowers developers to create intelligent assistants that can perform a variety of tasks, including financial management, information retrieval, and executing specialized functions. These assistants act as the brain of your application, continuously learning and evolving to provide better assistance.
+The Assistants API enables you to create AI assistants within your own apps. These assistants have instructions and can use models, tools, and knowledge to answer user questions. The API currently offers three types of tools: Code Interpreter, Retrieval, and Function calling.
 
 ## Key Features and Benefits
 
