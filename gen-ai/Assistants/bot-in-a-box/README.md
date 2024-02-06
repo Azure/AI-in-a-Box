@@ -55,7 +55,7 @@ The flow of messages is as follows:
 
 ```
 git clone https://github.com/Azure/AI-in-a-Box
-cd gen-ai/assistant-bot-in-a-box
+cd gen-ai/Assistants/bot-in-a-box
 ```
 2. Deploy resources:
 ```
