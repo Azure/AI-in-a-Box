@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "{MSI_CLIENT_ID}",
+  "packageName": "com.microsoft.teams.AssistantBot",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Semantic Kernel Bot",
+    "full": "Semantic Kernel Bot"
+  },
+  "description": {
+    "short": "Implement a Semantic Kernel based bot for Microsoft Teams",
+    "full": "Implement a Semantic Kernel based bot for Microsoft Teams"
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "{MSI_CLIENT_ID}",
+      "scopes": [
+        "personal"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "validDomains": [
+    "token.botframework.com",
+    "{APP_SERVICES_NAME}.azurewebsites.net"
+  ],
+  "webApplicationInfo": {
+    "id": "{REGISTRATION_APP_ID}",
+    "resource": "api://botid-{REGISTRATION_APP_ID}"
+  }
+}
