@@ -37,9 +37,6 @@ Check out the provided samples to get started with integrating the Assistants AP
 | [Wind Farm](./api-in-a-box/wind_farm/assistant-wind_farm.ipynb) | Utilizing Assistant tools such as the Code Interpreter and Function calling, this bot is capable of retrieving a CSV file that illustrates turbine wind speed, voltage, and the last maintenance date. It assists you in reviewing the file contents and aids in determining whether a specific turbine is in need of maintenance. |
 | [Assistants Bot-in-a-Box](./bot-in-a-box/) | The Assistants API Bot in-a-box automates virtual assistant deployment on Azure, facilitating seamless communication between users and assistants across various messaging channels. It streamlines message processing and response delivery through Azure Bot Services and the Assistants API. |
 
-
-use the assistant to analyze the failed
-
 ## Prerequisites
 Before using the Assistants API, ensure you have:
 
