@@ -11,7 +11,7 @@ The Assistants API enables you to create AI assistants within your own apps. The
 - **Threads:** A Thread represents a conversation. The Assistant will ensure that requests to the model fit within the maximum context window, using relevant optimization techniques such as truncation
 
 ## Use Case
-Envision an all-in-one assistant aiding with finances, fetching information, and handling tasks effortlessly. The Assistants API offers developers a toolkit to enrich their apps. Key features like Function Calling enable seamless integration for tasks like messaging and device control. With Knowledge, developers can tap into vast data, ensuring accurate user responses. The API's Code Interpreter provides calculation abilities, while blending these powers crafts a versatile, super-assistant for diverse tasks.
+Envision an all-in-one assistant aiding with finances, fetching information, and handling tasks effortlessly. The Assistants API offers developers a toolkit to enrich their apps. Key features like ***Function Calling*** enable seamless integration for tasks like messaging and device control. With ***Knowledge Retrieval***, developers can tap into vast data, ensuring accurate user responses. The API's ***Code Interpreter*** provides calculation abilities, while blending these powers crafts a versatile, assistant for diverse tasks.
 
 ## How It Works
 The Assistants API operates through a straightforward flow:
