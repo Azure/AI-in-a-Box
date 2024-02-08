@@ -61,6 +61,49 @@ namespace Models
         [JsonPropertyName("instructions")]
         public string Instructions { get; set; }
     }
+
+    public class Function {
+        
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+        
+        [JsonPropertyName("arguments")]
+        public string Arguments { get; set; }
+
+    }
+    public class ToolCall {
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+        
+        [JsonPropertyName("function")]
+        public Function Function { get; set; }
+        
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+    }
+    public class SubmitToolOutputs {
+        [JsonPropertyName("tool_calls")]
+        public List<ToolCall> ToolCalls { get; set; }
+    }
+    public class ToolOutput {
+        [JsonPropertyName("tool_call_id")]
+        public string ToolCallId { get; set; }
+        [JsonPropertyName("output")]
+        public string Output { get; set; }
+    }
+    public class ToolOutputData {
+        [JsonPropertyName("tool_outputs")]
+        public List<ToolOutput> ToolOutputs { get; set; }
+    }
+
+    public class RequiredAction {
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+        [JsonPropertyName("submit_tool_outputs")]
+        public SubmitToolOutputs? SubmitToolOutputs { get; set; }
+    }
+
+
     public class ThreadRun
     {
         [JsonPropertyName("id")]
@@ -74,6 +117,9 @@ namespace Models
 
         [JsonPropertyName("status")]
         public string Status { get; set; }
+
+        [JsonPropertyName("required_action")]
+        public RequiredAction RequiredAction { get; set; }
     }
 
 }

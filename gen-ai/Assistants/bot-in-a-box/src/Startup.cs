@@ -99,6 +99,8 @@ namespace Microsoft.BotBuilderSamples
             //         services.AddSingleton(new BlobServiceClient(new Uri(configuration.GetValue<string>("BLOB_API_ENDPOINT")), azureCredentials));
 
             services.AddHttpClient();
+            if (configuration.GetValue<string>("SPEECH_API_ENDPOINT") != null)
+                services.AddSingleton(new SpeechService(new System.Net.Http.HttpClient(), configuration.GetValue<string>("SPEECH_API_ENDPOINT"), configuration.GetValue<string>("SPEECH_API_KEY")));
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             // services.AddSingleton<LoginDialog>();
             services.AddSingleton<LoginDialog>();

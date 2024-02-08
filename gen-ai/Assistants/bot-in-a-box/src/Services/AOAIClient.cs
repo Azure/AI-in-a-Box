@@ -32,6 +32,8 @@ namespace Services
         }
         public async Task<Thread> CreateThread()
         {
+            Console.WriteLine(_httpClient.BaseAddress);
+            Console.WriteLine(_accessKey);
             return await SendRequest<Thread>("/threads", HttpMethod.Post);
         }
         public async Task<Thread> DeleteThread(string threadId)
@@ -46,6 +48,10 @@ namespace Services
         {
             return await SendRequest<ThreadRun>($"/threads/{threadId}/runs", HttpMethod.Post, new StringContent(JsonSerializer.Serialize(run), Encoding.UTF8, "application/json"));
         }
+        public async Task<ThreadRun> SubmitToolOutputs(string threadId, string runId, ToolOutputData toolOutputData)
+        {
+            return await SendRequest<ThreadRun>($"/threads/{threadId}/runs/{runId}/submit_tool_outputs", HttpMethod.Post, new StringContent(JsonSerializer.Serialize(toolOutputData), Encoding.UTF8, "application/json"));
+        }
         public async Task<ThreadRun> GetThreadRun(string threadId, string runId)
         {
             return await SendRequest<ThreadRun>($"/threads/{threadId}/runs/{runId}", HttpMethod.Get);
@@ -58,7 +64,7 @@ namespace Services
 
         private async Task<T> SendRequest<T>(string path, HttpMethod method, StringContent body = null)
         {
-            var url = "/openai" + path + "?api-version=2024-01-01-preview";
+            var url = "/openai" + path + "?api-version=2024-02-15-preview";
             Console.WriteLine(url);
 
             var request = new HttpRequestMessage(method, url)
