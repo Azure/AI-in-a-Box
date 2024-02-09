@@ -10,32 +10,24 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Encodings.Web;
 using System.Net.Http;
-using Azure.AI.FormRecognizer.DocumentAnalysis;
-using Azure.Search.Documents;
-using Azure.Storage.Blobs;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Services;
 using Models;
-using Microsoft.Kiota.Abstractions;
 
 
 namespace Microsoft.BotBuilderSamples
 {
     public class AssistantBot<T> : StateManagementBot<T> where T : Dialog
     {
-        private Kernel kernel;
         private string _aoaiModel;
         private string _aoaiAssistant;
         private readonly AOAIClient _aoaiClient;
         private readonly string _welcomeMessage;
         private readonly List<string> _suggestedQuestions;
-        private readonly string _searchSemanticConfig;
         private HttpClient client = new HttpClient();
 
         public AssistantBot(
@@ -77,7 +69,7 @@ namespace Microsoft.BotBuilderSamples
                 // await turnContext.SendActivityAsync("No thread found - opening a new one for you.");
                 var thread = await _aoaiClient.CreateThread();
                 conversationData.ThreadId = thread.Id;
-                // await turnContext.SendActivityAsync($"Thread started: {thread.Id}");
+                await turnContext.SendActivityAsync($"Thread started: {thread.Id}");
             }
             else
             {
@@ -147,6 +139,7 @@ namespace Microsoft.BotBuilderSamples
 
             // Send back first message
             var messages = await _aoaiClient.ListThreadMessages(conversationData.ThreadId);
+            
             return messages.First().Content.First().Text.Value;
         }
         public async Task<string> QueryWikipedia(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext, string query)

@@ -17,6 +17,7 @@
     "cognitiveServicesFormRecognizer": "cog-fr-",
     "cognitiveServicesTextAnalytics": "cog-ta-",
     "cognitiveServicesBot": "cog-bot-",
+    "cognitiveServicesSpeech": "cog-spc-",
     "computeAvailabilitySets": "avail-",
     "computeCloudServices": "cld-",
     "computeDiskEncryptionSets": "des",

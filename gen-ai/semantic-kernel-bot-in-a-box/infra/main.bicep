@@ -24,12 +24,15 @@ param sqlDBName string = ''
 param searchName string = ''
 param storageName string = ''
 param documentIntelligenceName string = ''
+param speechName string = ''
 param bingName string = ''
 @description('Deploy SQL Database? (required for SQL Plugin demo)')
 param deploySQL bool
 @description('Deploy Search service? (required for Search Plugin demo)')
 param deploySearch bool
 @description('Deploy Document Intelligence service? (required for Upload Plugin demo)')
+param deploySpeech bool
+@description('Deploy Speech service?')
 param deployDocIntel bool
 param deployDalle3 bool = false
 param deployBing bool
@@ -79,6 +82,18 @@ module m_docs 'modules/documentIntelligence.bicep' = if (deployDocIntel) {
   params: {
     location: location
     documentIntelligenceName: !empty(documentIntelligenceName) ? documentIntelligenceName : '${abbrs.cognitiveServicesFormRecognizer}${environmentName}-${uniqueSuffix}'
+    msiPrincipalID: m_msi.outputs.msiPrincipalID
+    publicNetworkAccess: publicNetworkAccess
+    tags: tags
+  }
+}
+
+module m_speech 'modules/speech.bicep' = if (deploySpeech) {
+  name: 'deploy_speech'
+  scope: resourceGroup
+  params: {
+    location: location
+    speechName: !empty(speechName) ? speechName : '${abbrs.cognitiveServicesSpeech}${environmentName}-${uniqueSuffix}'
     msiPrincipalID: m_msi.outputs.msiPrincipalID
     publicNetworkAccess: publicNetworkAccess
     tags: tags
@@ -163,6 +178,8 @@ module m_app 'modules/appservice.bicep' = {
     bingName: deployBing ? m_bing.outputs.bingName : ''
     documentIntelligenceName: deployDocIntel ? m_docs.outputs.documentIntelligenceName : ''
     documentIntelligenceEndpoint: deployDocIntel ? m_docs.outputs.documentIntelligenceEndpoint : ''
+    speechName: deploySpeech ? m_speech.outputs.speechName : ''
+    speechEndpoint: deploySpeech ? m_speech.outputs.speechEndpoint : ''
     searchName: deploySearch ? m_search.outputs.searchName : ''
     searchEndpoint: deploySearch ? m_search.outputs.searchEndpoint : ''
     cosmosEndpoint: m_cosmos.outputs.cosmosEndpoint

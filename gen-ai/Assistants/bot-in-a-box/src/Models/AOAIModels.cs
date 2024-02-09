@@ -100,7 +100,7 @@ namespace Models
         [JsonPropertyName("type")]
         public string Type { get; set; }
         [JsonPropertyName("submit_tool_outputs")]
-        public SubmitToolOutputs? SubmitToolOutputs { get; set; }
+        public SubmitToolOutputs SubmitToolOutputs { get; set; }
     }
 
 

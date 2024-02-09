@@ -15,9 +15,10 @@ namespace TokenSampleApi.Controllers
     {
         private readonly SpeechService _speechService;
 
+        private readonly string _speechRegion;
         private readonly string _speechSecret;
 
-        public SpeechController(SpeechService speechService, IConfiguration configuration)
+        public SpeechController(IConfiguration configuration, SpeechService speechService = null)
         {
             _speechService = speechService;
             _speechRegion = configuration["SPEECH_REGION"];
@@ -40,7 +41,7 @@ namespace TokenSampleApi.Controllers
                 return BadRequest(new { message = invalidOpException.Message });
             }
 
-            return this.Ok(new { token = speechTokenDetails.Token, region =  });
+            return this.Ok(new { token = speechTokenDetails.Token, region = _speechRegion });
         }
     }
 }

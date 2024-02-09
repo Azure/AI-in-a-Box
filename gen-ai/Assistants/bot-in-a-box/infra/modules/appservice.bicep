@@ -7,17 +7,24 @@ param sku string = 'S1'
 param tags object = {}
 param openaiGPTModel string
 param openaiEmbeddingsModel string
+param speechName string
+var speechNames = !empty(speechName) ? [speechName] : []
 
 param openaiName string
 param storageName string
 
 param openaiEndpoint string
 param cosmosEndpoint string
+param speechEndpoint string
 
 
 resource openai 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
   name: openaiName
 }
+
+resource speeches 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = [for name in speechNames: {
+  name: name
+}]
 
 resource storage 'Microsoft.Storage/storageAccounts@2021-09-01' existing = {
   name: storageName
@@ -78,7 +85,19 @@ resource appService 'Microsoft.Web/sites@2022-09-01' = {
         }
         {
           name: 'AOAI_ASSISTANT_ID'
-          value: openaiEmbeddingsModel
+          value: 'YOUR_ASSISTANT_ID'
+        }
+        {
+          name: 'SPEECH_API_ENDPOINT'
+          value: speechEndpoint
+        }
+        {
+          name: 'SPEECH_API_KEY'
+          value: !empty(speechName) ? speeches[0].listKeys().key1 : ''
+        }
+        {
+          name: 'SPEECH_REGION'
+          value: !empty(speechName) ? speeches[0].location : ''
         }
         {
           name: 'COSMOS_API_ENDPOINT'
@@ -90,7 +109,7 @@ resource appService 'Microsoft.Web/sites@2022-09-01' = {
         }
         {
           name: 'PROMPT_WELCOME_MESSAGE'
-          value: 'Welcome to Semantic Kernel Bot in-a-box! Ask me anything to get started.'
+          value: 'Welcome to Assistants Bot in-a-box! Ask me anything to get started.'
         }
         {
           name: 'PROMPT_SYSTEM_MESSAGE'
