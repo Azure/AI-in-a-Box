@@ -14,6 +14,7 @@
     "cognitiveServicesAccounts": "cog-",
     "cognitiveServicesBing": "cog-bg-",
     "cognitiveServicesOpenAI": "cog-oa-",
+    "cognitiveServicesSpeech": "cog-spc-",
     "cognitiveServicesFormRecognizer": "cog-fr-",
     "cognitiveServicesTextAnalytics": "cog-ta-",
     "cognitiveServicesBot": "cog-bot-",
