@@ -43,7 +43,7 @@ An adversarial prompt attack is when a prompt is used to manipulate an LLM in or
 * [Prompt leaking](https://www.promptingguide.ai/risks/adversarial#prompt-leaking): is intended to cause the model to leak confidential or proprietary information.   
 * [Jailbreaking](https://www.promptingguide.ai/risks/adversarial#jailbreaking): is a technique to bypass model safety mechanisms to generate illegal or unethical content. 
 * [DAN](https://www.promptingguide.ai/risks/adversarial#dan): is an acronym for **D**o **A**nything **N**ow and is another technique intended to circumvent model safety guardrails and force it to comply with requests that generate unfiltered responses.
-* [Multi-prompt](): a series of prompts are used to extract private or sensitive information.
+* [Multi-prompt](https://www.lakera.ai/blog/guide-to-prompt-injection): a series of prompts are used to extract private or sensitive information.
 * Multi-language: although LLMs are trained in multiple languages, performance is superior for English. This technique involves submitting a request in languages other than English to cause the model to overlook or bypass security checks.
 * Obfuscation (token smuggling): a technique to present data in an unexpected format to avoid detection.  
 
