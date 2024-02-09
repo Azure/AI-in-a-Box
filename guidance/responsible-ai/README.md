@@ -1,5 +1,5 @@
 # Guidance: Responsible AI (RAI)
-![Responsible AI (RAI)](../media/images/banner-rai.png)
+![Responsible AI (RAI)](../../media/images/banner-rai.png)
 
 ## Introduction
 There is a lot to be excited about with recent advances in AI and LLM technology, but every day there are examples in the media about where and how it has gone wrong. As AI is integrated into more of our daily work and personal lives it can cause minor inconveniences, such as mistakenly canceled appointments, to more serious issues, such as potential job displacement and privacy compromises — and may even compound already existing social or economic inequities. All of us who design, develop, and deploy AI have a responsibility to confront the risks that the technology introduces.
@@ -8,7 +8,7 @@ There is a lot to be excited about with recent advances in AI and LLM technology
 
 ## Get Started
 RAI sounds promising.  Who wouldn't want their product to be responsible or trustworthy?  But there can be challenges:
-* AI sysems are complex and require a diversity of teams, skills, and tools
+* AI systems are complex and require a diversity of teams, skills, and tools
 * Potential harms and risks of AI systems are different from those of traditional software systems
 * Leadership support is crucial for a sustainable RAI practice
   
@@ -37,7 +37,7 @@ The pace of AI is moving quickly and a variety of methods are needed to help mea
 
 #### Adopt a layered mitigation approach for RAI
   At Microsoft, we recommend a layered mitigation approach that combines technical, operational, and governance measures to reduce the potential harms of LLMs. A layered approach applies different measures at different stages of development and deployment as documented in the article [Deploy large language models responsibly with Azure AI](https://techcommunity.microsoft.com/t5/ai-machine-learning-blog/deploy-large-language-models-responsibly-with-azure-ai/ba-p/3876792) and depicted below:
-![Responsible AI (RAI)](../media/images/Rai-mitigation-layers.png)
+![Responsible AI (RAI)](../../media/images/Rai-mitigation-layers.png)
 See [Harms mitigation strategies with Azure AI](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/evaluation-improvement-strategies) for a walk-through of the mitigation layers.  
  
 #### Get started with RAI metrics 
@@ -66,7 +66,7 @@ Here are additional RAI resources:
 * [Microsoft AI principles](https://www.microsoft.com/en-us/ai/principles-and-approach) 
 * [Microsoft Responsible AI Standard, v2](https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE5cmFl) 
 * [Microsoft Responsible AI Impact Assessment Template](https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE5cmFk)
-* [Responsible AI tools and guidance](https://aka.ms/rai) and [HAX Tookit](https://www.microsoft.com/en-us/haxtoolkit/)
+* [Responsible AI tools and guidance](https://aka.ms/rai) and [HAX Toolkit](https://www.microsoft.com/en-us/haxtoolkit/)
 * Video: [An introduction to responsible AI (RAI) process](https://learn.microsoft.com/en-us/shows/learn-live/fasttrack-for-azure-season-3-ep07-an-introduction-to-responsible-ai-rai-process)
 * Medium articles: [Responsible AI in action, Part 1: Get started](https://medium.com/data-science-at-microsoft/responsible-ai-in-action-part-1-get-started-ee50bebbdff3?source=friends_link&sk=3a9ad40230116d9fc4c66fdf7ab56de2), and [Responsible AI in action, Part 2: Complete an impact assessment](https://medium.com/data-science-at-microsoft/responsible-ai-in-action-part-2-complete-an-impact-assessment-9b792409e8db?source=friends_link&sk=6e68eb938a2be1d776748cc55a89b663) and [Responsible AI in action, Part 3: Tools to help](https://medium.com/data-science-at-microsoft/responsible-ai-in-action-part-3-tools-to-help-969e45cac11b?source=friends_link&sk=69bfea1ae66e2b7272d58e28a49cafe4)
  

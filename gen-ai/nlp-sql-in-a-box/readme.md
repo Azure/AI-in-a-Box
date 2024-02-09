@@ -38,7 +38,7 @@ And with Azure Speech Services, we will convert your speech into text and synthe
 
 **Step 2.** Create some mock data in Azure SQL Server
 
-**Step 3.** Create the Enviornment file .env
+**Step 3.** Create the Environment file .env
 
 **Step 4.** Analyze the Plugin Code (STTPlugin, TTSPlugin, nlpToSqlPlugin)
 
@@ -65,13 +65,13 @@ And with Azure Speech Services, we will convert your speech into text and synthe
     azd up
     ```
 
-    You will be prompted for a subcription, and region.
+    You will be prompted for a subscription, and region.
 
 
 ## Post Deployment
 Once your resources have been deployed you will need to do the following to get the app up and running:
 
-1. Add your client IP4 addres in the Azure SQL Server Firewall rules:       
+1. Add your client IP4 address in the Azure SQL Server Firewall rules:       
     * If you don't know how to add your IP Address to your SQL Server follow this link -> [Create a server-level firewall rule in Azure portal](https://learn.microsoft.com/en-us/azure/azure-sql/database/firewall-create-server-level-portal-quickstart)
 
 2. Create some mock data in Azure SQL Server. 
