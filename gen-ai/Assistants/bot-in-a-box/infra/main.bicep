@@ -18,9 +18,12 @@ param appServicePlanName string = ''
 param appServiceName string = ''
 param botServiceName string = ''
 param cosmosName string = ''
+param speechName string = ''
 
 param storageName string = ''
 param deployDalle3 bool = false
+param deploySpeech bool
+@description('Deploy Speech service?')
 
 @allowed(['Enabled', 'Disabled'])
 param publicNetworkAccess string
@@ -57,6 +60,18 @@ module m_openai 'modules/openai.bicep' = {
     msiPrincipalID: m_msi.outputs.msiPrincipalID
     publicNetworkAccess: publicNetworkAccess
     deployDalle3: deployDalle3
+    tags: tags
+  }
+}
+
+module m_speech 'modules/speech.bicep' = if (deploySpeech) {
+  name: 'deploy_speech'
+  scope: resourceGroup
+  params: {
+    location: location
+    speechName: !empty(speechName) ? speechName : '${abbrs.cognitiveServicesSpeech}${environmentName}-${uniqueSuffix}'
+    msiPrincipalID: m_msi.outputs.msiPrincipalID
+    publicNetworkAccess: publicNetworkAccess
     tags: tags
   }
 }
@@ -99,6 +114,8 @@ module m_app 'modules/appservice.bicep' = {
     openaiEndpoint: m_openai.outputs.openaiEndpoint
     openaiGPTModel: m_openai.outputs.openaiGPTModel
     openaiEmbeddingsModel: m_openai.outputs.openaiEmbeddingsModel
+    speechName: deploySpeech ? m_speech.outputs.speechName : ''
+    speechEndpoint: deploySpeech ? m_speech.outputs.speechEndpoint : ''
     cosmosEndpoint: m_cosmos.outputs.cosmosEndpoint
     storageName: m_storage.outputs.storageName
   }
