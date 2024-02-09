@@ -19,8 +19,8 @@ namespace Microsoft.BotBuilderSamples
         public LoginDialog(IConfiguration configuration)
             : base(nameof(LoginDialog))
         {
-            _login_successful_message = configuration.GetValue<string?>("SSO_MESSAGE_SUCCESS");
-            _login_failed_message = configuration.GetValue<string?>("SSO_MESSAGE_FAILED");
+            _login_successful_message = configuration.GetValue<string>("SSO_MESSAGE_SUCCESS", "Login success");
+            _login_failed_message = configuration.GetValue<string>("SSO_MESSAGE_FAILED", "Login failed");
             AddDialog(new OAuthPrompt(
                 nameof(OAuthPrompt),
                 new OAuthPromptSettings

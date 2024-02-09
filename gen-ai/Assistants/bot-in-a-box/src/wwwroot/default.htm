@@ -59,21 +59,24 @@
       }
 
       (async function main() {
-        // This is for obtaining Direct Line token from the bot.
-        // The Direct Line token will be bound to a random user ID.
-        // In a production system, we should avoid using Direct Line secret to connect to the bot.
-        const { token } = await fetchJSON('/api/directline/token');
-
+        let directLineToken = await fetchJSON('/api/directline/token')
+          .then(res => res.token)
+        let speechData = await fetchJSON('/api/speech/token')
+          .catch(err => null)
         WebChat.renderWebChat(
           {
-            directLine: WebChat.createDirectLine({ token }),
-            styleOptions: {
-              backgroundColor: 'rgba(255, 255, 255, .8)'
-            }
+            directLine: createDirectLine({ token: directLineToken }),
+            locale: 'en-US',
+            webSpeechPonyfillFactory: speechData ? WebChat.createCognitiveServicesSpeechServicesPonyfillFactory({
+              credentials: {
+                region: speechData.region,
+                authorizationToken: speechData.token
+              }
+            }) : undefined
           },
           document.getElementById('webchat')
         );
-      })().catch(err => console.error(err));
+      })();
     </script>
     <div id="root"></div>
   </body>

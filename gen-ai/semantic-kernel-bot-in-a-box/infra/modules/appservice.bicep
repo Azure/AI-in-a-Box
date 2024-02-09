@@ -10,6 +10,8 @@ param openaiEmbeddingsModel string
 
 param documentIntelligenceName string
 var documentIntelligenceNames = !empty(documentIntelligenceName) ? [documentIntelligenceName] : []
+param speechName string
+var speechNames = !empty(speechName) ? [speechName] : []
 param bingName string
 var bingNames = !empty(bingName) ? [bingName] : []
 param openaiName string
@@ -20,6 +22,7 @@ var searchNames = !empty(searchName) ? [searchName] : []
 param openaiEndpoint string
 param searchEndpoint string
 param documentIntelligenceEndpoint string
+param speechEndpoint string
 param sqlConnectionString string
 param cosmosEndpoint string
 
@@ -41,6 +44,10 @@ resource searchAccounts 'Microsoft.Search/searchServices@2023-11-01' existing = 
 }]
 
 resource documentIntelligences 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = [for name in documentIntelligenceNames: {
+  name: name
+}]
+
+resource speeches 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = [for name in speechNames: {
   name: name
 }]
 
@@ -120,6 +127,18 @@ resource appService 'Microsoft.Web/sites@2022-09-01' = {
         {
           name: 'DOCINTEL_API_KEY'
           value: !empty(documentIntelligenceName) ? documentIntelligences[0].listKeys().key1 : ''
+        }
+        {
+          name: 'SPEECH_API_ENDPOINT'
+          value: speechEndpoint
+        }
+        {
+          name: 'SPEECH_API_KEY'
+          value: !empty(speechName) ? speeches[0].listKeys().key1 : ''
+        }
+        {
+          name: 'SPEECH_REGION'
+          value: !empty(speechName) ? speeches[0].location : ''
         }
         {
           name: 'SQL_CONNECTION_STRING'
