@@ -13,7 +13,7 @@ The main objective of this tutorial is to demonstrate how to use function callin
 This tutorial uses the following services:
 
 - Azure OpenAI Service - you can apply for access [here](https://go.microsoft.com/fwlink/?linkid=2222006)
-- Bing Search - [Bing Search resouce](https://learn.microsoft.com/en-us/bing/search-apis/bing-web-search/create-bing-search-service-resource) 
+- Bing Search - [Bing Search resource](https://learn.microsoft.com/en-us/bing/search-apis/bing-web-search/create-bing-search-service-resource) 
 
 ### Programming Languages
 

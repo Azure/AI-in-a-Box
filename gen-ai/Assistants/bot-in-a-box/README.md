@@ -27,7 +27,7 @@ The solution architecture is described in the diagram below.
 
 The flow of messages is as follows:
 
-- End-users connect to a messaging channel your bot is publised to, such as Web, a PowerBI dashboard or Teams;
+- End-users connect to a messaging channel your bot is published to, such as Web, a PowerBI dashboard or Teams;
 - Messages get processed through Azure Bot Services, which communicates with a .NET application running on App Services.
 - The .NET application connects to the Assistants API, creates a new thread for each conversation.
 - Every time a new message comes through, it is added to the thread, and an Assistant is executed on the thread to respond.
@@ -61,7 +61,7 @@ cd gen-ai/Assistants/bot-in-a-box
 ```
 azd up
 ```
-You will be prompted for a subcription, region and model information. Keep regional model availability when proceeding.
+You will be prompted for a subscription, region and model information. Keep regional model availability when proceeding.
 
 3. Go to the Azure OpenAI Studio and create an Assistant with the tools you want to use. Alternatively, you can also use the API.
 

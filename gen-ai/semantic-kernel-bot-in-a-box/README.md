@@ -11,7 +11,7 @@ The solution architecture is described in the diagram below.
 
 The flow of messages is as follows:
 
-- End-users connect to a messaging channel your bot is publised to, such as Web, a PowerBI dashboard or Teams;
+- End-users connect to a messaging channel your bot is published to, such as Web, a PowerBI dashboard or Teams;
 - Messages get processed through Azure Bot Services, which communicates with a .NET application running on App Services.
 - The .NET application runs a Semantic Kernel Stepwise Planner at its core. The planner elaborates a series of steps to process the user's request, and then executes it.
 - Each step of the plan is formulated through Azure OpenAI, and the executed against Cognitive Search (traditional RAG pattern) or Azure SQL (structured data RAG).
@@ -45,7 +45,7 @@ cd semantic-kernel-bot-in-a-box
 ```
 azd up
 ```
-You will be prompted for a subcription, region and model information. Keep regional model availability when proceeding.
+You will be prompted for a subscription, region and model information. Keep regional model availability when proceeding.
 
 3. Test on Web Chat - go to your Azure Bot resource on the Azure portal and look for the Web Chat feature on the left side menu.
 

@@ -126,7 +126,7 @@ Then eliminate the Get Metadata and For Each activities and call the ChildAnalyz
 ### Use the same Data Factory for other video analysis use cases
 
 You can set up multiple triggers over your Azure Data Factory and pass different parameter values for whatever analysis you need to do:
-![trigers](./readme-assets/new-trigger-parm.png)
+![triggers](./readme-assets/new-trigger-parm.png)
 
 You can set up different storage accounts for landing videos, then adjust the **storageaccounturl** and **storageaccountcontainer** parameters to ingest and analyze those videos. You can have different prompts and other values sent to GPT-4V in the **sys_message**, **user_prompt**, **temperature**, and **top_p** values for different triggers. You can land the data in a different Cosmos Account, Database and/or Container when setting the **cosmosaccount**, and **cosmosdb**, and **cosmoscontainer** values.
 

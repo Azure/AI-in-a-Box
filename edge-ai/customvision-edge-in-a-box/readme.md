@@ -21,7 +21,7 @@ The sample includes deploying the necessary infrastructure and guides you throug
             * Deploy model via a deployment manifest
 2. Detection is done to the edge using Custom Vision model
 3. If graffiti is detected, the video is added to Azure Storage account using Blob on Edge
-4. Video is synced upto Azure for further analysis and possibly OCR (Optical Character Recognition)
+4. Video is synced up to Azure for further analysis and possibly OCR (Optical Character Recognition)
 
 ## Prerequisites
 * An [Azure subscription](https://azure.microsoft.com/en-us/free/).
@@ -41,7 +41,7 @@ The sample includes deploying the necessary infrastructure and guides you throug
 
 **Step 2.** Configure Edge Device and Create Edge VM if you would like
 
-**Step 3.** Buld ML model into docker image using [Custom Vision Studio](https://www.customvision.ai/)
+**Step 3.** Build ML model into docker image using [Custom Vision Studio](https://www.customvision.ai/)
 * Create a Custom Vision project with properties “classification” and multiclass (Single tag per image)”
     <img src="./readme_assets/cvproject.png" />
 * Make sure you select General (compact) as domain, otherwise the model cannot be exported as a container
@@ -80,7 +80,7 @@ The sample includes deploying the necessary infrastructure and guides you throug
     azd up
     ```
 
-    You will be prompted for a subcription, region and additional parameters.
+    You will be prompted for a subscription, region and additional parameters.
 
 
 ## Post Deployment
