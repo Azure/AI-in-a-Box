@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This guidance document synthesizes best practices for scaling OpenAI applications within Azure, detailing resource organization, quota management, rate limiting, and the strategic use of Provisioned Throughput Units (PTUs) and Azure API Management (APIM) for efficient load balancing.
+This guidance document contains best practices for scaling OpenAI applications within Azure, detailing resource organization, quota management, rate limiting, and the strategic use of Provisioned Throughput Units (PTUs) and Azure API Management (APIM) for efficient load balancing.
 
 ## Best Practices for Azure OpenAI Resources
 
