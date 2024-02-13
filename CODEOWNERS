@@ -1,10 +1,10 @@
 # Owners for this repo
 *       @AndresPad @codebytes @neerajjhaveri @MarcoABCardoso
 
-/ai-services/*                              @jehayesms @MarcoABCardoso
-/machine-learning/ml-ops-in-a-box/*         @Welasco
+/ai-services/*                              @jehayesms @AndresPad @MarcoABCardoso
+/machine-learning/ml-ops-in-a-box/*         @Welasco @AndresPad
 
-/gen-ai/Assistants/*                        @msalemor               
+/gen-ai/Assistants/*                        @msalemor @AndresPad              
 /gen-ai/semantic-kernel-bot-in-a-box/*      @MarcoABCardoso
 
-/guidance/*                                 @codebytes @KBaroni
+/guidance/*                                 @codebytes @KBaroni @AndresPad
