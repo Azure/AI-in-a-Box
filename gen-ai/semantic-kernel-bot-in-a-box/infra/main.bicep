@@ -10,7 +10,7 @@ param openaiName string = ''
 
 @allowed(['gpt-4', 'gpt-4-32k'])
 param gptModel string
-@allowed(['0613', '1106-Preview'])
+@allowed(['0613', '0125-Preview'])
 param gptVersion string
 
 param msiName string = ''

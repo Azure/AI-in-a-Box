@@ -73,6 +73,15 @@ namespace Microsoft.BotBuilderSamples
                 storage = new MemoryStorage();
             }
 
+            // register Document Analysis client
+            if (!configuration.GetValue<string>("DOCINTEL_API_ENDPOINT").IsNullOrEmpty())
+            {
+                services.AddSingleton(new DocumentAnalysisClient(new Uri(configuration.GetValue<string>("DOCINTEL_API_ENDPOINT")), new AzureKeyCredential(configuration.GetValue<string>("DOCINTEL_API_KEY"))));
+            }
+            else
+            {
+                services.AddSingleton(new DocumentAnalysisClient(new Uri(configuration.GetValue<string>("DOCINTEL_API_ENDPOINT")), azureCredentials));
+            }
 
             // Create the User state passing in the storage layer.
             var userState = new UserState(storage);
