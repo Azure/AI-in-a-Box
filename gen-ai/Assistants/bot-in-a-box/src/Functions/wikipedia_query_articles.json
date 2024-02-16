@@ -1,0 +1,16 @@
+{
+    "name": "query_wikipedia",
+    "description": "Query Wikipedia for information. Always provide a source link when using this information.",
+    "parameters": {
+      "type": "object",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The text to search for. Use as few words as possible"
+        }
+      }
+    }
+  }
