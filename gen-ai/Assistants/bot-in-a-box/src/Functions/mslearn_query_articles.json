@@ -1,0 +1,16 @@
+{
+    "name": "mslearn_query_articles",
+    "description": "Query Microsoft Learn documentation. Do not use the summary information to respond to specific questions - instead, use them only to decide whether they are relevant, and then use the mslearn_get_article function to get the full relevant ones.",
+    "parameters": {
+      "type": "object",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The text to search for. Use as few words as possible"
+        }
+      }
+    }
+  }

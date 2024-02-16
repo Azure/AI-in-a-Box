@@ -1,0 +1,16 @@
+{
+    "name": "get_wikipedia_content",
+    "description": "Get content from a Wikipedia article. Always provide a source link when using this information.",
+    "parameters": {
+      "type": "object",
+      "required": [
+        "page_title"
+      ],
+      "properties": {
+        "page_title": {
+          "type": "string",
+          "description": "The page to retrieve. Must be obtained through a query_wikipedia call."
+        }
+      }
+    }
+  }

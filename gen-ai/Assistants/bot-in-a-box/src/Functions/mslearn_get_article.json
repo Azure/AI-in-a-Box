@@ -1,0 +1,16 @@
+{
+    "name": "mslearn_get_article",
+    "description": "Get content from a Microsoft Learn article. Always provide a source link when using this information.",
+    "parameters": {
+      "type": "object",
+      "required": [
+        "page_url"
+      ],
+      "properties": {
+        "page_url": {
+          "type": "string",
+          "description": "The URL of the page to retrieve. Must be obtained through an mslearn_query_articles call."
+        }
+      }
+    }
+  }

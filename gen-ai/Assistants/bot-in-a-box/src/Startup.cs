@@ -75,7 +75,7 @@ namespace Microsoft.BotBuilderSamples
             services.AddSingleton(conversationState);
             services.AddSingleton(new AOAIClient(new System.Net.Http.HttpClient(), new Uri(configuration.GetValue<string>("AOAI_API_ENDPOINT")), configuration.GetValue<string>("AOAI_API_KEY")));
             services.AddHttpClient();
-            if (configuration.GetValue<string>("SPEECH_API_ENDPOINT") != null)
+            if (!configuration.GetValue<string>("SPEECH_API_ENDPOINT").IsNullOrEmpty())
                 services.AddSingleton(new SpeechService(new System.Net.Http.HttpClient(), configuration.GetValue<string>("SPEECH_API_ENDPOINT"), configuration.GetValue<string>("SPEECH_API_KEY")));
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             // services.AddSingleton<LoginDialog>();
