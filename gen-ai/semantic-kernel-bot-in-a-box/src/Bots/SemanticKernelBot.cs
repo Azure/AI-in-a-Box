@@ -107,7 +107,7 @@ namespace Microsoft.BotBuilderSamples
             if (_searchClient != null) kernel.ImportPluginFromObject(new HRHandbookPlugin(conversationData, turnContext, _embeddingsClient, _searchClient, _blobServiceClient, _searchSemanticConfig), "HRHandbookPlugin");
             kernel.ImportPluginFromObject(new DALLEPlugin(conversationData, turnContext, _aoaiClient), "DALLEPlugin");
             if (_bingClient != null) kernel.ImportPluginFromObject(new BingPlugin(conversationData, turnContext, _bingClient), "BingPlugin");
-            kernel.ImportPluginFromObject(new WikipediaPlugin(conversationData, turnContext), "WikipediaPlugin");
+            if (!_useWikipedia) kernel.ImportPluginFromObject(new WikipediaPlugin(conversationData, turnContext), "WikipediaPlugin");
             if (!_useStepwisePlanner) kernel.ImportPluginFromObject(new HumanInterfacePlugin(conversationData, turnContext, _aoaiClient), "HumanInterfacePlugin");
 
             if (_useStepwisePlanner)
