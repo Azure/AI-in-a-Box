@@ -6,3 +6,6 @@ obj
 appsettings.json
 
 .azure
+
+.env
+*_db
