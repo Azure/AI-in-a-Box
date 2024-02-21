@@ -1,5 +1,8 @@
 # Building Blocks
-![Banner](../../media/images/buildingblocks.png)
+<p align="center">
+  <img src="../../media/images/buildingblocks.png" alt="FTA AI-in-a-Box: Building" />
+</p>
+
 
 ## Why Building Blocks?
 Mastering the fundamentals and core concepts of OpenAI is indispensable for unlocking its full potential within Azure. Developers need a solid grasp of deploying Azure services like Azure OpenAI and Azure Cognitive Search, ensuring secure deployment aligned with responsible AI practices. This foundational knowledge guarantees that applications built on these services are not only functional but also ethically sound.
