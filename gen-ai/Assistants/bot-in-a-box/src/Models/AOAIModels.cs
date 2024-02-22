@@ -30,8 +30,7 @@ namespace Models
         [JsonPropertyName("content")]
         public string Content { get; set; } = null;
     }
-
-    public class MessageContentText {
+        public class MessageContentText {
         [JsonPropertyName("value")]
         public string Value { get; set; }
 
@@ -41,6 +40,13 @@ namespace Models
         public string Type { get; set; }
         [JsonPropertyName("text")]
         public MessageContentText Text { get; set; }
+        [JsonPropertyName("image_file")]
+        public ImageFile ImageFile { get; set; }
+    }
+
+    public class ImageFile {
+        [JsonPropertyName("file_id")]
+        public string FileId { get; set; }
     }
 
     public class Message

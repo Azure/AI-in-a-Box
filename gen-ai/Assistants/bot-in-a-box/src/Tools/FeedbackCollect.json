@@ -1,0 +1,14 @@
+{
+  "type": "function",
+  "function": {
+    "name": "feedback_collect",
+    "description": "Collect feedback about your response. Use this function after providing a final answer to the user.",
+    "parameters": {
+      "type": "object",
+      "required": [
+      ],
+      "properties": {
+      }
+    }
+  }
+}

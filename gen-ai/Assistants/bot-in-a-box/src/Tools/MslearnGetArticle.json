@@ -1,4 +1,6 @@
 {
+  "type": "function",
+  "function": {
     "name": "mslearn_get_article",
     "description": "Get content from a Microsoft Learn article. Always provide a source link when using this information.",
     "parameters": {
@@ -14,3 +16,4 @@
       }
     }
   }
+}

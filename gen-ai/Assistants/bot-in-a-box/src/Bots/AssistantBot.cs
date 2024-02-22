@@ -24,11 +24,11 @@ namespace Microsoft.BotBuilderSamples
 {
     public class AssistantBot<T> : StateManagementBot<T> where T : Dialog
     {
-        private string _aoaiModel;
         private string _aoaiAssistant;
         private readonly AOAIClient _aoaiClient;
         private readonly string _welcomeMessage;
         private readonly List<string> _suggestedQuestions;
+        private readonly string _appUrl;
         private HttpClient client = new HttpClient();
 
         public AssistantBot(
@@ -39,12 +39,12 @@ namespace Microsoft.BotBuilderSamples
             T dialog) :
             base(config, conversationState, userState, dialog)
         {
-            _aoaiModel = config.GetValue<string>("AOAI_GPT_MODEL");
             _aoaiAssistant = config.GetValue<string>("AOAI_ASSISTANT_ID");
             _welcomeMessage = config.GetValue<string>("PROMPT_WELCOME_MESSAGE");
             _systemMessage = config.GetValue<string>("PROMPT_SYSTEM_MESSAGE");
-            _suggestedQuestions = System.Text.Json.JsonSerializer.Deserialize<List<string>>(config.GetValue<string>("PROMPT_SUGGESTED_QUESTIONS"));
+            _suggestedQuestions = JsonSerializer.Deserialize<List<string>>(config.GetValue<string>("PROMPT_SUGGESTED_QUESTIONS"));
             _aoaiClient = aoaiClient;
+            _appUrl = config.GetValue("APP_URL", "http://localhost:3978");
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
@@ -62,7 +62,7 @@ namespace Microsoft.BotBuilderSamples
             });
         }
 
-        public override async Task<string> ProcessMessage(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext)
+        public override async Task<List<string>> ProcessMessage(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext)
         {
             await turnContext.SendActivityAsync(new Activity(type: "typing"));
             if (conversationData.ThreadId.IsNullOrEmpty())
@@ -83,7 +83,7 @@ namespace Microsoft.BotBuilderSamples
                 conversationData.ThreadId = null;
                 conversationData.History.Clear();
                 conversationData.Attachments.Clear();
-                return $"Thread {thread.Id} deleted.";
+                return new List<string> { $"Thread {thread.Id} deleted." };
             }
 
             // Add user message to thread
@@ -103,46 +103,10 @@ namespace Microsoft.BotBuilderSamples
             // Wait until run completes
             while (run.Status != "completed")
             {
-                Console.WriteLine(JsonSerializer.Serialize(run));
                 if (run.Status == "requires_action")
                 {
-                    var submitData = new ToolOutputData()
-                    {
-                        ToolOutputs = new()
-                    };
-                    foreach (ToolCall toolcall in run.RequiredAction.SubmitToolOutputs.ToolCalls)
-                    {
-                        var arguments = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, object>>(toolcall.Function.Arguments);
-                        string output = "";
-                        switch (toolcall.Function.Name)
-                        {
-                            case "get_wikipedia_content":
-                                output = await GetWikipediaContent(conversationData, turnContext, arguments["page_title"].ToString());
-                                break;
-                            case "query_wikipedia":
-                                output = await QueryWikipedia(conversationData, turnContext, arguments["query"].ToString());
-                                break;
-                            case "mslearn_query_articles":
-                                output = await MslearnQueryArticles(conversationData, turnContext, arguments["query"].ToString());
-                                break;
-                            case "mslearn_get_article":
-                                output = await MslearnGetArticle(conversationData, turnContext, arguments["page_url"].ToString());
-                                break;
-                            case "bot_show_image":
-                                output = await BotShowImage(conversationData, turnContext, arguments["image_url"].ToString());
-                                break;
-                            default:
-                                output = "Function not found";
-                                break;
-                        }
-                        var toolOutput = new ToolOutput
-                        {
-                            ToolCallId = toolcall.Id,
-                            Output = output
-                        };
-                        submitData.ToolOutputs.Add(toolOutput);
-                    }
-
+                    var tools = new Tools(conversationData, turnContext);
+                    var submitData = await tools.RunRequestedTools(run);
                     await _aoaiClient.SubmitToolOutputs(conversationData.ThreadId, run.Id, submitData);
                 }
                 // await turnContext.SendActivityAsync($"The assistant is running...");
@@ -150,85 +114,41 @@ namespace Microsoft.BotBuilderSamples
                 run = await _aoaiClient.GetThreadRun(conversationData.ThreadId, run.Id);
             }
 
-            // Send back first message
+            // Send back all messages written by the assistant since the last user message
+            var responses = new List<string>();
             var messages = await _aoaiClient.ListThreadMessages(conversationData.ThreadId);
+            var firstAssistantMessageIndex = messages.FindIndex(x => x.Role == "user") - 1;
 
-            return messages.First().Content.First().Text.Value;
-        }
-        public async Task<string> BotShowImage(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext, string imageUrl)
-        {
-            List<object> images = new();
-            images.Add(new { type = "Image", url = imageUrl });
-            object adaptiveCardJson = new
+            for (var i = firstAssistantMessageIndex; i >= 0; i--)
             {
-                type = "AdaptiveCard",
-                version = "1.0",
-                body = images
-            };
+                for (var j = messages[i].Content.Count() - 1; j >= 0; j--)
+                {
+                    if (messages[i].Content[j].Type == "text")
+                    {
+                        responses.Add(messages[i].Content[j].Text.Value);
+                        await turnContext.SendActivityAsync(messages[i].Content[j].Text.Value);
+                    }
+                    if (messages[i].Content[j].Type == "image_file")
+                    {
+                        responses.Add($"Image (ID: {messages[i].Content[j].ImageFile.FileId})");
+                        List<object> images = [new { type = "Image", url = $"{_appUrl}/openai/files/{messages[i].Content[j].ImageFile.FileId}/content" }];
+                        object adaptiveCardJson = new
+                        {
+                            type = "AdaptiveCard",
+                            version = "1.0",
+                            body = images
+                        };
 
-            var adaptiveCardAttachment = new Microsoft.Bot.Schema.Attachment()
-            {
-                ContentType = "application/vnd.microsoft.card.adaptive",
-                Content = adaptiveCardJson,
-            };
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment));
-            return "IMAGE SENT TO USER SUCCESSFULLY. DO NOT EMBED IT INTO YOUR RESPONSE.";
-        }
-        public async Task<string> MslearnQueryArticles(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext, string query)
-        {
-            await turnContext.SendActivityAsync($"Searching MS Learn for \"{query}\"...");
-            HttpResponseMessage response = await client.GetAsync(
-                $"https://learn.microsoft.com/api/search?search={UrlEncoder.Default.Encode(query)}&locale=en-us&$top=3"
-            );
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadAsStringAsync();
-            else
-                return $"FAILED TO FETCH DATA FROM API. STATUS CODE {response.StatusCode}";
-        }
-        public async Task<string> MslearnGetArticle(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext, string pageUrl)
-        {
-            if (!pageUrl.StartsWith("https://learn.microsoft.com/"))
-                return "NOT ALLOWED TO FETCH DATA FROM API OUTSIDE OF LEARN.MICROSOFT.COM";
-            await turnContext.SendActivityAsync($"Getting docs page \"{pageUrl}\"...");
-
-            var web = new HtmlWeb();
-            var doc = web.Load(pageUrl);
-
-            return doc.GetElementbyId("main-column").InnerText;
-        }
-        public async Task<string> QueryWikipedia(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext, string query)
-        {
-            await turnContext.SendActivityAsync($"Searching Wikipedia for \"{query}\"...");
-            HttpResponseMessage response = await client.GetAsync(
-                $"https://en.wikipedia.org/w/api.php?action=opensearch&search={UrlEncoder.Default.Encode(query)}&limit=1"
-            );
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadAsStringAsync();
-            else
-                return $"FAILED TO FETCH DATA FROM API. STATUS CODE {response.StatusCode}";
-        }
-        public async Task<string> GetWikipediaContent(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext, string pageTitle)
-        {
-            await turnContext.SendActivityAsync($"Getting article \"{pageTitle}\"...");
-            HttpResponseMessage response = await client.GetAsync(
-                $"https://en.wikipedia.org/w/api.php?action=query&format=json&titles={UrlEncoder.Default.Encode(pageTitle)}&prop=extracts&explaintext"
-            );
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadAsStringAsync();
-            else
-                return $"FAILED TO FETCH DATA FROM API. STATUS CODE {response.StatusCode}";
-
-        }
-
-        class QueryWikipediaArguments
-        {
-            [JsonPropertyName("query")]
-            public string Query { get; set; }
-        }
-        class GetWikipediaContentArguments
-        {
-            [JsonPropertyName("page_title")]
-            public string PageTitle { get; set; }
+                        var adaptiveCardAttachment = new Bot.Schema.Attachment()
+                        {
+                            ContentType = "application/vnd.microsoft.card.adaptive",
+                            Content = adaptiveCardJson,
+                        };
+                        await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment));
+                    }
+                }
+            }
+            return responses;
         }
     }
 }

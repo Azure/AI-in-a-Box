@@ -2,3 +2,6 @@
 dotnet_diagnostic.SKEXP0011.severity = none
 dotnet_diagnostic.SKEXP0060.severity = none
 dotnet_diagnostic.SKEXP0061.severity = none
+
+# IDE0055: Fix formatting
+dotnet_diagnostic.IDE0055.severity = none

@@ -1,5 +1,7 @@
 {
-    "name": "query_wikipedia",
+  "type": "function",
+  "function": {
+    "name": "wikipedia_query_articles",
     "description": "Query Wikipedia for information. Always provide a source link when using this information.",
     "parameters": {
       "type": "object",
@@ -14,3 +16,4 @@
       }
     }
   }
+}

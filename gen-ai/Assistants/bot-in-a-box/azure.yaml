@@ -8,3 +8,9 @@ services:
         project: src
         host: appservice
         language: dotnet
+hooks:
+  postdeploy:
+    shell: sh
+    run: ./scripts/createAssistant.sh
+    interactive: true
+    continueOnError: false
