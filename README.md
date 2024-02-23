@@ -4,10 +4,20 @@
   <img src="media/images/ai-in-a-box.png" alt="FTA AI-in-a-Box: Deployment Accelerator" style="width: 15%" />
 </p>
 
-Embarking on an Azure AI/ML journey can appear challenging for certain organizations and engineers, often leading to roadblocks in their initial scenarios. To address this challenge, providing a user-friendly and intuitive template becomes crucial.  Such a template should serve as a guiding example, illustrating the complete AI/ML/LLM lifecycle, showcasing the integration of MLOps practices, detailing the setup of training pipelines, offering insights into the processes of model training, deployment, access control, and integration with other services. This ensures a smoother and more comprehensible transition into the world of Azure AI and ML.
+<i>AI-in-a-Box</i> leverages the collective expertise of Microsoft Customer Engineers and Architects across the globe to develop and provide AI and ML solutions to the technical community. 
 
-<i>AI-in-a-Box</i> aims to provide an "Azure AI/ML <i>Easy Button</i>" for common scenarios within Azure ML, Edge AI, Cog Services and Azure OpenAI. Something that shows you how the pieces fit together in easy to deploy templates. Using the **patterns** available here, engineers will be able to quickly setup an Azure ML/AI Edge/Cog Services and/or Azure Open AI environment which optionally includes data ingestion, model training and creation, scaling patterns and edge deployments. So, if you’re seeking to shed some light into the realm of Azure ML/AI and Open AI, you’ve come to the right spot.
+Our intent is to present a curated collection of solution accelerators that can help engineers establish their AI/ML environments and solutions rapidly and with minimal friction, while maintaining the highest standards of quality and efficiency. 
 
+As we continue to learn from the market, the contributors will look to equip the community with the tools and resources necessary to succeed in the ever-evolving AI and ML landscape. 
+
+## Why AI-in-a-Box? 
+* Accelerated Deployment: Speed up your solutions with our proven, ready-to-use patterns. 
+* Cost Savings: Maximize your budget by reusing existing code and patterns. 
+* Enhanced Quality & Reliability: Trust in our solutions, validated through real-world scenarios. 
+* Competitive Advantage: Outpace competitors by accelerating solution deployment. 
+
+<br/>
+<br/>
 <p align="center">
   <img src="media/images/aibxtable.png" alt="FTA AI-in-a-Box: Deployment Accelerator" />
 </p>
@@ -20,7 +30,7 @@ Embarking on an Azure AI/ML journey can appear challenging for certain organizat
 |[Security for Generative AI Applications](./guidance/genai-security/)| This document provides specific security guidance for Generative AI (GenAI) applications. |
 |[Scaling OpenAI Applications](./guidance/scaling/)| This document contains best practices for scaling OpenAI applications within Azure. |
 
-## Available Patterns
+## Available “-in-a-Box” accelerators
 
 Pattern|Description|Supported Use Cases and Features|
 |---|---|---|
