@@ -101,7 +101,7 @@ namespace Microsoft.BotBuilderSamples
             });
 
             // Wait until run completes
-            while (run.Status != "completed")
+            while (run.Status != "completed" && run.Status != "failed")
             {
                 if (run.Status == "requires_action")
                 {
@@ -112,6 +112,9 @@ namespace Microsoft.BotBuilderSamples
                 // await turnContext.SendActivityAsync($"The assistant is running...");
                 System.Threading.Thread.Sleep(10000);
                 run = await _aoaiClient.GetThreadRun(conversationData.ThreadId, run.Id);
+            }
+            if (run.Status == "failed") {
+                await turnContext.SendActivityAsync("Something went wrong when running the assistant.");
             }
 
             // Send back all messages written by the assistant since the last user message

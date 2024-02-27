@@ -73,7 +73,6 @@ public class HRHandbookPlugin
             }
             textResults += $"Content: {result.Document.Chunk}\n*****\n\n";
         }
-        Console.WriteLine(textResults);
         return textResults;
     }
 

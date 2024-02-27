@@ -30,8 +30,6 @@ namespace Services
         }
         public async Task<Thread> CreateThread()
         {
-            Console.WriteLine(_httpClient.BaseAddress);
-            Console.WriteLine(_accessKey);
             return await JsonRequest<Thread>("/threads", HttpMethod.Post);
         }
         public async Task<Thread> DeleteThread(string threadId)
@@ -84,7 +82,6 @@ namespace Services
         {
             var response = await SendRequest(path, method, body);
             var responseContent = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(responseContent);
             if (!response.IsSuccessStatusCode)
                 throw new Exception(responseContent);
 

@@ -96,23 +96,4 @@ public class Tools
             return $"FAILED TO FETCH DATA FROM API. STATUS CODE {response.StatusCode}";
 
     }
-    public async Task<string> bot_show_image(Dictionary<string, object> arguments)
-    {
-        var imageUrl = arguments["image_url"].ToString();
-        List<object> images = [new { type = "Image", url = imageUrl }];
-        object adaptiveCardJson = new
-        {
-            type = "AdaptiveCard",
-            version = "1.0",
-            body = images
-        };
-
-        var adaptiveCardAttachment = new Microsoft.Bot.Schema.Attachment()
-        {
-            ContentType = "application/vnd.microsoft.card.adaptive",
-            Content = adaptiveCardJson,
-        };
-        await _turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment));
-        return "IMAGE SENT TO USER SUCCESSFULLY. DO NOT EMBED IT INTO YOUR RESPONSE.";
-    }
 }
