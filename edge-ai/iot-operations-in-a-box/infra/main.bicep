@@ -62,6 +62,7 @@ var networkSecurityGroupName = '${virtualMachineName}-NSG'
 #disable-next-line no-unused-vars
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 var prefix = '${environmentName}-${resourceToken}'
+var vmIdentityName = '${virtualMachineName}-vmIdentity'
 
 // Resources
 
@@ -69,6 +70,16 @@ var prefix = '${environmentName}-${resourceToken}'
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: 'rg-${environmentName}'
   location: location
+}
+
+// Create User Assigned Identity for VM
+module vmIdentity 'modules/identity/userassignedidentity.bicep' = {
+  scope: resourceGroup
+  name: replace('${take(prefix,19)}-${vmIdentityName}', '--', '-')
+  params: {
+    location: location
+    identityName: replace('${take(prefix,19)}-${vmIdentityName}', '--', '-')
+  }
 }
 
 // Create NSG
@@ -146,6 +157,8 @@ module vm 'modules/vm/vm-ubuntu.bicep' = {
     adminUsername: adminUsername
     adminPasswordOrKey: adminPasswordOrKey
     authenticationType: authenticationType
+    vmUserAssignedIdentityID: vmIdentity.outputs.identityid
+    vmUserAssignedIdentityPrincipalID: vmIdentity.outputs.principalId
     subnetId: subnet.id
     virtualMachineName: replace('${take(prefix,19)}-${virtualMachineName}', '--', '-')
     virtualMachineSize: virtualMachineSize

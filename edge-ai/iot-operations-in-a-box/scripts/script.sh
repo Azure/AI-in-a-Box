@@ -7,6 +7,7 @@
 # $2 = Azure Arc for Kubernetes cluster name
 # $3 = Azure Arc for Kubernetes cluster location
 # $4 = Azure VM User Name
+# $5 = Azure VM UserAssignedIdentity PrincipalId
 
 #############################
 # Script Definition
@@ -47,7 +48,7 @@ sudo apt-get install apt-transport-https --yes
 echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
 sudo apt-get update
 sudo apt-get install helm
-echo "source <(helm completion bash)" >> ~/.bashrc
+echo "source <(helm completion bash)" >> /home/$4/.bashrc
 
 #############################
 #Install Azure CLI
@@ -60,7 +61,7 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 #############################
 #Arc for Kubernetes setup
 #############################
-az login --identity
+az login --identity --username $5
 az extension add --name connectedk8s
 # az provider register --namespace Microsoft.Kubernetes
 # az provider register --namespace Microsoft.KubernetesConfiguration

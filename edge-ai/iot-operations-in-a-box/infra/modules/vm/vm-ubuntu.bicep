@@ -11,6 +11,8 @@ param ShellScriptName string
 param nsgId string = ''
 param Location string = resourceGroup().location
 param authenticationType string = 'password'
+param vmUserAssignedIdentityID string
+param vmUserAssignedIdentityPrincipalID string
 
 var linuxConfiguration = {
   disablePasswordAuthentication: true
@@ -41,7 +43,10 @@ resource vm 'Microsoft.Compute/virtualMachines@2023-07-01' = {
   name: virtualMachineName
   location: Location
   identity: {
-    type: 'SystemAssigned'
+    type: 'UserAssigned'
+    userAssignedIdentities: {
+      '${vmUserAssignedIdentityID}':{}
+    }
   }
   properties: {
     osProfile: {
@@ -95,7 +100,7 @@ module roleOnboarding '../identity/role.bicep' = {
   name: 'virtualMachineName-roleOnboarding'
   scope: resourceGroup()
   params:{
-    principalId: vm.identity.principalId
+    principalId: vmUserAssignedIdentityPrincipalID
     roleGuid: '34e09817-6cbe-4d01-b1a2-e0eac5743d41' // Kubernetes Cluster - Azure Arc Onboarding
   }
 }
@@ -104,32 +109,10 @@ module roleK8sExtensionContributor '../identity/role.bicep' = {
   name: 'virtualMachineName-roleK8sExtensionContributor'
   scope: resourceGroup()
   params:{
-    principalId: vm.identity.principalId
+    principalId: vmUserAssignedIdentityPrincipalID
     roleGuid: '85cb6faf-e071-4c9b-8136-154b5a04f717' // Kubernetes Extension Contributor
   }
 }
-
-// resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-07-01' = {
-//   parent: vm
-//   name: 'CustomScript'
-//   location: Location
-//   properties: {
-//     publisher: 'Microsoft.OSTCExtensions'
-//     type: 'CustomScriptForLinux'
-//     typeHandlerVersion: '1.5'
-//     autoUpgradeMinorVersion: false
-//     settings:{
-//       fileUris: [
-//         '${scriptURI}${ShellScriptName}'
-//       ]
-//       commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${Location}'
-//     }
-//   }
-//   dependsOn: [
-//     roleOnboarding
-//     roleK8sExtensionContributor
-//   ]
-// }
 
 resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
   parent: vm
@@ -144,7 +127,7 @@ resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
       fileUris: [
         '${scriptURI}${ShellScriptName}'
       ]
-      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${Location}'
+      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${Location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID}'
     }
   }
   dependsOn: [
