@@ -17,7 +17,7 @@ param virtualMachineSize string = 'Standard_B4ms'
 param virtualMachineName string
 
 @description('Username for the Virtual Machine.')
-param adminUsername string = 'azureuser'
+param adminUsername string
 
 @description('SSH Key or password for the Virtual Machine. SSH key is recommended.')
 @secure()
@@ -28,7 +28,7 @@ param adminPasswordOrKey string
   'sshPublicKey'
   'password'
 ])
-param authenticationType string = 'password'
+param authenticationType string
 
 @sys.description('Arc for Kubernates Cluster Name')
 param arcK8sClusterName string
@@ -45,10 +45,12 @@ param VNETAddress array = [
 param subnetCIDR string = '10.0.0.0/24'
 
 @sys.description('URI for Custom K3s VM Script and Config')
-param scriptURI string = 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/iot-operations-in-a-box/edge-ai/iot-operations-in-a-box/scripts/'
+//param scriptURI string = 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/iot-operations-in-a-box/edge-ai/iot-operations-in-a-box/scripts/'
+param scriptURI string
 
 @sys.description('Shell Script to be executed')
-param ShellScriptName string = 'script.sh'
+param ShellScriptName string
+//param ShellScriptName string = 'script.sh'
 
 // Variables
 var subnetName = 'IoT-Ops-Subnet'
@@ -116,7 +118,7 @@ module vnet 'modules/vnet/vnet.bicep' = {
 // Build reference of existing subnets
 resource subnet 'Microsoft.Network/virtualNetworks/subnets@2023-05-01' existing = {
   scope: resourceGroup
-  name: '${vnet.outputs.vnetName}${subnetName}'
+  name: '${vnet.outputs.vnetName}/${subnetName}'
 }
 
 // Create OPNsense Public IP

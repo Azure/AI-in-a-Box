@@ -20,16 +20,16 @@ echo "Installing K3s CLI" >> $logpath
 echo "#############################" >> $logpath
 curl -sfL https://get.k3s.io | sh -
 
-mkdir ~/.kube 2> /dev/null
-sudo k3s kubectl config view --raw > "$KUBECONFIG"
-chmod 600 "$KUBECONFIG"
-
 echo "
 KUBECONFIG=~/.kube/config
 source <(kubectl completion bash)
 alias k=kubectl
 complete -o default -F __start_kubectl k
 " >> ~/.bashrc
+
+mkdir ~/.kube 2> /dev/null
+sudo k3s kubectl config view --raw > "$KUBECONFIG"
+chmod 600 "$KUBECONFIG"
 
 #############################
 #Install Helm
