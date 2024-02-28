@@ -27,6 +27,7 @@ alias k=kubectl
 complete -o default -F __start_kubectl k
 " >> ~/.bashrc
 
+KUBECONFIG=~/.kube/config
 mkdir ~/.kube 2> /dev/null
 sudo k3s kubectl config view --raw > "$KUBECONFIG"
 chmod 600 "$KUBECONFIG"
