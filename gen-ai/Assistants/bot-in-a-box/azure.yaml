@@ -10,7 +10,13 @@ services:
         language: dotnet
 hooks:
   postdeploy:
-    shell: sh
-    run: ./scripts/createAssistant.sh
-    interactive: true
-    continueOnError: false
+    windows:
+      shell: pwsh
+      run: ./scripts/createAssistant.ps1
+      interactive: true
+      continueOnError: false
+    posix:
+      shell: sh
+      run: ./scripts/createAssistant.sh
+      interactive: true
+      continueOnError: false
