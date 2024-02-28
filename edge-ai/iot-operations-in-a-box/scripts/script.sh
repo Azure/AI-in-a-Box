@@ -61,6 +61,9 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 #############################
 #Arc for Kubernetes setup
 #############################
+echo "#############################" >> $logpath
+echo "Connecting K3s cluster to Arc for K8s" >> $logpath
+echo "#############################" >> $logpath
 az login --identity --username $5
 az extension add --name connectedk8s
 # az provider register --namespace Microsoft.Kubernetes
@@ -73,8 +76,14 @@ az connectedk8s connect --resource-group $1 --name $2 --location $3 --kube-confi
 #############################
 #Arc for Kubernetes GitOps
 #############################
+echo "#############################" >> $logpath
+echo "Configuring Arc for Kubernetes GitOps" >> $logpath
+echo "#############################" >> $logpath
 az extension add -n k8s-configuration
 az extension add -n k8s-extension
+
+# Sleep for 60 seconds to allow the cluster to be fully connected
+sleep 60
 
 # Deploy Extension
 # Need to be updated for Ai-In-A-Box Iot Operations Repo
