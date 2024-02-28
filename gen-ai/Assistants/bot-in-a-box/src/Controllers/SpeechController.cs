@@ -1,7 +1,6 @@
 ﻿// Sample code from: https://github.com/microsoft/BotFramework-WebChat
 
 using System;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

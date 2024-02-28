@@ -61,7 +61,6 @@ namespace Microsoft.BotBuilderSamples
             var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
 
             // -- Special keywords
-            // Clear conversation
             if (turnContext.Activity.Text != null)
             {
                 if (turnContext.Activity.Text.ToLower() == "logout")
@@ -93,17 +92,17 @@ namespace Microsoft.BotBuilderSamples
 
             conversationData.History.Add(new ConversationTurn { Role = "user", Message = turnContext.Activity.Text });
 
-            var replyText = await ProcessMessage(conversationData, turnContext);
+            var replies = await ProcessMessage(conversationData, turnContext);
 
-
-            conversationData.History.Add(new ConversationTurn { Role = "assistant", Message = replyText });
+            foreach (var reply in replies) {
+                conversationData.History.Add(new ConversationTurn { Role = "assistant", Message = reply });
+            }
 
             if (turnContext.Activity.Text == null || turnContext.Activity.Text.ToLower() == "")
             {
                 return;
             }
 
-            await turnContext.SendActivityAsync(replyText);
 
             conversationData.History = conversationData.History.GetRange(
                 Math.Max(conversationData.History.Count - _max_messages, 0),
@@ -116,10 +115,10 @@ namespace Microsoft.BotBuilderSamples
 
         }
 
-        public virtual async Task<string> ProcessMessage(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext)
+        public virtual async Task<List<string>> ProcessMessage(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext)
         {
             await turnContext.SendActivityAsync(JsonSerializer.Serialize(conversationData.History));
-            return $"This chat now contains {conversationData.History.Count} messages";
+            return new List<string>{ $"This chat now contains {conversationData.History.Count} messages" };
         }
 
         public string FormatConversationHistory(ConversationData conversationData)

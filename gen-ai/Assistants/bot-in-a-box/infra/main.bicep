@@ -137,3 +137,7 @@ module m_bot 'modules/botservice.bicep' = {
 
 output AZURE_RESOURCE_GROUP_ID string = resourceGroup.id
 output AZURE_RESOURCE_GROUP_NAME string = resourceGroup.name
+output AOAI_NAME string = m_openai.outputs.openaiName
+output AOAI_API_ENDPOINT string = m_openai.outputs.openaiEndpoint
+output APP_NAME string = m_app.outputs.appName
+output APP_HOSTNAME string = m_app.outputs.hostName
