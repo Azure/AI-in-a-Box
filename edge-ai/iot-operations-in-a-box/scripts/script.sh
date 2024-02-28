@@ -6,6 +6,7 @@
 # $1 = Azure Resource Group Name
 # $2 = Azure Arc for Kubernetes cluster name
 # $3 = Azure Arc for Kubernetes cluster location
+# $4 = Azure VM User Name
 
 #############################
 # Script Definition
@@ -20,17 +21,20 @@ echo "Installing K3s CLI" >> $logpath
 echo "#############################" >> $logpath
 curl -sfL https://get.k3s.io | sh -
 
+mkdir -p /home/$4/.kube
 echo "
 KUBECONFIG=~/.kube/config
 source <(kubectl completion bash)
 alias k=kubectl
 complete -o default -F __start_kubectl k
-" >> ~/.bashrc
+" >> /home/$4/.bashrc
 
-KUBECONFIG=~/.kube/config
-mkdir ~/.kube 2> /dev/null
-sudo k3s kubectl config view --raw > "$KUBECONFIG"
-chmod 600 "$KUBECONFIG"
+USERKUBECONFIG=/home/$4/.kube/config
+sudo k3s kubectl config view --raw > "$USERKUBECONFIG"
+chmod 600 "$USERKUBECONFIG"
+
+# Set KUBECONFIG for root - Current session
+KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 #############################
 #Install Helm
@@ -63,7 +67,7 @@ az extension add --name connectedk8s
 # az provider register --namespace Microsoft.ExtendedLocation
 
 # Need to grab the resource group name of the VM
-az connectedk8s connect --resource-group $1 --name $2 --location $3
+az connectedk8s connect --resource-group $1 --name $2 --location $3 --kube-config /etc/rancher/k3s/k3s.yaml
 
 #############################
 #Arc for Kubernetes GitOps
