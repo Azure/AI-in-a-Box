@@ -5,6 +5,7 @@
 #############################
 # $1 = Azure Resource Group Name
 # $2 = Azure Arc for Kubernetes cluster name
+# $3 = Azure Arc for Kubernetes cluster location
 
 #############################
 # Script Definition
@@ -56,9 +57,39 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 #############################
 az login --identity
 az extension add --name connectedk8s
-az provider register --namespace Microsoft.Kubernetes
-az provider register --namespace Microsoft.KubernetesConfiguration
-az provider register --namespace Microsoft.ExtendedLocation
+# az provider register --namespace Microsoft.Kubernetes
+# az provider register --namespace Microsoft.KubernetesConfiguration
+# az provider register --namespace Microsoft.ExtendedLocation
 
 # Need to grab the resource group name of the VM
-az connectedk8s connect --name $2 --resource-group $1
+az connectedk8s connect --resource-group $1 --name $2 --location $3
+
+#############################
+#Arc for Kubernetes GitOps
+#############################
+az extension add -n k8s-configuration
+az extension add -n k8s-extension
+
+# Deploy Extension
+# Need to be updated for Ai-In-A-Box Iot Operations Repo
+az k8s-extension create \
+    -g $1 \
+    -c $2 \
+    -n vws-app-config \
+    --cluster-type managedClusters \
+    --extension-type=microsoft.flux
+
+# Front-End
+# Need to be updated for Ai-In-A-Box Iot Operations Repo
+az k8s-configuration flux create \
+    -g $1 \
+    -c $2 \
+    -n vws-app-config \
+    --namespace vws-app \
+    -t managedClusters \
+    --scope cluster \
+    -u https://github.com/Welasco/testflux2.git \
+    --interval 2m \
+    --branch main \
+    --kustomization name=vws-app path=./vws-app prune=true sync_interval=2m
+
