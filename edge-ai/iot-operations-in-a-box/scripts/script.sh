@@ -17,14 +17,14 @@ logpath=/var/log/deploymentscriptlog
 #############################
 #Install K3s
 #############################
-echo "#############################" >> $logpath
-echo "Installing K3s CLI" >> $logpath
-echo "#############################" >> $logpath
+echo "#############################"
+echo "Installing K3s CLI"
+echo "#############################"
 curl -sfL https://get.k3s.io | sh -
 
 mkdir -p /home/$4/.kube
 echo "
-KUBECONFIG=~/.kube/config
+export KUBECONFIG=~/.kube/config
 source <(kubectl completion bash)
 alias k=kubectl
 complete -o default -F __start_kubectl k
@@ -33,6 +33,7 @@ complete -o default -F __start_kubectl k
 USERKUBECONFIG=/home/$4/.kube/config
 sudo k3s kubectl config view --raw > "$USERKUBECONFIG"
 chmod 600 "$USERKUBECONFIG"
+chown $4:$4 "$USERKUBECONFIG"
 
 # Set KUBECONFIG for root - Current session
 KUBECONFIG=/etc/rancher/k3s/k3s.yaml
@@ -40,9 +41,9 @@ KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 #############################
 #Install Helm
 #############################
-echo "#############################" >> $logpath
-echo "Installing Helm" >> $logpath
-echo "#############################" >> $logpath
+echo "#############################"
+echo "Installing Helm"
+echo "#############################"
 curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
 sudo apt-get install apt-transport-https --yes
 echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
@@ -53,17 +54,17 @@ echo "source <(helm completion bash)" >> /home/$4/.bashrc
 #############################
 #Install Azure CLI
 #############################
-echo "#############################" >> $logpath
-echo "Installing Azure CLI" >> $logpath
-echo "#############################" >> $logpath
+echo "#############################"
+echo "Installing Azure CLI"
+echo "#############################"
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 #############################
 #Arc for Kubernetes setup
 #############################
-echo "#############################" >> $logpath
-echo "Connecting K3s cluster to Arc for K8s" >> $logpath
-echo "#############################" >> $logpath
+echo "#############################"
+echo "Connecting K3s cluster to Arc for K8s"
+echo "#############################"
 az login --identity --username $5
 az extension add --name connectedk8s
 # az provider register --namespace Microsoft.Kubernetes
@@ -76,9 +77,9 @@ az connectedk8s connect --resource-group $1 --name $2 --location $3 --kube-confi
 #############################
 #Arc for Kubernetes GitOps
 #############################
-echo "#############################" >> $logpath
-echo "Configuring Arc for Kubernetes GitOps" >> $logpath
-echo "#############################" >> $logpath
+echo "#############################"
+echo "Configuring Arc for Kubernetes GitOps"
+echo "#############################"
 az extension add -n k8s-configuration
 az extension add -n k8s-extension
 
@@ -91,7 +92,7 @@ az k8s-extension create \
     -g $1 \
     -c $2 \
     -n vws-app-config \
-    --cluster-type managedClusters \
+    --cluster-type connectedClusters \
     --extension-type=microsoft.flux
 
 # Front-End
@@ -101,7 +102,7 @@ az k8s-configuration flux create \
     -c $2 \
     -n vws-app-config \
     --namespace vws-app \
-    -t managedClusters \
+    -t connectedClusters \
     --scope cluster \
     -u https://github.com/Welasco/testflux2.git \
     --interval 2m \
