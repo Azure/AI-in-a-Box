@@ -52,6 +52,21 @@ param scriptURI string
 param ShellScriptName string
 //param ShellScriptName string = 'script.sh'
 
+@sys.description('Name of the Application to be deployed using GitOps')
+param gitOpsAppName string
+
+@sys.description('Name of the namespace in K3s for the Application to be deployed using GitOps')
+param gitOpsAppNamespace string
+
+@sys.description('Git Repository URL for the Application to be deployed using GitOps')
+param gitOpsGitRepositoryUrl string
+
+@sys.description('Git Repository Branch for the Application to be deployed using GitOps')
+param gitOpsGitRepositoryBranch string
+
+@sys.description('Git Repository Path for the Application to be deployed using GitOps')
+param gitOpsAppPath string
+
 // Variables
 var subnetName = 'IoT-Ops-Subnet'
 var publicIPAddressName = '${virtualMachineName}-PublicIP'
@@ -97,6 +112,19 @@ module nsg 'modules/vnet/nsg.bicep' = {
           sourceAddressPrefix: '*'
           protocol: '*'
           destinationPortRange: '22'
+          access: 'Allow'
+          direction: 'Inbound'
+          sourcePortRange: '*'
+          destinationAddressPrefix: '*'
+        }
+      }
+      {
+        name: 'In-Demo-App-GitOps'
+        properties: {
+          priority: 1001
+          sourceAddressPrefix: '*'
+          protocol: '*'
+          destinationPortRange: '3000'
           access: 'Allow'
           direction: 'Inbound'
           sourcePortRange: '*'
@@ -169,5 +197,21 @@ module vm 'modules/vm/vm-ubuntu.bicep' = {
     vnet
     publicip
     nsg
+  ]
+}
+
+module gitOpsAppDeploy 'modules/gitops/gtiops.bicep' = {
+  name: 'gitOpsAppDeploy'
+  scope: resourceGroup
+  params: {
+    arcK8sClusterName: arcK8sClusterName
+    gitOpsAppName: gitOpsAppName
+    gitOpsAppNamespace: gitOpsAppNamespace
+    gitOpsGitRepositoryUrl: gitOpsGitRepositoryUrl
+    gitOpsGitRepositoryBranch: gitOpsGitRepositoryBranch
+    gitOpsAppPath: gitOpsAppPath
+  }
+  dependsOn: [
+    vm
   ]
 }

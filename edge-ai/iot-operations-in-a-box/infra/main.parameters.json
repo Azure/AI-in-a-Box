@@ -34,6 +34,21 @@
     },
     "ShellScriptName": {
       "value": "${AZURE_ENV_SHELLSCRIPTNAME}"
+    },
+    "gitOpsAppName" : {
+      "value": "${AZURE_ENV_GITOPSAPPNAME"
+    },
+    "gitOpsAppNamespace" : {
+      "value": "${AZURE_ENV_GITOPSAPPNAMESPACE"
+    },
+    "gitOpsGitRepositoryUrl" : {
+      "value": "${AZURE_ENV_GITOPSGITREPOSITORYURL"
+    },
+    "gitOpsGitRepositoryBranch" : {
+      "value": "${AZURE_ENV_GITOPSGITREPOSITORYBRANCH"
+    },
+    "gitOpsAppPath" : {
+      "value": "${AZURE_ENV_GITOPSAPPPATH}"
     }
   }
 }

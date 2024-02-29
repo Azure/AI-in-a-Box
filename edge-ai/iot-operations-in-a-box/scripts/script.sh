@@ -91,21 +91,21 @@ az extension add -n k8s-extension
 az k8s-extension create \
     -g $1 \
     -c $2 \
-    -n vws-app-config \
+    -n gitops \
     --cluster-type connectedClusters \
     --extension-type=microsoft.flux
 
 # Front-End
 # Need to be updated for Ai-In-A-Box Iot Operations Repo
-az k8s-configuration flux create \
-    -g $1 \
-    -c $2 \
-    -n vws-app-config \
-    --namespace vws-app \
-    -t connectedClusters \
-    --scope cluster \
-    -u https://github.com/Welasco/testflux2.git \
-    --interval 2m \
-    --branch main \
-    --kustomization name=vws-app path=./vws-app prune=true sync_interval=2m
+# az k8s-configuration flux create \
+#     -g $1 \
+#     -c $2 \
+#     -n gitops \
+#     --namespace vws-app \
+#     -t connectedClusters \
+#     --scope cluster \
+#     -u https://github.com/Welasco/testflux2.git \
+#     --interval 2m \
+#     --branch main \
+#     --kustomization name=vws-app path=./vws-app prune=true sync_interval=2m
 
