@@ -18,6 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 using HtmlAgilityPack;
 using Services;
 using Models;
+using System.IO;
 
 
 namespace Microsoft.BotBuilderSamples
@@ -77,13 +78,23 @@ namespace Microsoft.BotBuilderSamples
                 // await turnContext.SendActivityAsync($"Thread found: {conversationData.ThreadId}");
             }
 
+            // Process any attachments
+
+            if (!turnContext.Activity.Attachments.IsNullOrEmpty())
+                foreach (Bot.Schema.Attachment attachment in turnContext.Activity.Attachments)
+                    await IngestAttachment(conversationData, turnContext, attachment);
+
+            if (turnContext.Activity.Text.IsNullOrEmpty())
+                return new List<string>() {"1"};
+
+            // Process keywords
             if (turnContext.Activity.Text.ToLower() == "clear")
             {
                 var thread = await _aoaiClient.DeleteThread(conversationData.ThreadId);
                 conversationData.ThreadId = null;
                 conversationData.History.Clear();
                 conversationData.Attachments.Clear();
-                return new List<string> { $"Thread {thread.Id} deleted." };
+                return new List<string>() { $"Thread {thread.Id} deleted." };
             }
 
             // Add user message to thread
@@ -113,7 +124,8 @@ namespace Microsoft.BotBuilderSamples
                 System.Threading.Thread.Sleep(10000);
                 run = await _aoaiClient.GetThreadRun(conversationData.ThreadId, run.Id);
             }
-            if (run.Status == "failed") {
+            if (run.Status == "failed")
+            {
                 await turnContext.SendActivityAsync("Something went wrong when running the assistant.");
             }
 
@@ -134,7 +146,7 @@ namespace Microsoft.BotBuilderSamples
                     if (messages[i].Content[j].Type == "image_file")
                     {
                         responses.Add($"Image (ID: {messages[i].Content[j].ImageFile.FileId})");
-                        List<object> images = [new { type = "Image", url = $"{_appUrl}/openai/files/{messages[i].Content[j].ImageFile.FileId}/content" }];
+                        List<object> images = new() { new { type = "Image", url = $"{_appUrl}/openai/files/{messages[i].Content[j].ImageFile.FileId}/content" } };
                         object adaptiveCardJson = new
                         {
                             type = "AdaptiveCard",
@@ -152,6 +164,23 @@ namespace Microsoft.BotBuilderSamples
                 }
             }
             return responses;
+        }
+
+
+        private async Task IngestAttachment(ConversationData conversationData, ITurnContext<IMessageActivity> turnContext, Bot.Schema.Attachment attachment)
+        {
+            Uri fileUri = new Uri(attachment.ContentUrl);
+            var httpClient = new HttpClient();
+            var stream = await httpClient.GetStreamAsync(fileUri);
+            var file = await _aoaiClient.UploadFile(stream, attachment.Name);
+            await _aoaiClient.SendMessage(conversationData.ThreadId, new MessageInput()
+            {
+                Role = "user",
+                Content = "(File uploaded)",
+                FileIds = new List<string>() {file.Id}
+            });
+            stream.Dispose();
+            await turnContext.SendActivityAsync($"File {attachment.Name} uploaded successfully!");
         }
     }
 }

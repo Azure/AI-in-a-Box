@@ -35,7 +35,7 @@ public class Tools
         {
             var method = typeof(Tools).GetMethod(toolcall.Function.Name);
             var arguments = JsonSerializer.Deserialize<Dictionary<string, object>>(toolcall.Function.Arguments);
-            string output = await (Task<string>)method.Invoke(this, [arguments]);
+            string output = await (Task<string>)method.Invoke(this, new object[]{arguments});
             var toolOutput = new ToolOutput
             {
                 ToolCallId = toolcall.Id,

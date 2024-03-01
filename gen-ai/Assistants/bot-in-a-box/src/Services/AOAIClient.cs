@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.Azure.Cosmos.Core;
 using Models;
 
 namespace Services
@@ -57,13 +59,24 @@ namespace Services
             var result = await JsonRequest<AOAIResponse<Message>>($"/threads/{threadId}/messages", HttpMethod.Get);
             return result.Data;
         }
+        public async Task<Models.File> UploadFile(Stream file, string fileName)
+        {
+            MultipartFormDataContent form = new MultipartFormDataContent
+            {
+                { new StringContent("assistants"), "purpose" },
+                { new StreamContent(file), "file", fileName }
+            };
+            var result = await JsonRequest<Models.File>($"/files", HttpMethod.Post, form);
+            return result;
+        }
         public async Task<HttpResponseMessage> GetFile(string fileId)
         {
             var result = await SendRequest($"/files/{fileId}/content", HttpMethod.Get);
             return result;
         }
 
-        private async Task<HttpResponseMessage> SendRequest(string path, HttpMethod method, StringContent body = null) {
+        private async Task<HttpResponseMessage> SendRequest(string path, HttpMethod method, StringContent body = null)
+        {
             var url = "/openai" + path + "?api-version=2024-02-15-preview";
 
             var request = new HttpRequestMessage(method, url)
@@ -76,11 +89,39 @@ namespace Services
             };
             return await _httpClient.SendAsync(request, default);
         }
-        
+
 
         private async Task<T> JsonRequest<T>(string path, HttpMethod method, StringContent body = null)
         {
             var response = await SendRequest(path, method, body);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(responseContent);
+
+            var content = JsonSerializer.Deserialize<T>(responseContent);
+            return content;
+        }
+
+        private async Task<HttpResponseMessage> SendRequest(string path, HttpMethod method, MultipartFormDataContent body)
+        {
+            var url = "/openai" + path + "?api-version=2024-02-15-preview";
+
+            var request = new HttpRequestMessage(method, url)
+            {
+                Headers =
+                {
+                    { "api-key", _accessKey },
+                },
+                Content = body
+            };
+            return await _httpClient.SendAsync(request, default);
+        }
+
+
+        private async Task<T> JsonRequest<T>(string path, HttpMethod method, MultipartFormDataContent body)
+        {
+            var response = await SendRequest(path, method, body);
+            
             var responseContent = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
                 throw new Exception(responseContent);
