@@ -146,7 +146,7 @@ namespace Microsoft.BotBuilderSamples
                     if (messages[i].Content[j].Type == "image_file")
                     {
                         responses.Add($"Image (ID: {messages[i].Content[j].ImageFile.FileId})");
-                        List<object> images = new() { new { type = "Image", url = $"{_appUrl}/openai/files/{messages[i].Content[j].ImageFile.FileId}/content" } };
+                        List<object> images = new() { new { type = "Image", url = $"https://{_appUrl}/openai/files/{messages[i].Content[j].ImageFile.FileId}/content" } };
                         object adaptiveCardJson = new
                         {
                             type = "AdaptiveCard",
