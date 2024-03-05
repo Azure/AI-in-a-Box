@@ -144,9 +144,9 @@ while True:
 | Topic | Description |
 |----------------------|--------------------------------------------------|
 | [Math Tutor](math_tutor/assistant-math_tutor.ipynb) | Showcases the foundational concepts of Assistants such as Threads, Messages, Runs, Tools, and lifecycle management. |
-| [Financial Assistant](personal_finance/assistant-personal_finance.ipynb) | Function Calling with Yfinance to get latest stock prices. Summarization of user provided article. Extract country info from article, extract country, capital and other aspects, and call an API to get more information about each country. |
 | [Failed Banks](failed_banks/assistant-failed_banks.ipynb) | Failed Banks is an Assistant designed to analyze and extract data concerning failed banks. It can provide insights into questions like identifying failed banks within specific states during a given time frame and generate charts illustrating bank failures across the US. |
 | [Wind Farm](wind_farm/assistant-wind_farm.ipynb) | Utilizing Assistant tools such as the Code Interpreter and Function calling, this bot is capable of retrieving a CSV file that illustrates turbine wind speed, voltage, and the last maintenance date. It assists you in reviewing the file contents and aids in determining whether a specific turbine is in need of maintenance. |
+| [Financial Assistant](personal_finance/assistant-personal_finance.ipynb) | Function Calling with Yfinance to get latest stock prices. Summarization of user provided article. Extract country info from article, extract country, capital and other aspects, and call an API to get more information about each country. |
 
 ## Prerequisites
 
