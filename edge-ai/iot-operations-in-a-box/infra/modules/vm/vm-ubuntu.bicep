@@ -138,4 +138,4 @@ resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
 
 output nicIP string = nic.outputs.nicIP
 output untrustedNicProfileId string = nic.outputs.nicIpConfigurationId
-output virtualMachinePrincipalId string = vm.identity.principalId
+//output virtualMachinePrincipalId string = vm.identity.principalId
