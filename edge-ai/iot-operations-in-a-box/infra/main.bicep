@@ -67,10 +67,14 @@ param gitOpsGitRepositoryBranch string
 @sys.description('Git Repository Path for the Application to be deployed using GitOps')
 param gitOpsAppPath string
 
+@sys.description('Custom Locations RP ObjectID')
+param customLocationRPSPID string
+
 // Variables
 var subnetName = 'IoT-Ops-Subnet'
 var publicIPAddressName = '${virtualMachineName}-PublicIP'
 var networkSecurityGroupName = '${virtualMachineName}-NSG'
+var keyVaultName = '${virtualMachineName}-kv'
 
 // Generate a unique token to be used in naming resources.
 // Remove linter suppression after using.
@@ -173,6 +177,17 @@ module publicip 'modules/vnet/publicip.bicep' = {
   }
 }
 
+// Create KeyVault used for IoT Operations
+module keyvault 'modules/keyvault/keyvault.bicep' = {
+  name: replace('${take(prefix,19)}-${keyVaultName}', '--', '-')
+  scope: resourceGroup
+  params: {
+    location: location
+    name: replace('${take(prefix,19)}-${keyVaultName}', '--', '-')
+    vmUserAssignedIdentityPrincipalID: vmIdentity.outputs.principalId
+  }
+}
+
 // Create Ubuntu VM for K3s
 module vm 'modules/vm/vm-ubuntu.bicep' = {
   name: virtualMachineName
@@ -192,11 +207,14 @@ module vm 'modules/vm/vm-ubuntu.bicep' = {
     virtualMachineSize: virtualMachineSize
     publicIPId: publicip.outputs.publicipId
     nsgId: nsg.outputs.nsgID
+    keyVaultId: keyvault.outputs.keyvaultId
+    customLocationRPSPID: customLocationRPSPID
   }
   dependsOn: [
     vnet
     publicip
     nsg
+    keyvault
   ]
 }
 

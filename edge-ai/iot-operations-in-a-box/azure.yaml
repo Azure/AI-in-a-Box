@@ -7,3 +7,15 @@ infra:
   provider: "bicep"
   path: "infra"
   module: "main"
+hooks:
+  preprovision:
+    windows:
+      shell: pwsh
+      run: ./scripts/azd_preprovision.ps1
+      continueOnError: false
+      interactive: true
+    posix:
+      shell: sh
+      run: ./scripts/azd_preprovision.sh
+      continueOnError: false
+      interactive: true

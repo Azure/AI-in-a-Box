@@ -2,12 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "backendImageName": {
-      "value": "${AZURE_ENV_BACKENDIMAGENAME}"
-    },
-    "frontendImageName": {
-      "value": "${AZURE_ENV_FRONTENDIMAGENAME}"
-    },
     "environmentName": {
       "value": "${AZURE_ENV_NAME}"
     },
@@ -49,6 +43,9 @@
     },
     "gitOpsAppPath" : {
       "value": "${AZURE_ENV_GITOPSAPPPATH}"
+    },
+    "customLocationRPSPID":{
+      "value": "${AZURE_ENV_CUSTOMLOCATIONRPSPID}"
     }
   }
 }

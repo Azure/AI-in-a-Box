@@ -13,6 +13,8 @@ param Location string = resourceGroup().location
 param authenticationType string = 'password'
 param vmUserAssignedIdentityID string
 param vmUserAssignedIdentityPrincipalID string
+param customLocationRPSPID string
+param keyVaultId string
 
 var linuxConfiguration = {
   disablePasswordAuthentication: true
@@ -127,7 +129,7 @@ resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
       fileUris: [
         '${scriptURI}${ShellScriptName}'
       ]
-      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${Location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID}'
+      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${Location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId}'
     }
   }
   dependsOn: [
