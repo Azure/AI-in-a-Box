@@ -7,9 +7,10 @@ Function Calling with Yfinance to get latest stock prices. Summarization of user
 
 ### Objective
 
-The objective of the provided Python file is to create an Azure OpenAI Assistant named "Portfolio Management Assistant" using the Azure OpenAI API. The assistant is designed to act as a personal financial assistant, providing information and insights related to a user's investment portfolio. The script initiates a conversation with the assistant, guiding it through various financial queries and scenarios to showcase its capabilities.
+The objective of the provided notebook file is to create an Azure OpenAI Assistant named "Portfolio Management Assistant" using the Azure OpenAI API. The assistant is designed to act as a personal financial assistant, providing information and insights related to a user's investment portfolio. The script initiates a conversation with the assistant, guiding it through various financial queries and scenarios to showcase its capabilities.
 
 ### Programming Languages
- - Python
+
+- Python
 
 ### Estimated Runtime: 10 mins

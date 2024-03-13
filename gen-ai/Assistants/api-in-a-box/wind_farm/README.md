@@ -7,7 +7,7 @@ Utilizing Assistant tools such as the Code Interpreter and Function calling, thi
 
 ### Objective
 
-The objective of the provided Python file is to create an Azure OpenAI Assistant named "Turbine Management Assistant" using the Azure OpenAI API. The assistant is designed to function as a management tool for wind turbine farms, providing information, charts, and recommendations related to the status and performance of individual turbines within the farm. The script initiates a conversation with the assistant, guiding it through various queries and scenarios to showcase its capabilities.
+The objective of the provided notebook file is to create an Azure OpenAI Assistant named "Turbine Management Assistant" using the Azure OpenAI API. The assistant is designed to function as a management tool for wind turbine farms, providing information, charts, and recommendations related to the status and performance of individual turbines within the farm. The script initiates a conversation with the assistant, guiding it through various queries and scenarios to showcase its capabilities.
 
 ### Programming Languages
 
