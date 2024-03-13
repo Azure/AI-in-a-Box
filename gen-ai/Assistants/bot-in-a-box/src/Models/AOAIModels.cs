@@ -29,9 +29,11 @@ namespace Models
 
         [JsonPropertyName("content")]
         public string Content { get; set; } = null;
-    }
 
-    public class MessageContentText {
+        [JsonPropertyName("file_ids")]
+        public List<string> FileIds { get; set; } = new();
+    }
+        public class MessageContentText {
         [JsonPropertyName("value")]
         public string Value { get; set; }
 
@@ -41,6 +43,19 @@ namespace Models
         public string Type { get; set; }
         [JsonPropertyName("text")]
         public MessageContentText Text { get; set; }
+        [JsonPropertyName("image_file")]
+        public ImageFile ImageFile { get; set; }
+    }
+
+    public class File {
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+    }
+
+
+    public class ImageFile {
+        [JsonPropertyName("file_id")]
+        public string FileId { get; set; }
     }
 
     public class Message
@@ -49,7 +64,10 @@ namespace Models
         public string Role { get; set; }
 
         [JsonPropertyName("content")]
-        public List<MessageContent> Content { get; set; }
+        public List<MessageContent> Content { get; set; } = null;
+
+        [JsonPropertyName("file_ids")]
+        public List<string> FileIds { get; set; }
     }
 
     public class ThreadRunInput

@@ -1,5 +1,7 @@
 {
-    "name": "get_wikipedia_content",
+  "type": "function",
+  "function": {
+    "name": "wikipedia_get_article",
     "description": "Get content from a Wikipedia article. Always provide a source link when using this information.",
     "parameters": {
       "type": "object",
@@ -14,3 +16,4 @@
       }
     }
   }
+}

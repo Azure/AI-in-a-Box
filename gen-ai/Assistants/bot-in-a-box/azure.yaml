@@ -8,3 +8,15 @@ services:
         project: src
         host: appservice
         language: dotnet
+hooks:
+  postdeploy:
+    windows:
+      shell: pwsh
+      run: ./scripts/createAssistant.ps1
+      interactive: true
+      continueOnError: false
+    posix:
+      shell: sh
+      run: ./scripts/createAssistant.sh
+      interactive: true
+      continueOnError: false

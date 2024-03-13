@@ -39,7 +39,7 @@ The flow of messages is as follows:
 
 ```
 git clone https://github.com/Azure/AI-in-a-Box
-cd semantic-kernel-bot-in-a-box
+cd AI-in-a-Box/gen-ai/semantic-kernel-bot-in-a-box
 ```
 2. Deploy resources:
 ```

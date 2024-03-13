@@ -9,3 +9,5 @@ appsettings.json
 
 .env
 *_db
+
+__pycache__
