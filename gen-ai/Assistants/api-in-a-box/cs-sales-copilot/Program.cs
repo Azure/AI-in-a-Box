@@ -10,11 +10,15 @@ AssistantsClient client = new(new Uri(settings.APIEndpoint), new AzureKeyCredent
 
 // Create the Sales agent and registration
 AssistantAgent salesAgent = await SalesAgent.SalesAgent.GetAgent(settings, client);
-AgentRegistration salesAgentRegistration = new(salesAgent, "SalesIntent", "You are an assistant that can answer questions related to customers, sellers, orders and inventory.");
+AgentRegistration salesAgentRegistration = new(salesAgent,
+  "SalesIntent",
+  "You are an assistant that can answer questions related to customers, sellers, orders and inventory.");
 
 // Create the trading agent and its registration
 AssistantAgent informationAgent = await InformationAgent.InformationAgent.GetAgent(settings, client);
-AgentRegistration tradingAgentRegistration = new(informationAgent, "CityWeatherIntent", "You are an assistant that answer questions related to favority cities, weather and city nick names.");
+AgentRegistration tradingAgentRegistration = new(informationAgent,
+  "CityWeatherIntent",
+  "You are an assistant that answer questions related to favority cities, weather and city nick names.");
 
 // Create the proxy and add the registred agents
 AgentProxy proxy = new(settings, [salesAgentRegistration, tradingAgentRegistration]);
