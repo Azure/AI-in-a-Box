@@ -21,7 +21,7 @@ param cosmosName string = ''
 param speechName string = ''
 
 param storageName string = ''
-param deployDalle3 bool = false
+param deployDalle3 bool
 param deploySpeech bool
 @description('Deploy Speech service?')
 
@@ -114,6 +114,7 @@ module m_app 'modules/appservice.bicep' = {
     openaiEndpoint: m_openai.outputs.openaiEndpoint
     openaiGPTModel: m_openai.outputs.openaiGPTModel
     openaiEmbeddingsModel: m_openai.outputs.openaiEmbeddingsModel
+    openaiDalleModel: m_openai.outputs.openaiDalleModel
     speechName: deploySpeech ? m_speech.outputs.speechName : ''
     speechEndpoint: deploySpeech ? m_speech.outputs.speechEndpoint : ''
     cosmosEndpoint: m_cosmos.outputs.cosmosEndpoint

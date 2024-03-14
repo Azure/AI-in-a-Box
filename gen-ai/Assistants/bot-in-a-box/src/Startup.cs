@@ -2,8 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using Azure;
-using Azure.AI.OpenAI;
 using Azure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -73,7 +71,7 @@ namespace Microsoft.BotBuilderSamples
             // Create the Conversation state passing in the storage layer.
             var conversationState = new ConversationState(storage);
             services.AddSingleton(conversationState);
-            services.AddSingleton(new AOAIClient(new System.Net.Http.HttpClient(), new Uri(configuration.GetValue<string>("AOAI_API_ENDPOINT")), configuration.GetValue<string>("AOAI_API_KEY")));
+            services.AddSingleton(new AOAIClient(new System.Net.Http.HttpClient(), new Uri(configuration.GetValue<string>("AOAI_API_ENDPOINT")), configuration.GetValue<string>("AOAI_API_KEY"), configuration.GetValue<string>("AOAI_DALLE_DEPLOYMENT")));
             services.AddHttpClient();
             if (!configuration.GetValue<string>("SPEECH_API_ENDPOINT").IsNullOrEmpty())
                 services.AddSingleton(new SpeechService(new System.Net.Http.HttpClient(), configuration.GetValue<string>("SPEECH_API_ENDPOINT"), configuration.GetValue<string>("SPEECH_API_KEY")));

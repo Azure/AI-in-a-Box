@@ -63,17 +63,7 @@ azd up
 ```
 You will be prompted for a subscription, region and model information. Keep regional model availability when proceeding.
 
-3. Go to the Azure OpenAI Studio and create an Assistant with the tools you want to use. Alternatively, you can also use the API.
-
-> Important: currently, this application only supports Code Interpreter. Other tools will be implemented in the near future.
-
-![Assistant Creation](./readme_assets/assistant-creation.png)
-
-4. Add your newly created Assistant's ID in the AOAI_ASSISTANT_ID environment variable.
-
-![Add Assistant ID to environment](./readme_assets/assistant-id-variable.png)
-
-5. Test on Web Chat - go to your Azure Bot resource on the Azure portal and look for the Web Chat feature on the left side menu.
+3. Test on Web Chat - go to your Azure Bot resource on the Azure portal and look for the Web Chat feature on the left side menu.
 
 ![Test Web Chat](./readme_assets/assistant-test.png)
 
@@ -107,3 +97,12 @@ To deploy a Web Chat version of your app:
 - Your bot will be available at https://APP_NAME.azurewebsites.net.
 
 Please note that doing so will make your bot public, unless you implement authentication / SSO.
+
+### Creating custom functions
+
+To update function calling behavior or create your own functions, follow the steps below.
+
+- Go to [./src/Tools](./src/Tools/)
+- Create or update a JSON file with the function specification. You may also copy files from [./src/ToolsSamples](./src/ToolsSamples/) into [./src/Tools](./src/Tools/)
+- Go to `_Tools.cs` and create or update the method with the same name as the function's "name" field. **Use only lowercase characters and underscores for names**.
+- Redeploy with `azd up`. The Assistant definition will be updated automatically.
