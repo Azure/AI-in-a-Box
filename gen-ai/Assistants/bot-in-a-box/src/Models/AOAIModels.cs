@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Azure.AI.OpenAI;
 
 namespace Models
 {
@@ -138,6 +139,46 @@ namespace Models
 
         [JsonPropertyName("required_action")]
         public RequiredAction RequiredAction { get; set; }
+    }
+    public class ImageGenerationInput
+    {
+        [JsonPropertyName("prompt")]
+        public string Prompt { get; set; }
+
+        [JsonPropertyName("size")]
+        public string Size { get; set; }
+
+        [JsonPropertyName("n")]
+        public int N { get; set; }
+    }
+    public class ImageGenerationOutput
+    {
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+        [JsonPropertyName("status")]
+        public string Status { get; set; }
+    }
+    public class ImageGenerationStatusResponse
+    {
+        [JsonPropertyName("result")]
+        public ImageGenerationResult Result { get; set; }
+        
+        [JsonPropertyName("status")]
+        public string Status { get; set; }
+    }
+    public class ImageGenerationResult
+    {
+        [JsonPropertyName("data")]
+        public List<GeneratedImage> Data { get; set; }
+    }
+    public class GeneratedImage
+    {
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
+
+        [JsonPropertyName("revised_prompt")]
+        public string RevisedPrompt { get; set; }
     }
 
 }

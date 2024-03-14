@@ -64,7 +64,7 @@ resource adaEmbeddingsdeployment 'Microsoft.CognitiveServices/accounts/deploymen
 
 resource dalle3deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = if (deployDalle3) {
   parent: openai
-  name: 'dall-e-3'
+  name: 'Dalle3'
   properties: {
     model: {
       format: 'OpenAI'
@@ -98,3 +98,4 @@ output openaiName string = openai.name
 output openaiEndpoint string = openai.properties.endpoint
 output openaiGPTModel string = gpt4deployment.name
 output openaiEmbeddingsModel string = adaEmbeddingsdeployment.name
+output openaiDalleModel string = deployDalle3 ? dalle3deployment.name : ''
