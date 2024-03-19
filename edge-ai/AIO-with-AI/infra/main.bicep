@@ -45,7 +45,7 @@ param VNETAddress array = [
 param subnetCIDR string = '10.0.0.0/24'
 
 @sys.description('URI for Custom K3s VM Script and Config')
-//param scriptURI string = 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/iot-operations-in-a-box/edge-ai/iot-operations-in-a-box/scripts/'
+//param scriptURI string = 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/AIO-with-AI/edge-ai/AIO-with-AI/scripts/'
 param scriptURI string
 
 @sys.description('Shell Script to be executed')
