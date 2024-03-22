@@ -9,6 +9,7 @@ resource arcCluster 'Microsoft.Kubernetes/connectedClusters@2024-02-01-preview' 
   name: arcK8sClusterName
 }
 
+//https://learn.microsoft.com/en-us/azure/templates/microsoft.kubernetesconfiguration/fluxconfigurations
 resource gitops 'Microsoft.KubernetesConfiguration/fluxConfigurations@2023-05-01' = {
   scope: arcCluster
   name: '${gitOpsAppName}-config'

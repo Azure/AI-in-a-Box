@@ -1,20 +1,34 @@
-param subnetId string
-param publicIPId string = ''
+/*region Header
+      Module Steps 
+      1 - Create NIC
+      2 - Create VM
+      3 - Assign Role to VM
+      4 - Create VM Extension
+      5 - Output NIC IP
+      6 - Output Untrusted NIC Profile ID
+*/
+
+//Declare Parameters--------------------------------------------------------------------------------------------------------------------------
+param location string = resourceGroup().location
+param virtualMachineSize string
 param virtualMachineName string
 param arcK8sClusterName string
 param adminUsername string
 #disable-next-line secure-secrets-in-params
 param adminPasswordOrKey string
-param virtualMachineSize string
-param scriptURI string
-param ShellScriptName string
-param nsgId string = ''
-param Location string = resourceGroup().location
 param authenticationType string = 'password'
 param vmUserAssignedIdentityID string
 param vmUserAssignedIdentityPrincipalID string
-param customLocationRPSPID string
+
+param subnetId string
+param publicIPId string = ''
+param nsgId string = ''
 param keyVaultId string
+
+param scriptURI string
+param ShellScriptName string
+
+param customLocationRPSPID string
 
 var linuxConfiguration = {
   disablePasswordAuthentication: true
@@ -33,7 +47,7 @@ var nicName = '${virtualMachineName}-NIC'
 module nic '../vnet/nic.bicep' = {
   name: nicName
   params:{
-    Location: Location
+    location: location
     nicName: nicName
     subnetId: subnetId
     publicIPId: publicIPId
@@ -43,7 +57,7 @@ module nic '../vnet/nic.bicep' = {
 
 resource vm 'Microsoft.Compute/virtualMachines@2023-07-01' = {
   name: virtualMachineName
-  location: Location
+  location: location
   identity: {
     type: 'UserAssigned'
     userAssignedIdentities: {
@@ -119,7 +133,7 @@ module roleK8sExtensionContributor '../identity/role.bicep' = {
 resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
   parent: vm
   name: 'CustomScript'
-  location: Location
+  location: location
   properties: {
     publisher: 'Microsoft.Azure.Extensions'
     type: 'CustomScript'
@@ -129,7 +143,7 @@ resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
       fileUris: [
         '${scriptURI}${ShellScriptName}'
       ]
-      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${Location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId}'
+      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId}'
     }
   }
   dependsOn: [

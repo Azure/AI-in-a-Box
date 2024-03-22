@@ -1,9 +1,15 @@
-param name string
+/*region Header
+      Module Steps 
+      1 - Create KeyVault
+*/
+
+//Declare Parameters--------------------------------------------------------------------------------------------------------------------------
+param keyVaultName string
 param location string = resourceGroup().location
 param vmUserAssignedIdentityPrincipalID string
 
 resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' = {
-  name: name
+  name: keyVaultName
   location: location
   properties: {
     sku: {

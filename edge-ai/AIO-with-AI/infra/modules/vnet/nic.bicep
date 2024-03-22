@@ -1,13 +1,20 @@
+/*region Header
+      Module Steps 
+      1 - Create NIC
+*/
+
+//Declare Parameters--------------------------------------------------------------------------------------------------------------------------
+param location string = resourceGroup().location
 param subnetId string
 param publicIPId string = ''
 param enableIPForwarding bool = false
 param nicName string
 param nsgId string = ''
-param Location string = resourceGroup().location
+
 
 resource nic 'Microsoft.Network/networkInterfaces@2023-05-01' = {
   name: nicName
-  location: Location
+  location: location
   properties: {
     enableIPForwarding: enableIPForwarding
     networkSecurityGroup:{

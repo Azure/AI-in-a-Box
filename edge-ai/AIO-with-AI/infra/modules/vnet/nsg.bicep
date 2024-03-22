@@ -1,6 +1,13 @@
+/*region Header
+      Module Steps 
+      1 - Creae NSG
+*/
+
+//Declare Parameters--------------------------------------------------------------------------------------------------------------------------
+param location string
 param nsgName string
 param securityRules array = []
-param location string
+
 resource nsg 'Microsoft.Network/networkSecurityGroups@2023-05-01' = {
   name: nsgName
   location: location

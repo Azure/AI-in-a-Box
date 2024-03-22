@@ -1,3 +1,39 @@
+/*region Header
+      =========================================================================================================
+      Created by:       Author: Your Name | your.name@azurestream.io 
+      Description:      AIO with AI in-a-box - Deploy your AI Model on the Edge with Azure IoT Operations
+      =========================================================================================================
+
+      Dependencies:
+        Install Azure CLI
+        https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest 
+
+        Install Latest version of Bicep
+        https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install
+      
+        To Run:
+        az login
+        az account set --subscription <subscription id>
+        az group create --name <your resource group name> --location <your resource group location>
+        az ad user show --id 'your email' --query id
+
+        az bicep build --file main.bicep
+        az deployment group create --resource-group <your resource group name>  --template-file main.bicep --parameters main.bicepparam --name Doc-intelligence-in-a-Box --query 'properties.outputs' 
+      
+        SCRIPT STEPS 
+      1 - Create Resource Group
+      2 - Create User Assigned Identity for VM
+      3 - Create NSG
+      4 - Create VNET
+      5 - Build reference of existing subnets
+      6 - Create OPNsense Public IP
+      7 - Create KeyVault used for Azure IoT Operations
+      8 - Create Ubuntu VM for K3s
+      9 - Deploy Application using GitOps
+      
+      //=====================================================================================
+
+*/
 targetScope = 'subscription'
 
 @minLength(1)
@@ -9,12 +45,16 @@ param environmentName string
 @description('Primary location for all resources')
 param location string
 
-// Parameters
+//VM Module Parameters
 @sys.description('VM size, please choose a size which have enough memory and CPU for K3s.')
 param virtualMachineSize string = 'Standard_B4ms'
 
 @sys.description('Ubuntu K3s Manchine Name')
 param virtualMachineName string
+
+@sys.description('Arc for Kubernates Cluster Name')
+param arcK8sClusterName string
+
 
 @description('Username for the Virtual Machine.')
 param adminUsername string
@@ -30,8 +70,7 @@ param adminPasswordOrKey string
 ])
 param authenticationType string
 
-@sys.description('Arc for Kubernates Cluster Name')
-param arcK8sClusterName string
+
 
 @sys.description('Virtual Nework Name. This is a required parameter to build a new VNet or find an existing one.')
 param virtualNetworkName string = 'IoT-Ops-VNET'
@@ -49,8 +88,9 @@ param subnetCIDR string = '10.0.0.0/24'
 param scriptURI string
 
 @sys.description('Shell Script to be executed')
-param ShellScriptName string
 //param ShellScriptName string = 'script.sh'
+param ShellScriptName string
+
 
 @sys.description('Name of the Application to be deployed using GitOps')
 param gitOpsAppName string
@@ -83,9 +123,10 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 var prefix = '${environmentName}-${resourceToken}'
 var vmIdentityName = '${virtualMachineName}-vmIdentity'
 
-// Resources
 
-// Create resource group
+//====================================================================================
+// Create Resource Group 
+//====================================================================================
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: 'rg-${environmentName}'
   location: location
@@ -194,7 +235,7 @@ module vm 'modules/vm/vm-ubuntu.bicep' = {
   scope: resourceGroup
   params: {
     arcK8sClusterName: arcK8sClusterName
-    Location: location
+    location: location
     scriptURI: scriptURI
     ShellScriptName: ShellScriptName
     adminUsername: adminUsername

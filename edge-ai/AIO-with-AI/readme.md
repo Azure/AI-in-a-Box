@@ -1,11 +1,11 @@
-# AML Edge in-a-box
-![Banner](./readme_assets/banner-aml-edge-in-a-box.png)
+# AIO with AI in-a-box
+![Banner](./readme_assets/banner-aio-with-ai-in-a-box.png)
 
 ## Use Case
-Orchestration of resources for the entire Edge AI model lifecycle, including creation, deployment, and proper packaging through Azure ML and IoT Edge. This involves leveraging key components such as IoT Hub, IoT Edge, Azure ML, and Azure ML CLI V2.
+Orchestration of resources for the entire Edge AI model lifecycle with AIO (Azure IoT Operations enabled by ARC), including creation, deployment, and proper packaging through Azure ML, AIO and ARC . This involves leveraging key components such as AIO, AKS, ARC, Azure ML and Azure ML CLI V2.
 
 ## Solution Architecture
-<img src="./readme_assets/edgeai-mledge-architecture.png" />
+<img src="./readme_assets/azure-iot-operations-architecture.svg" />
 
 ### The above architecture is explained step-by-step below:
 1. You create all your necessary Azure Resources
@@ -34,19 +34,19 @@ Orchestration of resources for the entire Edge AI model lifecycle, including cre
 * Prepare your Linux virtual machine or physical device for [IoT Edge](https://learn.microsoft.com/en-us/azure/iot-edge/how-to-provision-single-device-linux-symmetric)
 
 ## Deployment Flow 
-<img src="./readme_assets/edgeai-mledge-flow.png" />
+
 
 **Step 1.** Clone the [AI-in-a-Box repository](https://github.com/Azure/AI-in-a-Box)
 
-**Step 2.** Create Azure Resources (User Assigned Managed Identity, IoT Hub, Azure ML Workspace, Container Registry, IoT Edge Devices, IoT Edge VM)
+**Step 2.** Create Azure Resources (User Assigned Managed Identity, VNET, Key Vault, Ubuntu VM, Azure ML Workspace, Container Registry)
 
-**Step 2.** Configure Edge Device and Create Edge VM if you would like
+**Step 2.** Configure Ubuntu VM
 
 **Step 3.** Buld ML model into docker image
 
 **Step 4.** Push model to Azure Container Registry
 
-**Step 5.** Deploy model onto Edge Device via a deployment manifest build & deploy
+**Step 5.** Deploy model to the Edge via Azure IoT Operations
 
 ## Deploy to Azure
 
@@ -59,7 +59,7 @@ Orchestration of resources for the entire Edge AI model lifecycle, including cre
 
     ```
     git clone https://github.com/Azure/AI-in-a-Box
-    cd edge-ai/aml-edge-in-a-box
+    cd edge-ai/AIO-with-AI
     ```
 
 2. Deploy resources:
@@ -71,7 +71,7 @@ Orchestration of resources for the entire Edge AI model lifecycle, including cre
 
 
 ## Post Deployment
-Once your resources have been deployed you will need to do the following to get the notebooks up running in Azure ML Studio and your Edge VM or device functioning properly:
+Once your resources have been deployed you will need to do the following to get the notebooks up running in Azure ML Studio and your Edge Pod functioning properly:
 
 * When running the notebooks in AML your user (jim@contoso.com for instance) won't have permission to alter the storage account or add data to the storage. Please ensure that you have been assigned both **Storage Blob Data Reader** and **Storage Blob Data Contributor** roles.
 
