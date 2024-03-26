@@ -16,7 +16,7 @@
 #https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac
 
 #CD into appropriate directory
-#cd doc-intelligence-in-a-box\Deployment\1_infra
+#cd document-intelligence\Deployment\1_infra
 
 #Login with Service Principal - Make sure you login and run deployment with a user that has a high enough RBAC to create role assignments (Owner Role). 
 az login --service-principal --username $appID --password $password --tenant $TenantID 

@@ -57,7 +57,7 @@ And with Azure Speech Services, we will convert your speech into text and synthe
 
     ```
     git clone https://github.com/Azure/AI-in-a-Box
-    cd gen-ai/nlp-sql-in-a-box
+    cd generative-ai/semantic-kernel/nlp-to-sql
     ```
 
 2. Deploy resources:
