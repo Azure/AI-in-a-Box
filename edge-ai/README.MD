@@ -15,7 +15,7 @@ With this in mind, we aim to simplify your understanding of creating a model, pa
 
 We will start the series with:
 1. [AML Edge](./aml-edge-in-a-box/) - Creating a model in Azure ML, leveraging AutoML, packaging it correctly and deploying with IoT Edge to an Edge Device.
-2. [Custom Vision Edge](./customvision-edge-in-a-box/) - Creating a model with Azure's [Custom Vision](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/overview) and deploying with IoT Edge and running that AI model in a docker container.
+2. [Custom Vision Edge](./custom-vision-edge/) - Creating a model with Azure's [Custom Vision](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/overview) and deploying with IoT Edge and running that AI model in a docker container.
 
 We will then expand the series to include the following:
 

@@ -34,7 +34,7 @@ The solution architecture is described in the diagram below.
 1. Clone repository / copy files locally
 ```
 git clone https://github.com/Azure/AI-in-a-Box
-cd cognitive-services-landing-zone-in-a-box
+cd ai-services/ai-landing-zone
 ```
 1. Log in to Azure and Azure Developer CLI
 ```
@@ -80,4 +80,4 @@ This sample is available on GitHub.
 
 ### 3. Deploy the Semantic Kernel Bot in-a-box pattern privately
 
-The [Semantic Kernel Bot in-a-box](/generative-ai/semantic-kernel/bot-framework-dotnet/) sample is compatible with this template. See the README for integration instructions.
+The [Semantic Kernel Bot Sample](/generative-ai/semantic-kernel/bot-framework-dotnet/) is compatible with this template. See the README for integration instructions.

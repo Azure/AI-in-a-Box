@@ -59,7 +59,7 @@ Orchestration of resources for the entire Edge AI model lifecycle, including cre
 
     ```
     git clone https://github.com/Azure/AI-in-a-Box
-    cd edge-ai/aml-edge-in-a-box
+    cd edge-ai/aml-edge
     ```
 
 2. Deploy resources:

@@ -7,7 +7,7 @@
 
 #DESCRIPTION
 #You can run the script in a bash command prompt by using the following command:
-#1. cd edge-ai-in-a-box/iotedge-ai-in-a-box/scripts
+#1. cd edge-ai/iotedge-ai/scripts
 #2. Using Inline Parameters copy the below command and run in bash terminal: 
 #    ./IoTEdgeDeployVM.script.sh aibx-iotedge-rg eastus aibx iot-aibx-a2n EdgeDevice1 edgevm1 password NodeVMAdmin NodeVMAZU^7^8^9
     
@@ -57,7 +57,7 @@ echo "   adminUsername: $adminUsername";
 
 edgedevice=("EdgeDevice1" "EdgeDevice2" "EdgeDevice3")
 edgedeviceName=${edgedevice[0]}
-BicepJson="https://raw.githubusercontent.com/Azure/AI-in-a-Box/main/edge-ai/aml-edge-in-a-box/infra/edge/edgeDeploy.json"
+BicepJson="https://raw.githubusercontent.com/Azure/AI-in-a-Box/main/edge-ai/aml-edge/infra/edge/edgeDeploy.json"
 BicepJsonOrg="https://raw.githubusercontent.com/Azure/iotedge-vm-deploy/1.4/edgeDeploy.json"
 #------------------------------------------------------------------------------------------------------"
 # Deploy IoT Edge VM

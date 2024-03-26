@@ -7,7 +7,7 @@
 
 #DESCRIPTION
 #You can run the script in a bash command prompt by using the following command:
-#1. cd edge-ai-in-a-box/iotedge-ai-in-a-box/scripts
+#1. cd edge-ai/iotedge-ai/scripts
 #2. Using Inline Parameters copy the below command and run in bash terminal: 
 #   ./IoTRegisterEdgeDevices.script.sh aibx-iotedge-rg eastus 
     

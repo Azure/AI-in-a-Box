@@ -1,5 +1,5 @@
 # Custom Vision Edge in-a-box
-![Banner](./readme_assets/banner-customvision-edge-in-a-box.png)
+![Banner](./readme_assets/banner-custom-vision-edge.png)
 
 ## Use Case
 
@@ -72,7 +72,7 @@ The sample includes deploying the necessary infrastructure and guides you throug
 
     ```
     git clone https://github.com/Azure/AI-in-a-Box
-    cd edge-ai/customvision-edge-in-a-box
+    cd edge-ai/custom-vision-edge
     ```
 
 2. Deploy resources:

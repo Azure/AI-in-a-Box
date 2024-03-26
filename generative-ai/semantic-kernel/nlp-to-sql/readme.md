@@ -102,7 +102,7 @@ Once your resources have been deployed you will need to do the following to get 
     password = <password>
     ```
 
-4. Create/Update environment file, you can rename the .env-sample file to .env which is located in the root (nlp-sql-in-a-box) folder. Please fill in the details in the file in the below format:
+4. Create/Update environment file, you can rename the .env-sample file to .env which is located in the root (nlp-to-sql) folder. Please fill in the details in the file in the below format:
 
     ```
     AZURE_OPENAI_DEPLOYMENT_NAME="gpt-35-turbo"

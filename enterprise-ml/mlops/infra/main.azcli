@@ -31,7 +31,7 @@ az ad sp create-for-rbac --name SPName --role contributor --scopes /subscription
 az ad sp create-for-rbac --name ap-aibx-sp --role contributor --scopes /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aibx-ml-rg
 
 #Build and convert your Bicep file to an Azure Resource Manager template (ARM template)
-#(Make sure that you run the below command within the \1-ml-in-a-box\infra directory. So change directory (cd) at the command prompt)
+#(Make sure that you run the below command within the \enterprise-ml\mlops\infra directory. So change directory (cd) at the command prompt)
 az bicep build --file $BicepFile
 az bicep build-params --file $parameterFile
 

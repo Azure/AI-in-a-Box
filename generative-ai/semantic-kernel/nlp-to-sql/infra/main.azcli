@@ -16,7 +16,7 @@
 #https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac
 
 #CD into appropriate directory
-#cd nlp-sql-in-a-box\infra
+#cd nlp-to-sql\infra
 
 #Login with Service Principal - Make sure you login and run deployment with a user that has a high enough RBAC to create role assignments (Owner Role). 
 az login --service-principal --username $appID --password $password --tenant $TenantID 
@@ -40,7 +40,7 @@ az ad sp create-for-rbac --name ap-aibx-sp --role contributor --scopes /subscrip
 $spObjectId = az ad user show --id 'email@youremail.com' --query id 
 
 #Build and convert your Bicep file to an Azure Resource Manager template (ARM template)
-#(Make sure that you run the below command within the \edge-ai-in-a-box\iotedge-ai-in-a-box\infra directory. So change directory (cd) at the command prompt)
+#(Make sure that you run the below command within the \edge-ai\iotedge-ai\infra directory. So change directory (cd) at the command prompt)
 az bicep build --file $BicepFile
 
 #Preview the changes that will happen. Azure Resource Manager provides the what-if operation to let you see how resources will change if you deploy the template.
