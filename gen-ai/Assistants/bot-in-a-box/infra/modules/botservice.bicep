@@ -27,3 +27,5 @@ resource botservice 'Microsoft.BotService/botServices@2022-09-15' = {
   }
 
 }
+
+output name string = botservice.name

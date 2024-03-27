@@ -142,3 +142,4 @@ output AOAI_NAME string = m_openai.outputs.openaiName
 output AOAI_API_ENDPOINT string = m_openai.outputs.openaiEndpoint
 output APP_NAME string = m_app.outputs.appName
 output APP_HOSTNAME string = m_app.outputs.hostName
+output BOT_NAME string = m_bot.outputs.name

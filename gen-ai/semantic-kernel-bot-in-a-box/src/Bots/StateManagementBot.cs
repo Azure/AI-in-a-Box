@@ -31,10 +31,10 @@ namespace Microsoft.BotBuilderSamples
             _conversationState = conversationState;
             _userState = userState;
             _dialog = dialog;
-            _max_messages = config.GetValue<int?>("CONVERSATION_HISTORY_MAX_MESSAGES") ?? 10;
-            _max_attachments = config.GetValue<int?>("MAX_ATTACHMENTS") ?? 5;
-            _sso_enabled = config.GetValue<bool?>("SSO_ENABLED") ?? false;
-            _sso_config_name = config.GetValue<string?>("SSO_CONFIG_NAME");
+            _max_messages = config.GetValue("CONVERSATION_HISTORY_MAX_MESSAGES", 10);
+            _max_attachments = config.GetValue("MAX_ATTACHMENTS", 5);
+            _sso_enabled = config.GetValue("SSO_ENABLED", false);
+            _sso_config_name = config.GetValue("SSO_CONFIG_NAME", "default");
         }
 
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
