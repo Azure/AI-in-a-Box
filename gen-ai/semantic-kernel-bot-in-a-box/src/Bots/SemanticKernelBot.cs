@@ -121,7 +121,6 @@ namespace Microsoft.BotBuilderSamples
                 var planner = new FunctionCallingStepwisePlanner(plannerOptions);
                 string prompt = FormatConversationHistory(conversationData);
                 var result = await planner.ExecuteAsync(kernel, prompt);
-                await turnContext.SendActivityAsync(JsonSerializer.Serialize(result));
 
                 return result.FinalAnswer;
             }
