@@ -206,3 +206,6 @@ output AZURE_SEARCH_ENDPOINT string = deploySearch ? m_search.outputs.searchEndp
 output AZURE_SEARCH_NAME string = deploySearch ? m_search.outputs.searchName : ''
 output AZURE_RESOURCE_GROUP_ID string = resourceGroup.id
 output AZURE_RESOURCE_GROUP_NAME string = resourceGroup.name
+output APP_NAME string = m_app.outputs.appName
+output APP_HOSTNAME string = m_app.outputs.hostName
+output BOT_NAME string = m_bot.outputs.name

@@ -85,6 +85,48 @@ After running the deployment template, you may also run the application locally 
 - Send "clear" to delete the current thread;
 - Send "logout" to sign out when SSO is enabled;
 
+## Enabling SSO
+
+You can enable Single-Sign-On for your bot so that it identifies the user and keeps a token in context, that can later be used to retreive personal information like their name/job title, as well as for Microsoft Graph API calls.
+
+To enable SSO, follow the steps below. Please note that you should be an `Entra ID Application Developer` and a `Contributor` in the resource group in order to perform the following actions. You can also perform these steps in the portal if you prefer.
+
+- Load the required configurations. Hint: If you just deployed using Azure Developer CLI, you can run `azd env get-values` to retrieve these variables.
+```sh
+TENANT_ID=$(az account show --query tenantId -o tsv)
+APP_REGISTRATION_NAME=[choose app registration display name]
+AZURE_RESOURCE_GROUP_NAME=...
+BOT_NAME=...
+```
+
+- Create an App Registration and retrieve its ID and Client ID.
+```sh
+APP=$(az ad app create --display-name $APP_REGISTRATION_NAME --web-redirect-uris https://token.botframework.com/.auth/web/redirect)
+APP_ID=$(echo $APP | jq -r .id)
+CLIENT_ID=$(echo $APP | jq -r .appId)
+```
+- Create a client secret for the newly created app
+```sh
+SECRET=$(az ad app credential reset --id $APP_ID)
+CLIENT_SECRET=$(echo $SECRET | jq -r .password)
+```
+
+- Create an SSO configuration for your bot, passing in the App Registration details
+```sh
+az bot authsetting create --resource-group $AZURE_RESOURCE_GROUP_NAME --name $BOT_NAME --setting-name default --client-id $CLIENT_ID --client-secret $CLIENT_SECRET --parameters TenantId=$TENANT_ID --service aadv2 --provider-scope-string User.Read
+```
+
+- Configure the App Service to use the SSO configuration.
+```sh
+az webapp config appsettings set -g $AZURE_RESOURCE_GROUP_NAME -n $APP_NAME --settings SSO_ENABLED=true SSO_CONFIG_NAME=default
+```
+
+- Clear sensitive variables from terminal
+```sh
+SECRET=
+CLIENT_SECRET=
+```
+
 ### Enabling Web Chat
 
 To deploy a Web Chat version of your app:

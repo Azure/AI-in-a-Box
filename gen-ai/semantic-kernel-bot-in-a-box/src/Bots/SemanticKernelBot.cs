@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text.Json;
 using Azure.AI.FormRecognizer.DocumentAnalysis;
 using Azure.AI.OpenAI;
 using Azure.Search.Documents;
@@ -112,7 +113,7 @@ namespace Microsoft.BotBuilderSamples
 
             if (_useStepwisePlanner)
             {
-                var plannerOptions = new FunctionCallingStepwisePlannerConfig
+                var plannerOptions = new FunctionCallingStepwisePlannerOptions
                 {
                     MaxTokens = 128000,
                 };
@@ -125,10 +126,7 @@ namespace Microsoft.BotBuilderSamples
             }
             else
             {
-                var plannerOptions = new HandlebarsPlannerOptions
-                {
-                    MaxTokens = 128000,
-                };
+                var plannerOptions = new HandlebarsPlannerOptions();
 
                 var planner = new HandlebarsPlanner(plannerOptions);
                 string prompt = FormatConversationHistory(conversationData);
