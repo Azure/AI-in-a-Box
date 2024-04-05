@@ -1,14 +1,18 @@
 targetScope = 'resourceGroup'
 
-@description('Your resource group name')
+@description('Create or select an Azure resource group.')
 param resourceGroupName string = ''
+@description('Select the Azure region for the resources for GPT-4V. Make sure it is a region that supports GPT-4V.')
 param location string // as of 2024-01-23, GPT4V is only available in westus in the US, storage account must be in the same region as OpenAI resource
+@description('End the Azure region for the resources for AI Vision Image Analysis 4.0. Make sure it is a region that supports Image Analysis 4.0.')
 param locationCV string  // as of 2024-01-23, CV with image analysis 4.0 is only available in eastus in the US
 @description('Your Object ID')
 param spObjectId string = ''  //This is your own users Object ID
-param prefix string 
-
-param suffix string 
+@description('The prefix for the resources that will be created')
+param prefix string
+@description('The suffix for the resources that will be created')
+param suffix string
+@description('The name of the environment')
 param environmentName string
 
 var gpt4vDeploymentName = 'gpt-4v'

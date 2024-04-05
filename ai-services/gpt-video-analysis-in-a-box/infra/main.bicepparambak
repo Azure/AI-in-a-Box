@@ -1,9 +1,0 @@
-using './main.bicep'
-
-param resourceGroupName = 'jhwestgpt4' // the name of the resource group you created earlier
-param resourceLocation = 'westus' // this must be a region where GPT-4 Turbo with Vision is available
-param resourceLocationCV = 'eastus' // thhis must be a region where Computer Vision with Image Analysis 4.0 is available
-param prefix = 'jh' // a few alpha characters to make your resources unique
-param suffix = 'stt' // a few more alphanumeric characters to make your resources unique
-param spObjectId = '95d57743-ea03-4a76-a91f-02834c567119' // the object id of the service principal you created earlier
-
