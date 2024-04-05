@@ -1,7 +1,7 @@
 targetScope = 'subscription'
 
 @description('Create or select an Azure resource group.')
-param resourceGroupName string = ''
+param resourceGroupName string
 @description('Select the Azure region for the resources for GPT-4V. Make sure it is a region that supports GPT-4V.')
 param location string // as of 2024-01-23, GPT4V is only available in westus in the US, storage account must be in the same region as OpenAI resource
 @description('End the Azure region for the resources for AI Vision Image Analysis 4.0. Make sure it is a region that supports Image Analysis 4.0.')
@@ -46,9 +46,10 @@ var factoryName = '${vprefix}-adf-${vsuffix}'
 
 var openaiName = '${vprefix}-openai-${vsuffix}'
 
-resource resourceGroup 'Microsoft.Resources/resourceGroups@2023-07-01' existing = {
-  name: resourceGroupName
-  scope: subscription()
+// Organize resources in a resource group
+resource resourceGroup 'Microsoft.Resources/resourceGroups@2023-07-01' = {
+  name: !empty(resourceGroupName) ? resourceGroupName : '${vprefix}-rg-${vsuffix}'
+  location: location
 }
 
 // Deploy UAMI

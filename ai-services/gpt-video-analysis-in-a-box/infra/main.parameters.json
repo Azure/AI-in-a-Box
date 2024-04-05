@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "resourceGroupName": {
-      "value": "${AZURE_RESOURCE_GROUP}"
+      "value": "${AZURE_RESOURCE_GROUP_NAME}"
     },
     "location": {
       "value": "${AZURE_LOCATION}"
