@@ -1,4 +1,4 @@
-targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
 @description('Create or select an Azure resource group.')
 param resourceGroupName string = ''
