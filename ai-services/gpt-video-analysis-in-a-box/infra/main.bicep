@@ -1,12 +1,15 @@
 targetScope = 'resourceGroup'
 
-param resourceGroupName string 
-param resourceLocation string // as of 2024-01-23, GPT4V is only available in westus in the US, storage account must be in the same region as OpenAI resource
-param resourceLocationCV string  // as of 2024-01-23, CV with image analysis 4.0 is only available in eastus in the US
+@description('Your resource group name')
+param resourceGroupName string = ''
+param location string // as of 2024-01-23, GPT4V is only available in westus in the US, storage account must be in the same region as OpenAI resource
+param locationCV string  // as of 2024-01-23, CV with image analysis 4.0 is only available in eastus in the US
 @description('Your Object ID')
-param spObjectId string   //This is your own users Object ID
+param spObjectId string = ''  //This is your own users Object ID
 param prefix string 
+
 param suffix string 
+param environmentName string
 
 var gpt4vDeploymentName = 'gpt-4v'
 var gpt4vModelName = 'gpt-4'
@@ -49,7 +52,7 @@ module m_uaManagedIdentity 'modules/uami.bicep' = {
   name: 'deploy_UAMI'
   scope: resourceGroup
   params: {
-    resourceLocation: resourceLocation
+    resourceLocation: location
     uamiResourceName: uamiResourceName
   }
 }
@@ -59,7 +62,7 @@ module m_keyvault 'modules/keyvault.bicep' = {
   name: 'deploy_keyvault'
   scope: resourceGroup
   params: {
-    resourceLocation: resourceLocation
+    resourceLocation: location
     keyVaultName: keyVaultName
     principalId: m_uaManagedIdentity.outputs.uamiPrincipleId
     spObjectId: spObjectId
@@ -73,7 +76,7 @@ module m_storage 'modules/storage.bicep' = {
   name: 'deploy_storage'
   scope: resourceGroup
   params: {
-    resourceLocation: resourceLocation
+    resourceLocation: location
     storageAccountName: storageAccountName
     containerList: containers
     keyVaultName: keyVaultName
@@ -89,7 +92,7 @@ module m_cosmosdb 'modules/cosmosdb.bicep' = {
   name: 'deploy_cosmosdb'
   scope: resourceGroup
   params: {
-    resourceLocation: resourceLocation
+    resourceLocation: location
     cosmosAccountName: cosmosAccountName
     cosmosDbName: cosmosDbName
     cosmosDbContainerName: cosmosDbContainerName
@@ -105,7 +108,7 @@ module m_computervision 'modules/computervision.bicep' = {
   name: 'deploy_computervision'
   scope: resourceGroup
   params: {
-    cvLocation: resourceLocationCV
+    cvLocation: locationCV
     keyVaultName: keyVaultName
     cvName: computerVisionName
     uamiId:  m_uaManagedIdentity.outputs.uamiId
@@ -118,7 +121,7 @@ module m_computervision 'modules/computervision.bicep' = {
   name: 'deploy_openai'
   scope: resourceGroup
   params: {
-    resourceLocation: resourceLocation
+    resourceLocation: location
     keyVaultName: keyVaultName
     openaiName: openaiName
     gptDeploymentName: gpt4vDeploymentName
@@ -138,7 +141,7 @@ module m_datafactory 'modules/datafactory.bicep' = {
   name: 'deploy_datafactory'
   scope: resourceGroup
   params: {
-    resourceLocation: resourceLocation
+    resourceLocation: location
     dataFactoryName: factoryName
     uamiId: m_uaManagedIdentity.outputs.uamiId
     
