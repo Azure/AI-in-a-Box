@@ -1,0 +1,3 @@
+# do not save the shelve files
+assistant_db.*
+threads_db.*
