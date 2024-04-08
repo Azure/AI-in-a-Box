@@ -11,8 +11,8 @@ hooks:
       interactive: true
       continueOnError: false
     posix:
-      shell: pwsh
-      run: ./scripts/setSPObjectId.ps1
+      shell: sh
+      run: ./scripts/setSPObjectId.sh
       interactive: true
       continueOnError: false
     
