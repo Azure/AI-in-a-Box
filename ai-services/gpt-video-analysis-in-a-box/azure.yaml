@@ -7,12 +7,12 @@ hooks:
   preprovision:
     windows:
       shell: pwsh
-      run: ./scripts/setSPObjectId.ps1
+      run: ./scripts/setSPObjectID.ps1
       interactive: true
       continueOnError: false
     posix:
-      shell: sh
-      run: ./scripts/setSPObjectId.sh
+      shell: pwsh
+      run: ./scripts/setSPObjectID.ps1
       interactive: true
       continueOnError: false
     
