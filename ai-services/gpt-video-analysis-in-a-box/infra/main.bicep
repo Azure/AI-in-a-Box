@@ -33,7 +33,7 @@ var cosmosDbName = 'gpt4vresults-db' // preset for solution
 var cosmosDbContainerName = 'gptoutput' // preset for solution
 
 //Storage Module Parameters
-var storageAccountName = '${vprefix}storage${vsuffix}'
+var storageAccountName = '${replace(vprefix,'-','0')}0storage0${replace(vsuffix,'-','0')}'
 
 var containers = [
   'videosin'
