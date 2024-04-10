@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.Azure.Cosmos.Core;
+using Microsoft.IdentityModel.Tokens;
 using Models;
 
 namespace Services
@@ -14,11 +14,13 @@ namespace Services
     {
         private readonly HttpClient _httpClient;
         private readonly string _accessKey;
-        public AOAIClient(HttpClient httpClient, Uri uriBase, string apiKey)
+        private readonly string _dalleDeployment;
+        public AOAIClient(HttpClient httpClient, Uri uriBase, string apiKey, string dalleDeployment)
         {
             httpClient.BaseAddress = uriBase;
             _httpClient = httpClient;
             _accessKey = apiKey;
+            _dalleDeployment = dalleDeployment;
         }
 
         public async Task<List<Assistant>> ListAssistants()
@@ -74,10 +76,30 @@ namespace Services
             var result = await SendRequest($"/files/{fileId}/content", HttpMethod.Get);
             return result;
         }
-
-        private async Task<HttpResponseMessage> SendRequest(string path, HttpMethod method, StringContent body = null)
+        public async Task<ImageGenerationResult> GenerateImages(ImageGenerationInput input)
         {
-            var url = "/openai" + path + "?api-version=2024-02-15-preview";
+            if (_dalleDeployment.IsNullOrEmpty())
+                return await GenerateImagesV2(input);
+            else
+                return await GenerateImagesV3(_dalleDeployment, input);
+        }
+        public async Task<ImageGenerationResult> GenerateImagesV2(ImageGenerationInput input)
+        {
+            var output = await JsonRequest<ImageGenerationOutput>($"/images/generations:submit", HttpMethod.Post, new StringContent(JsonSerializer.Serialize(input), Encoding.UTF8, "application/json"), "2023-06-01-preview");
+            var response = await JsonRequest<ImageGenerationStatusResponse>($"/operations/images/{output.Id}", HttpMethod.Get, apiVersion: "2023-06-01-preview");
+            while (response.Status != "succeeded") {
+                response = await JsonRequest<ImageGenerationStatusResponse>($"/operations/images/{output.Id}", HttpMethod.Get, apiVersion: "2023-06-01-preview");
+                System.Threading.Thread.Sleep(5000);
+            }
+            return response.Result;
+        }
+        public async Task<ImageGenerationResult> GenerateImagesV3(string deploymentId, ImageGenerationInput input)
+        {
+            return await JsonRequest<ImageGenerationResult>($"/deployments/{deploymentId}/images/generations", HttpMethod.Post, new StringContent(JsonSerializer.Serialize(input), Encoding.UTF8, "application/json"), "2023-12-01-preview");
+        }
+        private async Task<HttpResponseMessage> SendRequest(string path, HttpMethod method, StringContent body = null, string apiVersion = "2024-02-15-preview")
+        {
+            var url = "/openai" + path + "?api-version=" + apiVersion;
 
             var request = new HttpRequestMessage(method, url)
             {
@@ -91,9 +113,9 @@ namespace Services
         }
 
 
-        private async Task<T> JsonRequest<T>(string path, HttpMethod method, StringContent body = null)
+        private async Task<T> JsonRequest<T>(string path, HttpMethod method, StringContent body = null, string apiVersion = "2024-02-15-preview")
         {
-            var response = await SendRequest(path, method, body);
+            var response = await SendRequest(path, method, body, apiVersion);
             var responseContent = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
                 throw new Exception(responseContent);
@@ -102,9 +124,9 @@ namespace Services
             return content;
         }
 
-        private async Task<HttpResponseMessage> SendRequest(string path, HttpMethod method, MultipartFormDataContent body)
+        private async Task<HttpResponseMessage> SendRequest(string path, HttpMethod method, MultipartFormDataContent body, string apiVersion = "2024-02-15-preview")
         {
-            var url = "/openai" + path + "?api-version=2024-02-15-preview";
+            var url = "/openai" + path + "?api-version=" + apiVersion;
 
             var request = new HttpRequestMessage(method, url)
             {
@@ -118,9 +140,9 @@ namespace Services
         }
 
 
-        private async Task<T> JsonRequest<T>(string path, HttpMethod method, MultipartFormDataContent body)
+        private async Task<T> JsonRequest<T>(string path, HttpMethod method, MultipartFormDataContent body, string apiVersion = "2024-02-15-preview")
         {
-            var response = await SendRequest(path, method, body);
+            var response = await SendRequest(path, method, body, apiVersion);
             
             var responseContent = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)

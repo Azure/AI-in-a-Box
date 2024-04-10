@@ -116,7 +116,7 @@ namespace Microsoft.BotBuilderSamples
             {
                 if (run.Status == "requires_action")
                 {
-                    var tools = new Tools(conversationData, turnContext);
+                    var tools = new Tools(conversationData, turnContext, _aoaiClient);
                     var submitData = await tools.RunRequestedTools(run);
                     await _aoaiClient.SubmitToolOutputs(conversationData.ThreadId, run.Id, submitData);
                 }

@@ -1,0 +1,23 @@
+{
+  "type": "function",
+  "function": {
+    "name": "dalle_generate_images",
+    "description": "Generate images using DALL-E",
+    "parameters": {
+      "type": "object",
+      "required": [
+        "prompt"
+      ],
+      "properties": {
+        "num_images": {
+          "type": "number",
+          "description": "The number of images to generate"
+        },
+        "prompt": {
+          "type": "string",
+          "description": "The description of the image to be generated."
+        }
+      }
+    }
+  }
+}

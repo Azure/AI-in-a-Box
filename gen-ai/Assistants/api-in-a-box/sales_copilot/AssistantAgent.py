@@ -8,8 +8,8 @@ from pathlib import Path
 
 from AgentSettings import AgentSettings
 
-from openai.types.beta.threads.message_content_image_file import MessageContentImageFile
-from openai.types.beta.threads.message_content_text import MessageContentText
+from openai.types.beta.threads.text_content_block import TextContentBlock
+from openai.types.beta.threads.image_file_content_block import ImageFileContentBlock
 from openai.types.beta.threads.messages import MessageFile
 from openai.types import FileObject
 from PIL import Image
@@ -157,7 +157,7 @@ class AssistantAgent:
         for message in message_list:
             for item in message.content:
                 # Determine the content type
-                if isinstance(item, MessageContentText):
+                if isinstance(item, TextContentBlock):
                     if message.role == "user":
                         print(f"user: {name}:\n{item.text.value}\n")
                     else:
@@ -168,7 +168,7 @@ class AssistantAgent:
                             file_id = annotation.file_path.file_id
                             content = self.read_assistant_file(file_id)
                             print(f"Annotation Content:\n{str(content)}\n")
-                elif isinstance(item, MessageContentImageFile):
+                elif isinstance(item, ImageFileContentBlock):
                     # Retrieve image from file id
                     data_in_bytes = self.read_assistant_file(
                         item.image_file.file_id)

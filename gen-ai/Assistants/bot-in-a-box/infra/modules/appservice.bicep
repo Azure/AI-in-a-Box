@@ -7,6 +7,7 @@ param sku string = 'S1'
 param tags object = {}
 param openaiGPTModel string
 param openaiEmbeddingsModel string
+param openaiDalleModel string
 param speechName string
 var speechNames = !empty(speechName) ? [speechName] : []
 
@@ -86,6 +87,10 @@ resource appService 'Microsoft.Web/sites@2022-09-01' = {
         {
           name: 'AOAI_ASSISTANT_ID'
           value: 'YOUR_ASSISTANT_ID'
+        }
+        {
+          name: 'AOAI_DALLE_DEPLOYMENT'
+          value: openaiDalleModel
         }
         {
           name: 'SPEECH_API_ENDPOINT'
