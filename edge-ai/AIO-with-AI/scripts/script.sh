@@ -22,3 +22,6 @@ logpath=/var/log/deploymentscriptlog
 echo "#############################"
 echo "Installing K3s CLI"
 echo "#############################"
+curl -sfL https://get.k3s.io | sh -
+
+mkdir -p /home/$4/.kube
