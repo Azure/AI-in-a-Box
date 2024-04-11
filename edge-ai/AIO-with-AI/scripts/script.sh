@@ -25,3 +25,18 @@ echo "#############################"
 curl -sfL https://get.k3s.io | sh -
 
 mkdir -p /home/$4/.kube
+echo "
+export KUBECONFIG=~/.kube/config
+source <(kubectl completion bash)
+alias k=kubectl
+complete -o default -F __start_kubectl k
+" >> /home/$4/.bashrc
+
+USERKUBECONFIG=/home/$4/.kube/config
+sudo k3s kubectl config view --raw > "$USERKUBECONFIG"
+chmod 600 "$USERKUBECONFIG"
+chown $4:$4 "$USERKUBECONFIG"
+
+# Set KUBECONFIG for root - Current session
+KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
