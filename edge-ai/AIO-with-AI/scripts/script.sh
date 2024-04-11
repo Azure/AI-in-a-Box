@@ -53,3 +53,11 @@ echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt
 sudo apt-get update
 sudo apt-get install helm
 echo "source <(helm completion bash)" >> /home/$4/.bashrc
+
+#############################
+#Install Azure CLI
+#############################
+echo "#############################"
+echo "Installing Azure CLI"
+echo "#############################"
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
