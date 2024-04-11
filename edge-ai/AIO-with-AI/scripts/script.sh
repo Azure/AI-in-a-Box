@@ -40,3 +40,7 @@ chown $4:$4 "$USERKUBECONFIG"
 # Set KUBECONFIG for root - Current session
 KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+
+#############################
+#Install Helm
+#############################
