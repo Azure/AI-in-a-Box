@@ -90,3 +90,11 @@ az extension add -n k8s-extension
 #sleep 60
 # Deploy Extension
 # Need to be updated for Ai-In-A-Box Iot Operations Repo
+# Deploy Extension
+# Need to be updated for Ai-In-A-Box Iot Operations Repo
+az k8s-extension create \
+    -g $1 \
+    -c $2 \
+    -n gitops \
+    --cluster-type connectedClusters \
+    --extension-type=microsoft.flux
