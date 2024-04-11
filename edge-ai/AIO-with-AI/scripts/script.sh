@@ -98,3 +98,27 @@ az k8s-extension create \
     -n gitops \
     --cluster-type connectedClusters \
     --extension-type=microsoft.flux
+
+# Front-End
+# Need to be updated for Ai-In-A-Box Iot Operations Repo
+# az k8s-configuration flux create \
+#     -g $1 \
+#     -c $2 \
+#     -n gitops \
+#     --namespace vws-app \
+#     -t connectedClusters \
+#     --scope cluster \
+#     -u https://github.com/Welasco/testflux2.git \
+#     --interval 2m \
+#     --branch main \
+#     --kustomization name=vws-app path=./vws-app prune=true sync_interval=2m
+
+
+#############################
+#Azure IoT Operations
+#############################
+# Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
+# Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
+
+# This needs to be run by elevated user.
+sudo apt install nfs-common
