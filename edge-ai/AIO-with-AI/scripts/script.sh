@@ -83,42 +83,4 @@ az connectedk8s connect --resource-group $1 --name $2 --location $3 --kube-confi
 echo "#############################"
 echo "Configuring Arc for Kubernetes GitOps"
 echo "#############################"
-az extension add -n k8s-configuration
-az extension add -n k8s-extension
 
-# Sleep for 60 seconds to allow the cluster to be fully connected
-#sleep 60
-# Deploy Extension
-# Need to be updated for Ai-In-A-Box Iot Operations Repo
-# Deploy Extension
-# Need to be updated for Ai-In-A-Box Iot Operations Repo
-az k8s-extension create \
-    -g $1 \
-    -c $2 \
-    -n gitops \
-    --cluster-type connectedClusters \
-    --extension-type=microsoft.flux
-
-# Front-End
-# Need to be updated for Ai-In-A-Box Iot Operations Repo
-# az k8s-configuration flux create \
-#     -g $1 \
-#     -c $2 \
-#     -n gitops \
-#     --namespace vws-app \
-#     -t connectedClusters \
-#     --scope cluster \
-#     -u https://github.com/Welasco/testflux2.git \
-#     --interval 2m \
-#     --branch main \
-#     --kustomization name=vws-app path=./vws-app prune=true sync_interval=2m
-
-
-#############################
-#Azure IoT Operations
-#############################
-# Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
-# Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
-
-# This needs to be run by elevated user.
-sudo apt install nfs-common
