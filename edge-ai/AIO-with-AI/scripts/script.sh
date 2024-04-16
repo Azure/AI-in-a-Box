@@ -83,4 +83,7 @@ az connectedk8s connect --resource-group $1 --name $2 --location $3 --kube-confi
 echo "#############################"
 echo "Configuring Arc for Kubernetes GitOps"
 echo "#############################"
+az extension add -n k8s-configuration
+
+
 
