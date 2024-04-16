@@ -86,4 +86,15 @@ echo "#############################"
 az extension add -n k8s-configuration
 az extension add -n k8s-extension
 
+# Sleep for 60 seconds to allow the cluster to be fully connected
+#sleep 60
+
+# Deploy Extension
+# Need to be updated for Ai-In-A-Box Iot Operations Repo
+az k8s-extension create \
+    -g $1 \
+    -c $2 \
+    -n gitops \
+    --cluster-type connectedClusters \
+    --extension-type=microsoft.flux
 
