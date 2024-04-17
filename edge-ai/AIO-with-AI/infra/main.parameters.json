@@ -5,6 +5,9 @@
     "environmentName": {
       "value": "${AZURE_ENV_NAME}"
     },
+    "resourceGroupName": {
+      "value": "aibx-aioedgeai-rg"
+    },
     "virtualMachineSize": {
       "value": "Standard_B4ms"
     },
@@ -46,6 +49,14 @@
     },
     "customLocationRPSPID":{
       "value": "${AZURE_ENV_CUSTOMLOCATIONRPSPID}"
+    },
+    "tags": {
+      "value": {
+        "Owner": "AI Team",
+        "Project": "AIOEdgeAI",
+        "Environment": "Dev",
+        "Toolkit": "Bicep"
+      }
     }
   }
 }

@@ -9,7 +9,7 @@ param publicipName string
 param publicipproperties object
 
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.network/publicipaddresses
-resource publicip 'Microsoft.Network/publicIPAddresses@2023-05-01' = {
+resource pip 'Microsoft.Network/publicIPAddresses@2023-05-01' = {
   name: publicipName
   location: location
   sku: {
@@ -18,5 +18,6 @@ resource publicip 'Microsoft.Network/publicIPAddresses@2023-05-01' = {
   }
   properties: publicipproperties
 }
-output publicipId string = publicip.id
-output publicipAddress string = publicip.properties.ipAddress
+
+output publicipId string = pip.id
+output publicipAddress string = pip.properties.ipAddress

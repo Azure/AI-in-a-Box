@@ -12,19 +12,19 @@ az account set --subscription $env:AZURE_SUBSCRIPTION_ID
 # Register providers
 Write-Host "Registering Azure providers..."
 $resourceProviders = @(
-    "Microsoft.Network",
     "Microsoft.Compute",
     "Microsoft.ContainerInstance",
-    "Microsoft.KeyVault",
-    "Microsoft.ManagedIdentity",
+    "Microsoft.ContainerService",
+    "Microsoft.DeviceRegistry"
     "Microsoft.ExtendedLocation",
+    "Microsoft.IoTOperationsDataProcessor",
+    "Microsoft.IoTOperationsMQ",
+    "Microsoft.IoTOperationsOrchestrator",
+    "Microsoft.KeyVault",
     "Microsoft.Kubernetes",
     "Microsoft.KubernetesConfiguration",
-    "Microsoft.ContainerService",
-    "Microsoft.IoTOperationsOrchestrator",
-    "Microsoft.IoTOperationsMQ",
-    "Microsoft.IoTOperationsDataProcessor",
-    "Microsoft.DeviceRegistry"
+    "Microsoft.ManagedIdentity",
+    "Microsoft.Network"
 )
 
 ###################

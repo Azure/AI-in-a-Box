@@ -42,10 +42,10 @@ var linuxConfiguration = {
   }
 }
 
-var nicName = '${virtualMachineName}-NIC'
+var nicName = '${virtualMachineName}-nic'
 
 module nic '../vnet/nic.bicep' = {
-  name: nicName
+  name: 'deployVMNic'
   params:{
     location: location
     nicName: nicName
@@ -113,7 +113,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2023-07-01' = {
 }
 
 module roleOnboarding '../identity/role.bicep' = {
-  name: 'virtualMachineName-roleOnboarding'
+  name: 'deployVMRole_AzureArcOnboarding'
   scope: resourceGroup()
   params:{
     principalId: vmUserAssignedIdentityPrincipalID
@@ -122,7 +122,7 @@ module roleOnboarding '../identity/role.bicep' = {
 }
 
 module roleK8sExtensionContributor '../identity/role.bicep' = {
-  name: 'virtualMachineName-roleK8sExtensionContributor'
+  name: 'deployVMRole_K8sExtensionContributor'
   scope: resourceGroup()
   params:{
     principalId: vmUserAssignedIdentityPrincipalID
