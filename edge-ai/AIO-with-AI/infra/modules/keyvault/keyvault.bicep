@@ -39,7 +39,7 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' = {
     tenantId: subscription().tenantId
     enabledForDiskEncryption: true
     softDeleteRetentionInDays: 7
-    enablePurgeProtection: true
+    //enablePurgeProtection: true //Commented this out to disable purge protection
     enableRbacAuthorization: false
     // networkAcls: {
     //   bypass: 'AzureServices'

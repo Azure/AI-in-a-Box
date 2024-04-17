@@ -45,6 +45,34 @@ param environmentName string
 @description('Primary location for all resources')
 param location string
 
+param resourceGroupName string = ''
+
+var abbrs = loadJsonContent('abbreviations.json')
+var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup.id), 1, 3) 
+param tags object
+
+//UAMI Module Parameters
+param msiName string = ''
+
+//Key Vault
+var keyVaultName = '' //'${virtualMachineName}-kv'
+
+
+//VNet Module Parameters
+var networkSecurityGroupName = '' //'${virtualMachineName}-nsg'
+var subnetName = 'AIO-Subnet'
+var publicIPAddressName = '' //'${virtualMachineName}-PublicIP'
+
+@sys.description('Virtual Nework Name. This is a required parameter to build a new VNet or find an existing one.')
+param vNetName string = 'aiobx-vnet'
+
+@sys.description('Virtual Network Address Space.')
+param vNetAddressSpace array = ['10.7.0.0/16']
+
+@sys.description('AIO Subnet Address Space.')
+param subnetCIDR string = '10.7.0.0/24'
+
+
 //VM Module Parameters
 @sys.description('VM size, please choose a size which have enough memory and CPU for K3s.')
 param virtualMachineSize string = 'Standard_B4ms'
@@ -70,18 +98,6 @@ param adminPasswordOrKey string
 ])
 param authenticationType string
 
-
-
-@sys.description('Virtual Nework Name. This is a required parameter to build a new VNet or find an existing one.')
-param virtualNetworkName string = 'IoT-Ops-VNET'
-
-@sys.description('Virtual Network Address Space.')
-param VNETAddress array = [
-  '10.0.0.0/16'
-]
-
-@sys.description('IoT Ops Subnet Address Space.')
-param subnetCIDR string = '10.0.0.0/24'
 
 @sys.description('URI for Custom K3s VM Script and Config')
 //param scriptURI string = 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/AIO-with-AI/edge-ai/AIO-with-AI/scripts/'
@@ -110,11 +126,6 @@ param gitOpsAppPath string
 @sys.description('Custom Locations RP ObjectID')
 param customLocationRPSPID string
 
-// Variables
-var subnetName = 'IoT-Ops-Subnet'
-var publicIPAddressName = '${virtualMachineName}-PublicIP'
-var networkSecurityGroupName = '${virtualMachineName}-NSG'
-var keyVaultName = '${virtualMachineName}-kv'
 
 // Generate a unique token to be used in naming resources.
 // Remove linter suppression after using.
@@ -127,28 +138,30 @@ var vmIdentityName = '${virtualMachineName}-vmIdentity'
 //====================================================================================
 // Create Resource Group 
 //====================================================================================
-resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: 'rg-${environmentName}'
+resource resourceGroup 'Microsoft.Resources/resourceGroups@2023-07-01' = {
+  name: !empty(resourceGroupName) ? resourceGroupName : '${abbrs.resourcesResourceGroups}${environmentName}'
   location: location
+  tags: tags
 }
 
-// Create User Assigned Identity for VM
-module vmIdentity 'modules/identity/userassignedidentity.bicep' = {
+//2. Deploy UAMI
+module m_msi 'modules/identity/msi.bicep' = {
+  name: 'deploy_msi'
   scope: resourceGroup
-  name: replace('${take(prefix,19)}-${vmIdentityName}', '--', '-')
   params: {
     location: location
-    identityName: replace('${take(prefix,19)}-${vmIdentityName}', '--', '-')
+    msiName: !empty(msiName) ? msiName : '${abbrs.managedIdentityUserAssignedIdentities}${environmentName}-${uniqueSuffix}'
+    tags: tags
   }
 }
 
-// Create NSG
-module nsg 'modules/vnet/nsg.bicep' = {
-  name: networkSecurityGroupName
+//3. Deploy Create NSG
+module m_nsg 'modules/vnet/nsg.bicep' = {
+  name: 'deploy_nsg'
   scope: resourceGroup
   params: {
     location: location
-    nsgName:  replace('${take(prefix,19)}-${networkSecurityGroupName}', '--', '-')
+    nsgName: !empty(networkSecurityGroupName) ? networkSecurityGroupName : '${abbrs.networkNetworkSecurityGroups}${environmentName}-${uniqueSuffix}'
     securityRules: [
       {
         name: 'In-SSH'
@@ -180,14 +193,14 @@ module nsg 'modules/vnet/nsg.bicep' = {
   }
 }
 
-// Create VNET
-module vnet 'modules/vnet/vnet.bicep' = {
-  name: virtualNetworkName
+//4. Deploy VNET
+module m_vnet 'modules/vnet/vnet.bicep' = {
+  name: 'deploy_vnet'
   scope: resourceGroup
   params: {
     location: location
-    vnetAddressSpace: VNETAddress
-    vnetName: replace('${take(prefix,19)}-${virtualNetworkName}', '--', '-')
+    vnetName: !empty(vNetName) ? vNetName : '${abbrs.networkVirtualNetworks}${environmentName}-${uniqueSuffix}'
+    vnetAddressSpace: vNetAddressSpace
     subnets: [
       {
         name: subnetName
@@ -199,63 +212,69 @@ module vnet 'modules/vnet/vnet.bicep' = {
   }
 }
 
-// Build reference of existing subnets
-resource subnet 'Microsoft.Network/virtualNetworks/subnets@2023-05-01' existing = {
-  scope: resourceGroup
-  name: '${vnet.outputs.vnetName}/${subnetName}'
-}
 
-// Create OPNsense Public IP
-module publicip 'modules/vnet/publicip.bicep' = {
-  name: publicIPAddressName
+//5. Create OPNsense Public IP
+module m_pip 'modules/vnet/publicip.bicep' = {
+  name: 'deploy_pip'
   scope: resourceGroup
   params: {
     location: location
-    publicipName: replace('${take(prefix,19)}-${publicIPAddressName}', '--', '-')
+    publicipName: !empty(publicIPAddressName) ? publicIPAddressName : '${abbrs.networkPublicIPAddresses}${environmentName}-${uniqueSuffix}'
     publicipproperties: {
       publicIPAllocationMethod: 'Static'
     }
   }
 }
 
-// Create KeyVault used for IoT Operations
-module keyvault 'modules/keyvault/keyvault.bicep' = {
-  name: replace('${take(prefix,19)}-${keyVaultName}', '--', '-')
+// 6. Deploy Required Key Vault
+// https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults
+module m_kvn 'modules/keyvault/keyvault.bicep' = {
+  name: 'deploy_keyvault'
   scope: resourceGroup
   params: {
     location: location
-    name: replace('${take(prefix,19)}-${keyVaultName}', '--', '-')
-    vmUserAssignedIdentityPrincipalID: vmIdentity.outputs.principalId
+    keyVaultName: !empty(keyVaultName) ? keyVaultName : '${abbrs.keyVaultVaults}${environmentName}-${uniqueSuffix}'
+    vmUserAssignedIdentityPrincipalID: m_msi.outputs.msiPrincipalID
   }
 }
 
+// Build reference of existing subnets
+resource subnet 'Microsoft.Network/virtualNetworks/subnets@2023-05-01' existing = {
+  scope: resourceGroup
+  name: '${m_vnet.outputs.vnetName}/${subnetName}'
+}
+
+
 // Create Ubuntu VM for K3s
-module vm 'modules/vm/vm-ubuntu.bicep' = {
-  name: virtualMachineName
+module m_vm 'modules/vm/vm-ubuntu.bicep' = {
+  name: 'deploy_K3sVM'
   scope: resourceGroup
   params: {
-    arcK8sClusterName: arcK8sClusterName
     location: location
-    scriptURI: scriptURI
-    ShellScriptName: ShellScriptName
+    virtualMachineSize: virtualMachineSize
+    virtualMachineName: !empty(virtualMachineName) ? virtualMachineName : '${abbrs.computeVirtualMachines}${environmentName}-${uniqueSuffix}'
+    arcK8sClusterName: arcK8sClusterName
     adminUsername: adminUsername
     adminPasswordOrKey: adminPasswordOrKey
     authenticationType: authenticationType
-    vmUserAssignedIdentityID: vmIdentity.outputs.identityid
-    vmUserAssignedIdentityPrincipalID: vmIdentity.outputs.principalId
+    vmUserAssignedIdentityID: m_msi.outputs.msiID //make sure this is the correct one because it could be msiclientid
+    vmUserAssignedIdentityPrincipalID: m_msi.outputs.msiPrincipalID
+
     subnetId: subnet.id
-    virtualMachineName: replace('${take(prefix,19)}-${virtualMachineName}', '--', '-')
-    virtualMachineSize: virtualMachineSize
-    publicIPId: publicip.outputs.publicipId
-    nsgId: nsg.outputs.nsgID
-    keyVaultId: keyvault.outputs.keyvaultId
+    publicIPId: m_pip.outputs.publicipId
+    nsgId: m_nsg.outputs.nsgID
+    keyVaultId: m_kvn.outputs.keyvaultId
+
+    scriptURI: scriptURI
+    ShellScriptName: ShellScriptName
+
     customLocationRPSPID: customLocationRPSPID
   }
   dependsOn: [
-    vnet
-    publicip
-    nsg
-    keyvault
+    m_nsg
+    m_vnet
+    m_pip
+    m_kvn
   ]
 }
 
@@ -271,6 +290,6 @@ module gitOpsAppDeploy 'modules/gitops/gtiops.bicep' = {
     gitOpsAppPath: gitOpsAppPath
   }
   dependsOn: [
-    vm
+    m_vm
   ]
 }

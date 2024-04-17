@@ -18,19 +18,19 @@ echo "Registering Azure providers..."
 # List of required azure providers
 ###################
 azProviders=(
-    "Microsoft.Network"
-    "Microsoft.Compute"
-    "Microsoft.ContainerInstance"
-    "Microsoft.KeyVault"
-    "Microsoft.ManagedIdentity"
+    "Microsoft.Compute",
+    "Microsoft.ContainerInstance",
+    "Microsoft.ContainerService",
+    "Microsoft.DeviceRegistry"
     "Microsoft.ExtendedLocation",
+    "Microsoft.IoTOperationsDataProcessor",
+    "Microsoft.IoTOperationsMQ",
+    "Microsoft.IoTOperationsOrchestrator",
+    "Microsoft.KeyVault",
     "Microsoft.Kubernetes",
     "Microsoft.KubernetesConfiguration",
-    "Microsoft.ContainerService",
-    "Microsoft.IoTOperationsOrchestrator",
-    "Microsoft.IoTOperationsMQ",
-    "Microsoft.IoTOperationsDataProcessor",
-    "Microsoft.DeviceRegistry"
+    "Microsoft.ManagedIdentity",
+    "Microsoft.Network"
 )
 
 ###################
@@ -115,6 +115,7 @@ fi
 
 ###################
 # Retrieving the custom RP SP ID
+# Get the objectId of the Microsoft Entra ID application that the Azure Arc service uses and save it as an environment variable.
 ###################
 # bc313c14-388c-4e7d-a58e-70017303ee3b is Custom Locations RP
 echo "Retrieving the Custom Location RP ObjectID from SP ID bc313c14-388c-4e7d-a58e-70017303ee3b"

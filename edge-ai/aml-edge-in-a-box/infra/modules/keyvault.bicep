@@ -1,7 +1,6 @@
 /*region Header
       Module Steps 
-      1 - Create ML Workspace
-      2 - Create ML Workspace Compute Instance
+      1 - Create KeyVault
 */
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
