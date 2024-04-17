@@ -12,6 +12,7 @@ az account set --subscription $env:AZURE_SUBSCRIPTION_ID
 # Register providers
 Write-Host "Registering Azure providers..."
 $resourceProviders = @(
+    
     "Microsoft.Compute",
     "Microsoft.ContainerInstance",
     "Microsoft.ContainerService",

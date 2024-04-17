@@ -121,29 +121,3 @@ az k8s-extension create \
 
 # This needs to be run by elevated user.
 sudo apt install nfs-common
-
-echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
-echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
-
-sudo sysctl -p
-
-az extension add --upgrade --name azure-iot-ops
-
-# Creating keyvault which is required for IoT Operations
-# this step will be done in Bicep
-# command reference only
-#az keyvault create --enable-rbac-authorization false  --name "<KeyVault Name>" --resource-group $1 --location "EastUS" ## This was created using portal shell.
-# Example: az keyvault create --enable-rbac-authorization false  --name "nab-r7v26nydafn7c-kv" --resource-group $1 --location "EastUS" ## This was created using portal shell.
-
-# The Object ID: bc313c14-388c-4e7d-a58e-70017303ee3b is Custom Locations RP
-# The Service Principal for this Object ID is created during the resource provider registration for Custom Locations
-# By default Managed Identities doesn't have access to query MS Graph and this step of quering the Object ID of the Service Principal is required to be executed a Pre-Step and passed as parameter
-# Command for reference only
-#export OBJECT_ID = $(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
-
-az connectedk8s enable-features -n $2 -g $1 --custom-locations-oid $6 --features cluster-connect custom-locations
-
-# Need to review with Nabeel if we should use the additional parameters --dp-instance, --simulate-plc, --mq-instance --mq-mode
-# reference: https://learn.microsoft.com/en-us/azure/iot-operations/get-started/quickstart-deploy?tabs=linux
-az iot ops init --cluster $2 -g $1 --kv-id $7
