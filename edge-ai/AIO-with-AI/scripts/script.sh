@@ -120,4 +120,5 @@ az k8s-extension create \
 # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
 
 # This needs to be run by elevated user.
-sudo apt-get install -y nfs-common
+
+sudo apt-get --yes --force-yes nfs-common
