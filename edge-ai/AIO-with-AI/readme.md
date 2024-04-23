@@ -52,7 +52,7 @@ Orchestration of resources for the entire Edge AI model lifecycle with AIO (Azur
 
 1. Log into your Azure subscription: 
     ```
-    azd auth login
+    azd auth login --tenant-id xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx
     ```
 
 1. Clone this repository locally: 
@@ -78,12 +78,8 @@ Once your resources have been deployed you will need to do the following to get 
 * Run the Notebook(s) 
     * 1-AutoML-ObjectDetection.ipynb
 
-* Once the VM is deployed, or your physical device is setup, you can ssh into the VM/device using the below command   
-    * ssh NodeVMAdmin@edgevm1.eastus.cloudapp.azure.com -p 2222 
-
-* Once connected to your virtual machine, [verify](https://learn.microsoft.com/en-us/azure/iot-edge/quickstart-linux) that the runtime was successfully installed and configured on your IoT Edge device.
-    * sudo iotedge system status
-    * sudo iotedge list
-    * sudo iotedge check
-
-* Once you get access to your VM you will need to deploy your Model through a [Deployment Manifest](https://learn.microsoft.com/en-us/azure/iot-edge/module-composition). Please visit how to [Develop IoT Edge Modules using VS Code](https://learn.microsoft.com/en-us/azure/iot-edge/tutorial-develop-for-linux?view=iotedge-1.4&tabs=csharp&pivots=iotedge-dev-cli)
+## Deployment Issues
+ - export OBJECT_ID = $(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
+ - You need to make sure that you get this value from a tenant that you have access to get to the graph api in the tenant. 
+ - https://learn.microsoft.com/en-us/azure/azure-arc/kubernetes/custom-locations
+ - https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest

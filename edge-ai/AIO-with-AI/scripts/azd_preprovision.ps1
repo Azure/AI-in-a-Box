@@ -12,7 +12,6 @@ az account set --subscription $env:AZURE_SUBSCRIPTION_ID
 # Register providers
 Write-Host "Registering Azure providers..."
 $resourceProviders = @(
-    
     "Microsoft.Compute",
     "Microsoft.ContainerInstance",
     "Microsoft.ContainerService",
@@ -55,7 +54,6 @@ if (![string]::IsNullOrEmpty($azProvidersNotRegistered)) {
 ###################
 # Checking the status of missing Azure Providers
 ###################
-
 if (![string]::IsNullOrEmpty($azProvidersNotRegistered)) {
     $copy_azProvidersNotRegistered = $azProvidersNotRegistered
     while ($copy_azProvidersNotRegistered.Count -gt 0) {
@@ -80,8 +78,14 @@ if (![string]::IsNullOrEmpty($azProvidersNotRegistered)) {
     Write-Host "Done registering required Azure Providers"
 }
 
+###################
 # Retrieving the custom RP SP ID
+# Get the objectId of the Microsoft Entra ID application that the Azure Arc service uses and save it as an environment variable.
+###################
 # bc313c14-388c-4e7d-a58e-70017303ee3b is Custom Locations RP
 Write-Host "Retrieving the Custom Location RP ObjectID from SP ID bc313c14-388c-4e7d-a58e-70017303ee3b"
+# Make sure that the command below is and/or pointing to the correct subscription and the MS Tenant
+az account set --subscription $AZURE_SUBSCRIPTION_ID
 $customLocationRPSPID = $(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
+$customLocationRPSPID = "412d7898-47f2-46b4-9d60-b7e975ae0fde"
 azd env set AZURE_ENV_CUSTOMLOCATIONRPSPID $customLocationRPSPID

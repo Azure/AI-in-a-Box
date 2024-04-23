@@ -13,7 +13,6 @@ echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 
 sudo sysctl -p
 
-
 az provider register -n "Microsoft.ExtendedLocation"
 az provider register -n "Microsoft.Kubernetes"
 az provider register -n "Microsoft.KubernetesConfiguration"
@@ -21,7 +20,6 @@ az provider register -n "Microsoft.IoTOperationsOrchestrator"
 az provider register -n "Microsoft.IoTOperationsMQ"
 az provider register -n "Microsoft.IoTOperationsDataProcessor"
 az provider register -n "Microsoft.DeviceRegistry"
-
 
 
 # https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-deploy-iot-operations?tabs=portal
@@ -34,7 +32,6 @@ az login --identity --username $5
 
 az keyvault create --enable-rbac-authorization false  --name "<KeyVault Name>" --resource-group $1 --location "EastUS" ## This was created using portal shell. 
 # Example: az keyvault create --enable-rbac-authorization false  --name "nab-r7v26nydafn7c-kv" --resource-group $1 --location "EastUS" ## This was created using portal shell. 
-
 
 
 ###
@@ -52,6 +49,8 @@ az connectedk8s enable-features -n $2 -g $1 --custom-locations-oid $OBJECT_ID --
 
 az iot ops verify-host
 
+#az iot ops init --simulate-plc --cluster <CLUSTER_NAME> -g <RESOURCE_GROUP> --kv-id $(az keyvault show --name <KEYVAULT_NAME> -o tsv --query id)
+# below is nabeel's command but he is creating a keyvault in the same command when above on line 35 the keyvault is created separately.
 az iot ops init --cluster <CLUSTER_NAME> -g "rg-nab" --kv-id $(az keyvault create -n <NEW_KEYVAULT_NAME> -g <RESOURCE_GROUP> -o tsv --query id)
 
 az iot ops init --cluster $2 -g $1 --kv-id "<KeyVaultId>"
