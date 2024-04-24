@@ -76,6 +76,7 @@ az extension add --name connectedk8s
 
 # Need to grab the resource group name of the VM
 az connectedk8s connect --resource-group $1 --name $2 --location $3 --kube-config /etc/rancher/k3s/k3s.yaml
+#az connectedk8s connect  -g $1 -n $2  -l $3 --subscription 9aaa0a90-c54d-4c4c-baba-2748b3077340
 
 #############################
 #Arc for Kubernetes GitOps
@@ -120,5 +121,4 @@ az k8s-extension create \
 # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
 
 # This needs to be run by elevated user.
-
-sudo apt-get --yes --force-yes nfs-common
+az extension add --upgrade --name azure-iot-ops
