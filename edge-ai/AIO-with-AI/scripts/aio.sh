@@ -61,9 +61,21 @@ echo "#############################"
 echo "#############################"
 echo "Deploy IoT Operations components"
 echo "#############################"
-
 az extension add --upgrade --name azure-iot-ops
 
 echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
 echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
+
+sudo sysctl -p
+
+az connectedk8s enable-features -n $2 -g $1 --custom-locations-oid $6 --features cluster-connect custom-locations
+
+az iot ops verify-host
+
+az iot ops init --simulate-plc --cluster $2 --resource-group $1 --kv-id $(az keyvault show --name $7 -o tsv --query id)
+
+kubectl get deployments,pods -n azure-arc
+kubectl get pods -n azure-iot-operations
+
+az iot ops check

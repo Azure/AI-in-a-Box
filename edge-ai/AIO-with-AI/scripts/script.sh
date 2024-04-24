@@ -10,6 +10,7 @@
 # $5 = Azure VM UserAssignedIdentity PrincipalId
 # $6 = Object ID of the Service Principal for Custom Locations RP
 # $7 = Azure KeyVault ID
+# $8 = Subscription ID
 
 #############################
 # Script Definition
@@ -70,11 +71,12 @@ echo "Connecting K3s cluster to Arc for K8s"
 echo "#############################"
 #We might need to login with a user that has more permissions than the Azure VM UserAssignedIdentity
 az login --identity --username $5 
-az extension add --name connectedk8s
+az account set -s $8
 
+az extension add --name connectedk8s --yes
 # Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
 az connectedk8s connect --resource-group $1 --name $2 --location $3 --kube-config /etc/rancher/k3s/k3s.yaml
-#az connectedk8s connect  -g $1 -n $2  -l $3 --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+
 
 #############################
 #Arc for Kubernetes GitOps
@@ -82,8 +84,8 @@ az connectedk8s connect --resource-group $1 --name $2 --location $3 --kube-confi
 echo "#############################"
 echo "Configuring Arc for Kubernetes GitOps"
 echo "#############################"
-az extension add -n k8s-configuration
-az extension add -n k8s-extension
+az extension add -n k8s-configuration --yes
+az extension add -n k8s-extension --yes
 
 # Sleep for 60 seconds to allow the cluster to be fully connected
 #sleep 60
@@ -120,7 +122,7 @@ az k8s-extension create \
 echo "#############################"
 echo "Deploy IoT Operations components"
 echo "#############################"
-az extension add --upgrade --name azure-iot-ops --allow-preview
+az extension add --upgrade --name azure-iot-ops --allow-preview --yes
 
 echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
@@ -129,3 +131,4 @@ echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 
 az connectedk8s enable-features -n $2 -g $1 --custom-locations-oid $6 --features cluster-connect custom-locations
+#az iot ops init --simulate-plc --cluster $2 --resource-group $1 --kv-id $(az keyvault show --name $7 -o tsv --query id)
