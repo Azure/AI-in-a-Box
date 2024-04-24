@@ -131,6 +131,15 @@ module roleK8sExtensionContributor '../identity/role.bicep' = {
   }
 }
 
+module roleContributor '../identity/role.bicep' = {
+  name: 'deployVMRole_Contributor'
+  scope: resourceGroup()
+  params:{
+    principalId: vmUserAssignedIdentityPrincipalID
+    roleGuid: 'b24988ac-6180-42a0-ab88-20f7382dd24c' // Kubernetes Extension Contributor
+  }
+}
+
 resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
   parent: vm
   name: 'CustomScript'
@@ -144,7 +153,7 @@ resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
       fileUris: [
         '${scriptURI}${ShellScriptName}'
       ]
-      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId} ${keyVaultName} ${subscription().id}'
+      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId} ${keyVaultName} ${subscription().id} ${subscription().tenantId}'
     }
   }
   dependsOn: [

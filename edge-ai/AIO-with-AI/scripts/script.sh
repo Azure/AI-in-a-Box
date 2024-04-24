@@ -12,6 +12,8 @@
 # $7 = Azure KeyVault ID
 # $8 = Azure KeyVault Name
 # $9 = Subscription ID
+# $10 = Tenant ID
+
 
 #############################
 # Script Definition
@@ -71,7 +73,7 @@ echo "#############################"
 echo "Connecting K3s cluster to Arc for K8s"
 echo "#############################"
 #We might need to login with a user that has more permissions than the Azure VM UserAssignedIdentity
-az login --identity --username $5 
+az login --identity --username $5 --tenant $10
 az account set -s $9
 
 az extension add --name connectedk8s --yes
@@ -133,3 +135,6 @@ sudo sysctl -p
 
 az connectedk8s enable-features -g $1 -n $2 --custom-locations-oid $6 --features cluster-connect custom-locations
 az iot ops init --simulate-plc -g $1 --cluster $2 --kv-id $(az keyvault show --name $7 -o tsv --query id)
+
+az iot ops init --cluster mycluster -g myresourcegroup --kv-id /subscriptions/2cb3a427-1abc-48d0-9d03-dd240819742a/resourceGroups/myresourcegroup/providers/Microsoft.KeyVault/vaults/mykeyvault
+                                                              
