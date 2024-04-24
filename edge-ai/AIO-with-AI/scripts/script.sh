@@ -64,7 +64,8 @@ echo "source <(helm completion bash)" >> /home/$4/.bashrc
 echo "#############################"
 echo "Installing Azure CLI"
 echo "#############################"
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+#curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+curl -L https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 #############################
 #Arc for Kubernetes setup
@@ -90,51 +91,52 @@ echo "#############################"
 az extension add -n k8s-configuration --yes
 az extension add -n k8s-extension --yes
 
+sudo apt-get update && sudo apt-get upgrade
+
 # Sleep for 60 seconds to allow the cluster to be fully connected
 #sleep 60
 
 # Deploy Extension
 # Need to be updated for Ai-In-A-Box Iot Operations Repo
-az k8s-extension create \
-    -g $1 \
-    -c $2 \
-    -n gitops \
-    --cluster-type connectedClusters \
-    --extension-type=microsoft.flux
-
-# Front-End
-# Need to be updated for Ai-In-A-Box Iot Operations Repo
-# az k8s-configuration flux create \
+# az k8s-extension create \
 #     -g $1 \
 #     -c $2 \
 #     -n gitops \
-#     --namespace vws-app \
-#     -t connectedClusters \
-#     --scope cluster \
-#     -u https://github.com/Welasco/testflux2.git \
-#     --interval 2m \
-#     --branch main \
-#     --kustomization name=vws-app path=./vws-app prune=true sync_interval=2m
+#     --cluster-type connectedClusters \
+#     --extension-type=microsoft.flux
+
+# # Front-End
+# # Need to be updated for Ai-In-A-Box Iot Operations Repo
+# # az k8s-configuration flux create \
+# #     -g $1 \
+# #     -c $2 \
+# #     -n gitops \
+# #     --namespace vws-app \
+# #     -t connectedClusters \
+# #     --scope cluster \
+# #     -u https://github.com/Welasco/testflux2.git \
+# #     --interval 2m \
+# #     --branch main \
+# #     --kustomization name=vws-app path=./vws-app prune=true sync_interval=2m
 
 
-#############################
-#Azure IoT Operations
-#############################
-# Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
-# Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
-echo "#############################"
-echo "Deploy IoT Operations components"
-echo "#############################"
-az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
+# #############################
+# #Azure IoT Operations
+# #############################
+# # Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
+# # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
+# echo "#############################"
+# echo "Deploy IoT Operations components"
+# echo "#############################"
+# az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
-echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
-echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
+# echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
+# echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+# echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 
-sudo sysctl -p
+# sudo sysctl -p
 
-az connectedk8s enable-features -g $1 -n $2 --custom-locations-oid $6 --features cluster-connect custom-locations
-az iot ops init --simulate-plc -g $1 --cluster $2 --kv-id $(az keyvault show --name $7 -o tsv --query id)
+# az connectedk8s enable-features -g $1 -n $2 --custom-locations-oid $6 --features cluster-connect custom-locations
+# #az iot ops init --simulate-plc -g $1 --cluster $2 --kv-id $(az keyvault show --name $7 -o tsv --query id)
 
-az iot ops init --cluster mycluster -g myresourcegroup --kv-id /subscriptions/2cb3a427-1abc-48d0-9d03-dd240819742a/resourceGroups/myresourcegroup/providers/Microsoft.KeyVault/vaults/mykeyvault
                                                               
