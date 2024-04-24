@@ -72,7 +72,7 @@ echo "#############################"
 az login --identity --username $5 
 az extension add --name connectedk8s
 
-# Need to grab the resource group name of the VM
+# Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
 az connectedk8s connect --resource-group $1 --name $2 --location $3 --kube-config /etc/rancher/k3s/k3s.yaml
 #az connectedk8s connect  -g $1 -n $2  -l $3 --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
