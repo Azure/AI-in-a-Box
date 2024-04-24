@@ -139,14 +139,14 @@ sleep 60
 #     --kustomization name=vws-app path=./vws-app prune=true sync_interval=2m
 
 
-# #############################
-# #Azure IoT Operations
-# #############################
-# # Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
-# # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
-# echo "#############################"
-# echo "Deploy IoT Operations components"
-# echo "#############################"
+#############################
+#Azure IoT Operations
+#############################
+# Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
+# Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
+echo "#############################"
+echo "Deploy IoT Operations components"
+echo "#############################"
 # az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
 # echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
