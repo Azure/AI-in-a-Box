@@ -23,6 +23,7 @@ param vmUserAssignedIdentityPrincipalID string
 param subnetId string
 param publicIPId string = ''
 param nsgId string = ''
+param keyVaultId string
 param keyVaultName string
 
 param scriptURI string
@@ -143,7 +144,7 @@ resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
       fileUris: [
         '${scriptURI}${ShellScriptName}'
       ]
-      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultName} ${subscription().id}'
+      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId} ${keyVaultName} ${subscription().id}'
     }
   }
   dependsOn: [

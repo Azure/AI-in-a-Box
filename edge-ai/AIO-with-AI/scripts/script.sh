@@ -10,7 +10,8 @@
 # $5 = Azure VM UserAssignedIdentity PrincipalId
 # $6 = Object ID of the Service Principal for Custom Locations RP
 # $7 = Azure KeyVault ID
-# $8 = Subscription ID
+# $8 = Azure KeyVault ID
+# $9 = Subscription ID
 
 #############################
 # Script Definition
@@ -71,7 +72,7 @@ echo "Connecting K3s cluster to Arc for K8s"
 echo "#############################"
 #We might need to login with a user that has more permissions than the Azure VM UserAssignedIdentity
 az login --identity --username $5 
-az account set -s $8
+az account set -s $9
 
 az extension add --name connectedk8s --yes
 # Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
