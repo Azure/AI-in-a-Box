@@ -122,7 +122,7 @@ az k8s-extension create \
 echo "#############################"
 echo "Deploy IoT Operations components"
 echo "#############################"
-az extension add --upgrade --name azure-iot-ops --allow-preview --yes
+az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
 echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
