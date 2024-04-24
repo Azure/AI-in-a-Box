@@ -4,9 +4,9 @@
 # Connect to Azure
 ########################################################################
 echo "Connecting to Azure..."
-echo "Setting Azure context with subscription id $AZURE_SUBSCRIPTION_ID ..."
+echo "Setting Azure context with subscription id $env:AZURE_SUBSCRIPTION_ID ..."
 # echo "Setting az subscription..."
-az account set --subscription $AZURE_SUBSCRIPTION_ID
+az account set --subscription $env:AZURE_SUBSCRIPTION_ID
 
 ########################################################################
 # Registering resource providers
@@ -118,9 +118,11 @@ fi
 # Get the objectId of the Microsoft Entra ID application that the Azure Arc service uses and save it as an environment variable.
 ###################
 # bc313c14-388c-4e7d-a58e-70017303ee3b is Custom Locations RP
+echo "Setting Subscription Context"
+az account set --subscription $env:AZURE_SUBSCRIPTION_ID
 echo "Retrieving the Custom Location RP ObjectID from SP ID bc313c14-388c-4e7d-a58e-70017303ee3b"
 # Make sure that the command below is and/or pointing to the correct subscription and the MS Tenant
-az account set --subscription $AZURE_SUBSCRIPTION_ID
 $customLocationRPSPID = $(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
+echo "customLocationRPSPID: $customLocationRPSPID"
 $customLocationRPSPID = "412d7898-47f2-46b4-9d60-b7e975ae0fde"
 azd env set AZURE_ENV_CUSTOMLOCATIONRPSPID $customLocationRPSPID
