@@ -121,4 +121,4 @@ az k8s-extension create \
 # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
 
 # This needs to be run by elevated user.
-
+az extension add --upgrade --name azure-iot-ops
