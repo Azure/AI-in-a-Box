@@ -7,6 +7,7 @@
 param keyVaultName string
 param location string = resourceGroup().location
 param vmUserAssignedIdentityPrincipalID string
+param spObjectId string
 
 resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   name: keyVaultName
@@ -35,6 +36,24 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' = {
         }
         tenantId: subscription().tenantId
       }
+      {
+        tenantId: subscription().tenantId
+        objectId: spObjectId //This is your Service Principal Object ID or your own User Object ID so you can give the SP access to the Key Vault Secrets
+        permissions: { 
+          secrets: [
+            'all'
+          ]
+          storage: [
+            'all'
+          ]
+          keys: [
+            'all'
+          ]
+          certificates: [
+            'all'
+          ]
+        }
+      }
     ]
     tenantId: subscription().tenantId
     enabledForDiskEncryption: true
@@ -49,3 +68,4 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' = {
 }
 
 output keyvaultId string = keyvault.id
+output keyvaultName string = keyvault.name

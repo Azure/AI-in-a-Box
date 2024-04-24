@@ -57,6 +57,9 @@ param msiName string = ''
 //Key Vault
 var keyVaultName = '' //'${virtualMachineName}-kv'
 
+@description('Your Service Principal Object ID or your own User Object ID so you can give the SP access to the Key Vault Secrets')
+param spObjectId string //This is your Service Principal Object ID or your own User Object ID so you can give the SP access to the Key Vault Secrets
+
 
 //VNet Module Parameters
 var networkSecurityGroupName = '' //'${virtualMachineName}-nsg'
@@ -235,6 +238,9 @@ module m_kvn 'modules/keyvault/keyvault.bicep' = {
     location: location
     keyVaultName: !empty(keyVaultName) ? keyVaultName : '${abbrs.keyVaultVaults}${environmentName}-${uniqueSuffix}'
     vmUserAssignedIdentityPrincipalID: m_msi.outputs.msiPrincipalID
+
+    //Send in Service Principal and/or User Oject ID
+    spObjectId: spObjectId
   }
 }
 
@@ -264,6 +270,7 @@ module m_vm 'modules/vm/vm-ubuntu.bicep' = {
     publicIPId: m_pip.outputs.publicipId
     nsgId: m_nsg.outputs.nsgID
     keyVaultId: m_kvn.outputs.keyvaultId
+    keyVaultName: m_kvn.outputs.keyvaultName
 
     scriptURI: scriptURI
     ShellScriptName: ShellScriptName
@@ -278,18 +285,18 @@ module m_vm 'modules/vm/vm-ubuntu.bicep' = {
   ]
 }
 
-module gitOpsAppDeploy 'modules/gitops/gtiops.bicep' = {
-  name: 'gitOpsAppDeploy'
-  scope: resourceGroup
-  params: {
-    arcK8sClusterName: arcK8sClusterName
-    gitOpsAppName: gitOpsAppName
-    gitOpsAppNamespace: gitOpsAppNamespace
-    gitOpsGitRepositoryUrl: gitOpsGitRepositoryUrl
-    gitOpsGitRepositoryBranch: gitOpsGitRepositoryBranch
-    gitOpsAppPath: gitOpsAppPath
-  }
-  dependsOn: [
-    m_vm
-  ]
-}
+// module gitOpsAppDeploy 'modules/gitops/gtiops.bicep' = {
+//   name: 'gitOpsAppDeploy'
+//   scope: resourceGroup
+//   params: {
+//     arcK8sClusterName: arcK8sClusterName
+//     gitOpsAppName: gitOpsAppName
+//     gitOpsAppNamespace: gitOpsAppNamespace
+//     gitOpsGitRepositoryUrl: gitOpsGitRepositoryUrl
+//     gitOpsGitRepositoryBranch: gitOpsGitRepositoryBranch
+//     gitOpsAppPath: gitOpsAppPath
+//   }
+//   dependsOn: [
+//     m_vm
+//   ]
+// }
