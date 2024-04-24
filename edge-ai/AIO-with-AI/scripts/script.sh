@@ -10,10 +10,7 @@
 # $5 = Azure VM UserAssignedIdentity PrincipalId
 # $6 = Object ID of the Service Principal for Custom Locations RP
 # $7 = Azure KeyVault ID
-# $8 = Azure KeyVault Name
-# $9 = Subscription ID
-# $10 = Tenant ID
-
+# $8 = Subscription ID
 
 #############################
 # Script Definition
@@ -74,8 +71,8 @@ echo "#############################"
 echo "Connecting K3s cluster to Arc for K8s"
 echo "#############################"
 #We might need to login with a user that has more permissions than the Azure VM UserAssignedIdentity
-az login --identity --username $5 --tenant $10
-az account set -s $9
+az login --identity --username $5 --tenant e463e446-b414-49f1-b1ca-f08d8a7b6038
+az account set -s 9aaa0a90-c54d-4c4c-baba-2748b3077340
 
 az extension add --name connectedk8s --yes
 # Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
@@ -94,30 +91,30 @@ az extension add -n k8s-extension --yes
 sudo apt-get update && sudo apt-get upgrade
 
 # Sleep for 60 seconds to allow the cluster to be fully connected
-#sleep 60
+sleep 60
 
 # Deploy Extension
 # Need to be updated for Ai-In-A-Box Iot Operations Repo
-# az k8s-extension create \
+az k8s-extension create \
+    -g $1 \
+    -c $2 \
+    -n gitops \
+    --cluster-type connectedClusters \
+    --extension-type=microsoft.flux
+
+# Front-End
+# Need to be updated for Ai-In-A-Box Iot Operations Repo
+# az k8s-configuration flux create \
 #     -g $1 \
 #     -c $2 \
 #     -n gitops \
-#     --cluster-type connectedClusters \
-#     --extension-type=microsoft.flux
-
-# # Front-End
-# # Need to be updated for Ai-In-A-Box Iot Operations Repo
-# # az k8s-configuration flux create \
-# #     -g $1 \
-# #     -c $2 \
-# #     -n gitops \
-# #     --namespace vws-app \
-# #     -t connectedClusters \
-# #     --scope cluster \
-# #     -u https://github.com/Welasco/testflux2.git \
-# #     --interval 2m \
-# #     --branch main \
-# #     --kustomization name=vws-app path=./vws-app prune=true sync_interval=2m
+#     --namespace vws-app \
+#     -t connectedClusters \
+#     --scope cluster \
+#     -u https://github.com/Welasco/testflux2.git \
+#     --interval 2m \
+#     --branch main \
+#     --kustomization name=vws-app path=./vws-app prune=true sync_interval=2m
 
 
 # #############################
@@ -128,15 +125,19 @@ sudo apt-get update && sudo apt-get upgrade
 # echo "#############################"
 # echo "Deploy IoT Operations components"
 # echo "#############################"
-# az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
+az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
-# echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
-# echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
-# echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
+echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 
-# sudo sysctl -p
+sudo sysctl -p
 
-# az connectedk8s enable-features -g $1 -n $2 --custom-locations-oid $6 --features cluster-connect custom-locations
-# #az iot ops init --simulate-plc -g $1 --cluster $2 --kv-id $(az keyvault show --name $7 -o tsv --query id)
+#az connectedk8s enable-features -g $1 -n $2 --custom-locations-oid $6 --features cluster-connect custom-locations
+az connectedk8s enable-features -g $1 -n $2 --custom-locations-oid 412d7898-47f2-46b4-9d60-b7e975ae0fde --features cluster-connect custom-locations
+
+az iot ops init --simulate-plc -g $1 --cluster mycluster --kv-id /subscriptions/9aaa0a90-c54d-4c4c-baba-2748b3077340/resourceGroups/aibx-aioedgeai-rg/providers/Microsoft.KeyVault/vaults/kv-aiobx-zwq
+
+#az iot ops init --simulate-plc -g $1 --cluster $2 --kv-id $(az keyvault show --name $7 -o tsv --query id)
 
                                                               
