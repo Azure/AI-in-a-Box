@@ -81,8 +81,8 @@ echo "#############################"
 echo "Connecting K3s cluster to Arc for K8s"
 echo "#############################"
 #We might need to login with a user that has more permissions than the Azure VM UserAssignedIdentity
-# az login --identity --username $5
-# az account set -s $9
+az login --identity --username $5
+az account set -s $9
 
 # az extension add --name connectedk8s --yes
 # # Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
