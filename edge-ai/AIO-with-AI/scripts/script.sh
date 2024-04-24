@@ -10,7 +10,7 @@
 # $5 = Azure VM UserAssignedIdentity PrincipalId
 # $6 = Object ID of the Service Principal for Custom Locations RP
 # $7 = Azure KeyVault ID
-# $8 = Azure KeyVault ID
+# $8 = Azure KeyVault Name
 # $9 = Subscription ID
 
 #############################
@@ -131,5 +131,5 @@ echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 
 sudo sysctl -p
 
-az connectedk8s enable-features -n $2 -g $1 --custom-locations-oid $6 --features cluster-connect custom-locations
-az iot ops init --simulate-plc --cluster $2 --resource-group $1 --kv-id $(az keyvault show --name $7 -o tsv --query id)
+az connectedk8s enable-features -g $1 -n $2 --custom-locations-oid $6 --features cluster-connect custom-locations
+az iot ops init --simulate-plc -g $1 --cluster $2 --kv-id $(az keyvault show --name $7 -o tsv --query id)
