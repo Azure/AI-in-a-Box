@@ -68,15 +68,13 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 echo "#############################"
 echo "Connecting K3s cluster to Arc for K8s"
 echo "#############################"
-az login --identity --username $5
+#We might need to login with a user that has more permissions than the Azure VM UserAssignedIdentity
+az login --identity --username $5 
 az extension add --name connectedk8s
-# az provider register --namespace Microsoft.Kubernetes
-# az provider register --namespace Microsoft.KubernetesConfiguration
-# az provider register --namespace Microsoft.ExtendedLocation
 
 # Need to grab the resource group name of the VM
 az connectedk8s connect --resource-group $1 --name $2 --location $3 --kube-config /etc/rancher/k3s/k3s.yaml
-#az connectedk8s connect  -g $1 -n $2  -l $3 --subscription 9aaa0a90-c54d-4c4c-baba-2748b3077340
+#az connectedk8s connect  -g $1 -n $2  -l $3 --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 #############################
 #Arc for Kubernetes GitOps
@@ -123,3 +121,7 @@ echo "#############################"
 echo "Deploy IoT Operations components"
 echo "#############################"
 az extension add --upgrade --name azure-iot-ops
+
+echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
