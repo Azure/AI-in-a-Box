@@ -136,7 +136,7 @@ sudo sysctl -p
 #az connectedk8s enable-features -g $1 -n $2 --custom-locations-oid $6 --features cluster-connect custom-locations
 az connectedk8s enable-features -g $1 -n $2 --custom-locations-oid 412d7898-47f2-46b4-9d60-b7e975ae0fde --features cluster-connect custom-locations
 
-az iot ops init --simulate-plc -g $1 --cluster mycluster --kv-id /subscriptions/9aaa0a90-c54d-4c4c-baba-2748b3077340/resourceGroups/aibx-aioedgeai-rg/providers/Microsoft.KeyVault/vaults/kv-aiobx-zwq
+az iot ops init --simulate-plc -g $1 --cluster $2 --kv-id /subscriptions/9aaa0a90-c54d-4c4c-baba-2748b3077340/resourceGroups/aibx-aioedgeai-rg/providers/Microsoft.KeyVault/vaults/kv-aiobx-zwq
 
 #az iot ops init --simulate-plc -g $1 --cluster $2 --kv-id $(az keyvault show --name $7 -o tsv --query id)
 
