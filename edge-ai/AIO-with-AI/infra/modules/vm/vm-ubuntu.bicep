@@ -136,7 +136,16 @@ module roleContributor '../identity/role.bicep' = {
   scope: resourceGroup()
   params:{
     principalId: vmUserAssignedIdentityPrincipalID
-    roleGuid: 'b24988ac-6180-42a0-ab88-20f7382dd24c' // Kubernetes Extension Contributor
+    roleGuid: 'b24988ac-6180-42a0-ab88-20f7382dd24c' // Contributor
+  }
+}
+
+module roleOwner '../identity/role.bicep' = {
+  name: 'deployVMRole_Owner'
+  scope: resourceGroup()
+  params:{
+    principalId: vmUserAssignedIdentityPrincipalID
+    roleGuid: '8e3af657-a8ff-443c-a75c-2fe8c4bcb635' // Owner
   }
 }
 
@@ -153,7 +162,7 @@ resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
       fileUris: [
         '${scriptURI}${ShellScriptName}'
       ]
-      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId} ${subscription().id}'
+      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId} ${keyVaultName} ${subscription().id}'
     }
   }
   dependsOn: [
