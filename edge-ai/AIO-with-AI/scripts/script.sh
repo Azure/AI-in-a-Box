@@ -123,10 +123,16 @@ az k8s-extension create \
 # This needs to be run by elevated user.
 # sudo apt-get --yes --allow nfs-common
 
+az extension add --upgrade --name azure-iot-ops
+
 echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
 echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 
 sudo sysctl -p
 
-az extension add --upgrade --name azure-iot-ops
+az connectedk8s enable-features -n $2 -g $1 --custom-locations-oid $6 --features cluster-connect custom-locations
+
+az iot ops verify-host
+
+az iot ops init --simulate-plc --cluster $2 --resource-group $1 --kv-id $(az keyvault show --name $7 -o tsv --query id)
