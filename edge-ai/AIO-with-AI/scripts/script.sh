@@ -98,7 +98,7 @@ echo "Connecting K3s cluster to Arc for K8s"
 echo "#############################"
 #We might need to login with a user that has more permissions than the Azure VM UserAssignedIdentity
 #az login --identity --username $5
-az login --service-principal -u $10 -p $11 --tenant $12
+az login --service-principal -u ${10} -p ${11} --tenant ${12}
 az account set -s $9
 
 az config set extension.use_dynamic_install=yes_without_prompt
