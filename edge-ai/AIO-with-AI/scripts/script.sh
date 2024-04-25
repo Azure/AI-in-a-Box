@@ -12,11 +12,9 @@
 # $7 = Azure KeyVault ID
 # $8 = Azure KeyVault Name
 # $9 = Subscription ID
-# $10 = Azure Service Principal App ID
-# $11 = Azure Service Principal Secret
-# $12 = Azure Service Principal Tenant ID
-
-
+# ${10} = Azure Service Principal App ID
+# ${11} = Azure Service Principal Secret
+# ${12} = Azure Service Principal Tenant ID
 
 #############################
 # Script Definition
@@ -32,10 +30,9 @@ echo "Service Principal Object ID $6"
 echo "KeyVault ID $7"
 echo "KeyVault Name $8"
 echo "Subscription ID $9"
-echo "Service Principal App ID $10"
-echo "Service Principal Secret $11"
-echo "Service Principal Tenant ID $12"
-
+echo "Service Principal App ID ${10}"
+echo "Service Principal Secret ${11}"
+echo "Service Principal Tenant ID ${12}"
 
 #############################
 #Install K3s
@@ -87,8 +84,8 @@ echo "source <(helm completion bash)" >> /home/$4/.bashrc
 echo "#############################"
 echo "Installing Azure CLI"
 echo "#############################"
-#curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-curl -L https://aka.ms/InstallAzureCLIDeb | sudo bash
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+#curl -L https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 # Sleep for 60 seconds to allow the cluster to be fully connected
 #sleep 60
@@ -158,15 +155,15 @@ az k8s-extension create \
 # Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
 # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
 echo "#############################"
-echo "Deploy IoT Operations CComponents"
+echo "Deploy IoT Operations CCComponents"
 echo "#############################"
-# az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
+az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
-# echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
-# echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
-# echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
+echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 
-# sudo sysctl -p
+sudo sysctl -p
 ##############################
 echo "Resource Group Name: $1"
 echo "Cluster Name: $2"
@@ -177,9 +174,9 @@ echo "Service Principal Object ID: $6"
 echo "KeyVault ID: $7"
 echo "KeyVault Name: $8"
 echo "Subscription ID: $9"
-echo "Service Principal App ID: $10"
-echo "Service Principal Secret: $11"
-echo "Service Principal Tenant ID: $12"
+echo "Service Principal App ID: ${10}"
+echo "Service Principal Secret: ${11}"
+echo "Service Principal Tenant ID: ${12}"
 
 OBJECT_ID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
 echo "OBJECT_ID: $OBJECT_ID"
