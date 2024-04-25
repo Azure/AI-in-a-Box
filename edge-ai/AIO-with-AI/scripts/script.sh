@@ -18,14 +18,16 @@
 #############################
 logpath=/var/log/deploymentscriptlog
 
-echo $1
-echo $2
-echo $3
-echo $4
-echo $5
-echo $6
-echo $7
-echo $8
+echo "Resource Group Name $1"
+echo "Cluster Name $2"
+echo "Cluster Location $3"
+echo "VM User Name $4"
+echo "UserAssignedIdentity PrincipalId $5"
+echo "Service Principal Object ID $6"
+echo "KeyVault ID $7"
+echo "KeyVault Name $8"
+echo "Subscription ID $9"
+
 
 #############################
 #Install K3s
@@ -53,7 +55,7 @@ KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 # Sleep for 60 seconds to allow the cluster to be fully connected
-sleep 60
+#sleep 60
 
 #############################
 #Install Helm
@@ -69,7 +71,7 @@ sudo apt-get install helm -y
 echo "source <(helm completion bash)" >> /home/$4/.bashrc
 
 # Sleep for 60 seconds to allow the cluster to be fully connected
-sleep 60
+#sleep 60
 
 #############################
 #Install Azure CLI
@@ -81,7 +83,7 @@ echo "#############################"
 curl -L https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 # Sleep for 60 seconds to allow the cluster to be fully connected
-sleep 60
+#sleep 60
 
 #############################
 #Arc for Kubernetes setup
@@ -93,12 +95,14 @@ echo "#############################"
 az login --identity --username $5
 az account set -s $9
 
+az config set extension.use_dynamic_install=yes_without_prompt
+
 az extension add --name connectedk8s --yes
-# # Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
+# Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
 az connectedk8s connect --resource-group $1 --name $2 --location $3 --kube-config /etc/rancher/k3s/k3s.yaml
 
 # Sleep for 60 seconds to allow the cluster to be fully connected
-sleep 60
+#sleep 60
 
 #############################
 #Arc for Kubernetes GitOps
@@ -155,14 +159,21 @@ echo "#############################"
 
 # sudo sysctl -p
 ##############################
-echo $1
-echo $2
-echo $3
-echo $4
-echo $5
-echo $6
-echo $7
-echo $8
+echo "Resource Group Name $1"
+echo "Cluster Name $2"
+echo "Cluster Location $3"
+echo "VM User Name $4"
+echo "UserAssignedIdentity PrincipalId $5"
+echo "Service Principal Object ID $6"
+echo "KeyVault ID $7"
+echo "KeyVault Name $8"
+echo "Subscription ID $9"
+
+OBJECT_ID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
+echo $OBJECT_ID
+
+kv_id=$(az keyvault show --name $8 -o tsv --query id)
+echo $kv_id
 
 #az connectedk8s enable-features -g $1 -n $2 --custom-locations-oid $6 --features cluster-connect custom-locations
 #az iot ops init --simulate-plc -g $1 --cluster $2 --kv-id $(az keyvault show --name $7 -o tsv --query id)
