@@ -12,6 +12,11 @@
 # $7 = Azure KeyVault ID
 # $8 = Azure KeyVault Name
 # $9 = Subscription ID
+# $10 = Azure Service Principal App ID
+# $11 = Azure Service Principal Secret
+# $12 = Azure Service Principal Tenant ID
+
+
 
 #############################
 # Script Definition
@@ -27,6 +32,9 @@ echo "Service Principal Object ID $6"
 echo "KeyVault ID $7"
 echo "KeyVault Name $8"
 echo "Subscription ID $9"
+echo "Service Principal App ID $10"
+echo "Service Principal Secret $11"
+echo "Service Principal Tenant ID $12"
 
 
 #############################
@@ -93,6 +101,7 @@ echo "Connecting K3s cluster to Arc for K8s"
 echo "#############################"
 #We might need to login with a user that has more permissions than the Azure VM UserAssignedIdentity
 #az login --identity --username $5
+az login --service-principal -u $10 -p $11 --tenant $12
 az account set -s $9
 
 az config set extension.use_dynamic_install=yes_without_prompt
@@ -149,7 +158,7 @@ az k8s-extension create \
 # Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
 # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
 echo "#############################"
-echo "Deploy IoT Operations components"
+echo "Deploy IoT Operations CComponents"
 echo "#############################"
 # az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
@@ -159,21 +168,24 @@ echo "#############################"
 
 # sudo sysctl -p
 ##############################
-echo "Resource Group Name $1"
-echo "Cluster Name $2"
-echo "Cluster Location $3"
-echo "VM User Name $4"
-echo "UserAssignedIdentity PrincipalId $5"
-echo "Service Principal Object ID $6"
-echo "KeyVault ID $7"
-echo "KeyVault Name $8"
-echo "Subscription ID $9"
+echo "Resource Group Name: $1"
+echo "Cluster Name: $2"
+echo "Cluster Location: $3"
+echo "VM User Name: $4"
+echo "UserAssignedIdentity PrincipalId: $5"
+echo "Service Principal Object ID: $6"
+echo "KeyVault ID: $7"
+echo "KeyVault Name: $8"
+echo "Subscription ID: $9"
+echo "Service Principal App ID: $10"
+echo "Service Principal Secret: $11"
+echo "Service Principal Tenant ID: $12"
 
 OBJECT_ID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
-echo $OBJECT_ID
+echo "OBJECT_ID: $OBJECT_ID"
 
 kv_id=$(az keyvault show --name $8 -o tsv --query id)
-echo $kv_id
+echo "kv_id $kv_id"
 
 #az connectedk8s enable-features -g $1 -n $2 --custom-locations-oid $6 --features cluster-connect custom-locations
 #az iot ops init --simulate-plc -g $1 --cluster $2 --kv-id $(az keyvault show --name $7 -o tsv --query id)

@@ -15,6 +15,7 @@ param virtualMachineName string
 param arcK8sClusterName string
 param adminUsername string
 #disable-next-line secure-secrets-in-params
+@secure()
 param adminPasswordOrKey string
 param authenticationType string = 'password'
 param vmUserAssignedIdentityID string
@@ -25,6 +26,12 @@ param publicIPId string = ''
 param nsgId string = ''
 param keyVaultId string
 param keyVaultName string
+
+
+param spAppId string
+#disable-next-line secure-secrets-in-params
+@secure()
+param spSecret string
 
 param scriptURI string
 param ShellScriptName string
@@ -162,7 +169,7 @@ resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
       fileUris: [
         '${scriptURI}${ShellScriptName}'
       ]
-      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId} ${keyVaultName} ${subscription().subscriptionId}'
+      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId} ${keyVaultName} ${subscription().subscriptionId} ${spAppId} ${spSecret} ${subscription().tenantId}'
     }
   }
   dependsOn: [

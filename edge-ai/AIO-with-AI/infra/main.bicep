@@ -60,6 +60,13 @@ var keyVaultName = '' //'${virtualMachineName}-kv'
 @description('Your Service Principal Object ID or your own User Object ID so you can give the SP access to the Key Vault Secrets')
 param spObjectId string //This is your Service Principal Object ID or your own User Object ID so you can give the SP access to the Key Vault Secrets
 
+@description('Service Principal App ID')
+param spAppId string
+
+@description('Service Principal Secret')
+@secure()
+param spSecret string 
+
 
 //VNet Module Parameters
 var networkSecurityGroupName = '' //'${virtualMachineName}-nsg'
@@ -134,8 +141,8 @@ param customLocationRPSPID string
 // Remove linter suppression after using.
 #disable-next-line no-unused-vars
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
-var prefix = '${environmentName}-${resourceToken}'
-var vmIdentityName = '${virtualMachineName}-vmIdentity'
+// var prefix = '${environmentName}-${resourceToken}'
+// var vmIdentityName = '${virtualMachineName}-vmIdentity'
 
 
 //====================================================================================
@@ -276,6 +283,10 @@ module m_vm 'modules/vm/vm-ubuntu.bicep' = {
     ShellScriptName: ShellScriptName
 
     customLocationRPSPID: customLocationRPSPID
+
+    spAppId: spAppId
+    spSecret: spSecret
+
   }
   dependsOn: [
     m_nsg
