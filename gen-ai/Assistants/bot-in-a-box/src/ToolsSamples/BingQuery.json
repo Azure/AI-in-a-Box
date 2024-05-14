@@ -1,0 +1,25 @@
+{
+  "type": "function",
+  "function": {
+    "name": "bing_query",
+    "description": "Query Bing for information. Always provide a source link when using this information.",
+    "parameters": {
+      "type": "object",
+      "required": [
+        "query",
+        "type"
+      ],
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The text to search for. Use as few words as possible"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of content to search. One of webpages, news or images",
+          "enum": ["webpages", "news", "images"]
+        }
+      }
+    }
+  }
+}

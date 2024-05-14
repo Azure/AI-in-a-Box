@@ -27,7 +27,6 @@ param deploySpeech bool
 
 @allowed(['Enabled', 'Disabled'])
 param publicNetworkAccess string
-
 var abbrs = loadJsonContent('abbreviations.json')
 
 var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup.id), 1, 3) 
@@ -136,6 +135,7 @@ module m_bot 'modules/botservice.bicep' = {
   }
 }
 
+output AZURE_TENANT_ID string = tenant().tenantId
 output AZURE_RESOURCE_GROUP_ID string = resourceGroup.id
 output AZURE_RESOURCE_GROUP_NAME string = resourceGroup.name
 output AOAI_NAME string = m_openai.outputs.openaiName

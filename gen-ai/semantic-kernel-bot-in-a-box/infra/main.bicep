@@ -203,6 +203,7 @@ module m_bot 'modules/botservice.bicep' = {
   }
 }
 
+output AZURE_TENANT_ID string = tenant().tenantId
 output AZURE_SEARCH_ENDPOINT string = deploySearch ? m_search.outputs.searchEndpoint : ''
 output AZURE_SEARCH_NAME string = deploySearch ? m_search.outputs.searchName : ''
 output AZURE_RESOURCE_GROUP_ID string = resourceGroup.id

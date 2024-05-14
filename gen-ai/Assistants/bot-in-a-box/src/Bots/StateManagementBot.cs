@@ -121,22 +121,6 @@ namespace Microsoft.BotBuilderSamples
             return new List<string>{ $"This chat now contains {conversationData.History.Count} messages" };
         }
 
-        public string FormatConversationHistory(ConversationData conversationData)
-        {
-            string history = $"{_systemMessage} Continue the conversation acting as the ASSISTANT. Respond to the USER by using available information and functions.\n\n [CONVERSATION_HISTORY]\n";
-            List<ConversationTurn> latestMessages = conversationData.History.GetRange(
-                Math.Max(conversationData.History.Count - _max_messages, 0),
-                Math.Min(conversationData.History.Count, _max_messages)
-            );
-            foreach (ConversationTurn conversationTurn in latestMessages)
-            {
-                history += $"{conversationTurn.Role.ToUpper()}:\n{conversationTurn.Message}\n";
-            }
-            history += "ASSISTANT: {{Plan response goes here}}";
-            return history;
-        }
-
-
         protected override async Task OnTeamsSigninVerifyStateAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
             // The OAuth Prompt needs to see the Invoke Activity in order to complete the login process.

@@ -140,7 +140,6 @@ namespace Microsoft.BotBuilderSamples
             {
                 history += $"{conversationTurn.Role.ToUpper()}:\n{conversationTurn.Message}\n";
             }
-            history += "ASSISTANT: {{Plan response goes here}}";
             return history;
         }
 

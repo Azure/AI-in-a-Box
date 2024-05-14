@@ -44,13 +44,13 @@ namespace Services
         {
             return await JsonRequest<Thread>($"/threads/{threadId}/messages", HttpMethod.Post, new StringContent(JsonSerializer.Serialize(message), Encoding.UTF8, "application/json"));
         }
-        public async Task<ThreadRun> CreateThreadRun(string threadId, ThreadRunInput run)
+        public async Task<Stream> CreateThreadRun(string threadId, ThreadRunInput run)
         {
-            return await JsonRequest<ThreadRun>($"/threads/{threadId}/runs", HttpMethod.Post, new StringContent(JsonSerializer.Serialize(run), Encoding.UTF8, "application/json"));
+            return await StreamRequest($"/threads/{threadId}/runs", HttpMethod.Post, new StringContent(JsonSerializer.Serialize(run), Encoding.UTF8, "application/json"));
         }
-        public async Task<ThreadRun> SubmitToolOutputs(string threadId, string runId, ToolOutputData toolOutputData)
+        public async Task<Stream> SubmitToolOutputs(string threadId, string runId, ToolOutputData toolOutputData)
         {
-            return await JsonRequest<ThreadRun>($"/threads/{threadId}/runs/{runId}/submit_tool_outputs", HttpMethod.Post, new StringContent(JsonSerializer.Serialize(toolOutputData), Encoding.UTF8, "application/json"));
+            return await StreamRequest($"/threads/{threadId}/runs/{runId}/submit_tool_outputs", HttpMethod.Post, new StringContent(JsonSerializer.Serialize(toolOutputData), Encoding.UTF8, "application/json"));
         }
         public async Task<ThreadRun> GetThreadRun(string threadId, string runId)
         {
@@ -109,7 +109,7 @@ namespace Services
                 },
                 Content = body
             };
-            return await _httpClient.SendAsync(request, default);
+            return await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
         }
 
 
@@ -150,6 +150,15 @@ namespace Services
 
             var content = JsonSerializer.Deserialize<T>(responseContent);
             return content;
+        }
+
+        private async Task<Stream> StreamRequest(string path, HttpMethod method, StringContent body, string apiVersion = "2024-02-15-preview")
+        {
+            var response = await SendRequest(path, method, body, apiVersion);
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(response.StatusCode.ToString());
+            
+            return response.Content.ReadAsStream();
         }
 
 

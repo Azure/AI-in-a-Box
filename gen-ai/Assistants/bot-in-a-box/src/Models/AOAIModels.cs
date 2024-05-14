@@ -79,6 +79,9 @@ namespace Models
 
         [JsonPropertyName("instructions")]
         public string Instructions { get; set; }
+
+        [JsonPropertyName("stream")]
+        public bool Stream { get; set; }
     }
 
     public class Function {
@@ -113,6 +116,8 @@ namespace Models
     public class ToolOutputData {
         [JsonPropertyName("tool_outputs")]
         public List<ToolOutput> ToolOutputs { get; set; }
+        [JsonPropertyName("stream")]
+        public bool Stream { get; set; }
     }
 
     public class RequiredAction {
@@ -139,6 +144,27 @@ namespace Models
 
         [JsonPropertyName("required_action")]
         public RequiredAction RequiredAction { get; set; }
+
+        [JsonPropertyName("last_error")]
+        public ThreadRunError LastError { get; set; }
+    }
+
+    public class ThreadRunError
+    {
+        [JsonPropertyName("code")]
+        public string Code { get; set; }
+        
+        [JsonPropertyName("message")]
+        public string Message { get; set; }
+    }
+
+    public class ThreadMessageDelta
+    {
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+        [JsonPropertyName("delta")]
+        public Message Delta { get; set; }
     }
     public class ImageGenerationInput
     {

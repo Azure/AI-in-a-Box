@@ -113,54 +113,32 @@ And you're done! Redeploy your app and Semantic Kernel will now use your plugin 
 
 You can enable Single-Sign-On for your bot so that it identifies the user and keeps a token in context, that can later be used to retreive personal information like their name/job title, as well as for Microsoft Graph API calls.
 
-To enable SSO, follow the steps below. Please note that you should be an `Entra ID Application Developer` and a `Contributor` in the resource group in order to perform the following actions. You can also perform these steps in the portal if you prefer.
+To enable SSO, use the provided scripts for Powershell and Bash. Please note that you should be an `Entra ID Application Developer` and a `Contributor` in the resource group in order to perform the following actions. You can also perform these steps in the portal if you prefer.
 
-- Load the required configurations. Hint: If you just deployed using Azure Developer CLI, you can run `azd env get-values` to retrieve these variables.
-```sh
-TENANT_ID=$(az account show --query tenantId -o tsv)
-APP_REGISTRATION_NAME=[choose app registration display name]
-AZURE_RESOURCE_GROUP_NAME=...
-BOT_NAME=...
+On Windows:
+```pwsh
+.\scripts\setupSso.ps1
 ```
 
-- Create an App Registration and retrieve its ID and Client ID.
+On Linux/Mac:
 ```sh
-APP=$(az ad app create --display-name $APP_REGISTRATION_NAME --web-redirect-uris https://token.botframework.com/.auth/web/redirect)
-APP_ID=$(echo $APP | jq -r .id)
-CLIENT_ID=$(echo $APP | jq -r .appId)
-```
-- Create a client secret for the newly created app
-```sh
-SECRET=$(az ad app credential reset --id $APP_ID)
-CLIENT_SECRET=$(echo $SECRET | jq -r .password)
+sh ./scripts/setupSso.sh
 ```
 
-- Create an SSO configuration for your bot, passing in the App Registration details
-```sh
-az bot authsetting create --resource-group $AZURE_RESOURCE_GROUP_NAME --name $BOT_NAME --setting-name default --client-id $CLIENT_ID --client-secret $CLIENT_SECRET --parameters TenantId=$TENANT_ID --service aadv2 --provider-scope-string User.Read
+### Enabling Web Chat
+
+Web chat is disabled by default, as you may want to set up authentication before publishing your app. To enable it, use the provided scripts for Powershell and Bash.
+
+
+On Windows:
+```pwsh
+.\scripts\setupWebchat.ps1
 ```
 
-- Configure the App Service to use the SSO configuration.
+On Linux/Mac:
 ```sh
-az webapp config appsettings set -g $AZURE_RESOURCE_GROUP_NAME -n $APP_NAME --settings SSO_ENABLED=true SSO_CONFIG_NAME=default
+sh ./scripts/setupWebchat.sh
 ```
-
-- Clear sensitive variables from terminal
-```sh
-SECRET=
-CLIENT_SECRET=
-```
-
-## Enabling Web Chat
-
-To deploy a Web Chat version of your app:
-
-- Go to your Azure Bot Resource;
-- Go to Channels;
-- Click on Direct Line;
-- Obtain a Direct Line Secret;
-- Add the secret to your App Service's environment variables, under the key DIRECT_LINE_SECRET;
-- Your bot will be available at https://APP_NAME.azurewebsites.net.
 
 Please note that doing so will make your bot public, unless you implement authentication / SSO.
 

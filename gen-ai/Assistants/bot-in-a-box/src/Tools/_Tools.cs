@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Encodings.Web;
@@ -7,22 +8,26 @@ using HtmlAgilityPack;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.BotBuilderSamples;
+using Microsoft.Extensions.Configuration;
 using Models;
 using Services;
 
 public class Tools
 {
+    private readonly IConfiguration _config;
     private HttpClient client = new HttpClient();
     private AOAIClient _aoaiClient;
     private ITurnContext _turnContext;
     private ConversationData _conversationData;
 
     public Tools(
+        IConfiguration config,
         ConversationData conversationData,
         ITurnContext<IMessageActivity> turnContext,
         AOAIClient aoaiClient
     )
     {
+        _config = config;
         _conversationData = conversationData;
         _turnContext = turnContext;
         _aoaiClient = aoaiClient;
@@ -32,7 +37,8 @@ public class Tools
     {
         var submitData = new ToolOutputData()
         {
-            ToolOutputs = new()
+            ToolOutputs = new(),
+            Stream = true
         };
         foreach (ToolCall toolcall in run.RequiredAction.SubmitToolOutputs.ToolCalls)
         {
@@ -93,6 +99,27 @@ public class Tools
         HttpResponseMessage response = await client.GetAsync(
             $"https://en.wikipedia.org/w/api.php?action=query&format=json&titles={UrlEncoder.Default.Encode(pageTitle)}&prop=extracts&explaintext"
         );
+        if (response.IsSuccessStatusCode)
+            return await response.Content.ReadAsStringAsync();
+        else
+            return $"FAILED TO FETCH DATA FROM API. STATUS CODE {response.StatusCode}";
+    }
+    public async Task<string> bing_query(Dictionary<string, object> arguments)
+    {
+        var query = arguments["query"].ToString();
+        var resultType = arguments["type"].ToString();
+        await _turnContext.SendActivityAsync($"Searching Bing for {resultType} about \"{query}\"...");
+        // Construct the search request URI.
+        var path = _config["BING_API_ENDPOINT"] + "/v7.0/search?count=3&q=" + Uri.EscapeDataString(query) + "&responseFilter=" + Uri.EscapeDataString(resultType);
+
+        var tokenRequest = new HttpRequestMessage(HttpMethod.Get, path)
+        {
+            Headers =
+            {
+                { "Ocp-Apim-Subscription-Key", _config["BING_API_KEY"] },
+            },
+        };
+        var response = await client.SendAsync(tokenRequest, default);
         if (response.IsSuccessStatusCode)
             return await response.Content.ReadAsStringAsync();
         else
