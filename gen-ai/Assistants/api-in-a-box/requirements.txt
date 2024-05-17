@@ -1,4 +1,5 @@
-openai==1.16.2
+openai==1.21
+pyautogen==0.2.27
 python-dotenv
 yfinance
 pillow
