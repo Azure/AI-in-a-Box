@@ -37,6 +37,7 @@ Check out the provided samples to get started with integrating the Assistants AP
 | [Wind Farm](./notebooks/wind_farm/assistant-wind_farm.ipynb) | Utilizing Assistant tools such as the Code Interpreter and Function calling, this bot is capable of retrieving a CSV file that illustrates turbine wind speed, voltage, and the last maintenance date. It assists you in reviewing the file contents and aids in determining whether a specific turbine is in need of maintenance. |
 | [Sales Assistant](./notebooks/sales_assistant/assistant_sales.ipynb) | Showcases how you can create an Assistant adept at managing various tasks, such as handling relational data across different files and supporting multiple users simultaneously within the same Assistant across distinct threads. |
 | [Autogen Assistants](./notebooks/autogen/gpt_assistant_agent.ipynb) | Get started with Assistants on Autogen, with examples of basic assistants, code interpreter, retrieval and function calling, entirely managed by the Autogen framework. |
+| [File Search Assistant](./notebooks/file_search/assistant-file-search.ipynb) | Leverage File Search with Assistants, with examples of retrieval over a document containing benefits information. |
 | [Assistants Bot-in-a-Box](./bot-in-a-box/) | The Assistants API Bot in-a-box automates virtual assistant deployment on Azure, facilitating seamless communication between users and assistants across various messaging channels. It streamlines message processing and response delivery through Azure Bot Services and the Assistants API. |
 
 ## Prerequisites
