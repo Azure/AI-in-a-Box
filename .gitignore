@@ -11,3 +11,5 @@ appsettings.json
 *_db
 
 __pycache__
+
+.cache
