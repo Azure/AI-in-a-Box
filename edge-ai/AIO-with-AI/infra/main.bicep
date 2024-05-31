@@ -109,7 +109,7 @@ param authenticationType string
 
 
 @sys.description('URI for Custom K3s VM Script and Config')
-//param scriptURI string = 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/scripts'
+//param scriptURI string = 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/scripts/'
 param scriptURI string
 
 @sys.description('Shell Script to be executed')
@@ -117,23 +117,23 @@ param scriptURI string
 param ShellScriptName string
 
 
-@sys.description('Name of the Application to be deployed using GitOps')
-param gitOpsAppName string
+// @sys.description('Name of the Application to be deployed using GitOps')
+// param gitOpsAppName string
 
-@sys.description('Name of the namespace in K3s for the Application to be deployed using GitOps')
-param gitOpsAppNamespace string
+// @sys.description('Name of the namespace in K3s for the Application to be deployed using GitOps')
+// param gitOpsAppNamespace string
 
-@sys.description('Git Repository URL for the Application to be deployed using GitOps')
-param gitOpsGitRepositoryUrl string
+// @sys.description('Git Repository URL for the Application to be deployed using GitOps')
+// param gitOpsGitRepositoryUrl string
 
-@sys.description('Git Repository Branch for the Application to be deployed using GitOps')
-param gitOpsGitRepositoryBranch string
+// @sys.description('Git Repository Branch for the Application to be deployed using GitOps')
+// param gitOpsGitRepositoryBranch string
 
-@sys.description('Git Repository Path for the Application to be deployed using GitOps')
-param gitOpsAppPath string
+// @sys.description('Git Repository Path for the Application to be deployed using GitOps')
+// param gitOpsAppPath string
 
 @sys.description('Custom Locations RP ObjectID')
-param customLocationRPSPID string
+param customLocationRPSPID string = ''
 
 
 // Generate a unique token to be used in naming resources.
