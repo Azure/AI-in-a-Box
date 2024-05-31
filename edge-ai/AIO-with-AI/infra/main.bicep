@@ -58,14 +58,14 @@ param msiName string = ''
 var keyVaultName = '' //'${virtualMachineName}-kv'
 
 @description('Your Service Principal Object ID or your own User Object ID so you can give the SP access to the Key Vault Secrets')
-param spObjectId string //This is your Service Principal Object ID or your own User Object ID so you can give the SP access to the Key Vault Secrets
+param spObjectId string = '' //This is your Service Principal Object ID or your own User Object ID so you can give the SP access to the Key Vault Secrets
 
 @description('Service Principal App ID')
-param spAppId string
+param spAppId string = ''
 
 @description('Service Principal Secret')
 @secure()
-param spSecret string
+param spSecret string = ''
 
 //VNet Module Parameters
 var networkSecurityGroupName = '' //'${virtualMachineName}-nsg'
@@ -109,7 +109,7 @@ param authenticationType string
 
 
 @sys.description('URI for Custom K3s VM Script and Config')
-//param scriptURI string = 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/AIO-with-AI/edge-ai/AIO-with-AI/scripts/'
+//param scriptURI string = 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/scripts'
 param scriptURI string
 
 @sys.description('Shell Script to be executed')
