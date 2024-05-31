@@ -1,16 +1,16 @@
 /*region Header
       =========================================================================================================
-      Created by:       Author: Your Name | your.name@azurestream.io 
+      Created by:       Author: Your Name | your.name@azurestream.io
       Description:      AIO with AI in-a-box - Deploy your AI Model on the Edge with Azure IoT Operations
       =========================================================================================================
 
       Dependencies:
         Install Azure CLI
-        https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest 
+        https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest
 
         Install Latest version of Bicep
         https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install
-      
+
         To Run:
         az login
         az account set --subscription <subscription id>
@@ -18,9 +18,9 @@
         az ad user show --id 'your email' --query id
 
         az bicep build --file main.bicep
-        az deployment group create --resource-group <your resource group name>  --template-file main.bicep --parameters main.bicepparam --name Doc-intelligence-in-a-Box --query 'properties.outputs' 
-      
-        SCRIPT STEPS 
+        az deployment group create --resource-group <your resource group name>  --template-file main.bicep --parameters main.bicepparam --name Doc-intelligence-in-a-Box --query 'properties.outputs'
+
+        SCRIPT STEPS
       1 - Create Resource Group
       2 - Create User Assigned Identity for VM
       3 - Create NSG
@@ -30,7 +30,7 @@
       7 - Create KeyVault used for Azure IoT Operations
       8 - Create Ubuntu VM for K3s
       9 - Deploy Application using GitOps
-      
+
       //=====================================================================================
 
 */
@@ -48,7 +48,7 @@ param location string
 param resourceGroupName string = ''
 
 var abbrs = loadJsonContent('abbreviations.json')
-var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup.id), 1, 3) 
+var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup.id), 1, 3)
 param tags object
 
 //UAMI Module Parameters
@@ -65,8 +65,7 @@ param spAppId string
 
 @description('Service Principal Secret')
 @secure()
-param spSecret string 
-
+param spSecret string
 
 //VNet Module Parameters
 var networkSecurityGroupName = '' //'${virtualMachineName}-nsg'
@@ -146,7 +145,7 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 
 
 //====================================================================================
-// Create Resource Group 
+// Create Resource Group
 //====================================================================================
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2023-07-01' = {
   name: !empty(resourceGroupName) ? resourceGroupName : '${abbrs.resourcesResourceGroups}${environmentName}'
@@ -286,6 +285,7 @@ module m_vm 'modules/vm/vm-ubuntu.bicep' = {
 
     spAppId: spAppId
     spSecret: spSecret
+    spObjectId: spObjectId
 
   }
   dependsOn: [

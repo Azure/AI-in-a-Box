@@ -1,5 +1,5 @@
 /*region Header
-      Module Steps 
+      Module Steps
       1 - Create NIC
       2 - Create VM
       3 - Assign Role to VM
@@ -32,6 +32,7 @@ param spAppId string
 #disable-next-line secure-secrets-in-params
 @secure()
 param spSecret string
+param spObjectId string
 
 param scriptURI string
 param ShellScriptName string
@@ -169,7 +170,7 @@ resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
       fileUris: [
         '${scriptURI}${ShellScriptName}'
       ]
-      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId} ${keyVaultName} ${subscription().subscriptionId} ${spAppId} ${spSecret} ${subscription().tenantId}'
+      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId} ${keyVaultName} ${subscription().subscriptionId} ${spAppId} ${spSecret} ${subscription().tenantId} ${spObjectId}'
     }
   }
   dependsOn: [

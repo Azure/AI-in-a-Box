@@ -50,8 +50,14 @@
     "customLocationRPSPID":{
       "value": "${AZURE_ENV_CUSTOMLOCATIONRPSPID}"
     },
-    "spObjectId":{
-      "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    "spObjectId": {
+      "value": "${AZURE_ENV_SPAPPID}"
+    },
+    "spAppId": {
+      "value": "${AZURE_ENV_SPSECRET}"
+    },
+    "spSecret": {
+      "value": "${AZURE_ENV_SPOBJECTID}"
     },
     "tags": {
       "value": {

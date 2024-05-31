@@ -19,3 +19,14 @@ hooks:
       run: ./scripts/azd_preprovision.sh
       continueOnError: false
       interactive: true
+  postdown:
+    windows:
+      shell: pwsh
+      run: ./scripts/azd_postdown.ps1
+      continueOnError: false
+      interactive: true
+    posix:
+      shell: sh
+      run: ./scripts/azd_postdown.sh
+      continueOnError: false
+      interactive: true

@@ -12,27 +12,43 @@
 # $7 = Azure KeyVault ID
 # $8 = Azure KeyVault Name
 # $9 = Subscription ID
-# ${10} = Azure Service Principal App ID
-# ${11} = Azure Service Principal Secret
-# ${12} = Azure Service Principal Tenant ID
+# $10 = Azure Service Principal App ID
+# $11 = Azure Service Principal Secret
+# $12 = Azure Service Principal Tenant ID
+# $13 = Azure Service Principal Object ID
+
+#  1   ${resourceGroup().name}
+#  2   ${arcK8sClusterName}
+#  3   ${location}
+#  4   ${adminUsername}
+#  5   ${vmUserAssignedIdentityPrincipalID}
+#  6   ${customLocationRPSPID}
+#  7   ${keyVaultId}
+#  8   ${keyVaultName}
+#  9   ${subscription().subscriptionId}
+#  10  ${spAppId}
+#  11  ${spSecret}
+#  12  ${subscription().tenantId}'
+#  13  ${spObjectId}
+
+rg=$1
+arcK8sClusterName=$2
+location=$3
+adminUsername=$4
+vmUserAssignedIdentityPrincipalID=$5
+customLocationRPSPID=$6
+keyVaultId=$7
+keyVaultName=$8
+subscriptionId=$9
+spAppId=$10
+spSecret=$11
+tenantId=$12
+spObjectId=$13
 
 #############################
 # Script Definition
 #############################
 logpath=/var/log/deploymentscriptlog
-
-echo "Resource Group Name $1"
-echo "Cluster Name $2"
-echo "Cluster Location $3"
-echo "VM User Name $4"
-echo "UserAssignedIdentity PrincipalId $5"
-echo "Service Principal Object ID $6"
-echo "KeyVault ID $7"
-echo "KeyVault Name $8"
-echo "Subscription ID $9"
-echo "Service Principal App ID ${10}"
-echo "Service Principal Secret ${11}"
-echo "Service Principal Tenant ID ${12}"
 
 #############################
 #Install K3s
@@ -42,18 +58,18 @@ echo "Installing K3s CLI"
 echo "#############################"
 curl -sfL https://get.k3s.io | sh -
 
-mkdir -p /home/$4/.kube
+mkdir -p /home/$adminUsername/.kube
 echo "
 export KUBECONFIG=~/.kube/config
 source <(kubectl completion bash)
 alias k=kubectl
 complete -o default -F __start_kubectl k
-" >> /home/$4/.bashrc
+" >> /home/$adminUsername/.bashrc
 
-USERKUBECONFIG=/home/$4/.kube/config
+USERKUBECONFIG=/home/$adminUsername/.kube/config
 sudo k3s kubectl config view --raw > "$USERKUBECONFIG"
 chmod 600 "$USERKUBECONFIG"
-chown $4:$4 "$USERKUBECONFIG"
+chown $adminUsername:$adminUsername "$USERKUBECONFIG"
 
 # Set KUBECONFIG for root - Current session
 KUBECONFIG=/etc/rancher/k3s/k3s.yaml
@@ -73,7 +89,7 @@ sudo apt-get install apt-transport-https --yes
 echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
 sudo apt-get update -y
 sudo apt-get install helm -y
-echo "source <(helm completion bash)" >> /home/$4/.bashrc
+echo "source <(helm completion bash)" >> /home/$adminUsername/.bashrc
 
 # Sleep for 60 seconds to allow the cluster to be fully connected
 #sleep 60
@@ -97,15 +113,19 @@ echo "#############################"
 echo "Connecting K3s cluster to Arc for K8s"
 echo "#############################"
 #We might need to login with a user that has more permissions than the Azure VM UserAssignedIdentity
-#az login --identity --username $5
-az login --service-principal -u ${10} -p ${11} --tenant ${12}
-az account set -s $9
+az login --identity --username $vmUserAssignedIdentityPrincipalID
+#az login --service-principal -u ${10} -p ${11} --tenant ${12}
+#az account set -s $subscriptionId
 
 az config set extension.use_dynamic_install=yes_without_prompt
 
 az extension add --name connectedk8s --yes
 # Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
-az connectedk8s connect --resource-group $1 --name $2 --location $3 --kube-config /etc/rancher/k3s/k3s.yaml
+az connectedk8s connect \
+    --resource-group $rg \
+    --name $arcK8sClusterName \
+    --location $location \
+    --kube-config /etc/rancher/k3s/k3s.yaml
 
 # Sleep for 60 seconds to allow the cluster to be fully connected
 #sleep 60
@@ -128,8 +148,8 @@ sleep 60
 # Deploy Extension
 # Need to be updated for Ai-In-A-Box Iot Operations Repo
 az k8s-extension create \
-    -g $1 \
-    -c $2 \
+    -g $rg \
+    -c $arcK8sClusterName \
     -n gitops \
     --cluster-type connectedClusters \
     --extension-type=microsoft.flux
@@ -137,8 +157,8 @@ az k8s-extension create \
 # Front-End
 # Need to be updated for Ai-In-A-Box Iot Operations Repo
 # az k8s-configuration flux create \
-#     -g $1 \
-#     -c $2 \
+#     -g $rg \
+#     -c $arcK8sClusterName \
 #     -n gitops \
 #     --namespace vws-app \
 #     -t connectedClusters \
@@ -165,26 +185,16 @@ echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 
 sudo sysctl -p
 ##############################
-echo "Resource Group Name: $1"
-echo "Cluster Name: $2"
-echo "Cluster Location: $3"
-echo "VM User Name: $4"
-echo "UserAssignedIdentity PrincipalId: $5"
-echo "Service Principal Object ID: $6"
-echo "KeyVault ID: $7"
-echo "KeyVault Name: $8"
-echo "Subscription ID: $9"
-echo "Service Principal App ID: ${10}"
-echo "Service Principal Secret: ${11}"
-echo "Service Principal Tenant ID: ${12}"
+# OBJECT_ID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
+# echo "OBJECT_ID: $OBJECT_ID"
+#az iot ops init --simulate-plc -g $rg --cluster $arcK8sClusterName --kv-id $kv_id
+az connectedk8s enable-features -g $rg \
+    -n $arcK8sClusterName \
+    --custom-locations-oid $customLocationRPSPID \
+    --features cluster-connect custom-locations
 
-OBJECT_ID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
-echo "OBJECT_ID: $OBJECT_ID"
-
-kv_id=$(az keyvault show --name $8 -o tsv --query id)
-echo "kv_id $kv_id"
-
-#az connectedk8s enable-features -g $1 -n $2 --custom-locations-oid $6 --features cluster-connect custom-locations
-#az iot ops init --simulate-plc -g $1 --cluster $2 --kv-id $(az keyvault show --name $7 -o tsv --query id)
-
-                                                              
+az iot ops init -g $rg \
+    --kv-id $keyVaultId \
+    --sp-app-id  $spAppId \
+    --sp-object-id $spObjectId \
+    --sp-secret $spSecret
