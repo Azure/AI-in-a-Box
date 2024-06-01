@@ -7,8 +7,6 @@ foreach ($line in (& azd env get-values)) {
 	    [Environment]::SetEnvironmentVariable($key, $value)
     }
 }
-# Output the azd env get-values
-azd env get-values
 
 # Delete the service principal
 Write-Host "Deleting the service principal with id $env:AZURE_ENV_SPAPPID"
