@@ -194,6 +194,7 @@ az connectedk8s enable-features -g $rg \
     --features cluster-connect custom-locations
 
 az iot ops init -g $rg \
+    --cluster $arcK8sClusterName \
     --kv-id $keyVaultId \
     --sp-app-id  $spAppId \
     --sp-object-id $spObjectId \
