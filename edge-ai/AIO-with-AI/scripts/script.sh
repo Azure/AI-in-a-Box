@@ -40,10 +40,10 @@ customLocationRPSPID=$6
 keyVaultId=$7
 keyVaultName=$8
 subscriptionId=$9
-spAppId=$10
-spSecret=$11
-tenantId=$12
-spObjectId=$13
+spAppId=${10}
+spSecret=${11}
+tenantId=${12}
+spObjectId=${13}
 
 #############################
 # Script Definition
