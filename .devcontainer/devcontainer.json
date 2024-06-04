@@ -17,9 +17,7 @@
     },
     "ghcr.io/rchaganti/vsc-devcontainer-features/azurebicep:latest": {},
     "ghcr.io/azure/azure-dev/azd:latest": {},
-    "ghcr.io/devcontainers/features/terraform:1": {
-      "version": "latest"
-    }
+
   },
   "customizations": {
     "vscode": {
@@ -28,8 +26,8 @@
       },
       "extensions": [
         "ms-azuretools.vscode-bicep",
-        "ms-vscode.azure-account",
-        "hashicorp.terraform"
+        "ms-vscode.azure-account"
+
       ]
     }
   }
