@@ -18,9 +18,7 @@
   },
   "customizations": {
     "vscode": {
-      "settings": {
-        "bicep.experimental.deployPane": "true"
-      },
+      "settings": {},
       "extensions": [
         "ms-azuretools.vscode-bicep",
         "ms-vscode.azure-account"
