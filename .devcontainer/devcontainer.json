@@ -9,10 +9,7 @@
   "features": {
     "ghcr.io/devcontainers/features/azure-cli:latest": {
       "installBicep": true,
-      "installUsingPython": true,
-      "version": "latest"
-    },
-    "ghcr.io/devcontainers/features/powershell:latest": {
+      "installUsingPython": false,
       "version": "latest"
     },
     "ghcr.io/rchaganti/vsc-devcontainer-features/azurebicep:latest": {},
