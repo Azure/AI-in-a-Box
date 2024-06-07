@@ -1,3 +1,5 @@
+set -e
+
 echo "Loading azd .env file from current environment..."
 
 while IFS='=' read -r key value; do
@@ -32,7 +34,8 @@ echo '{
 curl "$AOAI_API_ENDPOINT/openai/assistants$ASSISTANT_ID?api-version=2024-02-15-preview" \
   -H "api-key: $AOAI_API_KEY" \
   -H 'content-type: application/json' \
-  -d @tmp.json
+  -d @tmp.json \
+  --fail-with-body
 rm tmp.json
 
 ASSISTANT_ID=$(curl "$AOAI_API_ENDPOINT/openai/assistants?api-version=2024-02-15-preview" \

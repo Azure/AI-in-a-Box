@@ -148,6 +148,8 @@ while True:
 | [Failed Banks](failed_banks/assistant-failed_banks.ipynb) | Using Assistant tools Code Interpreter and Function calling, this Assistant can get a CSV file, gather a list of failed banks by state, and generate a chart to visually represent the data. |
 | [Wind Farm](wind_farm/assistant-wind_farm.ipynb) | Utilizing Assistant tools such as the Code Interpreter and Function calling, this bot is capable of retrieving a CSV file that illustrates turbine wind speed, voltage, and the last maintenance date. It assists you in reviewing the file contents and aids in determining whether a specific turbine is in need of maintenance. |
 | [Sales Assistant](sales_assistant/assistant_sales.ipynb) | Showcases how you can create an Assistant adept at managing various tasks, such as handling relational data across different files and supporting multiple users simultaneously within the same Assistant across distinct threads. |
+| [Autogen Assistants](autogen/gpt_assistant_agent.ipynb) | Get started with Assistants on Autogen, with examples of basic assistants, code interpreter, retrieval and function calling, entirely managed by the Autogen framework. |
+| [File Search Assistant](file_search/assistant-file-search.ipynb) | Leverage File Search with Assistants, with examples of retrieval over a document containing benefits information. |
 
 ## Prerequisites
 

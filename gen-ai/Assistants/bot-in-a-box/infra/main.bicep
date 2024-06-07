@@ -8,9 +8,9 @@ param tags object
 
 param openaiName string = ''
 
-@allowed(['gpt-4', 'gpt-4-32k'])
+@allowed(['gpt-4', 'gpt-4-32k', 'gpt-35-turbo', 'gpt-35-turbo-16k'])
 param gptModel string
-@allowed(['0613', '1106-Preview'])
+@allowed(['0301', '0613', '1106', '0125', 'turbo-2024-04-09', '1106-Preview', '0125-Preview'])
 param gptVersion string
 
 param msiName string = ''
