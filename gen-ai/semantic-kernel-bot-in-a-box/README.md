@@ -13,7 +13,7 @@ The flow of messages is as follows:
 
 - End-users connect to a messaging channel your bot is published to, such as Web, a PowerBI dashboard or Teams;
 - Messages get processed through Azure Bot Services, which communicates with a .NET application running on App Services.
-- The .NET application runs a Semantic Kernel Stepwise Planner at its core. The planner elaborates a series of steps to process the user's request, and then executes it.
+- The .NET application runs a Semantic Kernel Stepwise Planner at its core. The planner elaborates a series of steps to process the user's request, and then executes it. With Semantic Kernal Auto Funcation Calling using gpt4-turbo, gpt-3.5-turbo model, the model detects when to call a particular function. 
 - Each step of the plan is formulated through Azure OpenAI, and the executed against Cognitive Search (traditional RAG pattern) or Azure SQL (structured data RAG).
 - Cognitive search contains an index of hotels, while Azure SQL contains customer data from the AdventureWorksLT sample. Azure OpenAI is responsible for deciding which data source each question gets routed to. Questions may also span multiple data sources. Check out the Sample Scenarios section for more details.
 
