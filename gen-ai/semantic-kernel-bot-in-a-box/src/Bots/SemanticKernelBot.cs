@@ -17,10 +17,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
-using Microsoft.SemanticKernel.Planning;
-using Microsoft.SemanticKernel.Planning.Handlebars;
 using Plugins;
 using Services;
+using Microsoft.SemanticKernel.Planning.Handlebars;
+using Microsoft.SemanticKernel.Planning;
 
 namespace Microsoft.BotBuilderSamples
 {
@@ -37,7 +37,7 @@ namespace Microsoft.BotBuilderSamples
         private readonly SqlConnectionFactory _sqlConnectionFactory;
         private readonly string _welcomeMessage;
         private readonly List<string> _suggestedQuestions;
-        private readonly bool _useStepwisePlanner;
+        private readonly bool _useStepwisePlanner, _useAutoFunctionCall;
         private readonly string _searchSemanticConfig;
         private readonly bool _useWikipedia;
 
@@ -60,6 +60,7 @@ namespace Microsoft.BotBuilderSamples
             _systemMessage = config.GetValue<string>("PROMPT_SYSTEM_MESSAGE");
             _suggestedQuestions = System.Text.Json.JsonSerializer.Deserialize<List<string>>(config.GetValue<string>("PROMPT_SUGGESTED_QUESTIONS"));
             _useStepwisePlanner = config.GetValue<bool>("USE_STEPWISE_PLANNER");
+            _useAutoFunctionCall = config.GetValue<bool>("USE_AUTO_FUNCTION_CALL");
             _searchSemanticConfig = config.GetValue<string>("SEARCH_SEMANTIC_CONFIG");
             _aoaiClient = aoaiClient;
             _searchClient = searchClient;
@@ -109,9 +110,9 @@ namespace Microsoft.BotBuilderSamples
             kernel.ImportPluginFromObject(new DALLEPlugin(conversationData, turnContext, _aoaiClient), "DALLEPlugin");
             if (_bingClient != null) kernel.ImportPluginFromObject(new BingPlugin(conversationData, turnContext, _bingClient), "BingPlugin");
             if (!_useWikipedia) kernel.ImportPluginFromObject(new WikipediaPlugin(conversationData, turnContext), "WikipediaPlugin");
-            if (!_useStepwisePlanner) kernel.ImportPluginFromObject(new HumanInterfacePlugin(conversationData, turnContext, _aoaiClient), "HumanInterfacePlugin");
+            if (!_useStepwisePlanner && !_useAutoFunctionCall) kernel.ImportPluginFromObject(new HumanInterfacePlugin(conversationData, turnContext, _aoaiClient), "HumanInterfacePlugin");
 
-            if (_useStepwisePlanner)
+            if (_useStepwisePlanner && !_useAutoFunctionCall)
             {
                 var plannerOptions = new FunctionCallingStepwisePlannerOptions
                 {
@@ -124,7 +125,7 @@ namespace Microsoft.BotBuilderSamples
 
                 return result.FinalAnswer;
             }
-            else
+            else if (!_useStepwisePlanner && !_useAutoFunctionCall)
             {
                 var plannerOptions = new HandlebarsPlannerOptions();
 
@@ -134,6 +135,18 @@ namespace Microsoft.BotBuilderSamples
                 var result = await plan.InvokeAsync(kernel, default);
                 return result;
             }
+            else
+            {
+                // Use Auto Function calling setting to let llm decide which Plugin to invoke.
+                OpenAIPromptExecutionSettings settings = new() { ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions };
+
+                var result = await kernel.InvokePromptAsync(turnContext.Activity.Text, new(settings));
+                return result.ToString();
+            }
+
+
+
+
         }
     }
 
