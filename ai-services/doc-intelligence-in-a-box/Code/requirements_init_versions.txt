@@ -4,7 +4,7 @@
 
 azure-functions==1.12.0
 azure-storage-blob==12.14.1
-azure-identity==1.12.0
+azure-identity==1.16.1
 requests
 #azure-ai-formrecognizer
 azure-ai-formrecognizer==3.2.0b3
