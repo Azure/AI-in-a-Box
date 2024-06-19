@@ -8,22 +8,23 @@
   <ItemGroup>
     <PackageReference Include="AdaptiveCards" Version="3.1.0" />
     <PackageReference Include="Azure.AI.FormRecognizer" Version="4.1.0" />
-    <PackageReference Include="Azure.Identity" Version="1.10.4" />
+    <PackageReference Include="Azure.Identity" Version="1.11.3" />
     <PackageReference Include="Azure.Search.Documents" Version="11.5.1" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.57" />
+    <PackageReference Include="Azure.Security.KeyVault.Keys" Version="4.6.0" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Search.WebSearch" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Azure.KeyVault.Core" Version="3.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.7" />
-    <PackageReference Include="Microsoft.Bot.Builder.Azure" Version="4.21.1" />
-    <PackageReference Include="Microsoft.Bot.Builder.Azure.Blobs" Version="4.20.1" />
-    <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.21.2" />
-    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.20.1" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.4" />
-    <PackageReference Include="Microsoft.Graph" Version="5.38.0" />
-    <PackageReference Include="Microsoft.Graph.Core" Version="3.1.4" />
-    <PackageReference Include="Microsoft.SemanticKernel" Version="1.6.3" />
-    <PackageReference Include="Microsoft.SemanticKernel.Planners.Handlebars" Version="1.6.3-preview" />
-    <PackageReference Include="Microsoft.SemanticKernel.Planners.OpenAI" Version="1.6.3-preview" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.6" />
+    <PackageReference Include="Microsoft.Bot.Builder.Azure" Version="4.22.4" />
+    <PackageReference Include="Microsoft.Bot.Builder.Azure.Blobs" Version="4.22.4" />
+    <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.22.4" />
+    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.22.4" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
+    <PackageReference Include="Microsoft.Graph" Version="5.56.0" />
+    <PackageReference Include="Microsoft.Graph.Core" Version="3.1.12" />
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.14.1" />
+    <PackageReference Include="Microsoft.SemanticKernel.Planners.Handlebars" Version="1.14.1-preview" />
+    <PackageReference Include="Microsoft.SemanticKernel.Planners.OpenAI" Version="1.14.1-preview" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 
   <PropertyGroup>
