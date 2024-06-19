@@ -24,10 +24,7 @@ echo '{
     "name":"'$AOAI_ASSISTANT_NAME'",
     "model":"gpt-4",
     "instructions":"",
-    "tools":[
-        '$(for each in ./src/Tools/*.json; do cat $each; echo ","; done)'
-        {}
-    ],
+    "tools":'$(cat ./src/Tools/*.json | jq -s)',
     "file_ids":[],
     "metadata":{}
   }' > tmp.json
