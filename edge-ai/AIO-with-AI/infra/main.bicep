@@ -18,7 +18,7 @@
         az ad user show --id 'your email' --query id
 
         az bicep build --file main.bicep
-        az deployment group create --resource-group <your resource group name>  --template-file main.bicep --parameters main.bicepparam --name Doc-intelligence-in-a-Box --query 'properties.outputs'
+        az deployment group create --resource-group <your resource group name>  --template-file main.bicep --parameters main.paraeters.json --name AIO-in-a-Box --query 'properties.outputs'
 
         SCRIPT STEPS
       1 - Create Resource Group
@@ -109,7 +109,7 @@ param authenticationType string
 
 
 @sys.description('URI for Custom K3s VM Script and Config')
-//param scriptURI string = 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/scripts/'
+//param scriptURI string = 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/AIO-with-AI/edge-ai/AIO-with-AI/scripts/'
 param scriptURI string
 
 @sys.description('Shell Script to be executed')

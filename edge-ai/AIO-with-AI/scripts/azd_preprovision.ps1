@@ -11,6 +11,7 @@ az account set --subscription $env:AZURE_SUBSCRIPTION_ID
 ########################################################################
 # Register providers
 Write-Host "Registering Azure providers..."
+
 ###################
 # List of required azure providers
 ###################
@@ -92,14 +93,13 @@ Write-Host "Retrieving the Custom Location RP ObjectID from SP ID bc313c14-388c-
 # Make sure that the command below is and/or pointing to the correct subscription and the MS Tenant
 $customLocationRPSPID = $(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
 Write-Host "Custom Location RP SP ID: $customLocationRPSPID"
-#$customLocationRPSPID = "412d7898-47f2-46b4-9d60-b7e975ae0fde"
 azd env set AZURE_ENV_CUSTOMLOCATIONRPSPID $customLocationRPSPID
 
 ###################
 # Create a service principal used by IoT Operations to interact with Key Vault
 ###################
 Write-Host "Creating a service principal for IoT Operations to interact with Key Vault..."
-$iotOperationsKeyVaultSP = $(az ad sp create-for-rbac --name "iot-operations-keyvault-sp")
+$iotOperationsKeyVaultSP = $(az ad sp create-for-rbac --name "aio-keyvault-sp")
 $iotOperationsKeyVaultSPobj = $iotOperationsKeyVaultSP | ConvertFrom-Json
 $spobjId = $(az ad sp show --id $iotOperationsKeyVaultSPobj.appId --query id -o tsv)
 

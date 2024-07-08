@@ -1,5 +1,5 @@
 # Loading the .env file from the current environment and deleting the service principal
-Write-Host "Loading azd .env file from current environment"
+Write-Host "Loading azd .env file from current environment..."
 foreach ($line in (& azd env get-values)) {
     if ($line -match "([^=]+)=(.*)") {
         $key = $matches[1]

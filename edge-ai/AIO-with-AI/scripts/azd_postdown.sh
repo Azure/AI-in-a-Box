@@ -9,4 +9,5 @@ $(azd env get-values)
 EOF
 
 # Delete the service principal
+echo "Deleting the service principal with id $AZURE_ENV_SPAPPID"
 az ad sp delete --id "$AZURE_ENV_SPAPPID"

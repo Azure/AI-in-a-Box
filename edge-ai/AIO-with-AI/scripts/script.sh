@@ -121,11 +121,7 @@ az config set extension.use_dynamic_install=yes_without_prompt
 
 az extension add --name connectedk8s --yes
 # Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
-az connectedk8s connect \
-    --resource-group $rg \
-    --name $arcK8sClusterName \
-    --location $location \
-    --kube-config /etc/rancher/k3s/k3s.yaml
+az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
 
 # Sleep for 60 seconds to allow the cluster to be fully connected
 #sleep 60
