@@ -230,7 +230,7 @@ module m_aml './modules/azureml.bicep' = {
   params: {
     location: location
     aisnId: m_aisn.outputs.applicationInsightId
-    amlcompclustername: !empty(amlcompclustername) ? amlcompclustername : '${abbrs.machineLearningServicesComputeCPU}${environmentName}-${uniqueSuffix}'
+    amlcompclustername: !empty(amlcompclustername) ? amlcompclustername : '${abbrs.machineLearningServicesCluster}${environmentName}-${uniqueSuffix}'
     amlcompinstancename: !empty(amlcompinstancename) ? amlcompinstancename : '${abbrs.machineLearningServicesComputeCPU}${environmentName}-${uniqueSuffix}'
     keyvaultId: m_kvn.outputs.keyVaultId
     storageAccountId: m_stg.outputs.stgId

@@ -171,7 +171,7 @@ az k8s-extension create \
 # Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
 # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
 echo "#############################"
-echo "Deploy IoT Operations CCComponents"
+echo "Deploy IoT Operations CCCCComponents"
 echo "#############################"
 az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
@@ -184,10 +184,7 @@ sudo sysctl -p
 # OBJECT_ID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
 # echo "OBJECT_ID: $OBJECT_ID"
 #az iot ops init --simulate-plc -g $rg --cluster $arcK8sClusterName --kv-id $kv_id
-az connectedk8s enable-features -g $rg \
-    -n $arcK8sClusterName \
-    --custom-locations-oid $customLocationRPSPID \
-    --features cluster-connect custom-locations
+az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-oid $customLocationRPSPID --features cluster-connect custom-locations
 
 az iot ops init -g $rg \
     --cluster $arcK8sClusterName \
