@@ -25,7 +25,7 @@
        2 - Create User Assigned Identity for VM
        3 - Create NSG
        4 - Create VNET
-       5 - Create OPNsense Public IP
+       5 - Create VM/K3s Public IP
        6 - Create KeyVault used for Azure IoT Operations
        7 - Build reference of existing subnets
        8 - Create Ubuntu VM for K3s
@@ -88,7 +88,7 @@ param subnetCIDR string = '10.7.0.0/24'
 
 //VM Module Parameters
 @sys.description('VM size, please choose a size which have enough memory and CPU for K3s.')
-param virtualMachineSize string = 'Standard_B4ms'
+param virtualMachineSize string = 'Standard_B4ms' //Make sure the VM size you pick has at least 8GBs of memory
 
 @sys.description('Ubuntu K3s Manchine Name')
 param virtualMachineName string
@@ -245,7 +245,7 @@ module m_vnet 'modules/vnet/vnet.bicep' = {
   }
 }
 
-//5. Create OPNsense Public IP
+//5. Create VM/K3s Public IP
 module m_pip 'modules/vnet/publicip.bicep' = {
   name: 'deploy_pip'
   scope: resourceGroup

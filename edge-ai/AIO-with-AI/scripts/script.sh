@@ -173,22 +173,3 @@ az k8s-extension create \
 echo "#############################"
 echo "Deploy IoT Operations CCCCComponents"
 echo "#############################"
-az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
-
-echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
-echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
-
-sudo sysctl -p
-##############################
-# OBJECT_ID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
-# echo "OBJECT_ID: $OBJECT_ID"
-#az iot ops init --simulate-plc -g $rg --cluster $arcK8sClusterName --kv-id $kv_id
-az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-oid $customLocationRPSPID --features cluster-connect custom-locations
-
-az iot ops init -g $rg \
-    --cluster $arcK8sClusterName \
-    --kv-id $keyVaultId \
-    --sp-app-id  $spAppId \
-    --sp-object-id $spObjectId \
-    --sp-secret $spSecret
