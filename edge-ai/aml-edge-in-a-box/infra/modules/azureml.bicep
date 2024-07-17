@@ -1,7 +1,9 @@
 /*region Header
       Module Steps 
       1 - Create ML Workspace
-      2 - Create ML Workspace Compute Instance
+      2 - Create ML Workspace Compute Cluster
+      3 - Create ML Workspace Compute Instance
+      4 - Create ML Workspace Compute Cluster with GPU
       https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.machinelearningservices/machine-learning-end-to-end-secure/README.md
 */
 
@@ -13,13 +15,14 @@ param amlcompinstancename string
 param storageAccountId string
 param keyvaultId string
 param aisnId string
-param systemDatastoresAuthMode string = 'identity'
+param systemDatastoresAuthMode string 
 param hbi_workspace bool = false
 param acrId string
 param tags object = {}
 
+param baseTime string = utcNow('yyyy-MM-ddTHH:mm:ss')
 
-//1. Deploy Machine Learning Workspace
+//1. Create Machine Learning Workspace
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces?pivots=deployment-language-bicep
 resource amlwn 'Microsoft.MachineLearningServices/workspaces@2023-06-01-preview' = {
   identity: {
@@ -39,7 +42,7 @@ resource amlwn 'Microsoft.MachineLearningServices/workspaces@2023-06-01-preview'
   tags: tags
 }
 
-//2. Deploy ML Workspace Compute Cluster
+//2. Create ML Workspace Compute Cluster
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces/computes?pivots=deployment-language-bicep
 resource amlcompcluster 'Microsoft.MachineLearningServices/workspaces/computes@2023-06-01-preview' = {
   parent: amlwn
@@ -59,7 +62,42 @@ resource amlcompcluster 'Microsoft.MachineLearningServices/workspaces/computes@2
   }
 }
 
-//3. Deploy ML Workspace Compute Cluster with GPU
+
+//3. Create ML Workspace Compute Instance
+//https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces/computes?pivots=deployment-language-bicep
+//https://learn.microsoft.com/en-us/azure/machine-learning/how-to-create-compute-instance?view=azureml-api-2&tabs=azure-studio#create-a-schedule-with-a-resource-manager-template
+resource amlcompinstance 'Microsoft.MachineLearningServices/workspaces/computes@2023-06-01-preview' = {
+  parent: amlwn
+  name: amlcompinstancename
+  location: location
+  properties: {
+    computeType: 'ComputeInstance'
+    computeLocation: location
+    description: 'Machine Learning compute instance 001'
+    properties: {
+      idleTimeBeforeShutdown: 'PT30M'
+      schedules: {
+        computeStartStop: [
+          {
+            action: 'Stop'
+            status: 'Enabled'
+            triggerType: 'Cron'
+            cron: {
+                expression: '00 18 * * 1,2,3,4,5'
+                startTime: baseTime
+                timeZone: 'UTC'
+            }
+          }
+        ]
+      }
+      
+      vmSize: 'Standard_DS3_v2'
+    }
+  }
+}
+
+//3. Create ML Workspace Compute Cluster with GPU
+//Uncomment the below code to deploy ML Workspace Compute Cluster with GPU
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces/computes?pivots=deployment-language-bicep
 // resource amlcompclusterGPU 'Microsoft.MachineLearningServices/workspaces/computes@2023-06-01-preview' = {
 //   parent: amlwn
@@ -76,77 +114,6 @@ resource amlcompcluster 'Microsoft.MachineLearningServices/workspaces/computes@2
 //       vmPriority: 'LowPriority'
 //       vmSize: 'Standard_DS3_v2'
 //     }
-//   }
-// }
-
-//https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces/computes?pivots=deployment-language-bicep
-resource amlcompinstance 'Microsoft.MachineLearningServices/workspaces/computes@2023-06-01-preview' = {
-  parent: amlwn
-  name: amlcompinstancename
-  location: location
-  properties: {
-    computeType: 'ComputeInstance'
-    computeLocation: location
-    description: 'Machine Learning compute instance 001'
-    properties: {
-      // schedules: {
-      //   computeStartStop: [
-      //     {
-      //       action: 'Stop'
-      //       // cron: {
-      //       //   expression: '*/30 * * * *'
-      //       //   startTime: 'string'
-      //       //   timeZone: 'eastus'
-      //       // }
-      //       recurrence: {
-      //         frequency: 'Week'
-      //         interval: 1
-      //         schedule: {
-      //           hours: [
-      //             6
-      //           ]
-      //           minutes: [
-      //             30
-      //           ]
-      //           weekDays: [
-      //             'Monday'
-      //             'Tuesday'
-      //             'Wednesday'
-      //             'Thursday'
-      //             'Friday'
-      //           ]
-      //         }
-      //         startTime:  '2024-01-29T18:30:30'  
-      //         timeZone: 'Eastern Standard Time'
-      //       }
-      //       status: 'Enabled'
-      //       triggerType: 'Recurrence'
-      //     }
-      //   ]
-      // }
-
-      vmSize: 'Standard_DS3_v2'
-    }
-  }
-}
-
-// var azureRBACStorageBlobDataContributorRoleID = 'ba92f5b4-2d11-453d-a403-e96b0029c9fe' //Storage Blob Data Contributor Role: https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor
-// //var azureRBACOwnerRoleID = '8e3af657-a8ff-443c-a75c-2fe8c4bcb635' //Owner: https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#owner
-
-// //Reference existing resources for permission assignment scope
-// resource stgRef 'Microsoft.Storage/storageAccounts@2021-06-01' existing = {
-//   name: storageAccountName
-// }
-
-// //3. Assign Storage Blob Data Contributor Role to ML Workspace in the Raw Data Lake Account as per https://docs.microsoft.com/en-us/azure/synapse-analytics/security/how-to-grant-workspace-managed-identity-permissions#grant-the-managed-identity-permissions-to-adls-gen2-storage-account
-// //Create and apply RBAC to your ML workspace managed identity to the storage account -ML Workspace Role Assignment as Blob Data Contributor Role in the Data Lake Storage Account
-// resource r_eWorkspacetorageBlobDataContributor 'Microsoft.Authorization/roleAssignments@2020-10-01-preview' = {
-//   name: guid(resourceId('Microsoft.Storage/storageAccounts', workspaceName), stgRef.name)
-//   scope: stgRef
-//   properties:{
-//     roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', azureRBACStorageBlobDataContributorRoleID)
-//     principalId: amlwn.identity.principalId
-//     principalType:'ServicePrincipal'
 //   }
 // }
 

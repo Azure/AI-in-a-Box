@@ -3,9 +3,6 @@
       1 - Create Storage Account
       2 - Create default/root folder structure
       3 - Create containers
-      4 - Save adls key to key vault
-      5 - Save adls end point dfs to key vault
-      6 - Save adls end point web to key vault
 */
 
 //Declare Parameters--------------------------------------------------------------------------------------------------------------------------
@@ -31,6 +28,7 @@ resource stg 'Microsoft.Storage/storageAccounts@2023-01-01' = {
       keySource: 'Microsoft.Storage'
     }
     minimumTlsVersion: 'TLS1_2'
+    allowBlobPublicAccess: false
     supportsHttpsTrafficOnly: true
   }
   sku: {

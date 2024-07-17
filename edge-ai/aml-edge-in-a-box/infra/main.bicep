@@ -1,16 +1,16 @@
 /*region Header
       =========================================================================================================
-      Created by:       Author: Your Name | your.name@azurestream.io 
+      Created by:       Author: Your Name | your.name@azurestream.io
       Description:      Edge AI in-a-box - Deploy your AI Model on Edge Devices with Azure ML and IoT Edge
       =========================================================================================================
 
       Dependencies:
         Install Azure CLI
-        https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest 
+        https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest
 
         Install Latest version of Bicep
         https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install
-      
+
         To Run:
         az login
         az account set --subscription <subscription id>
@@ -18,29 +18,26 @@
         az ad user show --id 'your email' --query id
 
         az bicep build --file main.bicep
-        az deployment group create --resource-group <your resource group name>  --template-file main.bicep --parameters main.bicepparam --name Doc-intelligence-in-a-Box --query 'properties.outputs' 
-      
-        SCRIPT STEPS 
-      1 - Create UAMI
-      2 - Create Key Vault
-      3 - Create Storage Account
-      4 - Create IoT Hub
-      5 - Create DPS
-      6 - Create Application Insights
-      7 - Create ML Workspace 
-      8 - Create ACR
-      9 - Assign Role to UAMI
-      10 - Upload Notebooks to Azure ML Studio
-      11 - Create IoT Edge Devices inside of the IoT Hub with a Deployment Script
-      12 - Deploy Edge VM (A) - Deploy with a Script
-      
+        az deployment group create --resource-group <your resource group name>  --template-file main.bicep --parameters main.paraeters.json --name AML-Edge-in-a-Box --query 'properties.outputs'
+
+        SCRIPT STEPS
+        1 - Create Resource Group
+        2 - Create User Assigned Identity for VM
+        3 - Create Key Vault
+        4 - Create Required Storage Account(s)
+        5 - Create IoT Hub
+        6 - Create DPS
+        7 - Create Application Insights
+        8 - Create Azure Container Registry
+        9 - Create Azure Machine Learning Workspace
+        10 - Assign Role to UAMI
+        11 - Upload Notebooks to Azure ML Studio
+        12 - Create IoT Edge Devices inside of the IoT Hub with a Deployment Script
+        13 - Deploy Edge VM (A) - Deploy with a Script
+   
       //=====================================================================================
 
 */
-
-//********************************************************
-// Global Parameters
-//********************************************************
 targetScope = 'subscription'
 
 @minLength(1)
@@ -55,7 +52,7 @@ param location string
 param resourceGroupName string = ''
 
 var abbrs = loadJsonContent('abbreviations.json')
-var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup.id), 1, 3) 
+var uniqueSuffix = substring(uniqueString(subscription().id, resourceGroup.id), 1, 3)
 param tags object
 
 //UAMI Module Parameters
@@ -81,21 +78,21 @@ param skuUnits int = 1
 //Application Insights
 var applicationInsightsName = ''
 
+//ACR Module Parameters
+param acrName string = ''
+@description('The SKU to use for the Azure Container Registry.')
+param acrSku string = 'Standard'
+
 //Azure ML
 var workspaceName = ''
 @description('Specifies the name of the Azure Machine Learning workspace Compute Name.')
 param amlcompclustername string = 'aml-cluster'
 @description('Specifies the name of the Azure Machine Learning workspace Compute Name.')
-param amlcompinstancename string = 'ml-instance'
+param amlcompinstancename string = ''
 @description('Specifies whether to reduce telemetry collection and enable additional encryption.')
 param hbi_workspace bool = false
 @description('Identity type of storage account services for your azure ml workspace.')
-param systemDatastoresAuthMode string = 'identity'
-
-//ACR Module Parameters
-param acrName string = ''
-@description('The SKU to use for the Azure Container Registry.')
-param acrSku string = 'Standard'
+param systemDatastoresAuthMode string = 'accessKey'
 
 //Edge VM Module Parameters
 @description('Deploy Document Intelligence service? (required for Upload Plugin demo)')
@@ -117,9 +114,8 @@ param adminUsername string = 'NodeVMAdmin'
 param adminPasswordOrKey string
 
 
-
 //====================================================================================
-// Create Resource Group 
+// Create Resource Group
 //====================================================================================
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2023-07-01' = {
   name: !empty(resourceGroupName) ? resourceGroupName : '${abbrs.resourcesResourceGroups}${environmentName}'
@@ -127,7 +123,7 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2023-07-01' = {
   tags: tags
 }
 
-//1. Deploy UAMI
+//2. Create UAMI
 module m_msi 'modules/msi.bicep' = {
   name: 'deploy_msi'
   scope: resourceGroup
@@ -138,7 +134,7 @@ module m_msi 'modules/msi.bicep' = {
   }
 }
 
-//2. Deploy Required Key Vault
+//3. Create KeyVault
 //https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults
 module m_kvn 'modules/keyvault.bicep' = {
   name: 'deploy_keyvault'
@@ -149,7 +145,7 @@ module m_kvn 'modules/keyvault.bicep' = {
   }
 }
 
-//3. Deploy Required Storage Account(s)
+//4. Deploy Required Storage Account(s)
 //Deploy Storage Accounts (Create your Storage Account (ADLS Gen2 & HNS Enabled) for your ML Workspace)
 //https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts?tabs=bicep
 module m_stg 'modules/storage.bicep' = {
@@ -161,7 +157,7 @@ module m_stg 'modules/storage.bicep' = {
   }
 }
 
-//4. Deploy IoTHub
+//5. Create IoTHub
 module m_iot 'modules/iothub.bicep' = {
   name: 'deploy_iothub'
   scope: resourceGroup
@@ -181,7 +177,7 @@ module m_iot 'modules/iothub.bicep' = {
   ]
 }
 
-//5. Deploy DPS
+//6. Create DPS
 // module m_dps 'modules/dps.bicep' = {
 //   name: 'deploy_dps'
 //   scope: resourceGroup
@@ -198,7 +194,7 @@ module m_iot 'modules/iothub.bicep' = {
 //   ]
 // }
 
-//6. Deploy Application Insights Instance
+//7. Create Application Insights Instance
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.insights/components?pivots=deployment-language-bicep
 module m_aisn 'modules/insights.bicep' = {
   name: 'deploy_appinsights'
@@ -209,7 +205,7 @@ module m_aisn 'modules/insights.bicep' = {
   }
 }
 
-//7. Deploy Azure Container Registry
+//8. Create Azure Container Registry
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces?pivots=deployment-language-bicep
 module m_acr './modules/acr.bicep' = {
   name: 'deploy_acr'
@@ -222,7 +218,7 @@ module m_acr './modules/acr.bicep' = {
   }
 }
 
-//8. Deploy Machine Learning Workspace
+//9. Create Machine Learning Workspace
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces?pivots=deployment-language-bicep
 module m_aml './modules/azureml.bicep' = {
   name: 'deploy_azureml'
@@ -237,12 +233,12 @@ module m_aml './modules/azureml.bicep' = {
     workspaceName: !empty(workspaceName) ? workspaceName : '${abbrs.machineLearningServicesWorkspaces}${environmentName}-${uniqueSuffix}'
     hbi_workspace: hbi_workspace
     acrId: m_acr.outputs.acrId
-    systemDatastoresAuthMode: ((systemDatastoresAuthMode != 'accessKey') ? systemDatastoresAuthMode : 'identity')
+    systemDatastoresAuthMode: ((systemDatastoresAuthMode == 'accessKey') ? systemDatastoresAuthMode : 'identity')
     tags: tags
   }
 }
 
-//9. Assign Role to UAMI
+//10. Assign Role to UAMI
 module m_RBACRoleAssignment 'modules/rbac.bicep' = {
   name: 'deploy_RBAC'
   scope: resourceGroup
