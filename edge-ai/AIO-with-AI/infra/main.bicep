@@ -21,19 +21,21 @@
         az deployment group create --resource-group <your resource group name>  --template-file main.bicep --parameters main.paraeters.json --name AIO-in-a-Box --query 'properties.outputs'
 
         SCRIPT STEPS
-       1 - Create Resource Group
-       2 - Create User Assigned Identity for VM
-       3 - Create NSG
-       4 - Create VNET
-       5 - Create VM/K3s Public IP
-       6 - Create KeyVault used for Azure IoT Operations
-       7 - Build reference of existing subnets
-       8 - Create Ubuntu VM for K3s
-       9 - Create Required Storage Account(s)
-      10 - Create Application Insights
-      11 - Create Azure Container Registry
-      12 - Create Azure Machine Learning Workspace
-      13 - Deploy Application using GitOps
+        1 - Create Resource Group
+        2 - Create User Assigned Identity for VM
+        3 - Create KeyVault used for Azure IoT Operations
+        4 - Create Required Storage Account(s)
+        5 - Create NSG
+        6 - Create VNET
+        7 - Create VM/K3s Public IP
+        8 - Build reference of existing subnets
+        9 - Create Ubuntu VM for K3s
+        10 - Create Application Insights
+        11 - Create Azure Container Registry
+        12 - Create Azure Machine Learning Workspace
+        13 - Assign Role to UAMI
+        14 - Upload Notebooks to Azure ML Studio
+        15 - Deploy Application using GitOps
    
       //=====================================================================================
 
@@ -59,7 +61,7 @@ param tags object
 param msiName string = ''
 
 //Key Vault
-var keyVaultName = '' //'${virtualMachineName}-kv'
+var keyVaultName = ''
 
 @description('Your Service Principal Object ID or your own User Object ID so you can give the SP access to the Key Vault Secrets')
 param spObjectId string = '' //This is your Service Principal Object ID or your own User Object ID so you can give the SP access to the Key Vault Secrets
@@ -142,6 +144,7 @@ param customLocationRPSPID string = ''
 
 //Storage Account
 var storageAccountName = ''
+var storageContainerName = 'aio'
 
 //Application Insights
 var applicationInsightsName = ''
@@ -154,13 +157,13 @@ param acrSku string = 'Standard'
 //Azure ML
 var workspaceName = ''
 @description('Specifies the name of the Azure Machine Learning workspace Compute Name.')
-param amlcompclustername string = ''
+param amlcompclustername string = 'aml-cluster'
 @description('Specifies the name of the Azure Machine Learning workspace Compute Name.')
 param amlcompinstancename string = ''
 @description('Specifies whether to reduce telemetry collection and enable additional encryption.')
 param hbi_workspace bool = false
 @description('Identity type of storage account services for your azure ml workspace.')
-param systemDatastoresAuthMode string = 'identity'
+param systemDatastoresAuthMode string = 'accessKey'
 
 // Generate a unique token to be used in naming resources.
 // Remove linter suppression after using.
@@ -177,7 +180,7 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2023-07-01' = {
   tags: tags
 }
 
-//2. Deploy UAMI
+//2. Create UAMI
 module m_msi 'modules/identity/msi.bicep' = {
   name: 'deploy_msi'
   scope: resourceGroup
@@ -188,7 +191,34 @@ module m_msi 'modules/identity/msi.bicep' = {
   }
 }
 
-//3. Deploy Create NSG
+//3. Create KeyVault used for Azure IoT Operations
+//https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults
+module m_kvn 'modules/keyvault/keyvault.bicep' = {
+  name: 'deploy_keyvault'
+  scope: resourceGroup
+  params: {
+    keyVaultName: !empty(keyVaultName) ? keyVaultName : '${abbrs.keyVaultVaults}${environmentName}-${uniqueSuffix}'
+    location: location
+    vmUserAssignedIdentityPrincipalID: m_msi.outputs.msiPrincipalID
+
+    //Send in Service Principal and/or User Oject ID
+    spObjectId: spObjectId
+  }
+}
+
+//4. Create Required Storage Account(s)
+//Deploy Storage Accounts (Create your Storage Account (ADLS Gen2 & HNS Enabled) for your ML Workspace)
+//https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts?tabs=bicep
+module m_stg 'modules/aml/storage.bicep' = {
+  name: 'deploy_storageaccount'
+  scope: resourceGroup
+  params: {
+    storageAccountName: !empty(storageAccountName) ? storageAccountName : '${abbrs.storageStorageAccounts}${environmentName}${uniqueSuffix}'
+    location: location
+  }
+}
+
+//5. Create Create NSG
 module m_nsg 'modules/vnet/nsg.bicep' = {
   name: 'deploy_nsg'
   scope: resourceGroup
@@ -226,7 +256,7 @@ module m_nsg 'modules/vnet/nsg.bicep' = {
   }
 }
 
-//4. Create VNET
+//6. Create VNET
 module m_vnet 'modules/vnet/vnet.bicep' = {
   name: 'deploy_vnet'
   scope: resourceGroup
@@ -245,7 +275,7 @@ module m_vnet 'modules/vnet/vnet.bicep' = {
   }
 }
 
-//5. Create VM/K3s Public IP
+//7. Create VM/K3s Public IP
 module m_pip 'modules/vnet/publicip.bicep' = {
   name: 'deploy_pip'
   scope: resourceGroup
@@ -258,28 +288,13 @@ module m_pip 'modules/vnet/publicip.bicep' = {
   }
 }
 
-//6. Create KeyVault used for Azure IoT Operations
-//https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults
-module m_kvn 'modules/keyvault/keyvault.bicep' = {
-  name: 'deploy_keyvault'
-  scope: resourceGroup
-  params: {
-    location: location
-    keyVaultName: !empty(keyVaultName) ? keyVaultName : '${abbrs.keyVaultVaults}${environmentName}-${uniqueSuffix}'
-    vmUserAssignedIdentityPrincipalID: m_msi.outputs.msiPrincipalID
-
-    //Send in Service Principal and/or User Oject ID
-    spObjectId: spObjectId
-  }
-}
-
-//7. Build reference of existing subnets
+//8. Build reference of existing subnets
 resource subnet 'Microsoft.Network/virtualNetworks/subnets@2023-05-01' existing = {
   scope: resourceGroup
   name: '${m_vnet.outputs.vnetName}/${subnetName}'
 }
 
-//8. Create Ubuntu VM for K3s
+//9. Create Ubuntu VM for K3s
 module m_vm 'modules/vm/vm-ubuntu.bicep' = {
   name: 'deploy_K3sVM'
   scope: resourceGroup
@@ -318,19 +333,7 @@ module m_vm 'modules/vm/vm-ubuntu.bicep' = {
   ]
 }
 
-//9. Create Required Storage Account(s)
-//Deploy Storage Accounts (Create your Storage Account (ADLS Gen2 & HNS Enabled) for your ML Workspace)
-//https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts?tabs=bicep
-module m_stg 'modules/aml/storage.bicep' = {
-  name: 'deploy_storageaccount'
-  scope: resourceGroup
-  params: {
-    storageAccountName: !empty(storageAccountName) ? storageAccountName : '${abbrs.storageStorageAccounts}${environmentName}${uniqueSuffix}'
-    location: location
-  }
-}
-
-//6. Deploy Application Insights Instance
+//10. Create Application Insights Instance
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.insights/components?pivots=deployment-language-bicep
 module m_aisn 'modules/aml/insights.bicep' = {
   name: 'deploy_appinsights'
@@ -341,8 +344,7 @@ module m_aisn 'modules/aml/insights.bicep' = {
   }
 }
 
-
-//10. Create Azure Container Registry
+//11. Create Azure Container Registry
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces?pivots=deployment-language-bicep
 module m_acr './modules/aml/acr.bicep' = {
   name: 'deploy_acr'
@@ -355,7 +357,7 @@ module m_acr './modules/aml/acr.bicep' = {
   }
 }
 
-//10. Create Azure Machine Learning Workspace
+//12. Create Azure Machine Learning Workspace
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces?pivots=deployment-language-bicep
 module m_aml './modules/aml/azureml.bicep' = {
   name: 'deploy_azureml'
@@ -370,10 +372,45 @@ module m_aml './modules/aml/azureml.bicep' = {
     workspaceName: !empty(workspaceName) ? workspaceName : '${abbrs.machineLearningServicesWorkspaces}${environmentName}-${uniqueSuffix}'
     hbi_workspace: hbi_workspace
     acrId: m_acr.outputs.acrId
-    systemDatastoresAuthMode: ((systemDatastoresAuthMode != 'accessKey') ? systemDatastoresAuthMode : 'identity')
+    systemDatastoresAuthMode: ((systemDatastoresAuthMode == 'accessKey') ? systemDatastoresAuthMode : 'identity')
     tags: tags
   }
 }
+
+//13. Assign Role to UAMI
+module m_RBACRoleAssignment 'modules/aml/rbac.bicep' = {
+  name: 'deploy_RBAC'
+  scope: resourceGroup
+  params: {
+    uamiPrincipalId: m_msi.outputs.msiPrincipalID
+    uamiName: m_msi.outputs.msiName
+  }
+  dependsOn:[
+    m_msi
+    m_aml
+  ]
+}
+
+//********************************************************
+//Deployment Scripts
+//********************************************************
+//Upload Notebooks to Azure ML Studio
+module script_UploadNotebooks './modules/aml/scriptNotebookUpload.bicep' = {
+  name: 'script_UploadNotebooks'
+  scope: resourceGroup
+  params: {
+    location: location
+    resourceGroupName: resourceGroup.name
+    amlworkspaceName: m_aml.outputs.amlworkspaceName
+    storageAccountName: m_stg.outputs.stgName
+
+    uamiId: m_msi.outputs.msiID
+  }
+  dependsOn:[
+    m_aml
+  ]
+}
+
 
 // module gitOpsAppDeploy 'modules/gitops/gtiops.bicep' = {
 //   name: 'gitOpsAppDeploy'

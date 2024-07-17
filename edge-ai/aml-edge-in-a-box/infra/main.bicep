@@ -145,7 +145,7 @@ module m_kvn 'modules/keyvault.bicep' = {
   }
 }
 
-//4. Deploy Required Storage Account(s)
+//4. Create Required Storage Account(s)
 //Deploy Storage Accounts (Create your Storage Account (ADLS Gen2 & HNS Enabled) for your ML Workspace)
 //https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts?tabs=bicep
 module m_stg 'modules/storage.bicep' = {
