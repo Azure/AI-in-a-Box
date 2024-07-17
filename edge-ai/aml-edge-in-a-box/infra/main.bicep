@@ -297,7 +297,7 @@ module script_DeployEdgeVM './modules/scriptDeployEdgeVM.bicep' = if (deployEdge
     resourceGroupName: resourceGroup.name
     iotHubName: m_iot.outputs.iotHubName
     edgeDeviceName: edgeDeviceName
-    dnsLabelPrefix: dnsLabelPrefix
+    dnsLabelPrefix: !empty(dnsLabelPrefix) ? '${dnsLabelPrefix}${uniqueSuffix}' : 'edgevm1${uniqueSuffix}'
     authenticationType: authenticationType
     adminUsername : adminUsername
     adminPasswordOrKey: adminPasswordOrKey

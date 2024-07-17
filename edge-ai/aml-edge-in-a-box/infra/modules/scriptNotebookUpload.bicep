@@ -14,10 +14,9 @@ param storageAccountName string
 param uamiId string
 
 // Change the URL below with that of your notebook
-var urlNotebookAutoML= 'https://raw.githubusercontent.com/AndresPad/AI-in-a-Box/main/edge-ai/aml-edge-in-a-box/notebooks/1-AutoML-ObjectDetection.ipynb'
-var urlNotebookOnnx= 'https://raw.githubusercontent.com/AndresPad/AI-in-a-Box/main/edge-ai/aml-edge-in-a-box/notebooks/2-Onnx-HandwrittenDigitClassification.ipynb'
-var urlOnnxTrainingScript= 'https://raw.githubusercontent.com/AndresPad/AI-in-a-Box/main/edge-ai/aml-edge-in-a-box/notebooks/mnist.py'
-var urlNotebookOpenVino= 'https://raw.githubusercontent.com/AndresPad/AI-in-a-Box/main/edge-ai/aml-edge-in-a-box/notebooks/3-OpenVino.ipynb'
+var urlNotebookAutoML= 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/main/edge-ai/aml-edge-in-a-box/notebooks/1-AutoML-ObjectDetection.ipynb'
+var urlNotebookOnnx= 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/main/edge-ai/aml-edge-in-a-box/notebooks/2-Onnx-HandwrittenDigitClassification.ipynb'
+var urlOnnxTrainingScript= 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/main/edge-ai/aml-edge-in-a-box/notebooks/mnist.py'
 var dataStoreName = 'workspaceworkingdirectory' // Note: name auto-created by ML Workspace, DO NOT CHANGE
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
