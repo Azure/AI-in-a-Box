@@ -33,9 +33,8 @@
         10 - Create Application Insights
         11 - Create Azure Container Registry
         12 - Create Azure Machine Learning Workspace
-        13 - Assign Role to UAMI
-        14 - Upload Notebooks to Azure ML Studio
-        15 - Deploy Application using GitOps
+        13 - Upload Notebooks to Azure ML Studio
+        14 - Deploy Application using GitOps
    
       //=====================================================================================
 
@@ -375,20 +374,6 @@ module m_aml './modules/aml/azureml.bicep' = {
     systemDatastoresAuthMode: ((systemDatastoresAuthMode == 'accessKey') ? systemDatastoresAuthMode : 'identity')
     tags: tags
   }
-}
-
-//13. Assign Role to UAMI
-module m_RBACRoleAssignment 'modules/aml/rbac.bicep' = {
-  name: 'deploy_RBAC'
-  scope: resourceGroup
-  params: {
-    uamiPrincipalId: m_msi.outputs.msiPrincipalID
-    uamiName: m_msi.outputs.msiName
-  }
-  dependsOn:[
-    m_msi
-    m_aml
-  ]
 }
 
 //********************************************************

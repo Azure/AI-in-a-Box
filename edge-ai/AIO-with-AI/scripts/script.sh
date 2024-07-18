@@ -150,19 +150,17 @@ az k8s-extension create \
     --cluster-type connectedClusters \
     --extension-type=microsoft.flux
 
-# Front-End
-# Need to be updated for Ai-In-A-Box Iot Operations Repo
-# az k8s-configuration flux create \
+#############################
+#Arc for Kubernetes AML Extension
+#############################
+# az k8s-extension create \
 #     -g $rg \
 #     -c $arcK8sClusterName \
-#     -n gitops \
-#     --namespace vws-app \
-#     -t connectedClusters \
-#     --scope cluster \
-#     -u https://github.com/Welasco/testflux2.git \
-#     --interval 2m \
-#     --branch main \
-#     --kustomization name=vws-app path=./vws-app prune=true sync_interval=2m
+#     -n azureml \
+#     --cluster-type connectedClusters \
+#     --extension-type Microsoft.AzureML.Kubernetes \
+#     --scope cluster --configuration-settings enableInference=True allowInsecureConnections=True inferenceRouterServiceType=LoadBalancer
+   
 
 
 #############################
@@ -173,3 +171,16 @@ az k8s-extension create \
 echo "#############################"
 echo "Deploy IoT Operations CCCCComponents"
 echo "#############################"
+az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
+
+echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
+
+sudo sysctl -p
+##############################
+# OBJECT_ID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
+# echo "OBJECT_ID: $OBJECT_ID"
+#az iot ops init -g $rg --cluster $arcK8sClusterName --kv-id $kv_id --simulate-plc --include-dp
+#next time we deploy make sure we test out the following --simulate-plc --include-dp
+#az iot ops init -g $rg --cluster $arcK8sClusterName --kv-id $keyVaultId --sp-app-id  $spAppId --sp-object-id $spObjectId --sp-secret $spSecret --simulate-plc --include-dp

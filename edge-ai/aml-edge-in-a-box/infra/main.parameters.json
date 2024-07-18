@@ -17,12 +17,6 @@
     "deployEdgeVM": {
       "value": "${DEPLOY_EDGE_VM}"
     },
-    "adminUsername": {
-      "value": "${AZURE_ENV_ADMINUSERNAME}"
-    },
-    "adminPasswordOrKey": {
-      "value": "${AZURE_ENV_ADMINPASSWORDORKEY}"
-    },
     "tags": {
       "value": {
         "Owner": "AI Team",
