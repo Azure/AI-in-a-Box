@@ -118,8 +118,8 @@ az login --identity --username $vmUserAssignedIdentityPrincipalID
 #az account set -s $subscriptionId
 
 az config set extension.use_dynamic_install=yes_without_prompt
-
 az extension add --name connectedk8s --yes
+
 # Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
 az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
 
@@ -181,6 +181,16 @@ sudo sysctl -p
 ##############################
 # OBJECT_ID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
 # echo "OBJECT_ID: $OBJECT_ID"
-#az iot ops init -g $rg --cluster $arcK8sClusterName --kv-id $kv_id --simulate-plc --include-dp
-#next time we deploy make sure we test out the following --simulate-plc --include-dp
+
+#Use the az connectedk8s enable-features command to enable custom location support on your cluster.
+#This command uses the objectId of the Microsoft Entra ID application that the Azure Arc service uses.
+az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-oid $customLocationRPSPID --features cluster-connect custom-locations
+
+#--simulate-plc -> Flag when set, will configure the OPC-UA broker installer to spin-up a PLC server.
+#--include-dp -> Flag when set, Include Data Processor in the IoT Operations deployment. https://learn.microsoft.com/en-us/azure/iot-operations/process-data/overview-data-processor ->By default, Data Processor isn't included in an Azure IoT Operations Preview deployment. If you plan to use Data Processor, you must include it when you deploy Azure IoT Operations Preview - you can't add it later. 
+
+#Deploy Azure IoT Operations. This command takes several minutes to complete:
 #az iot ops init -g $rg --cluster $arcK8sClusterName --kv-id $keyVaultId --sp-app-id  $spAppId --sp-object-id $spObjectId --sp-secret $spSecret --simulate-plc --include-dp
+
+
+
