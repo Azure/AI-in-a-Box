@@ -89,9 +89,9 @@ param subnetCIDR string = '10.7.0.0/24'
 
 //VM Module Parameters
 @sys.description('VM size, please choose a size which have enough memory and CPU for K3s.')
-param virtualMachineSize string = 'Standard_D8s_v4' //'Standard_B4ms' //Make sure the VM size you pick has at least 8GBs of memory
+param virtualMachineSize string  //'Standard_D8s_v4'-Make sure the VM size you pick has at least 8GBs of memory
 
-@sys.description('Ubuntu K3s Manchine Name')
+@sys.description('Ubuntu K3s Cluster Name')
 param virtualMachineName string
 
 @sys.description('Arc for Kubernates Cluster Name')

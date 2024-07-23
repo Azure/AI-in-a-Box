@@ -9,7 +9,7 @@
       "value": "aibx-aioedgeai-rg"
     },
     "virtualMachineSize": {
-      "value": "Standard_B4ms"
+      "value": "${AZURE_ENV_VIRTUALMACHINESIZE}"
     },
     "virtualMachineName": {
       "value": "${AZURE_ENV_VIRTUALMACHINENAME}"
