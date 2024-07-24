@@ -36,7 +36,7 @@ echo $location:$3 | awk '{print substr($1,2); }' >> vars.sh
 echo $templateBaseUrl:${15} | awk '{print substr($1,2); }' >> vars.sh
 sed -i '2s/^/export adminUsername=/' vars.sh
 sed -i '3s/^/export appId=/' vars.sh
-sed -i '4s/^/export password=/' vars.sh
+sed -i '4s/^/export spSecret=/' vars.sh
 sed -i '5s/^/export tenantId=/' vars.sh
 sed -i '6s/^/export arcK8sClusterName=/' vars.sh
 sed -i '7s/^/export virtualMachineName=/' vars.sh
@@ -84,7 +84,7 @@ sudo -u $adminUsername az extension add --name "k8s-configuration"
 sudo -u $adminUsername az extension add --name "k8s-extension"
 sudo -u $adminUsername az extension add --name "customlocation"
 
-sudo -u $adminUsername az login --service-principal --username $appId --password=$password --tenant $tenantId
+sudo -u $adminUsername az login --service-principal --username $appId --password=$spSecret --tenant $tenantId
 #sudo -u $adminUsername az login --identity --username $vmUserAssignedIdentityPrincipalID
 
 # Onboard the cluster to Azure Arc and enabling Container Insights using Kubernetes extension
