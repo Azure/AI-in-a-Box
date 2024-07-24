@@ -51,19 +51,19 @@ sudo cp /etc/rancher/k3s/k3s.yaml /home/${adminUsername}/.kube/config.staging
 sudo chown -R $adminUsername /home/${adminUsername}/.kube/
 sudo chown -R staginguser /home/${adminUsername}/.kube/config.staging
 
-# # Installing Helm 3
-# echo ""
-# sudo snap install helm --classic
+# Installing Helm 3
+echo ""
+sudo snap install helm --classic
 
-# # Installing Azure CLI & Azure Arc Extensions
-# echo ""
-# sudo apt-get update
-# curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+# Installing Azure CLI & Azure Arc Extensions
+echo ""
+sudo apt-get update
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# sudo -u $adminUsername az extension add --name "connectedk8s"
-# sudo -u $adminUsername az extension add --name "k8s-configuration"
-# sudo -u $adminUsername az extension add --name "k8s-extension"
-# sudo -u $adminUsername az extension add --name "customlocation"
+sudo -u $adminUsername az extension add --name "connectedk8s"
+sudo -u $adminUsername az extension add --name "k8s-configuration"
+sudo -u $adminUsername az extension add --name "k8s-extension"
+sudo -u $adminUsername az extension add --name "customlocation"
 
 # sudo -u $adminUsername az login --service-principal --username $appId --password=$password --tenant $tenantId
 
