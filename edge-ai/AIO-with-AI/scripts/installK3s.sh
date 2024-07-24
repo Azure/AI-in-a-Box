@@ -138,7 +138,7 @@ echo ""
 # rg=$(sudo -u $adminUsername az resource list --query "[?name=='$virtualMachineName']".[resourceGroup] --resource-type "Microsoft.Compute/virtualMachines" -o tsv)
 #sudo -u $adminUsername az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /home/${adminUsername}/.kube/config --tags 'Project=jumpstart_azure_arc_k8s' --correlation-id "d009f5dd-dba8-4ac7-bac9-b54ef3a6671a"
 # sudo -u $adminUsername az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
-az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
+#az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
 
 #sudo -u $adminUsername az k8s-extension create -n "azuremonitor-containers" --cluster-name $arcK8sClusterName --resource-group $resourceGroup --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
 #sudo -u $adminUsernmae az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
