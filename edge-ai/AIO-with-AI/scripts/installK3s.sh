@@ -8,16 +8,32 @@ sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/" /etc/ssh/s
 sudo adduser staginguser --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 sudo echo "staginguser:ArcPassw0rd" | sudo chpasswd
 
+rg=$1
+arcK8sClusterName=$2
+location=$3
+adminUsername=$4
+vmUserAssignedIdentityPrincipalID=$5
+customLocationRPSPID=$6
+keyVaultId=$7
+keyVaultName=$8
+subscriptionId=$9
+spAppId=${10}
+spSecret=${11}
+tenantId=${12}
+spObjectId=${13}
+virtualMachineName=${14}
+templateBaseUrl=${15}
+
 # Injecting environment variables
 echo '#!/bin/bash' >> vars.sh
-echo $adminUsername:$1 | awk '{print substr($1,2); }' >> vars.sh
-echo $spAppId:$2 | awk '{print substr($1,2); }' >> vars.sh
-echo $spSecret:$3 | awk '{print substr($1,2); }' >> vars.sh
-echo $tenantId:$4 | awk '{print substr($1,2); }' >> vars.sh
-echo $arcK8sClusterName:$5 | awk '{print substr($1,2); }' >> vars.sh
-echo $virtualMachineName:$6 | awk '{print substr($1,2); }' >> vars.sh
-echo $location:$7 | awk '{print substr($1,2); }' >> vars.sh
-echo $templateBaseUrl:$8 | awk '{print substr($1,2); }' >> vars.sh
+echo $adminUsername:$4 | awk '{print substr($1,2); }' >> vars.sh
+echo $spAppId:${10} | awk '{print substr($1,2); }' >> vars.sh
+echo $spSecret:${11} | awk '{print substr($1,2); }' >> vars.sh
+echo $tenantId:${12} | awk '{print substr($1,2); }' >> vars.sh
+echo $arcK8sClusterName:$2 | awk '{print substr($1,2); }' >> vars.sh
+echo $virtualMachineName:${14} | awk '{print substr($1,2); }' >> vars.sh
+echo $location:$3 | awk '{print substr($1,2); }' >> vars.sh
+echo $templateBaseUrl:${15} | awk '{print substr($1,2); }' >> vars.sh
 sed -i '2s/^/export adminUsername=/' vars.sh
 sed -i '3s/^/export appId=/' vars.sh
 sed -i '4s/^/export password=/' vars.sh
@@ -26,6 +42,7 @@ sed -i '6s/^/export arcK8sClusterName=/' vars.sh
 sed -i '7s/^/export virtualMachineName=/' vars.sh
 sed -i '8s/^/export location=/' vars.sh
 sed -i '9s/^/export templateBaseUrl=/' vars.sh
+
 
 chmod +x vars.sh
 . ./vars.sh
@@ -68,10 +85,11 @@ sudo -u $adminUsername az extension add --name "k8s-extension"
 sudo -u $adminUsername az extension add --name "customlocation"
 
 sudo -u $adminUsername az login --service-principal --username $appId --password=$password --tenant $tenantId
+#sudo -u $adminUsername az login --identity --username $vmUserAssignedIdentityPrincipalID
 
 # Onboard the cluster to Azure Arc and enabling Container Insights using Kubernetes extension
 echo ""
-# resourceGroup=$(sudo -u $adminUsername az resource list --query "[?name=='$virtualMachineName']".[resourceGroup] --resource-type "Microsoft.Compute/virtualMachines" -o tsv)
+resourceGroup=$(sudo -u $adminUsername az resource list --query "[?name=='$virtualMachineName']".[resourceGroup] --resource-type "Microsoft.Compute/virtualMachines" -o tsv)
 # sudo -u $adminUsername az connectedk8s connect --name $arcK8sClusterName --resource-group $resourceGroup --location $location --kube-config /home/${adminUsername}/.kube/config --tags 'Project=jumpstart_azure_arc_k8s' --correlation-id "d009f5dd-dba8-4ac7-bac9-b54ef3a6671a"
 
 # sudo -u $adminUsername az k8s-extension create -n "azuremonitor-containers" --cluster-name $arcK8sClusterName --resource-group $resourceGroup --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
