@@ -50,7 +50,7 @@ chmod +x vars.sh
 export K3S_VERSION="1.28.5+k3s1" # Do not change!
 
 # Creating login message of the day (motd)
-sudo curl -v -o /etc/profile.d/welcomeK3s.sh ${templateBaseUrl}scripts/welcomeK3s.sh
+# sudo curl -v -o /etc/profile.d/welcomeK3s.sh ${templateBaseUrl}scripts/welcomeK3s.sh
 
 # Syncing this script log to 'jumpstart_logs' directory for ease of troubleshooting
 sudo -u $adminUsername mkdir -p /home/${adminUsername}/jumpstart_logs
@@ -59,16 +59,42 @@ while sleep 1; do sudo -s rsync -a /var/lib/waagent/custom-script/download/0/ins
 # Installing Rancher K3s cluster (single control plane)
 echo ""
 publicIp=$(hostname -i)
-sudo mkdir ~/.kube
-sudo -u $adminUsername mkdir /home/${adminUsername}/.kube
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --node-external-ip ${publicIp}" INSTALL_K3S_VERSION=v${K3S_VERSION} sh -
-sudo chmod 644 /etc/rancher/k3s/k3s.yaml
-sudo kubectl config rename-context default arck3sdemo --kubeconfig /etc/rancher/k3s/k3s.yaml
-sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
-sudo cp /etc/rancher/k3s/k3s.yaml /home/${adminUsername}/.kube/config
-sudo cp /etc/rancher/k3s/k3s.yaml /home/${adminUsername}/.kube/config.staging
-sudo chown -R $adminUsername /home/${adminUsername}/.kube/
-sudo chown -R staginguser /home/${adminUsername}/.kube/config.staging
+# sudo mkdir ~/.kube
+# sudo -u $adminUsername mkdir /home/${adminUsername}/.kube
+# curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --node-external-ip ${publicIp}" INSTALL_K3S_VERSION=v${K3S_VERSION} sh -
+# sudo chmod 644 /etc/rancher/k3s/k3s.yaml
+# sudo kubectl config rename-context default arck3sdemo --kubeconfig /etc/rancher/k3s/k3s.yaml
+# sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+# sudo cp /etc/rancher/k3s/k3s.yaml /home/${adminUsername}/.kube/config
+# sudo cp /etc/rancher/k3s/k3s.yaml /home/${adminUsername}/.kube/config.staging
+# sudo chown -R $adminUsername /home/${adminUsername}/.kube/
+# sudo chown -R staginguser /home/${adminUsername}/.kube/config.staging
+
+#############################
+#Install K3s
+#############################
+echo "#############################"
+echo "Installing K3s CLI"
+echo "#############################"
+curl -sfL https://get.k3s.io | sh -
+# curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --node-external-ip ${publicIp}" INSTALL_K3S_VERSION=v${K3S_VERSION} sh -
+
+mkdir -p /home/$adminUsername/.kube
+echo "
+export KUBECONFIG=~/.kube/config
+source <(kubectl completion bash)
+alias k=kubectl
+complete -o default -F __start_kubectl k
+" >> /home/$adminUsername/.bashrc
+
+USERKUBECONFIG=/home/$adminUsername/.kube/config
+sudo k3s kubectl config view --raw > "$USERKUBECONFIG"
+chmod 600 "$USERKUBECONFIG"
+chown $adminUsername:$adminUsername "$USERKUBECONFIG"
+
+# Set KUBECONFIG for root - Current session
+KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 # Installing Helm 3
 echo ""
@@ -92,11 +118,12 @@ sudo -u $adminUsername az login --identity --username $vmUserAssignedIdentityPri
 # Onboard the cluster to Azure Arc and enabling Container Insights using Kubernetes extension
 echo ""
 # rg=$(sudo -u $adminUsername az resource list --query "[?name=='$virtualMachineName']".[resourceGroup] --resource-type "Microsoft.Compute/virtualMachines" -o tsv)
-sudo -u $adminUsername az connectedk8s connect --name $arcK8sClusterName --resource-group $rg --location $location --kube-config /home/${adminUsername}/.kube/config --tags 'Project=aibx_azure_aio_k3s' --correlation-id "d009f5dd-dba8-4ac7-bac9-b54ef3a6671a"
+sudo -u $adminUsername az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /home/${adminUsername}/.kube/config --tags 'Project=jumpstart_azure_arc_k8s' --correlation-id "d009f5dd-dba8-4ac7-bac9-b54ef3a6671a"
+# sudo -u $adminUsername az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
 
 #sudo -u $adminUsername az k8s-extension create -n "azuremonitor-containers" --cluster-name $arcK8sClusterName --resource-group $resourceGroup --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
 #sudo -u $adminUsernmae az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
-# sudo -u $adminUsernmae az k8s-extension create -g $rg -c $arcK8sClusterName -n azureml --cluster-type connectedClusters --extension-type Microsoft.AzureML.Kubernetes --scope cluster --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose 
+#sudo -u $adminUsernmae az k8s-extension create -g $rg -c $arcK8sClusterName -n azureml --cluster-type connectedClusters --extension-type Microsoft.AzureML.Kubernetes --scope cluster --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose 
 
 
 #hardcoded values
