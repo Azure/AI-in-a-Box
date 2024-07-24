@@ -239,6 +239,19 @@ module m_nsg 'modules/vnet/nsg.bicep' = {
         }
       }
       {
+        name: 'open-port-2222'
+        properties: {
+          priority: 900
+          sourceAddressPrefix: '*'
+          protocol: '*'
+          destinationPortRange: '2222'
+          access: 'Allow'
+          direction: 'Inbound'
+          sourcePortRange: '*'
+          destinationAddressPrefix: '*'
+        }
+      }
+      {
         name: 'In-Demo-App-GitOps'
         properties: {
           priority: 1001
@@ -283,6 +296,8 @@ module m_pip 'modules/vnet/publicip.bicep' = {
     publicipName: !empty(publicIPAddressName) ? publicIPAddressName : '${abbrs.networkPublicIPAddresses}${environmentName}-${uniqueSuffix}'
     publicipproperties: {
       publicIPAllocationMethod: 'Static'
+      publicIPAddressVersion: 'IPv4'
+      idleTimeoutInMinutes: 4
     }
   }
 }
