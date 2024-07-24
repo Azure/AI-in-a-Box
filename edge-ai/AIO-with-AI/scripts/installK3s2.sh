@@ -104,8 +104,6 @@ sudo -u $adminUsername az extension add --name "customlocation" --yes
 
 sudo -u $adminUsername az login --service-principal --username '$appId' --password=$spSecret --tenant $tenantId
 #sudo -u $adminUsername az login --identity --username $vmUserAssignedIdentityPrincipalID
-#sudo -u 'ArcAdmin' az login --identity --username '/subscriptions/831a353b-37df-42bb-b4da-cfec630a5cfe/resourceGroups/aibx-aioedgeai-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-aiobx-xyq'
-#az login --identity --username '/subscriptions/831a353b-37df-42bb-b4da-cfec630a5cfe/resourceGroups/aiok3s-aioedgeai-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-aiobx-xyq'
 
 # Onboard the cluster to Azure Arc and enabling Container Insights using Kubernetes extension
 echo ""

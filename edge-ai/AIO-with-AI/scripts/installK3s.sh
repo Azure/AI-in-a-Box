@@ -130,8 +130,6 @@ sudo -u $adminUsername az extension add --name "customlocation" --yes
 
 # sudo -u $adminUsername az login --service-principal --username $appId --password=$spSecret --tenant $tenantId
 #sudo -u $adminUsername az login --identity --username $vmUserAssignedIdentityPrincipalID
-#sudo -u 'ArcAdmin' az login --identity --username '/subscriptions/831a353b-37df-42bb-b4da-cfec630a5cfe/resourceGroups/aibx-aioedgeai-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-aiobx-xyq'
-az login --identity --username '/subscriptions/831a353b-37df-42bb-b4da-cfec630a5cfe/resourceGroups/aibx-aioedgeai-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-aiobx-xyq'
 
 # Onboard the cluster to Azure Arc and enabling Container Insights using Kubernetes extension
 echo ""
@@ -143,9 +141,3 @@ az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --locatio
 #sudo -u $adminUsername az k8s-extension create -n "azuremonitor-containers" --cluster-name $arcK8sClusterName --resource-group $resourceGroup --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
 #sudo -u $adminUsernmae az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
 #sudo -u $adminUsernmae az k8s-extension create -g $rg -c $arcK8sClusterName -n azureml --cluster-type connectedClusters --extension-type Microsoft.AzureML.Kubernetes --scope cluster --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose 
-
-
-#hardcoded values
-# sudo -u ArcAdmin az connectedk8s connect --name aiobxcluster --resource-group aibx-aioedgeai-rg --location eastus --kube-config /home/ArcAdmin/.kube/config --tags 'Project=jumpstart_azure_arc_k8s' --correlation-id "d009f5dd-dba8-4ac7-bac9-b54ef3a6671a"
-# sudo -u ArcAdmin az k8s-extension create -g aibx-aioedgeai-rg -c aiobxcluster -n "azuremonitor-containers"  --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
-# sudo -u ArcAdmin az k8s-extension create -g aibx-aioedgeai-rg -c aiobxcluster -n azureml --cluster-type connectedClusters --extension-type Microsoft.AzureML.Kubernetes --scope cluster --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose 
