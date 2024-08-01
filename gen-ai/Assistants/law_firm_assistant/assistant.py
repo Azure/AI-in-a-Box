@@ -65,7 +65,7 @@ def get_or_create_assistant(client: AzureOpenAI, bing_resource_id: str, vector_s
         try:
             # validates vector store exists
             client.beta.assistants.retrieve(assistant_id=assistant_id)
-            logger.info("Assistant with id {} already exists".format(vector_store_id))
+            logger.info("Assistant with id {} already exists".format(assistant_id))
             return assistant_id
         except Exception as ex:
             raise Exception(f"Error retrieving assistant with id {assistant_id}: {ex}")
@@ -96,13 +96,14 @@ You are not allowed to answer questions that are not related to court cases
         },
         model="gpt-4o-0513",
     )
+    assistant_id = assistant.id
 
     logger.info("Created new assistant with id {}".format(assistant_id))
 
     # stores the id in the assistant.env file
-    write_env(env_file, assistant_id_env_name, assistant.id)
+    write_env(env_file, assistant_id_env_name, assistant_id)
 
-    return assistant.id
+    return assistant_id
 
 
 def write_env(env_file: TextIO, key: str, value: str):
