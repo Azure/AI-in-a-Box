@@ -64,13 +64,14 @@ You should try to give a plan in the following format:
         }],
         model="gpt-4-1106-preview",
     )
+    assistant_id = assistant.id
 
     logger.info("Created new assistant with id {}".format(assistant_id))
 
     # stores the id in the assistant.env file
-    write_env(env_file, assistant_id_env_name, assistant.id)
+    write_env(env_file, assistant_id_env_name, assistant_id)
 
-    return assistant.id
+    return assistant_id
 
 
 def write_env(env_file: TextIO, key: str, value: str):
