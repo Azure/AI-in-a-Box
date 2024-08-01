@@ -24,8 +24,10 @@ By the end of this tutorial, you should be able to:
 ## Estimated Runtime: 10 mins
 
 ## Pre-requisites
-- A Azure OpenAI resource (API key + endpoint)
-- A Bing Search resource
+- A [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) resource (API key + endpoint)
+- A [Bing Search](https://www.microsoft.com/en-us/bing/apis/bing-custom-search-api?msockid=05017416a2426182001960bfa3e36056) resource
+  - The Bing resource should be a Bing Search v7 resource and the SKU should be S15 or S16
+  - The Azure OpenAI resource needs to have 'Contributor' role on the selected Bing resource to use it
 - Python 3.10 or later
 
 ## Running the sample
