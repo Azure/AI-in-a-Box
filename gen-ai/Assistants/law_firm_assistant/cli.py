@@ -36,6 +36,7 @@ How can I help you with court cases!
                 content=user_input
             )
 
+            print("\nAssistant: ", end="", flush=True)
             event_handler = EventHandler()
             with self.client.beta.threads.runs.stream(assistant_id=self.assistant_id, thread_id=thread.id,
                                                       event_handler=event_handler) as stream:

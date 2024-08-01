@@ -32,6 +32,7 @@ class EventHandler(AssistantEventHandler):
             if annotation.type == "url_citation":
                 if is_first_url_citation:
                     print("\nUrl citations: \n", end="", flush=True)
+                    is_first_url_citation = False
                 title = annotation.model_extra['url_citation']['title']
                 url = annotation.model_extra['url_citation']['url']
                 print("* {} - [{}]({})\n".format(annotation.text, title, url), end="", flush=True)
