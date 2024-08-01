@@ -17,7 +17,6 @@ The assistant will be implemented through a CLI in python (command line interfac
 
 By the end of this tutorial, you should be able to:
 - Create an OpenAI assistant that uses the Web Browse tool
-- Understand how to instruct the assistant to use the Web Browse tool
 
 ## Programming Languages
 - Python
@@ -25,46 +24,31 @@ By the end of this tutorial, you should be able to:
 ## Estimated Runtime: 10 mins
 
 ## Pre-requisites
-- A Azure OpenAI resource (API key + endpoint)
-- A Bing Search resource
-- Python 3.9 or later
+- A [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) resource (API key + endpoint)
+- A [Bing Search](https://www.microsoft.com/en-us/bing/apis/bing-custom-search-api?msockid=05017416a2426182001960bfa3e36056) resource
+  - The Bing resource should be a Bing Search v7 resource and the SKU should be S15 or S16
+  - The Azure OpenAI resource needs to have 'Contributor' role on the selected Bing resource to use it
+- Python 3.10 or later
 
 ## Running the sample
 
 ### Step 1: Fill in the environment variables
-Fill `.env` file with the following environment variables:
+Create an `.env` file with the following environment variables:
 ```commandline
-API_KEY="YOUR_API_KEY"
-AZURE_ENDPOINT="YOUR_AZURE_ENDPOINT"
-BING_RESOURCE_ID="YOUR_BING_RESOURCE"
-ASSISTANT_ID="YOUR_ASSISTANT_ID"
+OPENAI_KEY="<openai_key>"
+OPENAI_ENDPOINT="<openai_endpoint>"
+BING_RESOURCE_ID="<bing_resource_id>"
 ```
 
-Note: The first time you run you can leave the `ASSISTANT_ID` empty. The script will create a new assistant.
-You can pick the created assistant id from logs and update the `.env` file so it doesn't create a new assistant every time.
+Note: The first time you run, an assistant will be created. Its id will be stored in a new `assistant.env` file, which is used to load the assistant in the following runs.
 
-### Step 2: Create an OpenAI Assistant that uses the Web Browse tool
-In order to create an OpenAI assistant that uses the Web Browse tool, you need to:
-- Register the browser tool in the assistant configuration. `BING_RESOURCE_ID` is the resource ID of the Bing Search API.
-```python
-    tools=[{
-        "type": "browser",
-        "browser": {
-            "bing_resource_id": os.getenv("BING_RESOURCE_ID")
-        }
-    }],
-``` 
-- Instruct the assistant to use the browser tool when needed. In this sample we do that by adding the following instruction:
-```
-When asked for up-to-date information, you should use the browser tool.
-```
 
-### Step 3: Install requirements
+### Step 2: Install requirements
 ```commandline
 pip install -r requirements.txt
 ```
 
-### Step 4: Run the sample
+### Step 3: Run the sample
 ```commandline
 python app.py
 ```
@@ -108,6 +92,58 @@ Based on your preferences and the available information, here’s a trip suggest
 - Check the weather forecast closer to the departure date for a more accurate outlook and to plan your packing appropriately.
 
 Remember to book accommodations and flights early for better rates, and have a fantastic time rocking out with Metallica!
+```
+
+## Understanding the Solution
+
+### OpenAI Client
+
+- Create an OpenAI client with:
+  - at least `2024-07-01-preview` version
+  - passing the header "X-Ms-Enable-Preview": "true"
+```python
+  client = AzureOpenAI(
+      api_key=openai_key,
+      api_version="2024-07-01-preview",
+      azure_endpoint=openai_endpoint,
+      default_headers={"X-Ms-Enable-Preview": "true"} 
+  )
+```
+
+### Assistant
+- Create the assistant with file search and browser tools
+  - browser tool needs the bing resource id
+  - file search tool needs the vector store id
+```python
+# assistant.py
+assistant = client.beta.assistants.create(
+    name="Travel planner copilot",
+    instructions='''
+You are travel planner that helps people plan trips across the world.
+
+The user might give you constraints like:
+- destination
+- weather preference
+- attractions preference
+- date preference
+
+When asked for up-to-date information, you should use the browser tool.
+
+You should try to give a plan in the following format:
+- city
+- start and end date
+- cost breakdown
+- weather forecast
+- attractions and any useful information about tickets.
+    ''',
+    tools=[{
+        "type": "browser",
+        "browser": {
+            "bing_resource_id": bing_resource_id
+        }
+    }],
+    model="gpt-4-1106-preview",
+)
 ```
 
 ## FAQ

@@ -24,43 +24,45 @@ def setup_assistant(client: AzureOpenAI, bing_resource_id: str) -> str:
     return assistant_id
 
 
-def get_or_create_assistant(client: AzureOpenAI, bing_resource_id: str, vector_store_id: str, env_file: TextIO) -> str:
+def get_or_create_assistant(client: AzureOpenAI, bing_resource_id: str, env_file: TextIO) -> str:
     assistant_id = os.getenv(assistant_id_env_name)
 
     if assistant_id is not None:
         try:
             # validates vector store exists
             client.beta.assistants.retrieve(assistant_id=assistant_id)
-            logger.info("Assistant with id {} already exists".format(vector_store_id))
+            logger.info("Assistant with id {} already exists".format(assistant_id))
             return assistant_id
         except Exception as ex:
             raise Exception(f"Error retrieving assistant with id {assistant_id}: {ex}")
 
     assistant = client.beta.assistants.create(
-        name="Law firm copilot",
+        name="Travel planner copilot",
         instructions='''
-You are a law firm assistant that answers questions about court cases.
+You are travel planner that helps people plan trips across the world.
 
-You are only allowed to:
-- use the file search tool to search for internal court cases
-- use the browser tool to look for court cases on the web
+The user might give you constraints like:
+- destination
+- weather preference
+- attractions preference
+- date preference
 
-You are not allowed to answer questions that are not related to court cases
+When asked for up-to-date information, you should use the browser tool.
+
+You should try to give a plan in the following format:
+- city
+- start and end date
+- cost breakdown
+- weather forecast
+- attractions and any useful information about tickets.
         ''',
         tools=[{
-            "type": "file_search"
-        }, {
             "type": "browser",
             "browser": {
                 "bing_resource_id": bing_resource_id
             }
         }],
-        tool_resources={
-            "file_search": {
-                "vector_store_ids": [vector_store_id]
-            }
-        },
-        model="gpt-4o-0513",
+        model="gpt-4-1106-preview",
     )
 
     logger.info("Created new assistant with id {}".format(assistant_id))
