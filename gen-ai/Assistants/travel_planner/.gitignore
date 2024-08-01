@@ -1,5 +1,3 @@
-app.log
-
-.idea/
-
-.env
+.idea
+*.log
+*.env

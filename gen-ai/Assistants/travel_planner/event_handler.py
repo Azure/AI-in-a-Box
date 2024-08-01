@@ -1,7 +1,8 @@
 import logging
+from typing import Any
 
 from openai import AssistantEventHandler
-from openai.types.beta.threads.runs import ToolCall, ToolCallDelta, RunStepDelta, RunStep
+from openai.types.beta.threads.runs import ToolCall
 from openai.types.beta.threads import Text, TextDelta
 
 
@@ -16,11 +17,11 @@ class EventHandler(AssistantEventHandler):
     def on_exception(self, exception: Exception) -> None:
         logger.error("please try again. an exception occurred: {}".format(exception))
 
-    def on_tool_call_created(self, tool_call: ToolCall):
-        logger.info("started calling tool {}".format(tool_call['type']))
+    def on_tool_call_created(self, tool_call: Any):
+        logger.info("started calling tool {}".format(get_tool_type(tool_call)))
 
     def on_tool_call_done(self, tool_call: ToolCall) -> None:
-        logger.info("completed calling tool {}".format(tool_call['type']))
+        logger.info("completed calling tool {}".format(get_tool_type(tool_call)))
 
     def on_text_delta(self, delta: TextDelta, snapshot: Text) -> None:
         print(delta.value, end="", flush=True)
@@ -31,6 +32,7 @@ class EventHandler(AssistantEventHandler):
             if annotation.type == "url_citation":
                 if is_first_url_citation:
                     print("\nUrl citations: \n", end="", flush=True)
+                    is_first_url_citation = False
                 title = annotation.model_extra['url_citation']['title']
                 url = annotation.model_extra['url_citation']['url']
                 print("* {} - [{}]({})\n".format(annotation.text, title, url), end="", flush=True)
@@ -40,3 +42,10 @@ class EventHandler(AssistantEventHandler):
 
     def on_end(self) -> None:
         logger.info("completed conversation with assistant")
+
+
+def get_tool_type(tool_call: Any) -> str:
+    if isinstance(tool_call, dict):
+        return tool_call['type']
+    else:
+        return tool_call.type
