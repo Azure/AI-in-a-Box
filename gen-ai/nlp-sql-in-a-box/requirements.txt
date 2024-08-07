@@ -1,7 +1,0 @@
-openai
-python-dotenv
-tiktoken
-semantic-kernel
-Jinja2
-asyncio
-pyodbc
