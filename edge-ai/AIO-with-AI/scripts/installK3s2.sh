@@ -96,11 +96,11 @@ echo ""
 sudo apt-get update
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-sudo -u $adminUsername az config set extension.use_dynamic_install=yes_without_prompt
-sudo -u $adminUsername az extension add --name "connectedk8s" --yes
-sudo -u $adminUsername az extension add --name "k8s-configuration" --yes
-sudo -u $adminUsername az extension add --name "k8s-extension" --yes
-sudo -u $adminUsername az extension add --name "customlocation" --yes
+# sudo -u $adminUsername az config set extension.use_dynamic_install=yes_without_prompt
+# sudo -u $adminUsername az extension add --name "connectedk8s" --yes
+# sudo -u $adminUsername az extension add --name "k8s-configuration" --yes
+# sudo -u $adminUsername az extension add --name "k8s-extension" --yes
+# sudo -u $adminUsername az extension add --name "customlocation" --yes
 
 # sudo -u $adminUsername az login --service-principal --username '$appId' --password=$spSecret --tenant $tenantId
 # #sudo -u $adminUsername az login --identity --username $vmUserAssignedIdentityPrincipalID
