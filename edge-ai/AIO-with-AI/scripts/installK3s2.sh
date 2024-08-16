@@ -160,8 +160,8 @@ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 # #############################
 # #Install Helm Arc Way
 # #############################
-# echo "Installing Helm"
-# sudo snap install helm --classic
+echo "Installing Helm"
+sudo snap install helm --classic
 
 # #############################
 # #Install Helm
