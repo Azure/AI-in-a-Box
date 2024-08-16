@@ -104,58 +104,58 @@ chmod +x vars.sh
 . ./vars.sh
 
 
-# logpath=/var/log/deploymentscriptlog
-# export K3S_VERSION="1.28.5+k3s1" # Do not change!
+logpath=/var/log/deploymentscriptlog
+export K3S_VERSION="1.28.5+k3s1" # Do not change!
 
-# # Syncing this script log to 'jumpstart_logs' directory for ease of troubleshooting
-# sudo -u $adminUsername mkdir -p /home/${adminUsername}/jumpstart_logs
-# while sleep 1; do sudo -s rsync -a /var/lib/waagent/custom-script/download/0/installK3s.log /home/${adminUsername}/jumpstart_logs/installK3s.log; done &
+# Syncing this script log to 'jumpstart_logs' directory for ease of troubleshooting
+sudo -u $adminUsername mkdir -p /home/${adminUsername}/jumpstart_logs
+while sleep 1; do sudo -s rsync -a /var/lib/waagent/custom-script/download/0/installK3s.log /home/${adminUsername}/jumpstart_logs/installK3s.log; done &
 
-# #1 install arc our way
-# #2 install arc our way with custom arc installation from arc jumpstart NSTALL_K3S_EXEC="server --disable traefik --node-external-ip ${publicIp}"
-# #3 install arc our way with custom arc installation and also with specific version
-# #4 install helm their way
-# #5 install helm our way
-# #############################
-# #Install K3s Arch Jumpstart Mothod
-# # Installing Rancher K3s cluster (single control plane)
-# #############################
-# echo "Installing Rancher K3s cluster"
-# publicIp=$(hostname -i)
+#1 install arc our way
+#2 install arc our way with custom arc installation from arc jumpstart NSTALL_K3S_EXEC="server --disable traefik --node-external-ip ${publicIp}"
+#3 install arc our way with custom arc installation and also with specific version
+#4 install helm their way
+#5 install helm our way
+#############################
+#Install K3s Arch Jumpstart Mothod
+# Installing Rancher K3s cluster (single control plane)
+#############################
+echo "Installing Rancher K3s cluster"
+publicIp=$(hostname -i)
 
-# # sudo mkdir ~/.kube
-# # sudo -u $adminUsername mkdir /home/${adminUsername}/.kube
-# # curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --node-external-ip ${publicIp}" INSTALL_K3S_VERSION=v${K3S_VERSION} sh -
-# # sudo chmod 644 /etc/rancher/k3s/k3s.yaml
-# # sudo kubectl config rename-context default arck3sdemo --kubeconfig /etc/rancher/k3s/k3s.yaml
-# # sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
-# # sudo cp /etc/rancher/k3s/k3s.yaml /home/${adminUsername}/.kube/config
-# # sudo cp /etc/rancher/k3s/k3s.yaml /home/${adminUsername}/.kube/config.staging
-# # sudo chown -R $adminUsername /home/${adminUsername}/.kube/
-# # sudo chown -R staginguser /home/${adminUsername}/.kube/config.staging
+# sudo mkdir ~/.kube
+# sudo -u $adminUsername mkdir /home/${adminUsername}/.kube
+# curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --node-external-ip ${publicIp}" INSTALL_K3S_VERSION=v${K3S_VERSION} sh -
+# sudo chmod 644 /etc/rancher/k3s/k3s.yaml
+# sudo kubectl config rename-context default arck3sdemo --kubeconfig /etc/rancher/k3s/k3s.yaml
+# sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+# sudo cp /etc/rancher/k3s/k3s.yaml /home/${adminUsername}/.kube/config
+# sudo cp /etc/rancher/k3s/k3s.yaml /home/${adminUsername}/.kube/config.staging
+# sudo chown -R $adminUsername /home/${adminUsername}/.kube/
+# sudo chown -R staginguser /home/${adminUsername}/.kube/config.staging
 
-# #############################
-# # Install Rancher K3s cluster
-# #############################
-# echo "Installing Rancher K3s cluster"
-# curl -sfL https://get.k3s.io | sh -
+#############################
+# Install Rancher K3s cluster
+#############################
+echo "Installing Rancher K3s cluster"
+curl -sfL https://get.k3s.io | sh -
 
-# mkdir -p /home/$adminUsername/.kube
-# echo "
-# export KUBECONFIG=~/.kube/config
-# source <(kubectl completion bash)
-# alias k=kubectl
-# complete -o default -F __start_kubectl k
-# " >> /home/$adminUsername/.bashrc
+mkdir -p /home/$adminUsername/.kube
+echo "
+export KUBECONFIG=~/.kube/config
+source <(kubectl completion bash)
+alias k=kubectl
+complete -o default -F __start_kubectl k
+" >> /home/$adminUsername/.bashrc
 
-# USERKUBECONFIG=/home/$adminUsername/.kube/config
-# sudo k3s kubectl config view --raw > "$USERKUBECONFIG"
-# chmod 600 "$USERKUBECONFIG"
-# chown $adminUsername:$adminUsername "$USERKUBECONFIG"
+USERKUBECONFIG=/home/$adminUsername/.kube/config
+sudo k3s kubectl config view --raw > "$USERKUBECONFIG"
+chmod 600 "$USERKUBECONFIG"
+chown $adminUsername:$adminUsername "$USERKUBECONFIG"
 
-# # Set KUBECONFIG for root - Current session
-# KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-# export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+# Set KUBECONFIG for root - Current session
+KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 # #############################
 # #Install Helm Arc Way
