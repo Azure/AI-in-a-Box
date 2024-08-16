@@ -24,6 +24,11 @@ spObjectId=${13}
 virtualMachineName=${14}
 templateBaseUrl=${15}
 
+
+#############################
+# Script Definition
+#############################
+
 # Determine the Fileshare name in Azure Storage Account
 echo "";
 echo "Paramaters:";
@@ -73,9 +78,12 @@ export K3S_VERSION="1.28.5+k3s1" # Do not change!
 sudo -u $adminUsername mkdir -p /home/${adminUsername}/jumpstart_logs
 while sleep 1; do sudo -s rsync -a /var/lib/waagent/custom-script/download/0/installK3s.log /home/${adminUsername}/jumpstart_logs/installK3s.log; done &
 
+#############################
 # Installing Rancher K3s cluster (single control plane)
-echo ""
+#############################
+echo "Installing Rancher K3s cluster"
 publicIp=$(hostname -i)
+
 # sudo mkdir ~/.kube
 # sudo -u $adminUsername mkdir /home/${adminUsername}/.kube
 # curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --node-external-ip ${publicIp}" INSTALL_K3S_VERSION=v${K3S_VERSION} sh -
@@ -88,16 +96,12 @@ publicIp=$(hostname -i)
 # sudo chown -R staginguser /home/${adminUsername}/.kube/config.staging
 
 #############################
-#Install K3s
+#Install Rancher K3s cluster
 #############################
-echo "#############################"
-echo "Installing K3s CLI"
-echo "#############################"
+echo "Installing Rancher K3s cluster"
 curl -sfL https://get.k3s.io | sh -
-# curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --node-external-ip ${publicIp}" INSTALL_K3S_VERSION=v${K3S_VERSION} sh -
 
 mkdir -p /home/$adminUsername/.kube
-echo "
 export KUBECONFIG=~/.kube/config
 source <(kubectl completion bash)
 alias k=kubectl
@@ -113,14 +117,23 @@ chown $adminUsername:$adminUsername "$USERKUBECONFIG"
 KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
+#############################
 # Installing Helm 3
-echo ""
+#############################
+echo "Installing Helm"
 sudo snap install helm --classic
 
-# Installing Azure CLI & Azure Arc Extensions
-echo ""
+#############################
+#Install Azure CLI
+#############################
+echo "Installing Azure CLI"
 sudo apt-get update
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+#############################
+#Azure Arc Extensions
+#############################
+echo "Connecting K3s cluster to Arc for K8s"
 
 sudo -u $adminUsername az config set extension.use_dynamic_install=yes_without_prompt
 sudo -u $adminUsername az extension add --name "connectedk8s" --yes
@@ -128,16 +141,17 @@ sudo -u $adminUsername az extension add --name "k8s-configuration" --yes
 sudo -u $adminUsername az extension add --name "k8s-extension" --yes
 sudo -u $adminUsername az extension add --name "customlocation" --yes
 
-# sudo -u $adminUsername az login --service-principal --username $appId --password=$spSecret --tenant $tenantId
+#sudo -u $adminUsername az login --service-principal --username $appId --password=$spSecret --tenant $tenantId
 #sudo -u $adminUsername az login --identity --username $vmUserAssignedIdentityPrincipalID
 
 # Onboard the cluster to Azure Arc and enabling Container Insights using Kubernetes extension
 #echo ""
 # rg=$(sudo -u $adminUsername az resource list --query "[?name=='$virtualMachineName']".[resourceGroup] --resource-type "Microsoft.Compute/virtualMachines" -o tsv)
-#sudo -u $adminUsername az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /home/${adminUsername}/.kube/config --tags 'Project=jumpstart_azure_arc_k8s' --correlation-id "d009f5dd-dba8-4ac7-bac9-b54ef3a6671a"
+# Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
+# sudo -u $adminUsername az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /home/${adminUsername}/.kube/config --tags 'Project=jumpstart_azure_arc_k8s' --correlation-id "d009f5dd-dba8-4ac7-bac9-b54ef3a6671a"
 # sudo -u $adminUsername az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
 #az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
 
-#sudo -u $adminUsername az k8s-extension create -n "azuremonitor-containers" --cluster-name $arcK8sClusterName --resource-group $resourceGroup --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
+#sudo -u $adminUsername az k8s-extension create --resource-group $resourceGroup -n "azuremonitor-containers" --cluster-name $arcK8sClusterName  --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
 #sudo -u $adminUsernmae az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
 #sudo -u $adminUsernmae az k8s-extension create -g $rg -c $arcK8sClusterName -n azureml --cluster-type connectedClusters --extension-type Microsoft.AzureML.Kubernetes --scope cluster --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose 

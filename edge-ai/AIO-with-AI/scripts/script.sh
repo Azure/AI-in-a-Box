@@ -51,15 +51,12 @@ spObjectId=${13}
 logpath=/var/log/deploymentscriptlog
 
 #############################
-#Install K3s
+#Install Rancher K3s cluster
 #############################
-echo "#############################"
-echo "Installing K3s CLI"
-echo "#############################"
+echo "Installing Rancher K3s cluster"
 curl -sfL https://get.k3s.io | sh -
 
 mkdir -p /home/$adminUsername/.kube
-echo "
 export KUBECONFIG=~/.kube/config
 source <(kubectl completion bash)
 alias k=kubectl
@@ -75,15 +72,10 @@ chown $adminUsername:$adminUsername "$USERKUBECONFIG"
 KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
-# Sleep for 60 seconds to allow the cluster to be fully connected
-#sleep 60
-
 #############################
 #Install Helm
 #############################
-echo "#############################"
 echo "Installing Helm"
-echo "#############################"
 curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
 sudo apt-get install apt-transport-https --yes
 echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
@@ -91,26 +83,16 @@ sudo apt-get update -y
 sudo apt-get install helm -y
 echo "source <(helm completion bash)" >> /home/$adminUsername/.bashrc
 
-# Sleep for 60 seconds to allow the cluster to be fully connected
-#sleep 60
-
 #############################
 #Install Azure CLI
 #############################
-echo "#############################"
 echo "Installing Azure CLI"
-echo "#############################"
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Sleep for 60 seconds to allow the cluster to be fully connected
-#sleep 60
-
 #############################
-#Arc for Kubernetes setup
+#Azure Arc Extensions
 #############################
-echo "#############################"
 echo "Connecting K3s cluster to Arc for K8s"
-echo "#############################"
 #We might need to login with a user that has more permissions than the Azure VM UserAssignedIdentity
 az login --identity --username $vmUserAssignedIdentityPrincipalID
 #az login --service-principal -u ${10} -p ${11} --tenant ${12}
@@ -122,15 +104,10 @@ az extension add --name connectedk8s --yes
 # Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
 az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
 
-# Sleep for 60 seconds to allow the cluster to be fully connected
-#sleep 60
-
 #############################
 #Arc for Kubernetes GitOps
 #############################
-echo "#############################"
 echo "Configuring Arc for Kubernetes GitOps"
-echo "#############################"
 az extension add -n k8s-configuration --yes
 az extension add -n k8s-extension --yes
 
