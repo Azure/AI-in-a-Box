@@ -157,15 +157,15 @@ chown $adminUsername:$adminUsername "$USERKUBECONFIG"
 KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
-# #############################
-# #Install Helm Arc Way
-# #############################
+#############################
+#Install Helm Arc Way
+#############################
 echo "Installing Helm"
 sudo snap install helm --classic
 
-# #############################
-# #Install Helm
-# #############################
+#############################
+#Install Helm
+#############################
 # #echo "Installing Helm"
 # #curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
 # #sudo apt-get install apt-transport-https --yes
@@ -174,17 +174,17 @@ sudo snap install helm --classic
 # #sudo apt-get install helm -y
 # #echo "source <(helm completion bash)" >> /home/$adminUsername/.bashrc
 
-# #############################
-# #Install Azure CLI
-# #############################
-# echo "Installing Azure CLI"
-# sudo apt-get update
-# curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+#############################
+#Install Azure CLI
+#############################
+echo "Installing Azure CLI"
+sudo apt-get update
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# #############################
-# #Azure Arc Extensions
-# #############################
-# echo "Connecting K3s cluster to Arc for K8s"
+#############################
+#Azure Arc Extensions
+#############################
+echo "Connecting K3s cluster to Arc for K8s"
 
 # sudo -u $adminUsername az config set extension.use_dynamic_install=yes_without_prompt
 # sudo -u $adminUsername az extension add --name "connectedk8s" --yes

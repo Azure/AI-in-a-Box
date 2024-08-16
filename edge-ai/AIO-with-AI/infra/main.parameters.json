@@ -6,7 +6,7 @@
       "value": "${AZURE_ENV_NAME}"
     },
     "resourceGroupName": {
-      "value": "aibx-aioedgeai-rg"
+      "value": "aiobx-aioedgeai-rg"
     },
     "virtualMachineSize": {
       "value": "${AZURE_ENV_VIRTUALMACHINESIZE}"
