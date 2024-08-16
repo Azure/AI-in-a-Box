@@ -135,12 +135,13 @@ publicIp=$(hostname -i)
 # sudo chown -R staginguser /home/${adminUsername}/.kube/config.staging
 
 #############################
-#Install Rancher K3s cluster
+# Install Rancher K3s cluster
 #############################
 echo "Installing Rancher K3s cluster"
 curl -sfL https://get.k3s.io | sh -
 
 mkdir -p /home/$adminUsername/.kube
+echo "
 export KUBECONFIG=~/.kube/config
 source <(kubectl completion bash)
 alias k=kubectl
