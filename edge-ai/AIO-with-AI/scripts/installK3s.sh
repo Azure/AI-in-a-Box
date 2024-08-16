@@ -69,16 +69,16 @@ sed -i '9s/^/export templateBaseUrl=/' vars.sh
 chmod +x vars.sh
 . ./vars.sh
 
-export K3S_VERSION="1.28.5+k3s1" # Do not change!
 
-# Creating login message of the day (motd)
-# sudo curl -v -o /etc/profile.d/welcomeK3s.sh ${templateBaseUrl}scripts/welcomeK3s.sh
+logpath=/var/log/deploymentscriptlog
+export K3S_VERSION="1.28.5+k3s1" # Do not change!
 
 # Syncing this script log to 'jumpstart_logs' directory for ease of troubleshooting
 sudo -u $adminUsername mkdir -p /home/${adminUsername}/jumpstart_logs
 while sleep 1; do sudo -s rsync -a /var/lib/waagent/custom-script/download/0/installK3s.log /home/${adminUsername}/jumpstart_logs/installK3s.log; done &
 
 #############################
+#Install K3s Arch Jumpstart Mothod
 # Installing Rancher K3s cluster (single control plane)
 #############################
 echo "Installing Rancher K3s cluster"
@@ -119,7 +119,7 @@ KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 #############################
-# Installing Helm 3
+#Install Helm Arc Way
 #############################
 echo "Installing Helm"
 sudo snap install helm --classic
@@ -136,11 +136,12 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 #############################
 echo "Connecting K3s cluster to Arc for K8s"
 
-sudo -u $adminUsername az config set extension.use_dynamic_install=yes_without_prompt
-sudo -u $adminUsername az extension add --name "connectedk8s" --yes
-sudo -u $adminUsername az extension add --name "k8s-configuration" --yes
-sudo -u $adminUsername az extension add --name "k8s-extension" --yes
-sudo -u $adminUsername az extension add --name "customlocation" --yes
+# sudo -u $adminUsername az config set extension.use_dynamic_install=yes_without_prompt
+# sudo -u $adminUsername az extension add --name "connectedk8s" --yes
+# sudo -u $adminUsername az extension add --name "k8s-configuration" --yes
+# sudo -u $adminUsername az extension add --name "k8s-extension" --yes
+# sudo -u $adminUsername az extension add --name "customlocation" --yes
+# sudo -u $adminUsername az extension add --name azure-iot-ops --allow-preview true --upgrade --yes
 
 #sudo -u $adminUsername az login --service-principal --username $appId --password=$spSecret --tenant $tenantId
 #sudo -u $adminUsername az login --identity --username $vmUserAssignedIdentityPrincipalID
