@@ -187,7 +187,7 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 echo "Connecting K3s cluster to Arc for K8s"
 
 sudo -u $adminUsername az config set extension.use_dynamic_install=yes_without_prompt
-sudo -u $adminUsername az extension add --name "connectedk8s" --yes
+# sudo -u $adminUsername az extension add --name "connectedk8s" --yes
 # sudo -u $adminUsername az extension add --name "k8s-configuration" --yes
 # sudo -u $adminUsername az extension add --name "k8s-extension" --yes
 # sudo -u $adminUsername az extension add --name "customlocation" --yes
