@@ -143,7 +143,9 @@ az extension add --name "connectedk8s" --yes
 # sudo -u $adminUsername az extension add --name "k8s-configuration" --yes
 az extension add --name "k8s-configuration" --yes
 # sudo -u $adminUsername az extension add --name "k8s-extension" --yes
+az extension add --name "k8s-extension" --yes
 # sudo -u $adminUsername az extension add --name "customlocation" --yes
+az extension add --name "customlocation" --yes
 # sudo -u $adminUsername az extension add --name azure-iot-ops --allow-preview true --upgrade --yes
 
 #sudo -u $adminUsername az login --service-principal --username $appId --password=$spSecret --tenant $tenantId
