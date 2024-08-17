@@ -68,6 +68,7 @@ echo "   spObjectId: $spObjectId"
 echo "   virtualMachineName: $virtualMachineName"
 echo "   templateBaseUrl: $templateBaseUrl"
 
+# Injecting environment variables
 logpath=/var/log/deploymentscriptlog
 
 #############################
@@ -94,15 +95,26 @@ KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 #############################
-#Install Helm
+#Install Helm Arc Way
 #############################
 echo "Installing Helm"
-curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
-sudo apt-get install apt-transport-https --yes
-echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-sudo apt-get update -y
-sudo apt-get install helm -y
-echo "source <(helm completion bash)" >> /home/$adminUsername/.bashrc
+sudo snap install helm --classic
+#Updates the package lists on the system to include the packages available from the newly added Helm repository. This is from victors but not need
+sudo apt-get update -y 
+
+#############################
+#Install Helm
+#############################
+# echo "Installing Helm"
+# curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+# sudo apt-get install apt-transport-https --yes
+# echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+# sudo apt-get update -y
+# sudo apt-get install helm -y
+# echo "source <(helm completion bash)" >> /home/$adminUsername/.bashrc
+
+
+
 
 # #############################
 # #Install Azure CLI
