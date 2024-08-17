@@ -44,6 +44,8 @@ spAppId=${10}
 spSecret=${11}
 tenantId=${12}
 spObjectId=${13}
+virtualMachineName=${14}
+templateBaseUrl=${15}
 
 #############################
 # Script Definition
@@ -108,24 +110,24 @@ az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --locatio
 #############################
 #Arc for Kubernetes GitOps
 #############################
-echo "Configuring Arc for Kubernetes GitOps"
-az extension add -n k8s-configuration --yes
-az extension add -n k8s-extension --yes
+# echo "Configuring Arc for Kubernetes GitOps"
+# az extension add -n k8s-configuration --yes
+# az extension add -n k8s-extension --yes
 
-sudo apt-get update -y
-sudo apt-get upgrade -y
+# sudo apt-get update -y
+# sudo apt-get upgrade -y
 
-# Sleep for 60 seconds to allow the cluster to be fully connected
-sleep 60
+# # Sleep for 60 seconds to allow the cluster to be fully connected
+# sleep 60
 
-# Deploy Extension
-# Need to be updated for Ai-In-A-Box Iot Operations Repo
-az k8s-extension create \
-    -g $rg \
-    -c $arcK8sClusterName \
-    -n gitops \
-    --cluster-type connectedClusters \
-    --extension-type=microsoft.flux
+# # Deploy Extension
+# # Need to be updated for Ai-In-A-Box Iot Operations Repo
+# az k8s-extension create \
+#     -g $rg \
+#     -c $arcK8sClusterName \
+#     -n gitops \
+#     --cluster-type connectedClusters \
+#     --extension-type=microsoft.flux
 
 #############################
 #Arc for Kubernetes AML Extension
@@ -151,23 +153,21 @@ az k8s-extension create \
 #############################
 # Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
 # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
-echo "#############################"
 echo "Deploy IoT Operations CCCCComponents"
-echo "#############################"
 az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
-echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
-echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
+# echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
+# echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+# echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 
-sudo sysctl -p
+# sudo sysctl -p
 ##############################
 # OBJECT_ID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
 # echo "OBJECT_ID: $OBJECT_ID"
 
 #Use the az connectedk8s enable-features command to enable custom location support on your cluster.
 #This command uses the objectId of the Microsoft Entra ID application that the Azure Arc service uses.
-az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-oid $customLocationRPSPID --features cluster-connect custom-locations
+#az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-oid $customLocationRPSPID --features cluster-connect custom-locations
 
 #--simulate-plc -> Flag when set, will configure the OPC-UA broker installer to spin-up a PLC server.
 #--include-dp -> Flag when set, Include Data Processor in the IoT Operations deployment. https://learn.microsoft.com/en-us/azure/iot-operations/process-data/overview-data-processor ->By default, Data Processor isn't included in an Azure IoT Operations Preview deployment. If you plan to use Data Processor, you must include it when you deploy Azure IoT Operations Preview - you can't add it later. 
@@ -177,9 +177,9 @@ az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-
 
 #Deploy Azure Monitor Container Insights Extension
 #Azure Monitor Container Insights provides visibility into the performance of workloads deployed on the Kubernetes cluster.
-az k8s-extension create \
-    -g $rg \
-    -c $arcK8sClusterName \
-    -n azuremonitor-containers \
-    --cluster-type connectedClusters \
-    --extension-type Microsoft.AzureMonitor.Containers
+# az k8s-extension create \
+#     -g $rg \
+#     -c $arcK8sClusterName \
+#     -n azuremonitor-containers \
+#     --cluster-type connectedClusters \
+#     --extension-type Microsoft.AzureMonitor.Containers
