@@ -113,18 +113,15 @@ sudo apt-get update -y
 # sudo apt-get install helm -y
 # echo "source <(helm completion bash)" >> /home/$adminUsername/.bashrc
 
-
-
-
-# #############################
-# #Install Azure CLI
-# #############################
+#############################
+#Install Azure CLI
+#############################
 echo "Installing Azure CLI"
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# #############################
-# #Azure Arc Extensions
-# #############################
+#############################
+#Azure Arc Extensions
+#############################
 echo "Connecting K3s cluster to Arc for K8s"
 # #We might need to login with a user that has more permissions than the Azure VM UserAssignedIdentity
 az login --identity --username $vmUserAssignedIdentityPrincipalID
