@@ -134,6 +134,11 @@ az extension add --name connectedk8s --yes
 # Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
 az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
 
+az extension add --name "k8s-configuration" --yes
+az extension add --name "k8s-extension" --yes
+az extension add --name "customlocation" --yes
+az extension add --name azure-iot-ops --allow-preview true --upgrade --yes
+
 #############################
 #Arc for Kubernetes GitOps
 #############################
@@ -143,9 +148,6 @@ az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --locatio
 
 # sudo apt-get update -y
 # sudo apt-get upgrade -y
-
-# # Sleep for 60 seconds to allow the cluster to be fully connected
-# sleep 60
 
 # # Deploy Extension
 # # Need to be updated for Ai-In-A-Box Iot Operations Repo
