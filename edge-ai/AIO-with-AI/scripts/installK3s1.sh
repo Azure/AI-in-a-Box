@@ -67,6 +67,7 @@ echo "   tenantId: $tenantId"
 echo "   spObjectId: $spObjectId"
 echo "   virtualMachineName: $virtualMachineName"
 echo "   templateBaseUrl: $templateBaseUrl"
+
 logpath=/var/log/deploymentscriptlog
 
 #############################
