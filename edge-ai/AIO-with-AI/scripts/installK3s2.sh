@@ -162,6 +162,8 @@ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 #############################
 echo "Installing Helm"
 sudo snap install helm --classic
+#Updates the package lists on the system to include the packages available from the newly added Helm repository. This is from victors but not need
+sudo apt-get update -y 
 
 #############################
 #Install Helm
@@ -210,7 +212,7 @@ echo ""
 # sudo -u $adminUsername az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /home/${adminUsername}/.kube/config --correlation-id "d009f5dd-dba8-4ac7-bac9-b54ef3a6671a"
 # sudo -u $adminUsername az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
 #az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /home/${adminUsername}/.kube/config --correlation-id "d009f5dd-dba8-4ac7-bac9-b54ef3a6671a"
-#az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
+az connectedk8s connect --resource-group aiobx-aioedgeai-rg --name aiobxcluster1 --location eastus --kube-config /etc/rancher/k3s/k3s.yaml
 
 #sudo -u $adminUsername az k8s-extension create --resource-group $resourceGroup -n "azuremonitor-containers" --cluster-name $arcK8sClusterName  --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
 #az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
