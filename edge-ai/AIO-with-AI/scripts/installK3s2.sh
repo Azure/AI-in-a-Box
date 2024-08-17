@@ -63,7 +63,6 @@ templateBaseUrl=${15}
 # Script Definition
 #############################
 
-# Determine the Fileshare name in Azure Storage Account
 echo "";
 echo "Paramaters:";
 echo "   Resource Group Name: $rg";

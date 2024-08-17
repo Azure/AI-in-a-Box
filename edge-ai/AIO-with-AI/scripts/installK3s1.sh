@@ -47,65 +47,82 @@ spObjectId=${13}
 virtualMachineName=${14}
 templateBaseUrl=${15}
 
+
 #############################
 # Script Definition
 #############################
+
+echo "";
+echo "Paramaters:";
+echo "   Resource Group Name: $rg";
+echo "   Location: $amlworkspaceName"
+echo "   vmUserAssignedIdentityPrincipalID: $vmUserAssignedIdentityPrincipalID"
+echo "   customLocationRPSPID: $customLocationRPSPID"
+echo "   keyVaultId: $keyVaultId"
+echo "   keyVaultName: $keyVaultName"
+echo "   subscriptionId: $subscriptionId"
+echo "   spAppId: $spAppId"
+echo "   spSecret: $spSecret"
+echo "   tenantId: $tenantId"
+echo "   spObjectId: $spObjectId"
+echo "   virtualMachineName: $virtualMachineName"
+echo "   templateBaseUrl: $templateBaseUrl"
 logpath=/var/log/deploymentscriptlog
 
 #############################
 # Install Rancher K3s cluster
 #############################
 echo "Installing Rancher K3s cluster"
-# curl -sfL https://get.k3s.io | sh -
+curl -sfL https://get.k3s.io | sh -
 
-# mkdir -p /home/$adminUsername/.kube
-# echo "
-# export KUBECONFIG=~/.kube/config
-# source <(kubectl completion bash)
-# alias k=kubectl
-# complete -o default -F __start_kubectl k
-# " >> /home/$adminUsername/.bashrc
+mkdir -p /home/$adminUsername/.kube
+echo "
+export KUBECONFIG=~/.kube/config
+source <(kubectl completion bash)
+alias k=kubectl
+complete -o default -F __start_kubectl k
+" >> /home/$adminUsername/.bashrc
 
-# USERKUBECONFIG=/home/$adminUsername/.kube/config
-# sudo k3s kubectl config view --raw > "$USERKUBECONFIG"
-# chmod 600 "$USERKUBECONFIG"
-# chown $adminUsername:$adminUsername "$USERKUBECONFIG"
+USERKUBECONFIG=/home/$adminUsername/.kube/config
+sudo k3s kubectl config view --raw > "$USERKUBECONFIG"
+chmod 600 "$USERKUBECONFIG"
+chown $adminUsername:$adminUsername "$USERKUBECONFIG"
 
-# # Set KUBECONFIG for root - Current session
-# KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-# export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+# Set KUBECONFIG for root - Current session
+KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 #############################
 #Install Helm
 #############################
-# echo "Installing Helm"
-# curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
-# sudo apt-get install apt-transport-https --yes
-# echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-# sudo apt-get update -y
-# sudo apt-get install helm -y
-# echo "source <(helm completion bash)" >> /home/$adminUsername/.bashrc
+echo "Installing Helm"
+curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+sudo apt-get install apt-transport-https --yes
+echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update -y
+sudo apt-get install helm -y
+echo "source <(helm completion bash)" >> /home/$adminUsername/.bashrc
 
 # #############################
 # #Install Azure CLI
 # #############################
-# echo "Installing Azure CLI"
-# curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+echo "Installing Azure CLI"
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 # #############################
 # #Azure Arc Extensions
 # #############################
-# echo "Connecting K3s cluster to Arc for K8s"
+echo "Connecting K3s cluster to Arc for K8s"
 # #We might need to login with a user that has more permissions than the Azure VM UserAssignedIdentity
-# az login --identity --username $vmUserAssignedIdentityPrincipalID
+az login --identity --username $vmUserAssignedIdentityPrincipalID
 # #az login --service-principal -u ${10} -p ${11} --tenant ${12}
 # #az account set -s $subscriptionId
 
-# az config set extension.use_dynamic_install=yes_without_prompt
-# az extension add --name connectedk8s --yes
+az config set extension.use_dynamic_install=yes_without_prompt
+az extension add --name connectedk8s --yes
 
-# # Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
-# az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
+# Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
+az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
 
 #############################
 #Arc for Kubernetes GitOps
