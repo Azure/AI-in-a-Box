@@ -151,6 +151,7 @@ az extension add --name azure-iot-ops --allow-preview true --upgrade --yes
 
 #sudo -u $adminUsername az login --service-principal --username $appId --password=$spSecret --tenant $tenantId
 #sudo -u $adminUsername az login --identity --username $vmUserAssignedIdentityPrincipalID
+az login --identity --username $vmUserAssignedIdentityPrincipalID
 
 # Onboard the cluster to Azure Arc and enabling Container Insights using Kubernetes extension
 echo ""

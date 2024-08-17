@@ -201,11 +201,13 @@ az extension add --name azure-iot-ops --allow-preview true --upgrade --yes
 
 #sudo -u $adminUsername az login --service-principal --username $appId --password=$spSecret --tenant $tenantId
 #sudo -u $adminUsername az login --identity --username $vmUserAssignedIdentityPrincipalID
+az login --identity --username $vmUserAssignedIdentityPrincipalID
 
 # Onboard the cluster to Azure Arc and enabling Container Insights using Kubernetes extension
 echo ""
 # rg=$(sudo -u $adminUsername az resource list --query "[?name=='$virtualMachineName']".[resourceGroup] --resource-type "Microsoft.Compute/virtualMachines" -o tsv)
 # Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
 # sudo -u $adminUsername az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /home/${adminUsername}/.kube/config --tags 'Project=jumpstart_azure_arc_k8s' --correlation-id "d009f5dd-dba8-4ac7-bac9-b54ef3a6671a"
+#az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /home/${adminUsername}/.kube/config --correlation-id "d009f5dd-dba8-4ac7-bac9-b54ef3a6671a"
 #az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
 #sudo -u $adminUsername az k8s-extension create --resource-group $resourceGroup -n "azuremonitor-containers" --cluster-name $arcK8sClusterName  --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
