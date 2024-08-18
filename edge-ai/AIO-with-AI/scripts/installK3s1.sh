@@ -139,7 +139,7 @@ az extension add --name "k8s-extension" --yes
 az extension add --name "customlocation" --yes
 az extension add --name azure-iot-ops --allow-preview true --upgrade --yes
 
-az k8s-extension create --resource-group $rg --cluster-name $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
+#az k8s-extension create --resource-group $rg --cluster-name $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
 #az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
 
 #############################
