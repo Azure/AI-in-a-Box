@@ -31,6 +31,8 @@
 #  12  ${subscription().tenantId}'
 #  13  ${spObjectId}
 
+sudo apt-get update
+
 rg=$1
 arcK8sClusterName=$2
 location=$3
@@ -117,16 +119,16 @@ sudo apt-get update -y
 #Install Azure CLI
 #############################
 echo "Installing Azure CLI"
+sudo apt-get update -y 
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 #############################
 #Azure Arc Extensions
 #############################
 echo "Connecting K3s cluster to Arc for K8s"
-# #We might need to login with a user that has more permissions than the Azure VM UserAssignedIdentity
 az login --identity --username $vmUserAssignedIdentityPrincipalID
-# #az login --service-principal -u ${10} -p ${11} --tenant ${12}
-# #az account set -s $subscriptionId
+#az login --service-principal -u ${10} -p ${11} --tenant ${12}
+#az account set -s $subscriptionId
 
 az config set extension.use_dynamic_install=yes_without_prompt
 az extension add --name connectedk8s --yes
@@ -134,10 +136,10 @@ az extension add --name connectedk8s --yes
 # Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
 az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
 
-az extension add --name "k8s-configuration" --yes
-az extension add --name "k8s-extension" --yes
-az extension add --name "customlocation" --yes
-az extension add --name azure-iot-ops --allow-preview true --upgrade --yes
+# az extension add --name "k8s-configuration" --yes
+# az extension add --name "k8s-extension" --yes
+# az extension add --name "customlocation" --yes
+# az extension add --name azure-iot-ops --allow-preview true --upgrade --yes
 
 #az k8s-extension create --resource-group $rg --cluster-name $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
 #az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
@@ -145,21 +147,21 @@ az extension add --name azure-iot-ops --allow-preview true --upgrade --yes
 #############################
 #Arc for Kubernetes GitOps
 #############################
-# echo "Configuring Arc for Kubernetes GitOps"
-# az extension add -n k8s-configuration --yes
-# az extension add -n k8s-extension --yes
+echo "Configuring Arc for Kubernetes GitOps"
+az extension add -n k8s-configuration --yes
+az extension add -n k8s-extension --yes
 
-# sudo apt-get update -y
-# sudo apt-get upgrade -y
+sudo apt-get update -y
+sudo apt-get upgrade -y
 
-# # Deploy Extension
-# # Need to be updated for Ai-In-A-Box Iot Operations Repo
-# az k8s-extension create \
-#     -g $rg \
-#     -c $arcK8sClusterName \
-#     -n gitops \
-#     --cluster-type connectedClusters \
-#     --extension-type=microsoft.flux
+# Deploy Extension
+# Need to be updated for Ai-In-A-Box Iot Operations Repo
+az k8s-extension create \
+    -g $rg \
+    -c $arcK8sClusterName \
+    -n gitops \
+    --cluster-type connectedClusters \
+    --extension-type=microsoft.flux
 
 #############################
 #Arc for Kubernetes AML Extension
