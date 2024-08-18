@@ -192,37 +192,30 @@ az k8s-extension create \
 
 az config set extension.use_dynamic_install=yes_without_prompt
 az config set extension.dynamic_install_allow_preview=true
-
 az extension add -n k8s-extension --yes
-
 az extension add --name "customlocation" --yes
 
 
 #Deploy Azure Monitor Container Insights Extension
 #Azure Monitor Container Insights provides visibility into the performance of workloads deployed on the Kubernetes cluster.
-# az k8s-extension create \
-#     -g $rg \
-#     -c $arcK8sClusterName \
-#     -n azuremonitor-containers \
-#     --cluster-type connectedClusters \
-#     --extension-type Microsoft.AzureMonitor.Containers
+az k8s-extension create \
+    -g $rg \
+    -c $arcK8sClusterName \
+    -n azuremonitor-containers \
+    --cluster-type connectedClusters \
+    --extension-type Microsoft.AzureMonitor.Containers
 
-az k8s-extension create --resource-group $rg -n azuremonitor-containers --cluster-name $arcK8sClusterName  --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
-#az k8s-extension create -g aiobx-aioedgeai-rg -c aiobxcluster -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
-
-
-#az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
 
 #az k8s-extension create -g aiobx-aioedgeai-rg -c aiobxcluster -n azureml --cluster-type connectedClusters --extension-type Microsoft.AzureML.Kubernetes --scope cluster --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose
 
-# az k8s-extension create \
-#     -g $rg \
-#     -c $arcK8sClusterName \
-#     -n azureml \
-#     --cluster-type connectedClusters \
-#     --extension-type Microsoft.AzureML.Kubernetes \
-#     --scope cluster \
-#     --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose 
+az k8s-extension create \
+    -g $rg \
+    -c $arcK8sClusterName \
+    -n azureml \
+    --cluster-type connectedClusters \
+    --extension-type Microsoft.AzureML.Kubernetes \
+    --scope cluster \
+    --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose 
 
 
 #############################
