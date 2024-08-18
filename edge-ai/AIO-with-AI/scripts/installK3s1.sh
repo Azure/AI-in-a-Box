@@ -144,8 +144,8 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 #Azure Arc Extensions
 #############################
 echo "Connecting K3s cluster to Arc for K8s"
-az login --identity --username $vmUserAssignedIdentityPrincipalID
-#az login --service-principal -u ${10} -p ${11} --tenant ${12}
+#az login --identity --username $vmUserAssignedIdentityPrincipalID
+az login --service-principal -u ${10} -p ${11} --tenant ${12}
 #az account set -s $subscriptionId
 
 az config set extension.use_dynamic_install=yes_without_prompt
@@ -190,6 +190,11 @@ az k8s-extension create \
 #allowInsecureConnections=True - Allow HTTP communication or not. HTTP communication is not a secure way. If not allowed, HTTPs will be used.
 #InferenceRouterHA=False       - By default, AzureML extension will deploy 3 ingress controller replicas for high availability, which requires at least 3 workers in a cluster. Set this to False if you have less than 3 workers and want to deploy AzureML extension for development and testing only, in this case it will deploy one ingress controller replica only.
 
+az config set extension.use_dynamic_install=yes_without_prompt
+az config set extension.dynamic_install_allow_preview=true
+
+az extension add -n k8s-extension --yes
+
 az extension add --name "customlocation" --yes
 
 # az k8s-extension create \
@@ -202,10 +207,13 @@ az extension add --name "customlocation" --yes
 #     --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose 
 
 
+#sudo -u $adminUsername az k8s-extension create --resource-group $resourceGroup -n "azuremonitor-containers" --cluster-name $arcK8sClusterName  --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
 #az k8s-extension create -g aiobx-aioedgeai-rg -c aiobxcluster -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
+
+
 az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
 
-# az k8s-extension create -g aiobx-aioedgeai-rg -c aiobxcluster -n azureml --cluster-type connectedClusters --extension-type Microsoft.AzureML.Kubernetes --scope cluster --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose
+#az k8s-extension create -g aiobx-aioedgeai-rg -c aiobxcluster -n azureml --cluster-type connectedClusters --extension-type Microsoft.AzureML.Kubernetes --scope cluster --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose
 
 
 
