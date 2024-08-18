@@ -110,11 +110,6 @@ export K3S_VERSION="1.28.5+k3s1" # Do not change!
 sudo -u $adminUsername mkdir -p /home/${adminUsername}/jumpstart_logs
 while sleep 1; do sudo -s rsync -a /var/lib/waagent/custom-script/download/0/installK3s.log /home/${adminUsername}/jumpstart_logs/installK3s.log; done &
 
-#1 install arc our way
-#2 install arc our way with custom arc installation from arc jumpstart NSTALL_K3S_EXEC="server --disable traefik --node-external-ip ${publicIp}"
-#3 install arc our way with custom arc installation and also with specific version
-#4 install helm their way
-#5 install helm our way
 #############################
 #Install K3s Arch Jumpstart Mothod
 # Installing Rancher K3s cluster (single control plane)
@@ -179,7 +174,7 @@ sudo apt-get update -y
 #Install Azure CLI
 #############################
 echo "Installing Azure CLI"
-sudo apt-get update
+sudo apt-get update -y 
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 #############################

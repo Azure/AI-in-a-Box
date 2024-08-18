@@ -144,8 +144,8 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 #Azure Arc Extensions
 #############################
 echo "Connecting K3s cluster to Arc for K8s"
-#az login --identity --username $vmUserAssignedIdentityPrincipalID
-az login --service-principal -u ${10} -p ${11} --tenant ${12}
+az login --identity --username $vmUserAssignedIdentityPrincipalID
+#az login --service-principal -u ${10} -p ${11} --tenant ${12}
 #az account set -s $subscriptionId
 
 az config set extension.use_dynamic_install=yes_without_prompt
@@ -197,6 +197,24 @@ az extension add -n k8s-extension --yes
 
 az extension add --name "customlocation" --yes
 
+
+#Deploy Azure Monitor Container Insights Extension
+#Azure Monitor Container Insights provides visibility into the performance of workloads deployed on the Kubernetes cluster.
+# sudo -u $adminUsername az k8s-extension create \
+#     -g $rg \
+#     -c $arcK8sClusterName \
+#     -n azuremonitor-containers \
+#     --cluster-type connectedClusters \
+#     --extension-type Microsoft.AzureMonitor.Containers
+
+sudo az k8s-extension create --resource-group $resourceGroup -n azuremonitor-containers --cluster-name $arcK8sClusterName  --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
+#az k8s-extension create -g aiobx-aioedgeai-rg -c aiobxcluster -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
+
+
+#az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
+
+#az k8s-extension create -g aiobx-aioedgeai-rg -c aiobxcluster -n azureml --cluster-type connectedClusters --extension-type Microsoft.AzureML.Kubernetes --scope cluster --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose
+
 # az k8s-extension create \
 #     -g $rg \
 #     -c $arcK8sClusterName \
@@ -205,16 +223,6 @@ az extension add --name "customlocation" --yes
 #     --extension-type Microsoft.AzureML.Kubernetes \
 #     --scope cluster \
 #     --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose 
-
-
-#sudo -u $adminUsername az k8s-extension create --resource-group $resourceGroup -n "azuremonitor-containers" --cluster-name $arcK8sClusterName  --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
-#az k8s-extension create -g aiobx-aioedgeai-rg -c aiobxcluster -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
-
-
-az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
-
-#az k8s-extension create -g aiobx-aioedgeai-rg -c aiobxcluster -n azureml --cluster-type connectedClusters --extension-type Microsoft.AzureML.Kubernetes --scope cluster --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose
-
 
 
 #############################
@@ -244,11 +252,3 @@ az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers
 #Deploy Azure IoT Operations. This command takes several minutes to complete:
 #az iot ops init -g $rg --cluster $arcK8sClusterName --kv-id $keyVaultId --sp-app-id  $spAppId --sp-object-id $spObjectId --sp-secret $spSecret --simulate-plc --include-dp
 
-#Deploy Azure Monitor Container Insights Extension
-#Azure Monitor Container Insights provides visibility into the performance of workloads deployed on the Kubernetes cluster.
-# az k8s-extension create \
-#     -g $rg \
-#     -c $arcK8sClusterName \
-#     -n azuremonitor-containers \
-#     --cluster-type connectedClusters \
-#     --extension-type Microsoft.AzureMonitor.Containers
