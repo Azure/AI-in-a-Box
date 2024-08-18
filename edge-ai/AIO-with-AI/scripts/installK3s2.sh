@@ -209,3 +209,28 @@ az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --locatio
 
 #sudo -u $adminUsername az k8s-extension create --resource-group $resourceGroup -n "azuremonitor-containers" --cluster-name $arcK8sClusterName  --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
 #az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
+
+#############################
+#Arc for Kubernetes GitOps
+#############################
+echo "Configuring Arc for Kubernetes GitOps"
+az extension add -n k8s-configuration --yes
+az extension add -n k8s-extension --yes
+
+sudo apt-get update -y
+sudo apt-get upgrade -y
+
+# Deploy Extension
+# Need to be updated for Ai-In-A-Box Iot Operations Repo
+az k8s-extension create \
+    -g $rg \
+    -c $arcK8sClusterName \
+    -n gitops \
+    --cluster-type connectedClusters \
+    --extension-type=microsoft.flux
+
+#############################
+#Arc for Kubernetes AML Extension
+#############################
+#Azure IoT Operations
+#############################
