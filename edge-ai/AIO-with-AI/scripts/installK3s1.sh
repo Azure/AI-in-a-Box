@@ -200,14 +200,14 @@ az extension add --name "customlocation" --yes
 
 #Deploy Azure Monitor Container Insights Extension
 #Azure Monitor Container Insights provides visibility into the performance of workloads deployed on the Kubernetes cluster.
-# sudo -u $adminUsername az k8s-extension create \
+# az k8s-extension create \
 #     -g $rg \
 #     -c $arcK8sClusterName \
 #     -n azuremonitor-containers \
 #     --cluster-type connectedClusters \
 #     --extension-type Microsoft.AzureMonitor.Containers
 
-sudo az k8s-extension create --resource-group $resourceGroup -n azuremonitor-containers --cluster-name $arcK8sClusterName  --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
+az k8s-extension create --resource-group $rg -n azuremonitor-containers --cluster-name $arcK8sClusterName  --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
 #az k8s-extension create -g aiobx-aioedgeai-rg -c aiobxcluster -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
 
 
