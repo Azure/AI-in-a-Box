@@ -75,7 +75,7 @@ logpath=/var/log/deploymentscriptlog
 export K3S_VERSION="1.28.5+k3s1" # Do not change!
 
 #############################
-#Install K3s Arch Jumpstart Mothod
+# Install Rancher K3s Cluster Jumpstart Method
 # Installing Rancher K3s cluster (single control plane)
 #############################
 echo "Installing Rancher K3s cluster"
@@ -93,7 +93,8 @@ publicIp=$(hostname -i)
 # sudo chown -R staginguser /home/${adminUsername}/.kube/config.staging
 
 #############################
-# Install Rancher K3s cluster
+# Install Rancher K3s Cluster AI-In-A-Box Method
+# Installing Rancher K3s cluster (single control plane)
 #############################
 echo "Installing Rancher K3s cluster"
 #curl -sfL https://get.k3s.io | sh -
@@ -117,13 +118,13 @@ KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 #############################
-#Install Helm Arc Way
+#Install Helm - Quick, easy, and cross-distribution installation method with automatic updates and minimal setup
 #############################
 echo "Installing Helm"
 sudo snap install helm --classic
 
 #############################
-#Install Helm
+#Install Helm - If you prefer full system integration, more control over the installation process, and you're working on a Debian-based system where this method is supported
 #############################
 # echo "Installing Helm"
 # curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
@@ -141,7 +142,7 @@ sudo apt-get update -y
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 #############################
-#Azure Arc Extensions
+#Azure Arc - Onboard the Cluster to Azure Arc
 #############################
 echo "Connecting K3s cluster to Arc for K8s"
 az login --identity --username $vmUserAssignedIdentityPrincipalID
@@ -156,13 +157,8 @@ az extension add --name connectedk8s --yes
 # Use the az connectedk8s connect command to Arc-enable your Kubernetes cluster and manage it as part of your Azure resource group
 az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --location $location --kube-config /etc/rancher/k3s/k3s.yaml
 
-# az extension add --name azure-iot-ops --allow-preview true --upgrade --yes
-
-#az k8s-extension create --resource-group $rg --cluster-name $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
-#az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
-
 #############################
-#Arc for Kubernetes GitOps
+#Arc for Kubernetes GitOps Extension
 #############################
 echo "Configuring Arc for Kubernetes GitOps"
 az extension add -n k8s-configuration --yes
@@ -172,7 +168,6 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 
 # Deploy Extension
-# Need to be updated for Ai-In-A-Box Iot Operations Repo
 az k8s-extension create \
     -g $rg \
     -c $arcK8sClusterName \
@@ -181,7 +176,7 @@ az k8s-extension create \
     --extension-type=microsoft.flux
 
 #############################
-#Arc for Kubernetes AML Extension
+#Arc for Kubernetes Azure Monitor Container Insights Extension
 #############################
 #https://learn.microsoft.com/en-us/azure/machine-learning/how-to-deploy-kubernetes-extension
 #allowInsecureConnections=True - Allow HTTP communication or not. HTTP communication is not a secure way. If not allowed, HTTPs will be used.
@@ -207,6 +202,12 @@ az extension add --name "customlocation" --yes
 az k8s-extension create --resource-group $rg -n azuremonitor-containers --cluster-name $arcK8sClusterName  --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers --allow-preview true
 #az k8s-extension create -g aiobx-aioedgeai-rg -c aiobxcluster -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
 
+#############################
+#Arc for Kubernetes AML Extension
+#############################
+#https://learn.microsoft.com/en-us/azure/machine-learning/how-to-deploy-kubernetes-extension
+#allowInsecureConnections=True - Allow HTTP communication or not. HTTP communication is not a secure way. If not allowed, HTTPs will be used.
+#InferenceRouterHA=False       - By default, AzureML extension will deploy 3 ingress controller replicas for high availability, which requires at least 3 workers in a cluster. Set this to False if you have less than 3 workers and want to deploy AzureML extension for development and testing only, in this case it will deploy one ingress controller replica only.
 
 #az k8s-extension create -g $rg -c $arcK8sClusterName -n "azuremonitor-containers" --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers 
 
