@@ -27,7 +27,7 @@ As we continue to learn from the market, the contributors will look to equip the
 
 |Topic|Description|
 |---|---|
-|[Responsible AI](./guidance/responsible-ai/) | This provides essential guidance on the responsible use of AI and LLM technologies. | 
+|[Responsible AI](./guidance/responsible-ai/) | This provides essential guidance on the responsible use of AI and LLM technologies. |
 |[Security for Generative AI Applications](./guidance/genai-security/)| This document provides specific security guidance for Generative AI (GenAI) applications. |
 |[Scaling OpenAI Applications](./guidance/scaling/)| This document contains best practices for scaling OpenAI applications within Azure. |
 
@@ -37,7 +37,7 @@ As we continue to learn from the market, the contributors will look to equip the
 |---|---|---|
 |[Azure ML Operationalization in-a-box](./machine-learning/ml-ops-in-a-box)|Boilerplate Data Science project from model development to deployment and monitoring|<li>End-to-end MLOps project template <li>Outer Loop (infrastructure setup) <br /><li>Inner Loop (model creation and deployment lifecycle)|
 |[Edge AI in-a-box](./edge-ai/)|Edge AI from model creation to deployment on Edge Device(s) |<li>Create a model and deploy to Edge Device.<li>Outer Loop Infrastructure Setup (IoT Hub, IoT Edge, Edge VM, Container Registry, Azure ML) <br /><li>Inner Loop (model creation and deployment)|
-|[Doc Intelligence in-a-box](./ai-services/doc-intelligence-in-a-box) | This accelerator enables companies to automate PDF form processing, modernize operations, save time, and cut costs as part of their digital transformation journey. |<li>Receive PDF Forms<br /><li>Function App and Logic App for Orchestration<br /><li>Document Intelligence Model creation for form processing and content extraction <br /><li> Saves PDF data in Azure Cosmos DB |
+|[Doc Intelligence in-a-box](https://github.com/Azure-Samples/doc-intelligence-in-a-box) | This accelerator enables companies to automate PDF form processing, modernize operations, save time, and cut costs as part of their digital transformation journey.|<li>Receive PDF Forms<br /><li>Function App and Logic App for Orchestration<br /><li>Document Intelligence Model creation for form processing and content extraction <br /><li> Saves PDF data in Azure Cosmos DB |
 |[Image and Video Analysis in-a-box](https://github.com/Azure-Samples/gpt-video-analysis-in-a-box) | Extracts information from images and videos with Azure AI Vision and sends the results along with the prompt and system message to Azure GPT-4 Turbo with Vision. |<li>Orchestration through Azure Data Factory<br /><li>Low code solution, easily extensible for your own use cases through ADF parameters<br /><li> Reuse same solution and deployed resources for many different scenarios<br /><li> Saves GPT4-V results to Azure CosmosDB|
 |[Cognitive Services Landing Zone in-a-box](./ai-services/ai-landing-zone)|Minimal enterprise-ready networking and AI Services setup to support most Cognitive Services scenarios in a secure environment|<li>Hub-and-Spoke Vnet setup and peering <br /><li>Cognitive Service deployment <br /><li>Private Endpoint setup <br /><li>Private DNS integration with PaaS DNS resolver|
 |[Semantic Kernel Bot in-a-box](https://github.com/Azure-samples/semantic-kernel-bot-in-a-box)|Extendable solution accelerator for advanced Azure OpenAI Bots|<li>Deploy Azure OpenAI bot to multiple channels (Web, Teams, Slack, etc) <br /><li>Built-in Retrieval-Augmented Generation (RAG) support <br /><li>Implement custom AI Plugins|

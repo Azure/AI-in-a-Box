@@ -8,4 +8,4 @@ And with Azure Speech Services, we will convert your speech into text and synthe
 
 ## MOVED
 
-We have moved the solution to a new repository. Please visit the new repository [https://github.com/Azure-Samples/nlp-sql-in-a-box)](https://github.com/Azure-Samples/nlp-sql-in-a-box)
+We have moved the solution to a new repository. Please visit the new repository [https://github.com/Azure-Samples/nlp-sql-in-a-box](https://github.com/Azure-Samples/nlp-sql-in-a-box).
