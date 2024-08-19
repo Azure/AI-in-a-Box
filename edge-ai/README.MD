@@ -37,14 +37,14 @@ You can train a custom model using either the [Custom Vision](https://learn.micr
 
 |Areas|Custom Vision service|Image Analysis 4.0 service|
 |---|---|---|
-|Tasks | Image classification<br>Object detection | Image classification <br> Object detection|
+|Tasks | Image classification<br />Object detection | Image classification <br /> Object detection|
 |Base model | CNN |	Transformer model |
 |Labeling |	[CustomVision.ai](https://www.customvision.ai/) | [AML Studio](https://ml.azure.com/) |
 |Web Portal | [CustomVision.ai](https://www.customvision.ai/) | [Vision Studio](http://aka.ms/VisionStudio) |
 |Libraries | REST, SDK | REST, Python Sample |
 |Minimum training data needed |	15 images per category |2-5 images per category |
 |Training data storage | Uploaded to service | Customer’s blob storage account |
-|Model hosting | Cloud and **Edge**	| Cloud hosting only,<br>***Edge container hosting to come***
+|Model hosting | Cloud and **Edge**	| Cloud hosting only,<br />***Edge container hosting to come***
 
 
 ## Additional Resources
