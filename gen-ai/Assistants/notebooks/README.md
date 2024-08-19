@@ -29,7 +29,7 @@ At a high level, a typical integration of the Assistants API has the following f
 |--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Threads | Contains Messages and automatically handles the truncation of content to fit within the context of a model. |
 | Files | Allows importing file content of different file formats. Can be used in tools such as Retrieval scenarios and analysis with Code Interpreter. |
-| Tools | Includes Code Interpreter, Knowledge Retrieval, and Function calling.<br>&nbsp;- Code Interpreter allows executing code snippets.<br>&nbsp;- Knowledge Retrieval automatically chunks and embeds content in files for augmented retrieval scenarios.<br>&nbsp;- Function calling enables calling functions. |
+| Tools | Includes Code Interpreter, Knowledge Retrieval, and Function calling.<br />&nbsp;- Code Interpreter allows executing code snippets.<br />&nbsp;- Knowledge Retrieval automatically chunks and embeds content in files for augmented retrieval scenarios.<br />&nbsp;- Function calling enables calling functions. |
 | Tool composition | Enables using multiple tools in one Assistant. |
 
 ## Foundational concepts
