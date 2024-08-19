@@ -161,9 +161,8 @@ az connectedk8s connect --resource-group $rg --name $arcK8sClusterName --locatio
 #Arc for Kubernetes GitOps Extension
 #############################
 echo "Configuring Arc for Kubernetes GitOps"
-
-az extension add -n k8s-extension --yes
 az extension add -n k8s-configuration --yes
+az extension add -n k8s-extension --yes
 
 sudo apt-get update -y
 sudo apt-get upgrade -y
@@ -185,9 +184,9 @@ az k8s-extension create \
 
 az config set extension.use_dynamic_install=yes_without_prompt
 az config set extension.dynamic_install_allow_preview=true
+az extension add -n k8s-extension --yes
+az extension add --name "customlocation" --yes
 
-az extension add --name k8s-extension --yes
-az extension add --name customlocation --yes
 
 #Deploy Azure Monitor Container Insights Extension
 #Azure Monitor Container Insights provides visibility into the performance of workloads deployed on the Kubernetes cluster.
@@ -206,6 +205,9 @@ az k8s-extension create \
 #allowInsecureConnections=True - Allow HTTP communication or not. HTTP communication is not a secure way. If not allowed, HTTPs will be used.
 #InferenceRouterHA=False       - By default, AzureML extension will deploy 3 ingress controller replicas for high availability, which requires at least 3 workers in a cluster. Set this to False if you have less than 3 workers and want to deploy AzureML extension for development and testing only, in this case it will deploy one ingress controller replica only.
 
+#az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
+
+
 az k8s-extension create \
     -g $rg \
     -c $arcK8sClusterName \
@@ -221,8 +223,8 @@ az k8s-extension create \
 #############################
 # Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
 # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
-echo "Deploy IoT Operations CCCCComponents"
-az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
+# echo "Deploy IoT Operations CCCCComponents"
+# az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
 # echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
 # echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
