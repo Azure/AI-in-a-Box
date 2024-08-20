@@ -123,7 +123,7 @@ az account set --subscription $env:AZURE_SUBSCRIPTION_ID
 echo "Retrieving the Custom Location RP ObjectID from SP ID bc313c14-388c-4e7d-a58e-70017303ee3b"
 # Make sure that the command below is and/or pointing to the correct subscription and the MS Tenant
 customLocationRPSPID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
-echo "customLocationRPSPID: $customLocationRPSPID"
+echo "Custom Location RP SP ID: $customLocationRPSPID"
 azd env set AZURE_ENV_CUSTOMLOCATIONRPSPID $customLocationRPSPID
 
 ###################
