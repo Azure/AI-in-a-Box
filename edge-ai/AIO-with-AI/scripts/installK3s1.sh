@@ -173,28 +173,14 @@ az k8s-extension create \
     --extension-type=microsoft.flux
 
 #############################
-#Arc for Kubernetes Azure Monitor Container Insights Extension
-#############################
-az config set extension.use_dynamic_install=yes_without_prompt
-az config set extension.dynamic_install_allow_preview=true
-az extension add --name customlocation --yes
-
-#Deploy Azure Monitor Container Insights Extension
-#Azure Monitor Container Insights provides visibility into the performance of workloads deployed on the Kubernetes cluster.
-# az k8s-extension create \
-#     -g $rg \
-#     -c $arcK8sClusterName \
-#     -n azuremonitor-containers \
-#     --cluster-type connectedClusters \
-#     --extension-type Microsoft.AzureMonitor.Containers
-
-
-#############################
 #Arc for Kubernetes AML Extension
 #############################
 #https://learn.microsoft.com/en-us/azure/machine-learning/how-to-deploy-kubernetes-extension
 #allowInsecureConnections=True - Allow HTTP communication or not. HTTP communication is not a secure way. If not allowed, HTTPs will be used.
 #InferenceRouterHA=False       - By default, AzureML extension will deploy 3 ingress controller replicas for high availability, which requires at least 3 workers in a cluster. Set this to False if you have less than 3 workers and want to deploy AzureML extension for development and testing only, in this case it will deploy one ingress controller replica only.
+az config set extension.use_dynamic_install=yes_without_prompt
+az config set extension.dynamic_install_allow_preview=true
+az extension add --name customlocation --yes
 
 az k8s-extension create \
     -g $rg \
@@ -224,7 +210,7 @@ echo "OBJECT_ID: $OBJECT_ID"
 
 #Use the az connectedk8s enable-features command to enable custom location support on your cluster.
 #This command uses the objectId of the Microsoft Entra ID application that the Azure Arc service uses.
-# az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-oid $customLocationRPSPID --features cluster-connect custom-locations
+az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-oid $customLocationRPSPID --features cluster-connect custom-locations
 
 #--simulate-plc -> Flag when set, will configure the OPC-UA broker installer to spin-up a PLC server.
 #--include-dp -> Flag when set, Include Data Processor in the IoT Operations deployment. https://learn.microsoft.com/en-us/azure/iot-operations/process-data/overview-data-processor ->By default, Data Processor isn't included in an Azure IoT Operations Preview deployment. If you plan to use Data Processor, you must include it when you deploy Azure IoT Operations Preview - you can't add it later. 
@@ -232,8 +218,11 @@ echo "OBJECT_ID: $OBJECT_ID"
 #Deploy Azure IoT Operations. This command takes several minutes to complete:
 #az iot ops init -g $rg --cluster $arcK8sClusterName --kv-id $keyVaultId --sp-app-id  $spAppId --sp-object-id $spObjectId --sp-secret $spSecret --simulate-plc --include-dp
 
-# az config set extension.use_dynamic_install=yes_without_prompt
-# az config set extension.dynamic_install_allow_preview=true
+#############################
+#Arc for Kubernetes Azure Monitor Container Insights Extension
+#############################
+#Deploy Azure Monitor Container Insights Extension
+#Azure Monitor Container Insights provides visibility into the performance of workloads deployed on the Kubernetes cluster.
 # az k8s-extension create \
 #     -g $rg \
 #     -c $arcK8sClusterName \
