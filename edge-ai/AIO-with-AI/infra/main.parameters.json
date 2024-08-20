@@ -53,6 +53,9 @@
     "spAppId": {
       "value": "${AZURE_ENV_SPAPPID}"
     },
+    "spAppObjectId": {
+      "value": "${AZURE_ENV_SPAPPOBJECTID}"
+    },
     "spSecret": {
       "value": "${AZURE_ENV_SPSECRET}"
     },

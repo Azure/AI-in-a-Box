@@ -102,8 +102,11 @@ Write-Host "Creating a service principal for IoT Operations to interact with Key
 $iotOperationsKeyVaultSP = $(az ad sp create-for-rbac --name "aio-keyvault-sp")
 $iotOperationsKeyVaultSPobj = $iotOperationsKeyVaultSP | ConvertFrom-Json
 $spobjId = $(az ad sp show --id $iotOperationsKeyVaultSPobj.appId --query id -o tsv)
+$spAppObjId = $(az ad app show --id $iotOperationsKeyVaultSPobj.appId --query id -o tsv)
 
 Write-Host "Setting the service principal environment variables..."
 azd env set AZURE_ENV_SPAPPID $iotOperationsKeyVaultSPobj.appId
 azd env set AZURE_ENV_SPSECRET $iotOperationsKeyVaultSPobj.password
 azd env set AZURE_ENV_SPOBJECTID $spobjId
+azd env set AZURE_ENV_SPAPPOBJECTID $spAppObjId
+
