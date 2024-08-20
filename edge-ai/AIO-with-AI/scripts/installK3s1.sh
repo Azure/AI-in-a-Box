@@ -177,7 +177,6 @@ az k8s-extension create \
 #############################
 az config set extension.use_dynamic_install=yes_without_prompt
 az config set extension.dynamic_install_allow_preview=true
-# az extension add -n k8s-extension --yes
 az extension add --name "customlocation" --yes
 
 #Deploy Azure Monitor Container Insights Extension
@@ -232,3 +231,10 @@ az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-
 
 #Deploy Azure IoT Operations. This command takes several minutes to complete:
 #az iot ops init -g $rg --cluster $arcK8sClusterName --kv-id $keyVaultId --sp-app-id  $spAppId --sp-object-id $spObjectId --sp-secret $spSecret --simulate-plc --include-dp
+
+az k8s-extension create \
+    -g $rg \
+    -c $arcK8sClusterName \
+    -n azuremonitor-containers \
+    --cluster-type connectedClusters \
+    --extension-type Microsoft.AzureMonitor.Containers
