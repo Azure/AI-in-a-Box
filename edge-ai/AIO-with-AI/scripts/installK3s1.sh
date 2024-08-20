@@ -211,7 +211,7 @@ az k8s-extension create \
 #############################
 # Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
 # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
-echo "Deploy IoT Operations CCCCComponents"
+echo "Deploy IoT Operations Components"
 az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
 echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
@@ -225,7 +225,7 @@ echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 
 #Use the az connectedk8s enable-features command to enable custom location support on your cluster.
 #This command uses the objectId of the Microsoft Entra ID application that the Azure Arc service uses.
-#az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-oid $customLocationRPSPID --features cluster-connect custom-locations
+az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-oid $customLocationRPSPID --features cluster-connect custom-locations
 
 #--simulate-plc -> Flag when set, will configure the OPC-UA broker installer to spin-up a PLC server.
 #--include-dp -> Flag when set, Include Data Processor in the IoT Operations deployment. https://learn.microsoft.com/en-us/azure/iot-operations/process-data/overview-data-processor ->By default, Data Processor isn't included in an Azure IoT Operations Preview deployment. If you plan to use Data Processor, you must include it when you deploy Azure IoT Operations Preview - you can't add it later. 
