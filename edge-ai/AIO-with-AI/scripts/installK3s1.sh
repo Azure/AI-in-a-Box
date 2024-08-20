@@ -214,9 +214,9 @@ az k8s-extension create \
 echo "Deploy IoT Operations CCCCComponents"
 az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
-# echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
-# echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
-# echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
+echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 
 # sudo sysctl -p
 ##############################
