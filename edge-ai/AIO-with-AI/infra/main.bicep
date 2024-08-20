@@ -208,14 +208,14 @@ module m_kvn 'modules/keyvault/keyvault.bicep' = {
 //4. Create Required Storage Account(s)
 //Deploy Storage Accounts (Create your Storage Account (ADLS Gen2 & HNS Enabled) for your ML Workspace)
 //https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts?tabs=bicep
-// module m_stg 'modules/aml/storage.bicep' = {
-//   name: 'deploy_storageaccount'
-//   scope: resourceGroup
-//   params: {
-//     storageAccountName: !empty(storageAccountName) ? storageAccountName : '${abbrs.storageStorageAccounts}${environmentName}${uniqueSuffix}'
-//     location: location
-//   }
-// }
+module m_stg 'modules/aml/storage.bicep' = {
+  name: 'deploy_storageaccount'
+  scope: resourceGroup
+  params: {
+    storageAccountName: !empty(storageAccountName) ? storageAccountName : '${abbrs.storageStorageAccounts}${environmentName}${uniqueSuffix}'
+    location: location
+  }
+}
 
 //5. Create Create NSG
 module m_nsg 'modules/vnet/nsg.bicep' = {
@@ -307,6 +307,18 @@ resource subnet 'Microsoft.Network/virtualNetworks/subnets@2023-05-01' existing 
   scope: resourceGroup
   name: '${m_vnet.outputs.vnetName}/${subnetName}'
 }
+
+// resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+//   name: guid(subscription().id, msiName, '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')
+//   properties: {
+//     roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')
+//     principalId: m_msi.outputs.msiPrincipalID
+//     principalType: 'ServicePrincipal'
+//   }
+//   dependsOn:[
+//     m_msi
+//   ]
+// }
 
 //9. Create Ubuntu VM for K3s
 module m_vm 'modules/vm/vm-ubuntu.bicep' = {
