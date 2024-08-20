@@ -210,12 +210,14 @@ echo "OBJECT_ID: $OBJECT_ID"
 
 #Use the az connectedk8s enable-features command to enable custom location support on your cluster.
 #This command uses the objectId of the Microsoft Entra ID application that the Azure Arc service uses.
+echo "Enabling custom location support on the Arc cluster"
 az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-oid $customLocationRPSPID --features cluster-connect custom-locations
 
 #--simulate-plc -> Flag when set, will configure the OPC-UA broker installer to spin-up a PLC server.
 #--include-dp -> Flag when set, Include Data Processor in the IoT Operations deployment. https://learn.microsoft.com/en-us/azure/iot-operations/process-data/overview-data-processor ->By default, Data Processor isn't included in an Azure IoT Operations Preview deployment. If you plan to use Data Processor, you must include it when you deploy Azure IoT Operations Preview - you can't add it later. 
 
 #Deploy Azure IoT Operations. This command takes several minutes to complete:
+echo "Deploy Azure IoT Operations"
 #az iot ops init -g $rg --cluster $arcK8sClusterName --kv-id $keyVaultId --sp-app-id $spAppId --sp-object-id $spObjectId --sp-secret $spSecret 
 
 #############################
