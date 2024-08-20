@@ -9,5 +9,5 @@ foreach ($line in (& azd env get-values)) {
 }
 
 # Delete the service principal
-Write-Host "Deleting the service principal with id $env:AZURE_ENV_SPAPPID"
-az ad sp delete --id $env:AZURE_ENV_SPAPPID
+Write-Host "Deleting the service principal with App Id $env:AZURE_ENV_SPAPPID"
+az ad app delete --id $env:AZURE_ENV_SPAPPID

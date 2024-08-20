@@ -197,7 +197,7 @@ az extension add --name "customlocation" --yes
 #allowInsecureConnections=True - Allow HTTP communication or not. HTTP communication is not a secure way. If not allowed, HTTPs will be used.
 #InferenceRouterHA=False       - By default, AzureML extension will deploy 3 ingress controller replicas for high availability, which requires at least 3 workers in a cluster. Set this to False if you have less than 3 workers and want to deploy AzureML extension for development and testing only, in this case it will deploy one ingress controller replica only.
 
-#az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
+
 
 
 az k8s-extension create \
@@ -209,6 +209,7 @@ az k8s-extension create \
     --scope cluster \
     --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose 
 
+az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
 #############################
 #Azure IoT Operations
