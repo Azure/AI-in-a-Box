@@ -72,6 +72,10 @@ param spAppId string = ''
 @secure()
 param spSecret string = ''
 
+@description('Your Service Principal App Object ID')
+param spAppObjectId string = '' //This is your App Registration Object ID
+
+
 //VNet Module Parameters
 var networkSecurityGroupName = '' //'${virtualMachineName}-nsg'
 var subnetName = 'AIO-Subnet'
@@ -349,6 +353,7 @@ module m_vm 'modules/vm/vm-ubuntu.bicep' = {
     spAppId: spAppId
     spSecret: spSecret
     spObjectId: spObjectId
+    spAppObjectId: spAppObjectId
 
   }
   dependsOn: [
