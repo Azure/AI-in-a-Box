@@ -134,8 +134,10 @@ iotOperationsKeyVaultSP=$(az ad sp create-for-rbac --name "aio-keyvault-sp")
 spAppId=$(echo $iotOperationsKeyVaultSP | jq -r '.appId')
 spSecret=$(echo $iotOperationsKeyVaultSP | jq -r '.password')
 spobjId=$(az ad sp show --id $spAppId --query id -o tsv)
+spAppObjId = $(az ad app show --id $spAppId --query id -o tsv)
 
 echo "Setting the service principal environment variables..."
 azd env set AZURE_ENV_SPAPPID $spAppId
 azd env set AZURE_ENV_SPSECRET $spSecret
 azd env set AZURE_ENV_SPOBJECTID $spobjId
+azd env set AZURE_ENV_SPAPPOBJECTID $spAppObjId
