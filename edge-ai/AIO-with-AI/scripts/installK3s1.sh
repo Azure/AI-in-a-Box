@@ -211,7 +211,7 @@ az k8s-extension create \
 #############################
 # Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
 # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
-echo "Deploy IoT Operations Components"
+echo "Deploy IoT Operations ccccComponents"
 az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
 echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
