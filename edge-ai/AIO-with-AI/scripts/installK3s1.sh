@@ -177,7 +177,7 @@ az k8s-extension create \
 #############################
 az config set extension.use_dynamic_install=yes_without_prompt
 az config set extension.dynamic_install_allow_preview=true
-az extension add --name "customlocation" --yes
+az extension add --name customlocation --yes
 
 #Deploy Azure Monitor Container Insights Extension
 #Azure Monitor Container Insights provides visibility into the performance of workloads deployed on the Kubernetes cluster.
@@ -224,7 +224,7 @@ echo "OBJECT_ID: $OBJECT_ID"
 
 #Use the az connectedk8s enable-features command to enable custom location support on your cluster.
 #This command uses the objectId of the Microsoft Entra ID application that the Azure Arc service uses.
-az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-oid $customLocationRPSPID --features cluster-connect custom-locations
+# az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-oid $customLocationRPSPID --features cluster-connect custom-locations
 
 #--simulate-plc -> Flag when set, will configure the OPC-UA broker installer to spin-up a PLC server.
 #--include-dp -> Flag when set, Include Data Processor in the IoT Operations deployment. https://learn.microsoft.com/en-us/azure/iot-operations/process-data/overview-data-processor ->By default, Data Processor isn't included in an Azure IoT Operations Preview deployment. If you plan to use Data Processor, you must include it when you deploy Azure IoT Operations Preview - you can't add it later. 
@@ -232,9 +232,11 @@ az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-
 #Deploy Azure IoT Operations. This command takes several minutes to complete:
 #az iot ops init -g $rg --cluster $arcK8sClusterName --kv-id $keyVaultId --sp-app-id  $spAppId --sp-object-id $spObjectId --sp-secret $spSecret --simulate-plc --include-dp
 
-az k8s-extension create \
-    -g $rg \
-    -c $arcK8sClusterName \
-    -n azuremonitor-containers \
-    --cluster-type connectedClusters \
-    --extension-type Microsoft.AzureMonitor.Containers
+# az config set extension.use_dynamic_install=yes_without_prompt
+# az config set extension.dynamic_install_allow_preview=true
+# az k8s-extension create \
+#     -g $rg \
+#     -c $arcK8sClusterName \
+#     -n azuremonitor-containers \
+#     --cluster-type connectedClusters \
+#     --extension-type Microsoft.AzureMonitor.Containers
