@@ -220,8 +220,8 @@ echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 
 # sudo sysctl -p
 ##############################
-# OBJECT_ID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
-# echo "OBJECT_ID: $OBJECT_ID"
+OBJECT_ID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
+echo "OBJECT_ID: $OBJECT_ID"
 
 #Use the az connectedk8s enable-features command to enable custom location support on your cluster.
 #This command uses the objectId of the Microsoft Entra ID application that the Azure Arc service uses.
