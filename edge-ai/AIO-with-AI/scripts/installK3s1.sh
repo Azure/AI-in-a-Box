@@ -216,7 +216,7 @@ az connectedk8s enable-features -g $rg -n $arcK8sClusterName --custom-locations-
 #--include-dp -> Flag when set, Include Data Processor in the IoT Operations deployment. https://learn.microsoft.com/en-us/azure/iot-operations/process-data/overview-data-processor ->By default, Data Processor isn't included in an Azure IoT Operations Preview deployment. If you plan to use Data Processor, you must include it when you deploy Azure IoT Operations Preview - you can't add it later. 
 
 #Deploy Azure IoT Operations. This command takes several minutes to complete:
-az iot ops init -g $rg --cluster $arcK8sClusterName --kv-id $keyVaultId --sp-app-id  $spAppId --sp-object-id $spObjectId --sp-secret $spSecret --simulate-plc --include-dp
+#az iot ops init -g $rg --cluster $arcK8sClusterName --kv-id $keyVaultId --sp-app-id $spAppId --sp-object-id $spObjectId --sp-secret $spSecret 
 
 #############################
 #Arc for Kubernetes Azure Monitor Container Insights Extension
