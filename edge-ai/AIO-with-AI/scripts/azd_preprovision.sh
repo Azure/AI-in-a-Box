@@ -5,7 +5,6 @@
 ########################################################################
 echo "Connecting to Azure..."
 echo "Setting Azure context with subscription id $env:AZURE_SUBSCRIPTION_ID ..."
-# echo "Setting az subscription..."
 az account set --subscription $env:AZURE_SUBSCRIPTION_ID
 
 ########################################################################

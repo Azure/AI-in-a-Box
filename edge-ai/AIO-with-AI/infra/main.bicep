@@ -366,67 +366,67 @@ module m_vm 'modules/vm/vm-ubuntu.bicep' = {
 
 //10. Create Application Insights Instance
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.insights/components?pivots=deployment-language-bicep
-// module m_aisn 'modules/aml/insights.bicep' = {
-//   name: 'deploy_appinsights'
-//   scope: resourceGroup
-//   params: {
-//     location: location
-//     applicationInsightsName:  !empty(applicationInsightsName) ? applicationInsightsName : '${abbrs.insightsComponents}${environmentName}-${uniqueSuffix}'
-//   }
-// }
+module m_aisn 'modules/aml/insights.bicep' = {
+  name: 'deploy_appinsights'
+  scope: resourceGroup
+  params: {
+    location: location
+    applicationInsightsName:  !empty(applicationInsightsName) ? applicationInsightsName : '${abbrs.insightsComponents}${environmentName}-${uniqueSuffix}'
+  }
+}
 
 //11. Create Azure Container Registry
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces?pivots=deployment-language-bicep
-// module m_acr './modules/aml/acr.bicep' = {
-//   name: 'deploy_acr'
-//   scope: resourceGroup
-//   params: {
-//     location: location
-//     acrName: !empty(acrName) ? acrName : '${abbrs.containerRegistryRegistries}${environmentName}${uniqueSuffix}'
-//     acrSku: acrSku
-//     tags: tags
-//   }
-// }
+module m_acr './modules/aml/acr.bicep' = {
+  name: 'deploy_acr'
+  scope: resourceGroup
+  params: {
+    location: location
+    acrName: !empty(acrName) ? acrName : '${abbrs.containerRegistryRegistries}${environmentName}${uniqueSuffix}'
+    acrSku: acrSku
+    tags: tags
+  }
+}
 
 //12. Create Azure Machine Learning Workspace
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces?pivots=deployment-language-bicep
-// module m_aml './modules/aml/azureml.bicep' = {
-//   name: 'deploy_azureml'
-//   scope: resourceGroup
-//   params: {
-//     location: location
-//     aisnId: m_aisn.outputs.applicationInsightId
-//     amlcompclustername: !empty(amlcompclustername) ? amlcompclustername : '${abbrs.machineLearningServicesCluster}${environmentName}-${uniqueSuffix}'
-//     amlcompinstancename: !empty(amlcompinstancename) ? amlcompinstancename : '${abbrs.machineLearningServicesComputeCPU}${environmentName}-${uniqueSuffix}'
-//     keyvaultId: m_kvn.outputs.keyVaultId
-//     storageAccountId: m_stg.outputs.stgId
-//     workspaceName: !empty(workspaceName) ? workspaceName : '${abbrs.machineLearningServicesWorkspaces}${environmentName}-${uniqueSuffix}'
-//     hbi_workspace: hbi_workspace
-//     acrId: m_acr.outputs.acrId
-//     systemDatastoresAuthMode: ((systemDatastoresAuthMode == 'accessKey') ? systemDatastoresAuthMode : 'identity')
-//     tags: tags
-//   }
-// }
+module m_aml './modules/aml/azureml.bicep' = {
+  name: 'deploy_azureml'
+  scope: resourceGroup
+  params: {
+    location: location
+    aisnId: m_aisn.outputs.applicationInsightId
+    amlcompclustername: !empty(amlcompclustername) ? amlcompclustername : '${abbrs.machineLearningServicesCluster}${environmentName}-${uniqueSuffix}'
+    amlcompinstancename: !empty(amlcompinstancename) ? amlcompinstancename : '${abbrs.machineLearningServicesComputeCPU}${environmentName}-${uniqueSuffix}'
+    keyvaultId: m_kvn.outputs.keyVaultId
+    storageAccountId: m_stg.outputs.stgId
+    workspaceName: !empty(workspaceName) ? workspaceName : '${abbrs.machineLearningServicesWorkspaces}${environmentName}-${uniqueSuffix}'
+    hbi_workspace: hbi_workspace
+    acrId: m_acr.outputs.acrId
+    systemDatastoresAuthMode: ((systemDatastoresAuthMode == 'accessKey') ? systemDatastoresAuthMode : 'identity')
+    tags: tags
+  }
+}
 
 //********************************************************
 //Deployment Scripts
 //********************************************************
 //Upload Notebooks to Azure ML Studio
-// module script_UploadNotebooks './modules/aml/scriptNotebookUpload.bicep' = {
-//   name: 'script_UploadNotebooks'
-//   scope: resourceGroup
-//   params: {
-//     location: location
-//     resourceGroupName: resourceGroup.name
-//     amlworkspaceName: m_aml.outputs.amlworkspaceName
-//     storageAccountName: m_stg.outputs.stgName
+module script_UploadNotebooks './modules/aml/scriptNotebookUpload.bicep' = {
+  name: 'script_UploadNotebooks'
+  scope: resourceGroup
+  params: {
+    location: location
+    resourceGroupName: resourceGroup.name
+    amlworkspaceName: m_aml.outputs.amlworkspaceName
+    storageAccountName: m_stg.outputs.stgName
 
-//     uamiId: m_msi.outputs.msiID
-//   }
-//   dependsOn:[
-//     m_aml
-//   ]
-// }
+    uamiId: m_msi.outputs.msiID
+  }
+  dependsOn:[
+    m_aml
+  ]
+}
 
 
 // module gitOpsAppDeploy 'modules/gitops/gtiops.bicep' = {
