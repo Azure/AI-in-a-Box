@@ -95,8 +95,8 @@ publicIp=$(hostname -i)
 # Install Rancher K3s Cluster AI-In-A-Box Method
 #############################
 echo "Installing Rancher K3s cluster"
-curl -sfL https://get.k3s.io | sh -
-#curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --node-external-ip ${publicIp}" sh -
+#curl -sfL https://get.k3s.io | sh -
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --node-external-ip ${publicIp}" sh -
 
 mkdir -p /home/$adminUsername/.kube
 echo "
@@ -136,8 +136,8 @@ echo "source <(helm completion bash)" >> /home/$adminUsername/.bashrc
 #Install Azure CLI
 #############################
 echo "Installing Azure CLI"
-#sudo apt-get update -y 
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+#curl -L https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 #############################
 #Azure Arc - Onboard the Cluster to Azure Arc
@@ -148,7 +148,6 @@ az login --identity --username $vmUserAssignedIdentityPrincipalID
 #az account set -s $subscriptionId
 
 az config set extension.use_dynamic_install=yes_without_prompt
-#az config set extension.dynamic_install_allow_preview=true
 
 az extension add --name connectedk8s --yes
 
@@ -170,19 +169,32 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 
 # Deploy Extension
-az k8s-extension create \
-    -g $rg \
-    -c $arcK8sClusterName \
-    -n gitops \
-    --cluster-type connectedClusters \
-    --extension-type=microsoft.flux
+# az k8s-extension create \
+#     -g $rg \
+#     -c $arcK8sClusterName \
+#     -n gitops \
+#     --cluster-type connectedClusters \
+#     --extension-type=microsoft.flux
 
+
+# az k8s-configuration flux create \
+#     -g $rg \
+#     -c $arcK8sClusterName \
+#     -n gitops \
+#     --namespace vws-app \
+#     -t connectedClusters \
+#     --scope cluster \
+#     -u https://github.com/Welasco/testflux2.git \
+#     --interval 2m \
+#     --branch main \
+#     --kustomization name=vws-app path=./vws-app prune=true sync_interval=2m
 
 #############################
 #Azure IoT Operations
 #############################
 # Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
 # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
+# Reference: https://learn.microsoft.com/en-us/cli/azure/iot/ops?view=azure-cli-latest#az-iot-ops-init
 echo "Deploy IoT Operations Components"
 az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
@@ -191,8 +203,6 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
 echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 
 sudo sysctl -p
-##############################
-
 
 #Use the az connectedk8s enable-features command to enable custom location support on your cluster.
 #This command uses the objectId of the Microsoft Entra ID application that the Azure Arc service uses.
@@ -204,17 +214,18 @@ az connectedk8s enable-features -g $rg \
     --features cluster-connect custom-locations
 
 #Deploy Azure IoT Operations. This command takes several minutes to complete.
-#--simulate-plc -> Flag when set, will configure the OPC-UA broker installer to spin-up a PLC server.
+#--simulate-plc -> Flag to enable a simulated PLC. Flag when set, will configure the OPC-UA broker installer to spin-up a PLC server.
 #--include-dp -> Flag when set, Include Data Processor in the IoT Operations deployment. https://learn.microsoft.com/en-us/azure/iot-operations/process-data/overview-data-processor ->By default, Data Processor isn't included in an Azure IoT Operations Preview deployment. If you plan to use Data Processor, you must include it when you deploy Azure IoT Operations Preview - you can't add it later. 
 
-echo "Deploy Azure IoT Operations"
-#az extension add --upgrade --name azure-iot-ops
+echo "Deploy Azure IoT Operations - Configure and deploy IoT Operations to the target Arc-enabled Cluster"
 az iot ops init -g $rg \
     --cluster $arcK8sClusterName \
     --kv-id $keyVaultId \
     --sp-app-id  $spAppId \
-    --sp-object-id $spAppObjectId \
-    --sp-secret $spSecret
+    --sp-object-id $spObjectId \
+    --sp-secret $spSecret \
+    --kubernetes-distro k3s \
+    --simulate-plc 
 
 #############################
 #Arc for Kubernetes AML Extension

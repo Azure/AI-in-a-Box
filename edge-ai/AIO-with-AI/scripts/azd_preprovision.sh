@@ -117,9 +117,6 @@ fi
 # Retrieving the custom RP SP ID
 # Get the objectId of the Microsoft Entra ID application that the Azure Arc service uses and save it as an environment variable.
 ###################
-# bc313c14-388c-4e7d-a58e-70017303ee3b is Custom Locations RP
-echo "Setting Subscription Context"
-az account set --subscription $env:AZURE_SUBSCRIPTION_ID
 echo "Retrieving the Custom Location RP ObjectID from SP ID bc313c14-388c-4e7d-a58e-70017303ee3b"
 # Make sure that the command below is and/or pointing to the correct subscription and the MS Tenant
 customLocationRPSPID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
@@ -130,7 +127,7 @@ azd env set AZURE_ENV_CUSTOMLOCATIONRPSPID $customLocationRPSPID
 # Create a service principal used by IoT Operations to interact with Key Vault
 ###################
 echo "Creating a service principal for IoT Operations to interact with Key Vault..."
-iotOperationsKeyVaultSP=$(az ad sp create-for-rbac --name "aio-keyvault-sp")
+iotOperationsKeyVaultSP=$(az ad sp create-for-rbac --name "aiobx-keyvault-sp" -- role "Owner" --scopes /subscriptions/$env:AZURE_SUBSCRIPTION_ID)
 spAppId=$(echo $iotOperationsKeyVaultSP | jq -r '.appId')
 spSecret=$(echo $iotOperationsKeyVaultSP | jq -r '.password')
 spobjId=$(az ad sp show --id $spAppId --query id -o tsv)

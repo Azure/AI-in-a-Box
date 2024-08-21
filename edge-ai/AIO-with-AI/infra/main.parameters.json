@@ -56,11 +56,11 @@
     "spAppObjectId": {
       "value": "${AZURE_ENV_SPAPPOBJECTID}"
     },
-    "spSecret": {
-      "value": "${AZURE_ENV_SPSECRET}"
-    },
     "spObjectId": {
       "value": "${AZURE_ENV_SPOBJECTID}"
+    },
+    "spSecret": {
+      "value": "${AZURE_ENV_SPSECRET}"
     },
     "tags": {
       "value": {
