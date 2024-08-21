@@ -56,7 +56,7 @@ if (( ${#azProvidersNotRegistered[@]} > 0 )); then
   for provider in "${azProvidersNotRegistered[@]}"
   do
     echo "Registering Azure Provider: $provider"
-    az provider register --namespace $provider
+    az provider register --namespace $provider --wait
   done
 fi
 echo ""
@@ -127,7 +127,7 @@ azd env set AZURE_ENV_CUSTOMLOCATIONRPSPID $customLocationRPSPID
 # Create a service principal used by IoT Operations to interact with Key Vault
 ###################
 echo "Creating a service principal for IoT Operations to interact with Key Vault..."
-iotOperationsKeyVaultSP=$(az ad sp create-for-rbac --name "aiobx-keyvault-sp" -- role "Owner" --scopes /subscriptions/$env:AZURE_SUBSCRIPTION_ID)
+iotOperationsKeyVaultSP=$(az ad sp create-for-rbac --name "aiobx-keyvault-sp" --role "Owner" --scopes /subscriptions/$env:AZURE_SUBSCRIPTION_ID)
 spAppId=$(echo $iotOperationsKeyVaultSP | jq -r '.appId')
 spSecret=$(echo $iotOperationsKeyVaultSP | jq -r '.password')
 spobjId=$(az ad sp show --id $spAppId --query id -o tsv)
