@@ -74,6 +74,24 @@ echo "   spAppObjectId: $spAppObjectId"
 logpath=/var/log/deploymentscriptlog
 
 #############################
+# Install Rancher K3s Cluster Jumpstart Method
+# Installing Rancher K3s cluster (single control plane)
+#############################
+echo "Installing Rancher K3s cluster"
+publicIp=$(hostname -i)
+
+# sudo mkdir ~/.kube
+# sudo -u $adminUsername mkdir /home/${adminUsername}/.kube
+# curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --node-external-ip ${publicIp}" INSTALL_K3S_VERSION=v${K3S_VERSION} sh -
+# sudo chmod 644 /etc/rancher/k3s/k3s.yaml
+# sudo kubectl config rename-context default arck3sdemo --kubeconfig /etc/rancher/k3s/k3s.yaml
+# sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+# sudo cp /etc/rancher/k3s/k3s.yaml /home/${adminUsername}/.kube/config
+# sudo cp /etc/rancher/k3s/k3s.yaml /home/${adminUsername}/.kube/config.staging
+# sudo chown -R $adminUsername /home/${adminUsername}/.kube/
+# sudo chown -R staginguser /home/${adminUsername}/.kube/config.staging
+
+#############################
 # Install Rancher K3s Cluster AI-In-A-Box Method
 #############################
 echo "Installing Rancher K3s cluster"
@@ -95,6 +113,12 @@ chown $adminUsername:$adminUsername "$USERKUBECONFIG"
 # Set KUBECONFIG for root - Current session
 KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+
+#############################
+#Install Helm - Quick, easy, and cross-distribution installation method with automatic updates and minimal setup
+#############################
+#echo "Installing Helm"
+#sudo snap install helm --classic
 
 #############################
 #Install Helm - If you prefer full system integration, more control over the installation process, and you're working on a Debian-based system where this method is supported
@@ -178,23 +202,32 @@ echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 
 sudo sysctl -p
 ##############################
-# OBJECT_ID=$(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
-# echo "OBJECT_ID: $OBJECT_ID"
-#az iot ops init --simulate-plc -g $rg --cluster $arcK8sClusterName --kv-id $kv_id
+
 
 #Use the az connectedk8s enable-features command to enable custom location support on your cluster.
 #This command uses the objectId of the Microsoft Entra ID application that the Azure Arc service uses.
 echo "Enabling custom location support on the Arc cluster"
-#Deploy Azure IoT Operations. This command takes several minutes to complete.
-echo "Deploy Azure IoT Operations"
+
 az connectedk8s enable-features -g $rg \
     -n $arcK8sClusterName \
     --custom-locations-oid $customLocationRPSPID \
     --features cluster-connect custom-locations
 
+#Deploy Azure IoT Operations. This command takes several minutes to complete.
+#--simulate-plc -> Flag when set, will configure the OPC-UA broker installer to spin-up a PLC server.
+#--include-dp -> Flag when set, Include Data Processor in the IoT Operations deployment. https://learn.microsoft.com/en-us/azure/iot-operations/process-data/overview-data-processor ->By default, Data Processor isn't included in an Azure IoT Operations Preview deployment. If you plan to use Data Processor, you must include it when you deploy Azure IoT Operations Preview - you can't add it later. 
+
+echo "Deploy Azure IoT Operations"
 az iot ops init -g $rg \
     --cluster $arcK8sClusterName \
     --kv-id $keyVaultId \
     --sp-app-id  $spAppId \
     --sp-object-id $spObjectId \
     --sp-secret $spSecret
+
+#############################
+#Arc for Kubernetes AML Extension
+#############################
+#https://learn.microsoft.com/en-us/azure/machine-learning/how-to-deploy-kubernetes-extension
+#allowInsecureConnections=True - Allow HTTP communication or not. HTTP communication is not a secure way. If not allowed, HTTPs will be used.
+#InferenceRouterHA=False       - By default, AzureML extension will deploy 3 ingress controller replicas for high availability, which requires at least 3 workers in a cluster. Set this to False if you have less than 3 workers and want to deploy AzureML extension for development and testing only, in this case it will deploy one ingress controller replica only.
