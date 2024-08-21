@@ -95,7 +95,8 @@ publicIp=$(hostname -i)
 # Install Rancher K3s Cluster AI-In-A-Box Method
 #############################
 echo "Installing Rancher K3s cluster"
-curl -sfL https://get.k3s.io | sh -
+#curl -sfL https://get.k3s.io | sh -
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --node-external-ip ${publicIp}" sh -
 
 mkdir -p /home/$adminUsername/.kube
 echo "
@@ -223,7 +224,8 @@ az iot ops init -g $rg \
     --kv-id $keyVaultId \
     --sp-app-id  $spAppId \
     --sp-object-id $spObjectId \
-    --sp-secret $spSecret
+    --sp-secret $spSecret \
+    --include-dp
 
 #############################
 #Arc for Kubernetes AML Extension
