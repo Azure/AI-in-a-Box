@@ -169,12 +169,12 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 
 # Deploy Extension
-az k8s-extension create \
-    -g $rg \
-    -c $arcK8sClusterName \
-    -n gitops \
-    --cluster-type connectedClusters \
-    --extension-type=microsoft.flux
+# az k8s-extension create \
+#     -g $rg \
+#     -c $arcK8sClusterName \
+#     -n gitops \
+#     --cluster-type connectedClusters \
+#     --extension-type=microsoft.flux
 
 
 # az k8s-configuration flux create \
@@ -218,14 +218,13 @@ az connectedk8s enable-features -g $rg \
 #--simulate-plc -> Flag when set, will configure the OPC-UA broker installer to spin-up a PLC server.
 #--include-dp -> Flag when set, Include Data Processor in the IoT Operations deployment. https://learn.microsoft.com/en-us/azure/iot-operations/process-data/overview-data-processor ->By default, Data Processor isn't included in an Azure IoT Operations Preview deployment. If you plan to use Data Processor, you must include it when you deploy Azure IoT Operations Preview - you can't add it later. 
 
-echo "Deploy Azure IoT Operations"
+echo "Deploy Azure IoT Operations - Configure and deploy IoT Operations to the target Arc-enabled Cluster"
 az iot ops init -g $rg \
     --cluster $arcK8sClusterName \
     --kv-id $keyVaultId \
     --sp-app-id  $spAppId \
     --sp-object-id $spObjectId \
-    --sp-secret $spSecret \
-    --include-dp
+    --sp-secret $spSecret
 
 #############################
 #Arc for Kubernetes AML Extension
