@@ -34,7 +34,8 @@
         11 - Create Azure Container Registry
         12 - Create Azure Machine Learning Workspace
         13 - Upload Notebooks to Azure ML Studio
-        14 - Deploy Application using GitOps
+        14 - Attach a Kubernetes cluster to Azure Machine Learning workspace
+        15 - Deploy Application using GitOps
    
       //=====================================================================================
 
@@ -424,6 +425,23 @@ module script_UploadNotebooks './modules/aml/scriptNotebookUpload.bicep' = {
     uamiId: m_msi.outputs.msiID
   }
   dependsOn:[
+    m_aml
+  ]
+}
+
+//Attach a Kubernetes cluster to Azure Machine Learning workspace
+module script_attachK3sCluster './modules/aml/attachK3sCluster.bicep' = {
+  name: 'script_attachK3sCluster'
+  scope: resourceGroup
+  params: {
+    location: location
+    resourceGroupName: resourceGroup.name
+    amlworkspaceName: m_aml.outputs.amlworkspaceName
+    arcK8sClusterName: arcK8sClusterName
+    vmUserAssignedIdentityID: m_msi.outputs.msiID
+  }
+  dependsOn:[
+    m_vm
     m_aml
   ]
 }
