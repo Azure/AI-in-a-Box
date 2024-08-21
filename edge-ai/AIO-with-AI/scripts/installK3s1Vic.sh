@@ -194,6 +194,7 @@ sudo apt-get upgrade -y
 #############################
 # Starting off the post deployment steps. The following steps are to deploy Azure IoT Operations components
 # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
+# Reference: https://learn.microsoft.com/en-us/cli/azure/iot/ops?view=azure-cli-latest#az-iot-ops-init
 echo "Deploy IoT Operations Components"
 az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
@@ -202,8 +203,6 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
 echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
 
 sudo sysctl -p
-##############################
-
 
 #Use the az connectedk8s enable-features command to enable custom location support on your cluster.
 #This command uses the objectId of the Microsoft Entra ID application that the Azure Arc service uses.
@@ -224,7 +223,9 @@ az iot ops init -g $rg \
     --kv-id $keyVaultId \
     --sp-app-id  $spAppId \
     --sp-object-id $spObjectId \
-    --sp-secret $spSecret
+    --sp-secret $spSecret \
+    --kubernetes-distro k3s \
+    --simulate-plc 
 
 #############################
 #Arc for Kubernetes AML Extension
