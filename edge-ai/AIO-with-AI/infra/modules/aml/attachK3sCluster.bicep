@@ -1,6 +1,6 @@
 /*region Header
       Module Steps 
-      1 - Attach a Kubernetes cluster to Azure Machine Learning workspace
+      1 - Attach a Kubernetes Cluster to Azure Machine Learning Workspace
 
       //https://learn.microsoft.com/en-us/azure/machine-learning/how-to-attach-kubernetes-to-workspace
 */
