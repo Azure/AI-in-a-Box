@@ -130,6 +130,15 @@ resource vm 'Microsoft.Compute/virtualMachines@2023-07-01' = {
   }
 }
 
+module roleArcAdminRole '../identity/role.bicep' = {
+  name: 'deployVMRole_AzureArcClusterAdminRole'
+  scope: resourceGroup()
+  params:{
+    principalId: vmUserAssignedIdentityPrincipalID
+    roleGuid: '8393591c-06b9-48a2-a542-1bd6b377f6a2' // Kubernetes Cluster - Azure Kubernetes Service Arc Cluster Admin Role - Lets you manage all resources in the cluster.
+  }
+}
+
 module roleOnboarding '../identity/role.bicep' = {
   name: 'deployVMRole_AzureArcOnboarding'
   scope: resourceGroup()
