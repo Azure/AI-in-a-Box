@@ -17,6 +17,7 @@ echo "Registering Azure providers..."
 # List of required azure providers
 ###################
 azProviders=(
+    "Microsoft.AlertsManagement",
     "Microsoft.Compute",
     "Microsoft.ContainerInstance",
     "Microsoft.ContainerService",

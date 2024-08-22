@@ -15,6 +15,7 @@ Write-Host "Registering Azure providers..."
 # List of required azure providers
 ###################
 $resourceProviders = @(
+    "Microsoft.AlertsManagement",
     "Microsoft.Compute",
     "Microsoft.ContainerInstance",
     "Microsoft.ContainerService",

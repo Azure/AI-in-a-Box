@@ -168,6 +168,9 @@ az extension add -n k8s-extension --yes
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
+# Sleep for 60 seconds to allow the cluster to be fully connected
+sleep 60
+
 # Deploy Extension
 # az k8s-extension create \
 #     -g $rg \
@@ -240,4 +243,4 @@ az k8s-extension create \
     --cluster-type connectedClusters \
     --extension-type Microsoft.AzureML.Kubernetes \
     --scope cluster \
-    --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose 
+    --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose # This is since our K3s is 1 node
