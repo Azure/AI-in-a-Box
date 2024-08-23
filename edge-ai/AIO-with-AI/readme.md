@@ -5,7 +5,10 @@
 Orchestration of resources for the entire Edge AI model lifecycle with AIO (Azure IoT Operations enabled by ARC), including creation, deployment, and proper packaging through Azure ML, AIO and ARC . This involves leveraging key components such as AIO, AKS, ARC, Azure ML and Azure ML CLI V2.
 
 ## Solution Architecture
-<img src="./readme_assets/aioaiD.svg" />
+<img src="./readme_assets/aioaiD.svg" width="100%" />
+
+
+![image](https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/readme_assets/aioaiD.svg) 
 
 ### The above architecture is explained step-by-step below:
 1. You create all your necessary Azure Resources
