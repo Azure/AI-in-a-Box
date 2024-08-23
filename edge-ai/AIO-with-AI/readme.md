@@ -8,7 +8,7 @@ Orchestration of resources for the entire Edge AI model lifecycle with AIO (Azur
 <img src="./readme_assets/aioaiD.svg"  />
 
 
-![image](/edge-ai/AIO-with-AI/readme_assets/aioaiD.svg) 
+![AIO with AI](/edge-ai/AIO-with-AI/readme_assets/aioaiD.svg) 
 
 ### The above architecture is explained step-by-step below:
 1. You create all your necessary Azure Resources
