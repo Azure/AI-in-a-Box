@@ -124,7 +124,12 @@ Highlight the main contacts for the project and acknowledge contributors. You ca
 |--------------------|---------------------|--------------------------|
 | Andrés Padilla | @AndresPad | anpadill@microsoft.com |
 | Victor Santana | @Welasco | vsantana@microsoft.com |
-| Chris Ayers | @codebytes  | chrisayers@microsoft.com |
+| Chris Ayers | @codebytes | chrisayers@microsoft.com |
+| Neeraj Jhaveri | @neerajjhaveri | nejhaver@microsoft.com |
+| Nabeel Muhammad | @nabeelmsft | munabeel@microsoft.com |
+| Ali Sanjabi | @asanjabi | alsanjab@microsoft.com |
+| João Carlos Santos | @jomacedo | jomacedo@microsoft.com |
+| Georgina Siggins | @georgesiggins | gsiggins@microsoft.com |
 
 ## License
 
