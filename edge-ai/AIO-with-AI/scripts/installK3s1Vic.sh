@@ -250,6 +250,7 @@ az k8s-extension create \
 #############################
 #Deploy Namespace, InfluxDB, Simulator, and Redis
 #############################
+#Create a folder for Cerebral configuration files
 mkdir -p /home/$adminUsername/cerebral
 
 #Apply the Cerebral namespace
@@ -259,36 +260,31 @@ kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/mai
 sudo mkdir /var/lib/influxdb2
 sudo chmod 777 /var/lib/influxdb2
 
-# #Deploy InfluxDB, Configure InfluxDB, and Deploy the Data Simulator
+#Deploy InfluxDB, Configure InfluxDB, and Deploy the Data Simulator
 kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/influxdb.yaml
 sleep 30
 kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/influxdb-setup.yaml
 sleep 30
 kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/cerebral-simulator.yaml
 #sleep 60
-# #Validate the implementation
+#Validate the implementation
 kubectl get all -n cerebral
 
-# #Deploy Redis to store user sessions and conversation history
+#Deploy Redis to store user sessions and conversation history
 kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/redis.yaml
 
-# #Deploy Cerebral Application
-# #Download the Cerebral application deployment file
+#Deploy Cerebral Application
+#Download the Cerebral application deployment file
 sleep 30
 wget -P /home/$adminUsername/cerebral https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/cerebral.yaml
 
 sed -i 's/<YOUR_OPENAI>/65b22c3cec9d449e881b54efc91e0db3/g' /home/$adminUsername/cerebral/cerebral.yaml
-sed -i 's#<AZURE OPEN AI ENDPOINT>#https://aistdioserviceeast.openai.azure.com#g' /home/$adminUsername/cerebral/cerebral.yaml
-sed -i 's/2024-03-01-preview/2024-03-15-preview/g' /home/$adminUsername/cerebral/cerebral.yaml
+sed -i 's#<AZURE OPEN AI ENDPOINT>#https://aistdioserviceeast.openai.azure.com/#g' /home/$adminUsername/cerebral/cerebral.yaml
+# sed -i 's/2024-03-01-preview/2024-03-15-preview/g' /home/$adminUsername/cerebral/cerebral.yaml
 
 kubectl apply -f /home/$adminUsername/cerebral/cerebral.yaml
 #sleep 60
 
-# Step 2: Edit the file using sed to update the specific lines
-# For example, let's say you want to update the following lines:
-# 1. Change the app-id from "rag-interface-dapr-workload" to "new-app-id"
-# 2. Change the app-port from "8701" to "8080"
-# 3. Change the image version to "v2"
 
 #Install Dapr runtime on the cluster
 helm repo add dapr https://dapr.github.io/helm-charts/
@@ -296,12 +292,12 @@ helm repo update
 helm upgrade --install dapr dapr/dapr --version=1.11 --namespace dapr-system --create-namespace --wait
 #sleep 60
 
-# #Deploy Azure IoT MQ - Dapr PubSub Component
+#Deploy Azure IoT MQ - Dapr PubSub Component
 # kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-mq-components.yaml 
 #sleep 60
 
-# #Deploy RAG on the Edge
-# #Deploy tho other components of RAG on the Edge
+#Deploy RAG on the Edge
+#Deploy tho other components of RAG on the Edge
 # kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-vdb-dapr-workload.yaml
 #sleep 60
 # kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-interface-dapr-workload.yaml

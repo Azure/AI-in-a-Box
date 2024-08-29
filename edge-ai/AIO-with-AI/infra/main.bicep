@@ -343,6 +343,9 @@ module m_pip 'modules/vnet/publicip.bicep' = {
       publicIPAllocationMethod: 'Static'
       publicIPAddressVersion: 'IPv4'
       idleTimeoutInMinutes: 4
+      dnsSettings: {
+        domainNameLabel: 'aiobx${uniqueSuffix}'
+      }
     }
   }
 }
