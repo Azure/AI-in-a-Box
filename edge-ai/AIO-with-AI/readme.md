@@ -130,6 +130,7 @@ Highlight the main contacts for the project and acknowledge contributors. You ca
 | Ali Sanjabi | @asanjabi | alsanjab@microsoft.com |
 | João Carlos Santos | @jomacedo | jomacedo@microsoft.com |
 | Georgina Siggins | @georgesiggins | gsiggins@microsoft.com |
+| Remco Ploeg | @rploeg | remcoploeg@microsoft.com |
 
 ## License
 
