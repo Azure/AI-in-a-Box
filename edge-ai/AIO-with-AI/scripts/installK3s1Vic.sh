@@ -201,9 +201,11 @@ sleep 60
 echo "Deploy IoT Operations Components"
 az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
 
+#Increase user watch/instance limits:
 echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
-echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf
+#Increase file descriptor limit:
+echo fs.file-max = 100000 | sudo tee -a /etc/sysctl.conf 
 
 sudo sysctl -p
 
@@ -244,3 +246,35 @@ az k8s-extension create \
     --extension-type Microsoft.AzureML.Kubernetes \
     --scope cluster \
     --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose # This is since our K3s is 1 node
+
+#############################
+#Deploy Namespace, InfluxDB, Simulator, and Redis
+#############################
+mkdir cerebral
+cd cerebral
+
+kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/cerebral-ns.yaml
+
+sudo mkdir /var/lib/influxdb2
+sudo chmod 777 /var/lib/influxdb2
+
+kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/influxdb.yaml
+kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/influxdb-setup.yaml
+kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/cerebral-simulator.yaml
+
+kubectl get all -n cerebral
+
+kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/redis.yaml
+wget https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/cerebral.yaml
+
+
+helm repo add dapr https://dapr.github.io/helm-charts/
+helm repo update
+helm upgrade --install dapr dapr/dapr --version=1.11 --namespace dapr-system --create-namespace --wait
+
+kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-mq-components.yaml 
+
+kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-vdb-dapr-workload.yaml
+kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-interface-dapr-workload.yaml
+kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-web-workload.yaml
+kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-llm-dapr-workload.yaml
