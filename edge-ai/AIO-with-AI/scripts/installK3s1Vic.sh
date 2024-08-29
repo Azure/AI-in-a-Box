@@ -250,7 +250,7 @@ az k8s-extension create \
 #############################
 #Deploy Namespace, InfluxDB, Simulator, and Redis
 #############################
-mkdir -p /home/ArcAdmin/cerebral
+mkdir -p /home/$adminUsername/cerebral
 
 #Apply the Cerebral namespace
 kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/cerebral-ns.yaml
@@ -275,13 +275,13 @@ kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/mai
 # #Deploy Cerebral Application
 # #Download the Cerebral application deployment file
 sleep 30
-wget -P /home/ArcAdmin/cerebral https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/cerebral.yaml
+wget -P /home/$adminUsername/cerebral https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/cerebral.yaml
 
-sed -i 's/<YOUR_OPENAI>/65b22c3cec9d449e881b54efc91e0db3/g' /home/ArcAdmin/cerebral/cerebral.yaml
-sed -i 's#<AZURE OPEN AI ENDPOINT>#https://aistdioserviceeast.openai.azure.com#g' /home/ArcAdmin/cerebral/cerebral.yaml
-sed -i 's/2024-03-01-preview/2024-03-15-preview/g' /home/ArcAdmin/cerebral/cerebral.yaml
+sed -i 's/<YOUR_OPENAI>/65b22c3cec9d449e881b54efc91e0db3/g' /home/$adminUsername/cerebral/cerebral.yaml
+sed -i 's#<AZURE OPEN AI ENDPOINT>#https://aistdioserviceeast.openai.azure.com#g' /home/$adminUsername/cerebral/cerebral.yaml
+sed -i 's/2024-03-01-preview/2024-03-15-preview/g' /home/$adminUsername/cerebral/cerebral.yaml
 
-kubectl apply -f /home/ArcAdmin/cerebral/cerebral.yaml
+kubectl apply -f /home/$adminUsername/cerebral/cerebral.yaml
 #sleep 60
 
 # Step 2: Edit the file using sed to update the specific lines
