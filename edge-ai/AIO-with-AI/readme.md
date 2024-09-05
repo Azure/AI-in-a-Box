@@ -131,6 +131,9 @@ Highlight the main contacts for the project and acknowledge contributors. You ca
 | João Carlos Santos | @jomacedo | jomacedo@microsoft.com |
 | Georgina Siggins | @georgesiggins | gsiggins@microsoft.com |
 | Remco Ploeg | @rploeg | remcoploeg@microsoft.com |
+| Armando Blanco Garcia | @armandoblanco | armbla@microsoft.com |
+| Cheng Chen | @ChenCheng368 | chencheng@microsoft.com |
+
 
 ## License
 
