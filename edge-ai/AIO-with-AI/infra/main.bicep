@@ -270,12 +270,12 @@ module m_nsg 'modules/vnet/nsg.bicep' = {
         }
       }
       {
-        name: 'AllowAnyCustom8086Inbound'
+        name: 'AllowAnyHTTPSInbound'
         properties: {
           priority: 1011
           sourceAddressPrefix: '*'
-          protocol: '*'
-          destinationPortRange: '8086'
+          protocol: 'Tcp'
+          destinationPortRange: '443'
           access: 'Allow'
           direction: 'Inbound'
           sourcePortRange: '*'
@@ -283,12 +283,12 @@ module m_nsg 'modules/vnet/nsg.bicep' = {
         }
       }
       {
-        name: 'AllowAnyHTTPSInbound'
+        name: 'AllowAnyHTTPInbound'
         properties: {
           priority: 1021
           sourceAddressPrefix: '*'
           protocol: '*'
-          destinationPortRange: '443'
+          destinationPortRange: '80'
           access: 'Allow'
           direction: 'Inbound'
           sourcePortRange: '*'
@@ -308,7 +308,32 @@ module m_nsg 'modules/vnet/nsg.bicep' = {
           destinationAddressPrefix: '*'
         }
       }
-      
+      {
+        name: 'AllowAnyCustom6443Inbound'
+        properties: {
+          priority: 1031
+          sourceAddressPrefix: '*'
+          protocol: '*'
+          destinationPortRange: '6443'
+          access: 'Allow'
+          direction: 'Inbound'
+          sourcePortRange: '*'
+          destinationAddressPrefix: '*'
+        }
+      }
+      {
+        name: 'AllowAnyCustom8086Inbound'
+        properties: {
+          priority: 1011
+          sourceAddressPrefix: '*'
+          protocol: '*'
+          destinationPortRange: '8086'
+          access: 'Allow'
+          direction: 'Inbound'
+          sourcePortRange: '*'
+          destinationAddressPrefix: '*'
+        }
+      }
     ]
   }
 }
