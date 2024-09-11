@@ -14,10 +14,22 @@ param storageAccountName string
 param uamiId string
 
 // Change the URL below with that of your notebook
-var urlNotebookAutoML=     'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/1-AutoML-ObjectDetection.ipynb'
-var urlNotebookOnnx=       'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/2-Onnx-HandwrittenDigitClassification.ipynb'
-var urlNotebookImgML=      'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/img-classification-training.ipynb'
-var urlOnnxTrainingScript= 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/mnist.py'
+var urlNotebookImgML=      'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/1-Img-Classification-Training.ipynb'
+var urlImgTrainingScript=  'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/train.py'
+var urlImgUtilScript=      'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/utils.py'
+
+var urlImgConda=           'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/environment/conda.yaml'
+
+var urlImgSKClSampleReq=   'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringclassification/sample-request.json'
+var urlImgSKClScore=       'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringclassification/score.py'
+var urlImgSKClModel=       'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringclassification/sklearn_mnist_model.pkl'
+
+var urlImgSKRgSampleReq=   'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringregression/sample-request.json'
+var urlImgSKRgScore=       'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringregression/score.py'
+var urlImgSKRgModel=       'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringregression/sklearn_regression_model.pkl'
+
+var urlNotebookAutoML=     'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/2-AutoML-ObjectDetection.ipynb'
+
 var dataStoreName = 'workspaceworkingdirectory' // Note: name auto-created by ML Workspace, DO NOT CHANGE
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
@@ -64,20 +76,48 @@ resource notebooksUploadScriptCLI 'Microsoft.Resources/deploymentScripts@2023-08
         secureValue: storageAccount.listKeys().keys[0].value
       }
       {
+        name: 'urlNotebookImgML'
+        value: urlNotebookImgML
+      }
+      {
+        name: 'urlImgTrainingScript'
+        value: urlImgTrainingScript
+      }
+      {
+        name: 'urlImgUtilScript'
+        value: urlImgUtilScript
+      }
+      {
+        name: 'urlImgConda'
+        value: urlImgConda
+      }
+      {
         name: 'urlNotebookAutoML'
         value: urlNotebookAutoML
       }
       {
-        name: 'urlNotebookOnnx'
-        value: urlNotebookOnnx
+        name: 'urlImgSKClSampleReq'
+        value: urlImgSKClSampleReq
       }
       {
-        name: 'urlOnnxTrainingScript'
-        value: urlOnnxTrainingScript
+        name: 'urlImgSKClScore'
+        value: urlImgSKClScore
       }
       {
-        name: 'urlNotebookImgML'
-        value: urlNotebookImgML
+        name: 'urlImgSKClModel'
+        value: urlImgSKClModel
+      }
+      {
+        name: 'urlImgSKRgSampleReq'
+        value: urlImgSKRgSampleReq
+      }
+      {
+        name: 'urlImgSKRgScore'
+        value: urlImgSKRgScore
+      }
+      {
+        name: 'urlImgSKRgModel'
+        value: urlImgSKRgModel
       }
     ]
   }
