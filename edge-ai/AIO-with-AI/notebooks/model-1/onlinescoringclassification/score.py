@@ -1,4 +1,5 @@
 import os
+import logging
 import json
 import numpy as np
 import pickle
@@ -16,6 +17,7 @@ def init():
     model_path = os.path.join(os.getenv("AZUREML_MODEL_DIR"), "sklearn_mnist_model.pkl")
     # deserialize the model file back into a sklearn model
     model = joblib.load(model_path)
+    logging.info("Init complete")
 
 def run(raw_data):
     """
@@ -23,8 +25,10 @@ def run(raw_data):
     In the example we extract the data from the json input and call the scikit-learn model's predict()
     method and return the result back
     """
+    logging.info("Request received")
     data = np.array(json.loads(raw_data)['data'])
 	# make prediction
-    y_hat = model.predict(data)
+    result = model.predict(data)
+    logging.info("Request processed")
 	# you can return any data type as long as it is JSON-serializable
-    return y_hat.tolist()
+    return result.tolist()

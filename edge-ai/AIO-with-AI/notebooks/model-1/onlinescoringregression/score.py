@@ -1,7 +1,8 @@
 import os
 import logging
 import json
-import numpy
+import numpy as np
+import pickle
 import joblib
 
 def init():
@@ -25,8 +26,7 @@ def run(raw_data):
     method and return the result back
     """
     logging.info("Request received")
-    data = json.loads(raw_data)["data"]
-    data = numpy.array(data)
+    data = np.array(json.loads(raw_data)['data'])
 	# make prediction
     result = model.predict(data)
     logging.info("Request processed")
