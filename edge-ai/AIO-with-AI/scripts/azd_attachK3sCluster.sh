@@ -65,6 +65,9 @@ echo "   Cluster Id: $arcK8sClusterId"
 # Attach a Kubernetes cluster to Azure Machine Learning workspace
 # https://learn.microsoft.com/en-us/azure/machine-learning/how-to-attach-kubernetes-to-workspace
 # https://learn.microsoft.com/en-us/cli/azure/ml/compute
+# Set the namespace to azureml-workloads so that all model deployments are created in this namespace from Azure ML Studio: kubectl get onlineEndpoint -n azureml-workloads
+# The namespace was created in the installK3s1.sh script
+
 az ml compute attach \
      --resource-group $resourceGroupName \
      --workspace-name $amlworkspaceName \
@@ -72,4 +75,5 @@ az ml compute attach \
      --user-assigned-identities $vmUserAssignedIdentityID \
      --identity-type UserAssigned \
      --type Kubernetes \
+     --namespace azureml-workloads \ 
      --name k3s-cluster
