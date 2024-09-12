@@ -1,8 +1,8 @@
 #!/bin/bash
 
-az extension add -n ml
-
 # resourceGroupName='aiobx-aioedgeai-rg'
+# subscriptionId='00000000-0000-0000-0000-000000000000'
+# uamiId='/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aiobx-aioedgeai-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/YOURUANAME'
 # amlworkspaceName='mlw-aiobx-hev'
 # dataStoreName='workspaceworkingdirectory'
 # storageAccountName='staiobxhev'
@@ -19,26 +19,27 @@ az extension add -n ml
 # urlImgSKRgScore='score.py'
 # urlImgSKRgModel='sklearn_regression_model.pkl'
 
-
 echo "Uploading Notebooks to Azure ML Studio via CLI Script";
  
 if [[ -n "$1" ]]; then
     resourceGroupName=$1
-    amlworkspaceName=$2
-    dataStoreName=$3
-    storageAccountName=$4
-    storageAccountKey=$5
-    urlNotebookImgML=$6
-    urlImgTrainingScript=$7
-    urlImgUtilScript=$8
-    urlImgConda=$9
-    urlNotebookAutoML=${10}
-    urlImgSKClSampleReq=${11}
-    urlImgSKClScore=${12}
-    urlImgSKClModel=${13}
-    urlImgSKRgSampleReq=${14}
-    urlImgSKRgScore=${15}
-    urlImgSKRgModel=${16}
+    subscriptionId=2
+    uamiId=$3
+    amlworkspaceName=$4
+    dataStoreName=$5
+    storageAccountName=$6
+    storageAccountKey=$7
+    urlNotebookImgML=$8
+    urlImgTrainingScript=$9
+    urlImgUtilScript=${10}
+    urlImgConda=${11}
+    urlNotebookAutoML=${12}
+    urlImgSKClSampleReq=${13}
+    urlImgSKClScore=${14}
+    urlImgSKClModel=${15}
+    urlImgSKRgSampleReq=${16}
+    urlImgSKRgScore=${17}
+    urlImgSKRgModel=${18}
     echo "Executing from command line";
 else
     echo "Executing from azd up";
@@ -48,6 +49,8 @@ fi
 echo "";
 echo "Paramaters:";
 echo "   Resource Group Name: $resourceGroupName";
+echo "   Subscription Id: $subscriptionId"
+echo "   uamiId: $uamiId"
 echo "   Machine Learning Service Name: $amlworkspaceName"
 echo "   Datastore Name: $dataStoreName"
 echo "   Storage Account Name: $storageAccountName"
@@ -64,15 +67,19 @@ echo "   URL Notebook: $urlImgSKRgSampleReq"
 echo "   URL Notebook: $urlImgSKRgScore"
 echo "   URL Notebook: $urlImgSKRgModel"
 
+az extension add -n ml
+az account set -s $subscriptionId
+
+echo "Active Azure account:"
+az account show
+
 workspace=$(az ml workspace show --name $amlworkspaceName --resource-group $resourceGroupName)
 shareName=$(az ml datastore show --name $dataStoreName --resource-group $resourceGroupName --workspace-name $amlworkspaceName --query "file_share_name" -otsv)
 
-echo "";
 echo "Get Azure ML File Share Name";
 echo "   File Share Name: $shareName"
 
 # Create a new directory in the Fileshare to hold the Notebooks
-echo ""
 echo "Creating necessary directories..."
 az storage directory create --share-name "$shareName" --name "edgeai" --account-name $storageAccountName --account-key $storageAccountKey --output none
 az storage directory create --share-name "$shareName" --name "edgeai/sklearn-model" --account-name $storageAccountName --account-key $storageAccountKey --output none
@@ -82,7 +89,6 @@ az storage directory create --share-name "$shareName" --name "edgeai/sklearn-mod
 
 
 # Download Notebook Files
-echo "URL Notebook: $urlNotebook"
 wget "$urlNotebookImgML"
 wget "$urlImgTrainingScript"
 wget "$urlImgUtilScript"
@@ -91,28 +97,24 @@ wget "$urlNotebookAutoML"
 wget "$urlImgSKClSampleReq"
 wget "$urlImgSKClScore"
 wget "$urlImgSKClModel"
-wget "$urlImgSKRgSampleReq"
-wget "$urlImgSKRgScore"
-wget "$urlImgSKRgModel"
+
 
 echo "$PWD"
   
-for entry in "$PWD"/*
-do
-echo "$entry"
-done
+# for entry in "$PWD"/*
+# do
+# echo "$entry"
+# done
 
 filepath1="$PWD/1-Img-Classification-Training.ipynb"
 filepath2="$PWD/train.py"
 filepath3="$PWD/utils.py"
-filepath4="$PWD/sklearn-model/environment/conda.yaml"
+filepath4="$PWD/conda.yaml"
 filepath5="$PWD/2-AutoML-ObjectDetection.ipynb"
-filepath6="$PWD/sklearn-model/onlinescoringclassification/sample-request.json"
-filepath7="$PWD/sklearn-model/onlinescoringclassification/score.py"
-filepath8="$PWD/sklearn-model/onlinescoringclassification/sklearn_mnist_model.pkl"
-filepath9="$PWD/sklearn-model/onlinescoringregression/sample-request.json"
-filepath10="$PWD/sklearn-model/onlinescoringregression/score.py"
-filepath11="$PWD/sklearn-model/onlinescoringregression/sklearn_regression_model.pkl"
+filepath6="$PWD/sample-request.json"
+filepath7="$PWD/score.py"
+filepath8="$PWD/sklearn_mnist_model.pkl"
+
 
 echo ""
 echo "File Path: $filepath1"
@@ -123,9 +125,7 @@ echo "File Path: $filepath5"
 echo "File Path: $filepath6"
 echo "File Path: $filepath7"
 echo "File Path: $filepath8"
-echo "File Path: $filepath9"
-echo "File Path: $filepath10"
-echo "File Path: $filepath11"
+
 
 # Upload Notebooks to File Shares in the "Notebooks" folder
 az storage file upload -s $shareName --source $filepath1 --path edgeai/1-Img-Classification-Training.ipynb --account-key $storageAccountKey --account-name $storageAccountName
@@ -133,9 +133,25 @@ az storage file upload -s $shareName --source $filepath2 --path edgeai/train.py 
 az storage file upload -s $shareName --source $filepath3 --path edgeai/utils.py --account-key $storageAccountKey --account-name $storageAccountName
 az storage file upload -s $shareName --source $filepath4 --path edgeai/sklearn-model/environment/conda.yaml --account-key $storageAccountKey --account-name $storageAccountName
 az storage file upload -s $shareName --source $filepath5 --path edgeai/2-AutoML-ObjectDetection.ipynb --account-key $storageAccountKey --account-name $storageAccountName
+
 az storage file upload -s $shareName --source $filepath6 --path edgeai/sklearn-model/onlinescoringclassification/sample-request.json --account-key $storageAccountKey --account-name $storageAccountName
 az storage file upload -s $shareName --source $filepath7 --path edgeai/sklearn-model/onlinescoringclassification/score.py --account-key $storageAccountKey --account-name $storageAccountName
 az storage file upload -s $shareName --source $filepath8 --path edgeai/sklearn-model/onlinescoringclassification/sklearn_mnist_model.pkl --account-key $storageAccountKey --account-name $storageAccountName
+
+
+wget "$urlImgSKRgSampleReq"
+wget "$urlImgSKRgScore"
+wget "$urlImgSKRgModel"
+
+filepath9="$PWD/sample-request.json"
+filepath10="$PWD/score.py"
+filepath11="$PWD/sklearn_regression_model.pkl"
+
+echo "File Path: $filepath9"
+echo "File Path: $filepath10"
+echo "File Path: $filepath11"
+
+
 az storage file upload -s $shareName --source $filepath9 --path edgeai/sklearn-model/onlinescoringregression/sample-request.json --account-key $storageAccountKey --account-name $storageAccountName
 az storage file upload -s $shareName --source $filepath10 --path edgeai/sklearn-model/onlinescoringregression/score.py --account-key $storageAccountKey --account-name $storageAccountName
 az storage file upload -s $shareName --source $filepath11 --path edgeai/sklearn-model/onlinescoringregression/sklearn_regression_model.pkl --account-key $storageAccountKey --account-name $storageAccountName

@@ -60,6 +60,14 @@ resource notebooksUploadScriptCLI 'Microsoft.Resources/deploymentScripts@2023-08
         value: resourceGroupName
       }
       {
+        name: 'subscriptionId'
+        value: subscription().subscriptionId
+      }
+      {
+        name: 'uamiId'
+        value: uamiId
+      }
+      {
         name: 'amlworkspaceName'
         value: amlworkspaceName
       }
