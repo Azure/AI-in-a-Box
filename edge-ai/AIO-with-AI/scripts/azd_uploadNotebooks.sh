@@ -95,10 +95,10 @@ wget "$urlImgUtilScript"
 wget "$urlImgConda"
 wget "$urlNotebookAutoML"
 wget "$urlImgSKClSampleReq"
-wget "$urlImgSKClScore"
+wget "$urlImgSKClScore" 
 wget "$urlImgSKClModel"
 
-
+echo "PWD Path";
 echo "$PWD"
   
 # for entry in "$PWD"/*
@@ -116,15 +116,14 @@ filepath7="$PWD/score.py"
 filepath8="$PWD/sklearn_mnist_model.pkl"
 
 
-echo ""
-echo "File Path: $filepath1"
-echo "File Path: $filepath2"
-echo "File Path: $filepath3"
-echo "File Path: $filepath4"
-echo "File Path: $filepath5"
-echo "File Path: $filepath6"
-echo "File Path: $filepath7"
-echo "File Path: $filepath8"
+# echo "File Path: $filepath1"
+# echo "File Path: $filepath2"
+# echo "File Path: $filepath3"
+# echo "File Path: $filepath4"
+# echo "File Path: $filepath5"
+# echo "File Path: $filepath6"
+# echo "File Path: $filepath7"
+# echo "File Path: $filepath8"
 
 
 # Upload Notebooks to File Shares in the "Notebooks" folder
@@ -138,13 +137,13 @@ az storage file upload -s $shareName --source $filepath6 --path edgeai/sklearn-m
 az storage file upload -s $shareName --source $filepath7 --path edgeai/sklearn-model/onlinescoringclassification/score.py --account-key $storageAccountKey --account-name $storageAccountName
 az storage file upload -s $shareName --source $filepath8 --path edgeai/sklearn-model/onlinescoringclassification/sklearn_mnist_model.pkl --account-key $storageAccountKey --account-name $storageAccountName
 
+mkdir -p onlinescoringregression  # Create directory if it doesn't exist
+wget "$urlImgSKRgSampleReq" -P onlinescoringregression/
+wget "$urlImgSKRgScore" -P onlinescoringregression/
+wget "$urlImgSKRgModel" 
 
-wget "$urlImgSKRgSampleReq"
-wget "$urlImgSKRgScore"
-wget "$urlImgSKRgModel"
-
-filepath9="$PWD/sample-request.json"
-filepath10="$PWD/score.py"
+filepath9="$PWD/onlinescoringregression/sample-request.json"
+filepath10="$PWD/onlinescoringregression/score.py"
 filepath11="$PWD/sklearn_regression_model.pkl"
 
 echo "File Path: $filepath9"
