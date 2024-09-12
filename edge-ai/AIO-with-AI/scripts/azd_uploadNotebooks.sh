@@ -20,7 +20,6 @@ az extension add -n ml
 # urlImgSKRgModel='sklearn_regression_model.pkl'
 
 
-
 echo "Uploading Notebooks to Azure ML Studio via CLI Script";
  
 if [[ -n "$1" ]]; then
@@ -73,7 +72,14 @@ echo "Get Azure ML File Share Name";
 echo "   File Share Name: $shareName"
 
 # Create a new directory in the Fileshare to hold the Notebooks
+echo ""
+echo "Creating necessary directories..."
 az storage directory create --share-name "$shareName" --name "edgeai" --account-name $storageAccountName --account-key $storageAccountKey --output none
+az storage directory create --share-name "$shareName" --name "edgeai/sklearn-model" --account-name $storageAccountName --account-key $storageAccountKey --output none
+az storage directory create --share-name "$shareName" --name "edgeai/sklearn-model/environment" --account-name $storageAccountName --account-key $storageAccountKey --output none
+az storage directory create --share-name "$shareName" --name "edgeai/sklearn-model/onlinescoringclassification" --account-name $storageAccountName --account-key $storageAccountKey --output none
+az storage directory create --share-name "$shareName" --name "edgeai/sklearn-model/onlinescoringregression" --account-name $storageAccountName --account-key $storageAccountKey --output none
+
 
 # Download Notebook Files
 echo "URL Notebook: $urlNotebook"
@@ -120,15 +126,6 @@ echo "File Path: $filepath8"
 echo "File Path: $filepath9"
 echo "File Path: $filepath10"
 echo "File Path: $filepath11"
-
-echo ""
-echo "Creating necessary directories..."
-az storage directory create --share-name $shareName --name "edgeai" --account-name $storageAccountName --account-key $storageAccountKey --output none
-az storage directory create --share-name $shareName --name "edgeai/sklearn-model" --account-name $storageAccountName --account-key $storageAccountKey --output none
-az storage directory create --share-name $shareName --name "edgeai/sklearn-model/environment" --account-name $storageAccountName --account-key $storageAccountKey --output none
-az storage directory create --share-name $shareName --name "edgeai/sklearn-model/onlinescoringclassification" --account-name $storageAccountName --account-key $storageAccountKey --output none
-az storage directory create --share-name $shareName --name "edgeai/sklearn-model/onlinescoringregression" --account-name $storageAccountName --account-key $storageAccountKey --output none
-
 
 # Upload Notebooks to File Shares in the "Notebooks" folder
 az storage file upload -s $shareName --source $filepath1 --path edgeai/1-Img-Classification-Training.ipynb --account-key $storageAccountKey --account-name $storageAccountName

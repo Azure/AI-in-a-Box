@@ -311,7 +311,7 @@ module m_nsg 'modules/vnet/nsg.bicep' = {
       {
         name: 'AllowAnyCustom6443Inbound'
         properties: {
-          priority: 1031
+          priority: 1041
           sourceAddressPrefix: '*'
           protocol: '*'
           destinationPortRange: '6443'
@@ -324,7 +324,7 @@ module m_nsg 'modules/vnet/nsg.bicep' = {
       {
         name: 'AllowAnyCustom8086Inbound'
         properties: {
-          priority: 1011
+          priority: 1051
           sourceAddressPrefix: '*'
           protocol: '*'
           destinationPortRange: '8086'
@@ -480,6 +480,23 @@ module m_aml './modules/aml/azureml.bicep' = {
 //********************************************************
 //Deployment Scripts
 //********************************************************
+//Attach a Kubernetes cluster to Azure Machine Learning workspace
+module script_attachK3sCluster './modules/aml/attachK3sCluster.bicep' = {
+  name: 'script_attachK3sCluster'
+  scope: resourceGroup
+  params: {
+    location: location
+    resourceGroupName: resourceGroup.name
+    amlworkspaceName: m_aml.outputs.amlworkspaceName
+    arcK8sClusterName: arcK8sClusterName
+    vmUserAssignedIdentityID: m_msi.outputs.msiID
+  }
+  dependsOn:[
+    m_vm
+    m_aml
+  ]
+}
+
 //Upload Notebooks to Azure ML Studio
 module script_UploadNotebooks './modules/aml/scriptNotebookUpload.bicep' = {
   name: 'script_UploadNotebooks'
@@ -497,22 +514,22 @@ module script_UploadNotebooks './modules/aml/scriptNotebookUpload.bicep' = {
   ]
 }
 
-//Attach a Kubernetes cluster to Azure Machine Learning workspace
-module script_attachK3sCluster './modules/aml/attachK3sCluster.bicep' = {
-  name: 'script_attachK3sCluster'
-  scope: resourceGroup
-  params: {
-    location: location
-    resourceGroupName: resourceGroup.name
-    amlworkspaceName: m_aml.outputs.amlworkspaceName
-    arcK8sClusterName: arcK8sClusterName
-    vmUserAssignedIdentityID: m_msi.outputs.msiID
-  }
-  dependsOn:[
-    m_vm
-    m_aml
-  ]
-}
+// module script_RAGonEdge './modules/aml/scriptNotebookUpload.bicep' = {
+//   name: 'script_RunML'
+//   scope: resourceGroup
+//   params: {
+//     location: location
+//     resourceGroupName: resourceGroup.name
+//     amlworkspaceName: m_aml.outputs.amlworkspaceName
+//     storageAccountName: m_stg.outputs.stgName
+
+//     uamiId: m_msi.outputs.msiID
+//   }
+//   dependsOn:[
+//     m_aml
+//   ]
+// }
+
 
 
 // module gitOpsAppDeploy 'modules/gitops/gtiops.bicep' = {
