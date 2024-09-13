@@ -171,26 +171,6 @@ sudo apt-get upgrade -y
 # Sleep for 60 seconds to allow the cluster to be fully connected
 sleep 60
 
-# Deploy Extension
-# az k8s-extension create \
-#     -g $rg \
-#     -c $arcK8sClusterName \
-#     -n gitops \
-#     --cluster-type connectedClusters \
-#     --extension-type=microsoft.flux
-
-
-# az k8s-configuration flux create \
-#     -g $rg \
-#     -c $arcK8sClusterName \
-#     -n gitops \
-#     --namespace vws-app \
-#     -t connectedClusters \
-#     --scope cluster \
-#     -u https://github.com/Welasco/testflux2.git \
-#     --interval 2m \
-#     --branch main \
-#     --kustomization name=vws-app path=./vws-app prune=true sync_interval=2m
 
 #############################
 #Azure IoT Operations

@@ -127,21 +127,6 @@ param scriptURI string
 param ShellScriptName string
 
 
-// @sys.description('Name of the Application to be deployed using GitOps')
-// param gitOpsAppName string
-
-// @sys.description('Name of the namespace in K3s for the Application to be deployed using GitOps')
-// param gitOpsAppNamespace string
-
-// @sys.description('Git Repository URL for the Application to be deployed using GitOps')
-// param gitOpsGitRepositoryUrl string
-
-// @sys.description('Git Repository Branch for the Application to be deployed using GitOps')
-// param gitOpsGitRepositoryBranch string
-
-// @sys.description('Git Repository Path for the Application to be deployed using GitOps')
-// param gitOpsAppPath string
-
 @sys.description('Custom Locations RP ObjectID')
 param customLocationRPSPID string = ''
 
@@ -381,18 +366,6 @@ resource subnet 'Microsoft.Network/virtualNetworks/subnets@2023-05-01' existing 
   name: '${m_vnet.outputs.vnetName}/${subnetName}'
 }
 
-// resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-//   name: guid(subscription().id, msiName, '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')
-//   properties: {
-//     roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')
-//     principalId: m_msi.outputs.msiPrincipalID
-//     principalType: 'ServicePrincipal'
-//   }
-//   dependsOn:[
-//     m_msi
-//   ]
-// }
-
 //9. Create Ubuntu VM for K3s
 module m_vm 'modules/vm/vm-ubuntu.bicep' = {
   name: 'deploy_K3sVM'
@@ -405,7 +378,7 @@ module m_vm 'modules/vm/vm-ubuntu.bicep' = {
     adminUsername: adminUsername
     adminPasswordOrKey: adminPasswordOrKey
     authenticationType: authenticationType
-    vmUserAssignedIdentityID: m_msi.outputs.msiID //make sure this is the correct one because it could be msiclientid
+    vmUserAssignedIdentityID: m_msi.outputs.msiID
     vmUserAssignedIdentityPrincipalID: m_msi.outputs.msiPrincipalID
 
     subnetId: subnet.id
@@ -513,37 +486,3 @@ module script_UploadNotebooks './modules/aml/scriptNotebookUpload.bicep' = {
     m_aml
   ]
 }
-
-// module script_RAGonEdge './modules/aml/scriptNotebookUpload.bicep' = {
-//   name: 'script_RunML'
-//   scope: resourceGroup
-//   params: {
-//     location: location
-//     resourceGroupName: resourceGroup.name
-//     amlworkspaceName: m_aml.outputs.amlworkspaceName
-//     storageAccountName: m_stg.outputs.stgName
-
-//     uamiId: m_msi.outputs.msiID
-//   }
-//   dependsOn:[
-//     m_aml
-//   ]
-// }
-
-
-
-// module gitOpsAppDeploy 'modules/gitops/gtiops.bicep' = {
-//   name: 'gitOpsAppDeploy'
-//   scope: resourceGroup
-//   params: {
-//     arcK8sClusterName: arcK8sClusterName
-//     gitOpsAppName: gitOpsAppName
-//     gitOpsAppNamespace: gitOpsAppNamespace
-//     gitOpsGitRepositoryUrl: gitOpsGitRepositoryUrl
-//     gitOpsGitRepositoryBranch: gitOpsGitRepositoryBranch
-//     gitOpsAppPath: gitOpsAppPath
-//   }
-//   dependsOn: [
-//     m_vm
-//   ]
-// }

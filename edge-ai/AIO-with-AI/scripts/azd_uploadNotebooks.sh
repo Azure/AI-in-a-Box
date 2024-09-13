@@ -46,7 +46,6 @@ else
 fi
 
 # Determine the Fileshare name in Azure Storage Account
-echo "";
 echo "Paramaters:";
 echo "   Resource Group Name: $resourceGroupName";
 echo "   Subscription Id: $subscriptionId"

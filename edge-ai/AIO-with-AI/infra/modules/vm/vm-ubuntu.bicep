@@ -41,8 +41,6 @@ param customLocationRPSPID string
 
 var osDiskType = 'Premium_LRS'
 
-var templateBaseUrl = 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/'
-
 var linuxConfiguration = {
   disablePasswordAuthentication: true
   ssh: {
