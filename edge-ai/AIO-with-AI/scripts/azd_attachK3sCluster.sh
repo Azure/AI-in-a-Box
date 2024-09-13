@@ -69,11 +69,11 @@ echo "   Cluster Id: $arcK8sClusterId"
 # The namespace was created in the installK3s1.sh script
 
 az ml compute attach \
-     --resource-group $resourceGroupName \
-     --workspace-name $amlworkspaceName \
-     --resource-id $arcK8sClusterId \
-     --user-assigned-identities $vmUserAssignedIdentityID \
-     --identity-type UserAssigned \
-     --type Kubernetes \
-     --namespace azureml-workloads \ 
-     --name k3s-cluster
+    --resource-group $resourceGroupName \
+    --workspace-name $amlworkspaceName \
+    --resource-id $arcK8sClusterId \
+    --user-assigned-identities $vmUserAssignedIdentityID \
+    --identity-type UserAssigned \
+    --type Kubernetes \
+    --namespace azureml-workloads \
+    --name k3s-cluster
