@@ -227,17 +227,13 @@ az k8s-extension create \
     --scope cluster \
     --config enableTraining=False enableInference=True allowInsecureConnections=True inferenceRouterServiceType=loadBalancer inferenceRouterHA=False autoUpgrade=True installNvidiaDevicePlugin=False installPromOp=False installVolcano=False installDcgmExporter=False --auto-upgrade true --verbose # This is since our K3s is 1 node
 
-#Creating the ML workload namespace
-#https://medium.com/@jmasengesho/azure-machine-learning-service-for-kubernetes-architects-deploy-your-first-model-on-aks-with-az-440ada47b4a0
-#When creating the Azure ML Extension we do not all the ML workloads and models we create later on on the same namespace as the Azure ML Extension.
-#We create a separate namespace for the ML workloads and models.
-kubectl create namespace azureml-workloads
 
 #############################
 #Deploy Namespace, InfluxDB, Simulator, and Redis
 #############################
 #Create a folder for Cerebral configuration files
 mkdir -p /home/$adminUsername/cerebral
+sleep 60
 
 #Apply the Cerebral namespace
 kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/cerebral-ns.yaml
@@ -252,6 +248,7 @@ sleep 30
 kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/influxdb-setup.yaml
 sleep 30
 kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/cerebral-simulator.yaml
+sleep 30
 
 #Validate the implementation
 kubectl get all -n cerebral
@@ -269,11 +266,13 @@ sed -i 's#<AZURE OPEN AI ENDPOINT>#https://aistdioserviceeast.openai.azure.com/#
 # sed -i 's/2024-03-01-preview/2024-03-15-preview/g' /home/$adminUsername/cerebral/cerebral.yaml
 
 kubectl apply -f /home/$adminUsername/cerebral/cerebral.yaml
+sleep 30
 
 #Install Dapr runtime on the cluster
 helm repo add dapr https://dapr.github.io/helm-charts/
 helm repo update
 helm upgrade --install dapr dapr/dapr --version=1.11 --namespace dapr-system --create-namespace --wait
+sleep 30
 
 #Deploy Azure IoT MQ - Dapr PubSub Component
 # kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-mq-components.yaml 
@@ -287,3 +286,11 @@ helm upgrade --install dapr dapr/dapr --version=1.11 --namespace dapr-system --c
 # kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-web-workload.yaml
 #sleep 60
 # kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-llm-dapr-workload.yaml
+
+
+#Creating the ML workload namespace
+#https://medium.com/@jmasengesho/azure-machine-learning-service-for-kubernetes-architects-deploy-your-first-model-on-aks-with-az-440ada47b4a0
+#When creating the Azure ML Extension we do not all the ML workloads and models we create later on on the same namespace as the Azure ML Extension.
+#We create a separate namespace for the ML workloads and models.
+kubectl create namespace azureml-workloads
+# kubectl get all -n azureml-workloads
