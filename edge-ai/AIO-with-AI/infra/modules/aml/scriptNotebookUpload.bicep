@@ -11,23 +11,19 @@ param location string
 param resourceGroupName string
 param amlworkspaceName string
 param storageAccountName string
-param uamiId string
+param vmUserAssignedIdentityID string
 
 // Change the URL below with that of your notebook
 var urlNotebookImgML=      'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/1-Img-Classification-Training.ipynb'
 var urlImgTrainingScript=  'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/train.py'
 var urlImgUtilScript=      'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/utils.py'
-
 var urlImgConda=           'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/environment/conda.yaml'
-
 var urlImgSKClSampleReq=   'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringclassification/sample-request.json'
 var urlImgSKClScore=       'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringclassification/score.py'
 var urlImgSKClModel=       'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringclassification/sklearn_mnist_model.pkl'
-
 var urlImgSKRgSampleReq=   'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringregression/sample-request.json'
 var urlImgSKRgScore=       'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringregression/score.py'
 var urlImgSKRgModel=       'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringregression/sklearn_regression_model.pkl'
-
 var urlNotebookAutoML=     'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/2-AutoML-ObjectDetection.ipynb'
 
 var dataStoreName = 'workspaceworkingdirectory' // Note: name auto-created by ML Workspace, DO NOT CHANGE
@@ -37,6 +33,8 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing 
 }
 
 //Using Azure CLI
+//In order for the script to run successfully make sure your user assignemd managed identiy has owner/contributor role on the resource group
+//Also note that we are applying those roles within the modules/vm/vm-ubuntu.bicep module
 resource notebooksUploadScriptCLI 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   name: 'notebooksUploadScriptCLI'
   location: location
@@ -44,7 +42,7 @@ resource notebooksUploadScriptCLI 'Microsoft.Resources/deploymentScripts@2023-08
   identity: {
     type: 'UserAssigned'
     userAssignedIdentities: {
-      '${uamiId}': {}
+      '${vmUserAssignedIdentityID}': {}
     }
   }
   properties: {
@@ -58,14 +56,6 @@ resource notebooksUploadScriptCLI 'Microsoft.Resources/deploymentScripts@2023-08
       {
         name: 'resourceGroupName'
         value: resourceGroupName
-      }
-      {
-        name: 'subscriptionId'
-        value: subscription().subscriptionId
-      }
-      {
-        name: 'uamiId'
-        value: uamiId
       }
       {
         name: 'amlworkspaceName'

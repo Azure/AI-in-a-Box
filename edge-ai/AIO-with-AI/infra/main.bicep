@@ -378,7 +378,7 @@ module m_vm 'modules/vm/vm-ubuntu.bicep' = {
     adminUsername: adminUsername
     adminPasswordOrKey: adminPasswordOrKey
     authenticationType: authenticationType
-    vmUserAssignedIdentityID: m_msi.outputs.msiID
+    vmUserAssignedIdentityID: m_msi.outputs.msiID 
     vmUserAssignedIdentityPrincipalID: m_msi.outputs.msiPrincipalID
 
     subnetId: subnet.id
@@ -480,9 +480,10 @@ module script_UploadNotebooks './modules/aml/scriptNotebookUpload.bicep' = {
     amlworkspaceName: m_aml.outputs.amlworkspaceName
     storageAccountName: m_stg.outputs.stgName
 
-    uamiId: m_msi.outputs.msiID
+    vmUserAssignedIdentityID: m_msi.outputs.msiID 
   }
   dependsOn:[
+    m_msi
     m_aml
   ]
 }

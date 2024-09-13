@@ -1,8 +1,6 @@
 #!/bin/bash
 
 # resourceGroupName='aiobx-aioedgeai-rg'
-# subscriptionId='00000000-0000-0000-0000-000000000000'
-# uamiId='/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aiobx-aioedgeai-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/YOURUANAME'
 # amlworkspaceName='mlw-aiobx-hev'
 # dataStoreName='workspaceworkingdirectory'
 # storageAccountName='staiobxhev'
@@ -23,54 +21,51 @@ echo "Uploading Notebooks to Azure ML Studio via CLI Script";
  
 if [[ -n "$1" ]]; then
     resourceGroupName=$1
-    subscriptionId=2
-    uamiId=$3
-    amlworkspaceName=$4
-    dataStoreName=$5
-    storageAccountName=$6
-    storageAccountKey=$7
-    urlNotebookImgML=$8
-    urlImgTrainingScript=$9
-    urlImgUtilScript=${10}
-    urlImgConda=${11}
-    urlNotebookAutoML=${12}
-    urlImgSKClSampleReq=${13}
-    urlImgSKClScore=${14}
-    urlImgSKClModel=${15}
-    urlImgSKRgSampleReq=${16}
-    urlImgSKRgScore=${17}
-    urlImgSKRgModel=${18}
+    amlworkspaceName=$2
+    dataStoreName=$3
+    storageAccountName=$4
+    storageAccountKey=$5
+    urlNotebookImgML=$6
+    urlImgTrainingScript=$7
+    urlImgUtilScript=${8}
+    urlImgConda=${9}
+    urlNotebookAutoML=${10}
+    urlImgSKClSampleReq=${11}
+    urlImgSKClScore=${12}
+    urlImgSKClModel=${13}
+    urlImgSKRgSampleReq=${14}
+    urlImgSKRgScore=${15}
+    urlImgSKRgModel=${16}
     echo "Executing from command line";
 else
     echo "Executing from azd up";
 fi
 
 # Determine the Fileshare name in Azure Storage Account
-echo "Paramaters:";
-echo "   Resource Group Name: $resourceGroupName";
-echo "   Subscription Id: $subscriptionId"
-echo "   uamiId: $uamiId"
-echo "   Machine Learning Service Name: $amlworkspaceName"
-echo "   Datastore Name: $dataStoreName"
-echo "   Storage Account Name: $storageAccountName"
-#echo "   Storage Account Key: $storageAccountKey"
-echo "   URL Notebook: $urlNotebookImgML"
-echo "   URL Notebook: $urlImgTrainingScript"
-echo "   URL Notebook: $urlImgUtilScript"
-echo "   URL Notebook: $urlImgConda"
-echo "   URL Notebook: $urlNotebookAutoML"
-echo "   URL Notebook: $urlImgSKClSampleReq"
-echo "   URL Notebook: $urlImgSKClScore"
-echo "   URL Notebook: $urlImgSKClModel"
-echo "   URL Notebook: $urlImgSKRgSampleReq"
-echo "   URL Notebook: $urlImgSKRgScore"
-echo "   URL Notebook: $urlImgSKRgModel"
+# echo "Paramaters:";
+# echo "   Resource Group Name: $resourceGroupName";
+# echo "   Subscription Id: $subscriptionId"
+# echo "   uamiId: $uamiId"
+# echo "   Machine Learning Service Name: $amlworkspaceName"
+# echo "   Datastore Name: $dataStoreName"
+# echo "   Storage Account Name: $storageAccountName"
+# #echo "   Storage Account Key: $storageAccountKey"
+# echo "   URL Notebook: $urlNotebookImgML"
+# echo "   URL Notebook: $urlImgTrainingScript"
+# echo "   URL Notebook: $urlImgUtilScript"
+# echo "   URL Notebook: $urlImgConda"
+# echo "   URL Notebook: $urlNotebookAutoML"
+# echo "   URL Notebook: $urlImgSKClSampleReq"
+# echo "   URL Notebook: $urlImgSKClScore"
+# echo "   URL Notebook: $urlImgSKClModel"
+# echo "   URL Notebook: $urlImgSKRgSampleReq"
+# echo "   URL Notebook: $urlImgSKRgScore"
+# echo "   URL Notebook: $urlImgSKRgModel"
 
 az extension add -n ml
-az account set -s $subscriptionId
 
-echo "Active Azure account:"
-az account show
+#echo "Active Azure account:"
+#az account show
 
 workspace=$(az ml workspace show --name $amlworkspaceName --resource-group $resourceGroupName)
 shareName=$(az ml datastore show --name $dataStoreName --resource-group $resourceGroupName --workspace-name $amlworkspaceName --query "file_share_name" -otsv)
@@ -145,9 +140,9 @@ filepath9="$PWD/onlinescoringregression/sample-request.json"
 filepath10="$PWD/onlinescoringregression/score.py"
 filepath11="$PWD/sklearn_regression_model.pkl"
 
-echo "File Path: $filepath9"
-echo "File Path: $filepath10"
-echo "File Path: $filepath11"
+# echo "File Path: $filepath9"
+# echo "File Path: $filepath10"
+# echo "File Path: $filepath11"
 
 
 az storage file upload -s $shareName --source $filepath9 --path edgeai/sklearn-model/onlinescoringregression/sample-request.json --account-key $storageAccountKey --account-name $storageAccountName
