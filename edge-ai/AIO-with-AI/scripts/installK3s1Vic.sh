@@ -159,7 +159,7 @@ az connectedk8s connect \
     --kube-config /etc/rancher/k3s/k3s.yaml
 
 #############################
-#Arc for Kubernetes GitOps Extension
+#Arc for Kubernetes Extensions
 #############################
 echo "Configuring Arc for Kubernetes GitOps"
 az extension add -n k8s-configuration --yes
@@ -170,7 +170,6 @@ sudo apt-get upgrade -y
 
 # Sleep for 60 seconds to allow the cluster to be fully connected
 sleep 60
-
 
 #############################
 #Azure IoT Operations
@@ -293,4 +292,4 @@ sleep 30
 #When creating the Azure ML Extension we do not all the ML workloads and models we create later on on the same namespace as the Azure ML Extension.
 #We create a separate namespace for the ML workloads and models.
 kubectl create namespace azureml-workloads
-# kubectl get all -n azureml-workloads
+kubectl get all -n azureml-workloads

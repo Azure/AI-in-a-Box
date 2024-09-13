@@ -75,6 +75,6 @@ az ml compute attach \
     --user-assigned-identities $vmUserAssignedIdentityID \
     --identity-type UserAssigned \
     --type Kubernetes \
-    --name k3s-cluster
-    # --namespace azureml-workloads \
+    --name k3s-cluster \
+    --namespace azureml-workloads
     
