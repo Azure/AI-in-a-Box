@@ -12,6 +12,7 @@ param resourceGroupName string
 param amlworkspaceName string
 param storageAccountName string
 param vmUserAssignedIdentityID string
+param vmUserAssignedIdentityPrincipalID string
 
 // Change the URL below with that of your notebook
 var urlNotebookImgML=      'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/1-Img-Classification-Training.ipynb'
@@ -116,6 +117,10 @@ resource notebooksUploadScriptCLI 'Microsoft.Resources/deploymentScripts@2023-08
       {
         name: 'urlImgSKRgModel'
         value: urlImgSKRgModel
+      }
+      {
+        name: 'vmUserAssignedIdentityPrincipalID'
+        value: vmUserAssignedIdentityPrincipalID
       }
     ]
   }

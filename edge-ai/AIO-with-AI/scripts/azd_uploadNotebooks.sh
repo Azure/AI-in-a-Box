@@ -36,6 +36,7 @@ if [[ -n "$1" ]]; then
     urlImgSKRgSampleReq=${14}
     urlImgSKRgScore=${15}
     urlImgSKRgModel=${16}
+    vmUserAssignedIdentityPrincipalID=${17}
     echo "Executing from command line";
 else
     echo "Executing from azd up";
@@ -61,9 +62,10 @@ fi
 # echo "   URL Notebook: $urlImgSKRgSampleReq"
 # echo "   URL Notebook: $urlImgSKRgScore"
 # echo "   URL Notebook: $urlImgSKRgModel"
+# echo "   Azure UserAssignedIdentity PrincipalId: $vmUserAssignedIdentityPrincipalID"
 
 az extension add -n ml
-
+az login --identity --username $vmUserAssignedIdentityPrincipalID
 #echo "Active Azure account:"
 #az account show
 

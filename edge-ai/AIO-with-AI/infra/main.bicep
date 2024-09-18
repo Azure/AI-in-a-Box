@@ -481,6 +481,7 @@ module script_UploadNotebooks './modules/aml/scriptNotebookUpload.bicep' = {
     storageAccountName: m_stg.outputs.stgName
 
     vmUserAssignedIdentityID: m_msi.outputs.msiID 
+    vmUserAssignedIdentityPrincipalID: m_msi.outputs.msiPrincipalID 
   }
   dependsOn:[
     m_msi
