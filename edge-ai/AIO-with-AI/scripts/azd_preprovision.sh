@@ -30,7 +30,8 @@ azProviders=(
     "Microsoft.Kubernetes",
     "Microsoft.KubernetesConfiguration",
     "Microsoft.ManagedIdentity",
-    "Microsoft.Network"
+    "Microsoft.Network",
+    "Microsoft.Relay"
 )
 
 ###################
