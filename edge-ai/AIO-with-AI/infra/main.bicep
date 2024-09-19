@@ -135,10 +135,12 @@ param customLocationRPSPID string = ''
 var storageAccountName = ''
 var storageContainerName = 'aio'
 
+//Log Analytics Workspace
 @description('The log analytics workspace name. If ommited will be generated')
 param logAnalyticsWorkspaceName string = ''
-param useApplicationInsights bool = true
+
 //Application Insights
+param useApplicationInsights bool = true
 var applicationInsightsName = ''
 
 //ACR Module Parameters
