@@ -135,6 +135,9 @@ param customLocationRPSPID string = ''
 var storageAccountName = ''
 var storageContainerName = 'aio'
 
+@description('The log analytics workspace name. If ommited will be generated')
+param logAnalyticsWorkspaceName string = ''
+param useApplicationInsights bool = true
 //Application Insights
 var applicationInsightsName = ''
 
@@ -406,16 +409,33 @@ module m_vm 'modules/vm/vm-ubuntu.bicep' = {
   ]
 }
 
-//10. Create Application Insights Instance
+//10.A Create Log Analytics Workspace
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.insights/components?pivots=deployment-language-bicep
-module m_aisn 'modules/aml/insights.bicep' = {
+module m_loga 'modules/aml/loganalytics.bicep' = {
+  name: 'deploy_loganalytics'
+  scope: resourceGroup
+  params: {
+    location: location
+    logAnalyticsName: !useApplicationInsights ? '': !empty(logAnalyticsWorkspaceName) ? logAnalyticsWorkspaceName : '${abbrs.operationalInsightsWorkspaces}${resourceToken}'
+    tags: tags
+    
+  }
+}
+
+
+//10.B Create Application Insights Instance
+//https://learn.microsoft.com/en-us/azure/templates/microsoft.insights/components?pivots=deployment-language-bicep
+
+module m_aisn 'modules/aml/applicationinsights.bicep' = {
   name: 'deploy_appinsights'
   scope: resourceGroup
   params: {
     location: location
     applicationInsightsName:  !empty(applicationInsightsName) ? applicationInsightsName : '${abbrs.insightsComponents}${environmentName}-${uniqueSuffix}'
+    logAnalyticsWorkspaceId: m_loga.outputs.id
   }
 }
+
 
 //11. Create Azure Container Registry
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces?pivots=deployment-language-bicep
