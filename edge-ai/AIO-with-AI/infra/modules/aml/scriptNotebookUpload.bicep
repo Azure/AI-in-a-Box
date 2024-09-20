@@ -47,7 +47,7 @@ resource notebooksUploadScriptCLI 'Microsoft.Resources/deploymentScripts@2023-08
     }
   }
   properties: {
-    azCliVersion: '2.52.0'
+    azCliVersion: '2.64.0'
     scriptContent: loadTextContent('../../../scripts/azd_uploadNotebooks.sh')
     retentionInterval: 'PT1H'
     cleanupPreference: 'OnSuccess'

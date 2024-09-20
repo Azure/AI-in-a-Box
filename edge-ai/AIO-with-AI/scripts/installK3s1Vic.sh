@@ -274,7 +274,7 @@ helm upgrade --install dapr dapr/dapr --version=1.11 --namespace dapr-system --c
 sleep 30
 
 #Deploy Azure IoT MQ - Dapr PubSub Component
-# kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-mq-components.yaml 
+kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-mq-components.yaml 
 
 #Deploy RAG on the Edge
 #Deploy tho other components of RAG on the Edge

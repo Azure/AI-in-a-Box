@@ -420,10 +420,8 @@ module m_loga 'modules/aml/loganalytics.bicep' = {
     location: location
     logAnalyticsName: !useApplicationInsights ? '': !empty(logAnalyticsWorkspaceName) ? logAnalyticsWorkspaceName : '${abbrs.operationalInsightsWorkspaces}${resourceToken}'
     tags: tags
-    
   }
 }
-
 
 //10.B Create Application Insights Instance
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.insights/components?pivots=deployment-language-bicep
@@ -437,7 +435,6 @@ module m_aisn 'modules/aml/applicationinsights.bicep' = {
     logAnalyticsWorkspaceId: m_loga.outputs.id
   }
 }
-
 
 //11. Create Azure Container Registry
 //https://learn.microsoft.com/en-us/azure/templates/microsoft.machinelearningservices/workspaces?pivots=deployment-language-bicep

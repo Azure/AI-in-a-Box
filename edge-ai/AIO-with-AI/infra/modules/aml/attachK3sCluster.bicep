@@ -30,7 +30,7 @@ resource attachK3sCluster 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
     }
   }
   properties: {
-    azCliVersion: '2.52.0'
+    azCliVersion: '2.64.0'
     scriptContent: loadTextContent('../../../scripts/azd_attachK3sCluster.sh')
     retentionInterval: 'PT1H'
     cleanupPreference: 'OnSuccess'
