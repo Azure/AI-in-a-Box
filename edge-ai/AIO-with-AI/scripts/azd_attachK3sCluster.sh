@@ -1,7 +1,7 @@
 #!/bin/bash
 
-az extension add -n ml
-az extension add -n connectedk8s
+#az extension add -n ml
+#az extension add -n connectedk8s
 
 
 #############################
