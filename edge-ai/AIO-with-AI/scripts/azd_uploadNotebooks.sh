@@ -64,8 +64,10 @@ fi
 # echo "   URL Notebook: $urlImgSKRgModel"
 # echo "   Azure UserAssignedIdentity PrincipalId: $vmUserAssignedIdentityPrincipalID"
 
-az extension add -n ml
+az upgrade --yes
+az extension add --name ml --yes
 az login --identity --username $vmUserAssignedIdentityPrincipalID
+
 #echo "Active Azure account:"
 #az account show
 

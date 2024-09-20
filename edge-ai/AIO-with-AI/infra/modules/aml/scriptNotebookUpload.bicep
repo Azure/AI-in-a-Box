@@ -36,6 +36,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing 
 //Using Azure CLI
 //In order for the script to run successfully make sure your user assignemd managed identiy has owner/contributor role on the resource group
 //Also note that we are applying those roles within the modules/vm/vm-ubuntu.bicep module
+//https://learn.microsoft.com/en-us/azure/templates/microsoft.resources/deploymentscripts
 resource notebooksUploadScriptCLI 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   name: 'notebooksUploadScriptCLI'
   location: location
@@ -47,7 +48,7 @@ resource notebooksUploadScriptCLI 'Microsoft.Resources/deploymentScripts@2023-08
     }
   }
   properties: {
-    azCliVersion: '2.64.0'
+    azCliVersion: '2.52.0'
     scriptContent: loadTextContent('../../../scripts/azd_uploadNotebooks.sh')
     retentionInterval: 'PT1H'
     cleanupPreference: 'OnSuccess'

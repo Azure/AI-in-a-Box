@@ -1,7 +1,8 @@
 #!/bin/bash
 
-#az extension add -n ml
-#az extension add -n connectedk8s
+az upgrade --yes
+az extension add --name ml --yes
+az extension add --name connectedk8s --yes
 
 
 #############################

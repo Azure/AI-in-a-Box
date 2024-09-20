@@ -482,6 +482,7 @@ module script_attachK3sCluster './modules/aml/attachK3sCluster.bicep' = {
     amlworkspaceName: m_aml.outputs.amlworkspaceName
     arcK8sClusterName: arcK8sClusterName
     vmUserAssignedIdentityID: m_msi.outputs.msiID
+    vmUserAssignedIdentityPrincipalID: m_msi.outputs.msiPrincipalID
   }
   dependsOn:[
     m_vm
