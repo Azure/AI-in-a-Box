@@ -1,4 +1,3 @@
-# AIO with AI in-a-box
 ![Banner](./readme_assets/banner-aio-with-ai-in-a-box.png)
 
 # What's in this box?
