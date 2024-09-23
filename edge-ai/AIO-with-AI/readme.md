@@ -2,6 +2,8 @@
 ![Banner](./readme_assets/banner-aio-with-ai-in-a-box.png)
 
 ## Use Case
+The following accelerator helps you grasp the following deployment scenarios.
+
 Orchestration of resources for the entire Edge AI model lifecycle with AIO (Azure IoT Operations enabled by ARC), including creation, deployment, and proper packaging through Azure ML, AIO and ARC . This involves leveraging key components such as AIO, AKS, ARC, Azure ML and Azure ML CLI V2.
 
 ## Solution Architecture

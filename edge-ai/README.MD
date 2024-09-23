@@ -13,21 +13,23 @@ With this in mind, we aim to simplify your understanding of creating a model, pa
 
 ![Banner](../media/images/edgeai-tree-options.png)
 
-We will start the series with:
+The series will encompass:
 1. [AML Edge](./aml-edge-in-a-box/) - Creating a model in Azure ML, leveraging AutoML, packaging it correctly and deploying with IoT Edge to an Edge Device.
 2. [Custom Vision Edge](./customvision-edge-in-a-box/) - Creating a model with Azure's [Custom Vision](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/overview) and deploying with IoT Edge and running that AI model in a docker container.
 
-We will then expand the series to include the following:
+3. [AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) - Azure AI services provides several Docker containers that let you use the same APIs that are available in Azure, on-premises. Using these containers gives you the flexibility to bring Azure AI services closer to your data for compliance, security or other operational reasons. 
+    - Optical Character Recognition (OCR) - The Read OCR container allows you to extract printed and handwritten text from images and documents with support for JPEG, PNG, BMP, PDF, and TIFF file formats. For more information, see the [Read API documentation](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-ocr). This container can also [run in disconnected environments](https://learn.microsoft.com/en-us/azure/ai-services/containers/disconnected-containers).
 
-3. [AI Vision Edge]() - Creating a model with [Azure AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) and the new Image Analysis 4.0 system, which is based on the Florence Foundational Model, which now supports custom models with few-shot learning capabilities.
+We are actively advancing this series to showcase the creation and deployment of models within Azure-Arc enabled Kubernetes and [Azure IoT Operations](https://learn.microsoft.com/en-us/azure/iot-operations/get-started/overview-iot-operations) scenarios.
 
-Finally, we are actively advancing this series to showcase the creation and deployment of models within  AKS/[AKS Edge](https://learn.microsoft.com/en-us/azure/aks/hybrid/aks-edge-overview) and [Azure IoT Operations](https://learn.microsoft.com/en-us/azure/iot-operations/get-started/overview-iot-operations) scenarios.
+4. [AIO Edge AI](./AIO-with-AI/):
+    - **Azure ML to AIO** - Creating a model and deploying that model in Azure-Arc enabled Kubernetes and [Azure IoT Operations](https://learn.microsoft.com/en-us/azure/iot-operations/get-started/overview-iot-operations) scenarios with the [Azure ML Extension](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-attach-kubernetes-anywhere?view=azureml-api-2).
+    - **AIO with Open AI** - Using ***[Cerebral](https://github.com/Azure/arc_jumpstart_drops/tree/main/sample_app/cerebral_genai)***, we will demonstrate how to seamlessly integrate Azure OpenAI and Natural Language Processing (NLP) into an AIO deployment. This setup will highlight how to implement Retrieval-Augmented Generation (RAG) for efficient document retrieval and actionable insights. By optimizing the use of local AIO resources alongside Azure OpenAI, this enhancement delivers faster, more contextually aware responses directly from the network edge.
+    - **AIO with SLMs (RAG) on Edge** - We will demonstrate how to optimize your [AIO](https://learn.microsoft.com/en-us/azure/iot-operations/get-started/overview-iot-operations)/***[Cerebral](https://github.com/Azure/arc_jumpstart_drops/tree/main/sample_app/cerebral_genai)*** setup by integrating Small Language Models (SLMs) from various model catalogs for flexible edge deployments, enabling Retrieval-Augmented Generation (RAG) at the Edge. By localizing key GenAI processing tasks, this approach reduces dependence on cloud resources, allowing RAG to function seamlessly in disconnected/hybrid environments. 
+    
+Additionally, we plan to expand the series by offering valuable knowledge and key building blocks to help you navigate GenAI scenarios at the edge. This includes practical insights into integrating ChatGPT with Azure AI Vision, performing video analysis using Azure Video Indexer, and leveraging GPT-4 Turbo with Vision, GPT-4o, or Phi-3 Vision for tasks such as OCR, object detection, video insights, and image analysis.
 
-4. [AKS Edge AI]() - Creating a model and deploying that model in AKS, AKS Edge and [Azure IoT Operations](https://learn.microsoft.com/en-us/azure/iot-operations/get-started/overview-iot-operations) scenarios
-
-Furthermore, we have plans to enrich the series by providing knowledge and essential building blocks to help you navigate GenAI scenarios at the Edge—such as practical insights into managing intent at the edge.
-
-5. [GenAI Edge]() - Working with GenAI at the edge scenarios
+5. [GenAI Edge]() - Working with GenAI at the edge scenarios -> Work in Progress.
 
 Stay tuned for more exciting accelerators in the pipeline, as there's much more to come!
 
