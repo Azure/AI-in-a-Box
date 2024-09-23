@@ -1,10 +1,17 @@
 # AIO with AI in-a-box
 ![Banner](./readme_assets/banner-aio-with-ai-in-a-box.png)
 
-## Use Case
-The following accelerator helps you grasp the following deployment scenarios.
+# What's in this box?
 
-Orchestration of resources for the entire Edge AI model lifecycle with AIO (Azure IoT Operations enabled by ARC), including creation, deployment, and proper packaging through Azure ML, AIO and ARC . This involves leveraging key components such as AIO, AKS, ARC, Azure ML and Azure ML CLI V2.
+![Banner](./readme_assets/aioedgeai.png)
+
+This deployment accelerator contains a minimal AIO (Azure IoT Operations/Kubernetes) congiguration that enables:
+
+1. **Azure ML to AIO** - Orchestration of resources for the entire Edge AI model lifecycle with AIO (Azure IoT Operations enabled by ARC), including creation, deployment, and proper packaging through Azure ML, AIO and ARC . This involves leveraging key components such as AIO, Arc-Enabled Kubernetes Cluster, ARC, Azure ML and Azure ML CLI V2 notebooks.
+
+1. **AIO with Open AI** - Deployment and enablement of ***[Cerebral](https://github.com/Azure/arc_jumpstart_drops/tree/main/sample_app/cerebral_genai)*** to demonstrate how to leverage Azure OpenAI and Natural Language Processing (NLP) within an AIO environment.
+
+1. **AIO with SLMs (RAG) on Edge** Deployment and Enablement of Small Language Models (SLMs) at the Edge within an AIO environment. This setup integrates SLMs to enable Retrieval-Augmented Generation (RAG) at the edge, optimizing performance and reducing reliance on cloud resources for a more efficient and responsive AIO deployment.
 
 ## Solution Architecture
 ![AIO with AI](/edge-ai/AIO-with-AI/readme_assets/aioaiL.png) 
