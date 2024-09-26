@@ -1,0 +1,33 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: edgeragpubsub
+  namespace: azure-iot-operations
+  annotations:
+    dapr.io/component-container: >
+      {
+        "name": "iot-operations-dapr-components",
+        "image": "ghcr.io/azure/iot-operations-dapr-components:latest",
+        "volumeMounts": [
+          { "name": "mqtt-client-token", "mountPath": "/var/run/secrets/tokens" },
+          { "name": "aio-ca-trust-bundle", "mountPath": "/var/run/certs/aio-mq-ca-cert" }
+        ],
+        "env": [
+            { "name": "pubSubLogLevel", "value": "Information" },
+            { "name": "stateStoreLogLevel", "value": "Information" }
+        ]
+      }
+spec:
+  type: pubsub.azure.iotoperations
+  version: v1
+  metadata:
+  - name: hostname
+    value: aio-mq-dmqtt-frontend
+  - name: tcpPort
+    value: 8883
+  - name: useTls
+    value: true
+  - name: caFile
+    value: /var/run/certs/aio-mq-ca-cert/ca.crt
+  - name: satAuthFile
+    value: /var/run/secrets/tokens/mqtt-client-token

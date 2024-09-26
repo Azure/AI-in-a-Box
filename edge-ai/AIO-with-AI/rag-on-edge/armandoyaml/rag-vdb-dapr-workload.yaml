@@ -1,0 +1,87 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-vdb-dapr-workload
+  namespace: azure-iot-operations
+  labels:
+    app: rag-vdb-dapr-workload
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rag-vdb-dapr-workload
+  template:
+    metadata:
+      labels:
+        app: rag-vdb-dapr-workload
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/unix-domain-socket-path: "/tmp/dapr-components-sockets"
+        dapr.io/app-id: "rag-vdb-dapr-workload"
+        dapr.io/app-port: "8602"
+        dapr.io/app-protocol: "http"
+        dapr.io/log-level: "debug"
+        dapr.io/sidecar-liveness-probe-delay-seconds: "10"
+        dapr.io/sidecar-liveness-probe-timeout-seconds: "5"
+        dapr.io/sidecar-readiness-probe-delay-seconds: "10"
+        dapr.io/sidecar-readiness-probe-timeout-seconds: "5"
+
+    spec:
+      #serviceAccountName: rag-interface-mqtt-client
+      volumes:
+        - name: dapr-unix-domain-socket
+          emptyDir: {}
+        - name: mqtt-client-token
+          projected:
+            sources:
+              - serviceAccountToken:
+                  path: mqtt-client-token
+                  audience: aio-mq
+                  expirationSeconds: 86400
+        # Certificate chain for Dapr to validate the MQTT broker
+        - name: aio-ca-trust-bundle
+          configMap:
+            name: aio-ca-trust-bundle-test-only
+
+      containers:
+        - name: rag-vdb
+          image: agoraarmbladev.azurecr.io/jumpstart-rag-vdb:v1
+          imagePullPolicy: Always
+          # livenessProbe:
+          #   initialDelaySeconds: 100
+          #   httpGet:
+          #     #path: /v1.0/healthz
+          #     port: http
+          # readinessProbe:
+          #   initialDelaySeconds: 100
+          #   httpGet:
+          #     #path: /v1.0/healthz
+          #     port: http
+          
+        # Container for the Pub/sub component
+        - name: aio-mq-components
+          image: ghcr.io/azure/iot-mq-dapr-components:latest
+          volumeMounts:
+          - name: dapr-unix-domain-socket
+            mountPath: /tmp/dapr-components-sockets
+          - name: mqtt-client-token
+            mountPath: /var/run/secrets/tokens
+          - name: aio-ca-trust-bundle
+            mountPath: /var/run/certs/aio-mq-ca-cert/
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rag-vdb-service
+  namespace: azure-iot-operations
+  labels:
+    app: rag-vdb-dapr-workload
+spec:
+  selector:
+    app: rag-vdb-dapr-workload
+  ports:
+    - protocol: TCP
+      port: 8602
+      targetPort: 8602
+  type: LoadBalancer

@@ -1,0 +1,15 @@
+azure-cli==2.53.1
+pandas==2.0.3
+openpyxl==3.1.2
+langchain==0.0.329
+tiktoken==0.5.1
+PyPDF2==3.0.1
+chromadb==0.4.15
+pathlib==1.0.1 
+ruamel-yaml==0.17.16
+Flask==3.0.0
+dapr==1.11.0
+cloudevents==1.10.1
+uvicorn==0.23.2
+typing_extensions==4.8.0
+dapr-ext-grpc==1.11.0

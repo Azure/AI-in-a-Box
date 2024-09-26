@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+#apiVersion: v1
+kind: Deployment
+metadata:
+  name: rag-web-workload
+  namespace: azure-iot-operations
+  labels:
+    app: rag-web-workload
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rag-web-workload
+  template:
+    metadata:
+      labels:
+        app: rag-web-workload
+
+    spec:
+
+      containers:
+        - name: rag-web
+          image: agoraarmbladev.azurecr.io/jumpstart-newui-web:v1
+          imagePullPolicy: Always
+          ports:  
+          - containerPort: 8501
+          env:
+          - name: Login
+            value: "False"
+          # livenessProbe:
+          #   initialDelaySeconds: 100
+          #   httpGet:
+          #     #path: /v1.0/healthz
+          #     port: http
+          # readinessProbe:
+          #   initialDelaySeconds: 100
+          #   httpGet:
+          #     #path: /v1.0/healthz
+          #     port: http
+          
+       
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rag-web-service
+  namespace: azure-iot-operations
+  labels:
+    app: rag-web-workload
+spec:
+  selector:
+    app: rag-web-workload
+  ports:
+    - protocol: TCP
+      port: 8501
+      targetPort: 8501
+  type: LoadBalancer

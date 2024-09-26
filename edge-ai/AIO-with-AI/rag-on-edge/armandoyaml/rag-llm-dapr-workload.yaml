@@ -1,0 +1,82 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-llm-dapr-workload
+  namespace: azure-iot-operations
+  # labels:
+  #   app: rag-llm-dapr-workload
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rag-llm-dapr-workload
+  template:
+    metadata:
+      labels:
+        app: rag-llm-dapr-workload
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/unix-domain-socket-path: "/tmp/dapr-components-sockets"
+        dapr.io/app-id: "rag-llm-dapr-workload"
+        dapr.io/app-port: "8601"
+        dapr.io/app-protocol: "http"
+        dapr.io/log-level: "debug"
+        dapr.io/sidecar-liveness-probe-delay-seconds: "10"
+        dapr.io/sidecar-liveness-probe-timeout-seconds: "5"
+        dapr.io/sidecar-readiness-probe-delay-seconds: "10"
+        dapr.io/sidecar-readiness-probe-timeout-seconds: "5"
+
+    spec:
+      #serviceAccountName: rag-interface-mqtt-client
+      volumes:
+        - name: dapr-unix-domain-socket
+          emptyDir: {}
+        - name: mqtt-client-token
+          projected:
+            sources:
+              - serviceAccountToken:
+                  path: mqtt-client-token
+                  audience: aio-mq
+                  expirationSeconds: 86400
+        # Certificate chain for Dapr to validate the MQTT broker
+        - name: aio-ca-trust-bundle
+          configMap:
+            name: aio-ca-trust-bundle-test-only
+
+      containers:
+        - name: rag-llm
+          image: agoraarmbladev.azurecr.io/jumpstart-rag-slm:v2
+          imagePullPolicy: Always
+          # Remove commented out env variable if you want to override the # of logical cores in your system
+          #env:
+          #- name: N_THREADS # Number of CPU for LLM used for inferencing
+          #  value: "32"
+          
+        # Container for the Pub/sub component
+        - name: aio-mq-components
+          image: ghcr.io/azure/iot-mq-dapr-components:latest
+          volumeMounts:
+          - name: dapr-unix-domain-socket
+            mountPath: /tmp/dapr-components-sockets
+          - name: mqtt-client-token
+            mountPath: /var/run/secrets/tokens
+          - name: aio-ca-trust-bundle
+            mountPath: /var/run/certs/aio-mq-ca-cert/
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rag-llm-service
+  namespace: azure-iot-operations
+  labels:
+    app: rag-llm-dapr-workload
+spec:
+  selector:
+    app: rag-llm-dapr-workload
+  ports:
+    - protocol: TCP
+      port: 8601
+      targetPort: 8601
+  type: LoadBalancer

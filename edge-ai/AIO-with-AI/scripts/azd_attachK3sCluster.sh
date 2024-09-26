@@ -4,7 +4,6 @@ az upgrade --yes
 az extension add --name ml --yes
 az extension add --name connectedk8s --yes
 
-
 #############################
 # Script Params
 # Attach a Kubernetes Cluster to Azure Machine Learning Workspace

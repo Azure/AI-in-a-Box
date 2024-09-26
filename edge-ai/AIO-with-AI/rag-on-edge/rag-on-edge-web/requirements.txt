@@ -1,0 +1,10 @@
+azure-cli==2.53.1
+streamlit==1.37.0
+streamlit-authenticator==0.2.3
+streamlit-extras==0.3.4
+st-pages==0.4.5
+openpyxl==3.1.2
+tiktoken==0.5.1
+pathlib==1.0.1 
+ruamel-yaml==0.17.16
+typing_extensions==4.8.0
