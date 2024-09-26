@@ -275,16 +275,25 @@ sleep 30
 
 #Deploy Azure IoT MQ - Dapr PubSub Component
 kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-mq-components.yaml 
+# deploy/yaml/rag-mq-components-aio0p6.yaml - install first the mq component
+
 
 #Deploy RAG on the Edge
 #Deploy tho other components of RAG on the Edge
 # kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-vdb-dapr-workload.yaml
+# deploy/yaml/rag-vdb-dapr-workload-aio0p6.yaml
+
 #sleep 60
+
 # kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-interface-dapr-workload.yaml
+# deploy/yaml/rag-interface-dapr-workload-aio0p6.yaml
+
 #sleep 60
-# kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-web-workload.yaml
+# kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-web-workload-aio0p6.yaml
+
 #sleep 60
 # kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-llm-dapr-workload.yaml
+# deploy/yaml/rag-llm-dapr-workload-aio0p6.yaml
 
 
 #Creating the ML workload namespace
