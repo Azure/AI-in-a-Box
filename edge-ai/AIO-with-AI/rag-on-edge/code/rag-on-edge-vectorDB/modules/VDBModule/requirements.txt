@@ -1,7 +1,7 @@
 azure-cli==2.53.1
 pandas==2.0.3
 openpyxl==3.1.2
-langchain==0.0.329
+langchain==0.2.10
 tiktoken==0.5.1
 PyPDF2==3.0.1
 chromadb==0.4.15

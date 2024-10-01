@@ -1,0 +1,31 @@
+#packages for both llm and slm
+azure-cli==2.53.1
+openpyxl==3.1.2
+tiktoken==0.5.1
+pathlib==1.0.1 
+Flask==3.0.0
+dapr==1.11.0
+cloudevents==1.10.1
+typing_extensions==4.8.0
+dapr-ext-grpc==1.11.0
+ruamel-yaml==0.17.16
+
+# packages for Llama Language Model 2
+langchain==0.1.11
+llama_cpp_python==0.2.13
+
+
+# packages for Phi 2 
+# pillow~=10.2.0
+# torch~=2.1.1
+# numpy~=1.24.4
+# sentencepiece~=0.1.98
+# transformers>=4.35.2
+# gguf>=0.1.0
+# protobuf>=4.21.0
+# langchain==0.1.7
+# langchain-community==0.0.20
+# langchain-core==0.1.23
+# langsmith==0.0.87
+# llama_cpp_python==0.2.43
+# pydantic==1.10.13
