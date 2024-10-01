@@ -18,12 +18,10 @@ spec:
         app: rag-web-workload
 
     spec:
-      imagePullSecrets:
-         - name: <>
 
       containers:
         - name: rag-web
-          image: craiobxap2do.azurecr.io/jumpstart-newui-web:v1
+          image: craiobxap2do.azurecr.io/rag-on-edge-web:latest
           imagePullPolicy: Always
           ports:  
           - containerPort: 8501

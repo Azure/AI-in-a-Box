@@ -52,12 +52,9 @@ spec:
         configMap:
           name: aio-ca-trust-bundle-test-only
 
-      imagePullSecrets:
-         - name: <>
-
       containers:
         - name: rag-interface
-          image: craiobxap2do.azurecr.io/jumpstart-newui-web:v1
+          image: craiobxap2do.azurecr.io/rag-on-edge-interface:latest
           imagePullPolicy: Always
 ---
 kind: Service

@@ -52,13 +52,14 @@ spec:
         configMap:
           name: aio-ca-trust-bundle-test-only
 
-      imagePullSecrets:
-         - name: <>
-
       containers:
         - name: rag-llm
-          image: craiobxap2do.azurecr.io/jumpstart-newui-web:v1
+          image: craiobxap2do.azurecr.io/rag-on-edge-llm:latest
           imagePullPolicy: Always
+          # Remove commented out env variable if you want to override the # of logical cores in your system
+          # env:
+          # - name: N_THREADS # Number of CPU for LLM used for inferencing
+          #   value: "32"
 
 ---
 kind: Service
