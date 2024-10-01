@@ -52,6 +52,9 @@ spec:
         configMap:
           name: aio-ca-trust-bundle-test-only
 
+      imagePullSecrets:
+         - name: cctestotdata
+
       containers:
         - name: rag-llm
           image: craiobxap2do.azurecr.io/rag-on-edge-llm:latest
