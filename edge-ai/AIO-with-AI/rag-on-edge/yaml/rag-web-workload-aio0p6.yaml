@@ -18,6 +18,8 @@ spec:
         app: rag-web-workload
 
     spec:
+      imagePullSecrets:
+         - name: cctestotdata
 
       containers:
         - name: rag-web
