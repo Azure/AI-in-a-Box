@@ -273,49 +273,28 @@ helm repo update
 helm upgrade --install dapr dapr/dapr --version=1.11 --namespace dapr-system --create-namespace --wait
 sleep 30
 
-#Deploy Azure IoT MQ - Dapr PubSub Component
-#rag-on-edge-pubsub-broker: a pub/sub message broker for message passing between the components.
-#kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-mq-components.yaml 
-#kubectl apply -f https://raw.githubusercontent.com/Azure/AI-in-a-Box/refs/heads/aio-with-ai/edge-ai/AIO-with-AI/rag-on-edge/yaml/rag-mq-components-aio0p6.yaml
-# deploy/yaml/rag-mq-components-aio0p6.yaml - install first the mq component
-
-#Deploy RAG on the Edge
-#Deploy tho other components of RAG on the Edge
-
-#1
-#rag-on-edge-web: a web application to interact with the user to submit the search and generation query.
-# kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-web-workload-aio0p6.yaml
-# kubectl apply -f https://raw.githubusercontent.com/Azure/AI-in-a-Box/refs/heads/aio-with-ai/edge-ai/AIO-with-AI/rag-on-edge/yaml/rag-web-workload-aio0p6.yaml
-# deploy/yaml/rag-web-workload-aio0p6.yaml
-
-#sleep 60
-
-#2
-#rag-on-edge-interface: an interface module to interact with web frontend and the backend components.
-# kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-interface-dapr-workload.yaml
-# kubectl apply -f https://raw.githubusercontent.com/Azure/AI-in-a-Box/refs/heads/aio-with-ai/edge-ai/AIO-with-AI/rag-on-edge/yaml/rag-interface-dapr-workload-aio0p6.yaml
-# deploy/yaml/rag-interface-dapr-workload-aio0p6.yaml
-
-#sleep 60
-
-#3
-#rag-on-edge-vectorDB: a database to store the vectors. 
-# kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-vdb-dapr-workload.yaml
-# kubectl apply -f https://raw.githubusercontent.com/Azure/AI-in-a-Box/refs/heads/aio-with-ai/edge-ai/AIO-with-AI/rag-on-edge/yaml/rag-vdb-dapr-workload-aio0p6.yaml
-# deploy/yaml/rag-vdb-dapr-workload-aio0p6.yaml
-
-#sleep 60
-
-#4
-#rag-on-edge-LLM: a large language model (LLM) to generate the response based on the vector search result.
-# kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/rag-on-the-edge/rag-llm-dapr-workload.yaml
-# kubectl apply -f https://raw.githubusercontent.com/Azure/AI-in-a-Box/refs/heads/aio-with-ai/edge-ai/AIO-with-AI/rag-on-edge/yaml/rag-llm-dapr-workload-aio0p6.yaml
-# deploy/yaml/rag-llm-dapr-workload-aio0p6.yaml
-
-
 #Creating the ML workload namespace
 #https://medium.com/@jmasengesho/azure-machine-learning-service-for-kubernetes-architects-deploy-your-first-model-on-aks-with-az-440ada47b4a0
 #When creating the Azure ML Extension we do not all the ML workloads and models we create later on on the same namespace as the Azure ML Extension.
 #We create a separate namespace for the ML workloads and models.
 kubectl create namespace azureml-workloads
 kubectl get all -n azureml-workloads
+
+#Deploy Azure IoT MQ - Dapr PubSub Component
+#rag-on-edge-pubsub-broker: a pub/sub message broker for message passing between the components.
+kubectl apply -f https://raw.githubusercontent.com/Azure/AI-in-a-Box/refs/heads/aio-with-ai/edge-ai/AIO-with-AI/rag-on-edge/yaml/rag-mq-components-aio0p6.yaml
+
+#Deploy RAG on the Edge
+#Deploy tho other components of RAG on the Edge
+
+#rag-on-edge-web: a web application to interact with the user to submit the search and generation query.
+kubectl apply -f https://raw.githubusercontent.com/Azure/AI-in-a-Box/refs/heads/aio-with-ai/edge-ai/AIO-with-AI/rag-on-edge/yaml/rag-web-workload-aio0p6-acrairstream.yaml
+
+#rag-on-edge-interface: an interface module to interact with web frontend and the backend components.
+kubectl apply -f https://raw.githubusercontent.com/Azure/AI-in-a-Box/refs/heads/aio-with-ai/edge-ai/AIO-with-AI/rag-on-edge/yaml/rag-interface-dapr-workload-aio0p6-acrairstream.yaml
+
+#rag-on-edge-vectorDB: a database to store the vectors. 
+kubectl apply -f https://raw.githubusercontent.com/Azure/AI-in-a-Box/refs/heads/aio-with-ai/edge-ai/AIO-with-AI/rag-on-edge/yaml/rag-vdb-dapr-workload-aio0p6-acr-airstream.yaml
+
+#rag-on-edge-LLM: a large language model (LLM) to generate the response based on the vector search result.
+kubectl apply -f https://raw.githubusercontent.com/Azure/AI-in-a-Box/refs/heads/aio-with-ai/edge-ai/AIO-with-AI/rag-on-edge/yaml/rag-llm-dapr-workload-aio0p6-acrairstream.yaml
