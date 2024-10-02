@@ -23,7 +23,7 @@ spec:
 
       containers:
         - name: rag-web
-          image: craiobxap2do.azurecr.io/rag-on-edge-web:latest
+          image: airstream.azurecr.io/rag-on-edge-web:latest
           imagePullPolicy: Always
           ports:  
           - containerPort: 8501

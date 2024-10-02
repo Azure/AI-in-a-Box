@@ -57,7 +57,7 @@ spec:
 
       containers:
         - name: rag-vdb
-          image: craiobxap2do.azurecr.io/rag-on-edge-vectordb:latest
+          image: airstream.azurecr.io/rag-on-edge-vectordb:latest
           imagePullPolicy: Always
 ---
 kind: Service

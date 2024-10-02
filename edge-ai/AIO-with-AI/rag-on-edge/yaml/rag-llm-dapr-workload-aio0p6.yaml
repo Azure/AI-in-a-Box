@@ -53,7 +53,7 @@ spec:
           name: aio-ca-trust-bundle-test-only
 
       imagePullSecrets:
-         - name: cctestotdata
+         - name: airstreamdata
 
       containers:
         - name: rag-llm

@@ -9,29 +9,29 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rag-vdb-dapr-workload
+  name: rag-interface-dapr-workload
   namespace: azure-iot-operations
   # labels:
-  #   app: rag-vdb-dapr-workload
+  #   app: rag-interface-dapr-workload
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rag-vdb-dapr-workload
+      app: rag-interface-dapr-workload
   template:
     metadata:
       labels:
-        app: rag-vdb-dapr-workload
+        app: rag-interface-dapr-workload
       annotations:
         dapr.io/enabled: "true"
         dapr.io/inject-pluggable-components: "true"
-        dapr.io/app-id: "rag-vdb-dapr-workload"
-        dapr.io/app-port: "8602"
+        dapr.io/app-id: "rag-interface-dapr-workload"
+        dapr.io/app-port: "8701"
         dapr.io/app-protocol: "http"
         dapr.io/log-level: "debug"
-        dapr.io/sidecar-liveness-probe-delay-seconds: "10"
+        dapr.io/sidecar-liveness-probe-delay-seconds: "15"
         dapr.io/sidecar-liveness-probe-timeout-seconds: "5"
-        dapr.io/sidecar-readiness-probe-delay-seconds: "10"
+        dapr.io/sidecar-readiness-probe-delay-seconds: "15"
         dapr.io/sidecar-readiness-probe-timeout-seconds: "5"
 
     spec:
@@ -56,22 +56,22 @@ spec:
          - name: airstreamdata
 
       containers:
-        - name: rag-vdb
-          image: craiobxap2do.azurecr.io/rag-on-edge-vectordb:latest
+        - name: rag-interface
+          image: airstream.azurecr.io/rag-on-edge-interface:latest
           imagePullPolicy: Always
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: rag-vdb-service
+  name: rag-interface-service
   namespace: azure-iot-operations
   labels:
-    app: rag-vdb-dapr-workload
+    app: rag-interface-dapr-workload
 spec:
   selector:
-    app: rag-vdb-dapr-workload
+    app: rag-interface-dapr-workload
   ports:
     - protocol: TCP
-      port: 8602
-      targetPort: 8602
+      port: 8701
+      targetPort: 8701
   type: LoadBalancer

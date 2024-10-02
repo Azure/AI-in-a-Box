@@ -81,17 +81,19 @@ This deployment accelerator contains a minimal AIO (Azure IoT Operations/Kuberne
 **Step 5.** Deploy model to the Edge via Azure IoT Operations
 
 ## Deploy to Azure
-
-1. Log into your Azure subscription: 
-    ```
-    azd auth login --tenant-id xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx
-    ```
-
 1. Clone this repository locally: 
 
     ```
     git clone https://github.com/Azure-Samples/edge-aio-in-a-box
     cd edge-ai/AIO-with-AI
+    ```
+
+1. Log into your Azure subscription  (both are required): 
+    ```
+    azd auth login --use-device-code --tenant-id xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx
+    ```
+    ```
+    az login --use-device-code --tenant xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx
     ```
 
 2. Deploy resources:

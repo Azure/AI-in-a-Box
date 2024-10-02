@@ -9,24 +9,24 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rag-vdb-dapr-workload
+  name: rag-llm-dapr-workload
   namespace: azure-iot-operations
   # labels:
-  #   app: rag-vdb-dapr-workload
+  #   app: rag-llm-dapr-workload
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rag-vdb-dapr-workload
+      app: rag-llm-dapr-workload
   template:
     metadata:
       labels:
-        app: rag-vdb-dapr-workload
+        app: rag-llm-dapr-workload
       annotations:
         dapr.io/enabled: "true"
         dapr.io/inject-pluggable-components: "true"
-        dapr.io/app-id: "rag-vdb-dapr-workload"
-        dapr.io/app-port: "8602"
+        dapr.io/app-id: "rag-llm-dapr-workload"
+        dapr.io/app-port: "8601"
         dapr.io/app-protocol: "http"
         dapr.io/log-level: "debug"
         dapr.io/sidecar-liveness-probe-delay-seconds: "10"
@@ -56,22 +56,27 @@ spec:
          - name: airstreamdata
 
       containers:
-        - name: rag-vdb
-          image: craiobxap2do.azurecr.io/rag-on-edge-vectordb:latest
+        - name: rag-llm
+          image: airstream.azurecr.io/rag-on-edge-llm:latest
           imagePullPolicy: Always
+          # Remove commented out env variable if you want to override the # of logical cores in your system
+          # env:
+          # - name: N_THREADS # Number of CPU for LLM used for inferencing
+          #   value: "32"
+
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: rag-vdb-service
+  name: rag-llm-service
   namespace: azure-iot-operations
   labels:
-    app: rag-vdb-dapr-workload
+    app: rag-llm-dapr-workload
 spec:
   selector:
-    app: rag-vdb-dapr-workload
+    app: rag-llm-dapr-workload
   ports:
     - protocol: TCP
-      port: 8602
-      targetPort: 8602
+      port: 8601
+      targetPort: 8601
   type: LoadBalancer

@@ -17,7 +17,7 @@ logging.info('Number of threads for LLM inference detected or passed in: ' + str
 app = Flask(__name__)
 app_port = os.getenv('LLM_PORT', '8601')
 
-llmmodel = LlamaCpp(model_path="./models/phi-2.Q4_K_M.gguf", verbose=True, n_threads=N_THREADS)
+llmmodel = LlamaCpp(model_path="./models/llama-2-7b.Q4_K_M.gguf", verbose=True, n_threads=N_THREADS)
 
 llm_prompt = '''Use the Content to answer the Search Query.
 
