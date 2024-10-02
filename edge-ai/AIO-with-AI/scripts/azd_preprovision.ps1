@@ -21,6 +21,7 @@ $resourceProviders = @(
     "Microsoft.ContainerService",
     "Microsoft.DeviceRegistry"
     "Microsoft.ExtendedLocation",
+    "Microsoft.IoTOperations",
     "Microsoft.IoTOperationsDataProcessor",
     "Microsoft.IoTOperationsMQ",
     "Microsoft.IoTOperationsOrchestrator",
