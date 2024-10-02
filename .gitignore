@@ -13,3 +13,5 @@ appsettings.json
 __pycache__
 
 .cache
+
+.idea/
