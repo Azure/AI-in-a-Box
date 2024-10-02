@@ -280,12 +280,17 @@ sleep 30
 kubectl create namespace azureml-workloads
 kubectl get all -n azureml-workloads
 
+
+az acr login --name airstream 
+ACR_REGISTRY_ID=$(az acr show --name airstream --query "id" --output tsv)
+PASSWORD=$(az ad sp create-for-rbac --name aiobx-keyvault-sp --scopes $ACR_REGISTRY_ID --role acrpull --query "password" --output tsv)
+
+#create secret
+kubectl create secret docker-registry airstreamdata --docker-server=airstream.azurecr.io  --docker-username=$spAppId --docker-password=$PASSWORD --namespace=azure-iot-operations
+
 #Deploy Azure IoT MQ - Dapr PubSub Component
 #rag-on-edge-pubsub-broker: a pub/sub message broker for message passing between the components.
 kubectl apply -f https://raw.githubusercontent.com/Azure/AI-in-a-Box/refs/heads/aio-with-ai/edge-ai/AIO-with-AI/rag-on-edge/yaml/rag-mq-components-aio0p6.yaml
-
-#Deploy RAG on the Edge
-#Deploy tho other components of RAG on the Edge
 
 #rag-on-edge-web: a web application to interact with the user to submit the search and generation query.
 kubectl apply -f https://raw.githubusercontent.com/Azure/AI-in-a-Box/refs/heads/aio-with-ai/edge-ai/AIO-with-AI/rag-on-edge/yaml/rag-web-workload-aio0p6-acrairstream.yaml
