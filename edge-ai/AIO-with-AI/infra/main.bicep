@@ -383,9 +383,7 @@ module m_vm 'modules/vm/vm-ubuntu.bicep' = {
     adminUsername: adminUsername
     adminPasswordOrKey: adminPasswordOrKey
     authenticationType: authenticationType
-    vmUserAssignedIdentityName: m_msi.outputs.msiName
     vmUserAssignedIdentityID: m_msi.outputs.msiID 
-    vmUserAssignedIdentityClientID: m_msi.outputs.msiClientID
     vmUserAssignedIdentityPrincipalID: m_msi.outputs.msiPrincipalID
 
     subnetId: subnet.id

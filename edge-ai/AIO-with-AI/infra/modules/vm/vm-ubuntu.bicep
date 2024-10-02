@@ -18,9 +18,7 @@ param adminUsername string
 @secure()
 param adminPasswordOrKey string
 param authenticationType string = 'password'
-param vmUserAssignedIdentityName string
 param vmUserAssignedIdentityID string
-param vmUserAssignedIdentityClientID string
 param vmUserAssignedIdentityPrincipalID string
 
 param subnetId string
@@ -197,7 +195,7 @@ resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
       fileUris: [
         '${scriptURI}${ShellScriptName}'
       ]
-      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId} ${keyVaultName} ${subscription().subscriptionId} ${spAppId} ${spSecret} ${subscription().tenantId} ${spObjectId} ${spAppObjectId} ${vmUserAssignedIdentityClientID} ${vmUserAssignedIdentityName}'
+      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId} ${keyVaultName} ${subscription().subscriptionId} ${spAppId} ${spSecret} ${subscription().tenantId} ${spObjectId} ${spAppObjectId}'
     }
   }
   dependsOn: [

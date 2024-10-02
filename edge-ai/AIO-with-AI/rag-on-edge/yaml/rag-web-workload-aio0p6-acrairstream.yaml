@@ -18,9 +18,6 @@ spec:
         app: rag-web-workload
 
     spec:
-      imagePullSecrets:
-         - name: airstreamdata
-
       containers:
         - name: rag-web
           image: airstream.azurecr.io/rag-on-edge-web:latest
