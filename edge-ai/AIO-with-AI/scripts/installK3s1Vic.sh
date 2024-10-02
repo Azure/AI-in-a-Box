@@ -209,8 +209,7 @@ az iot ops init -g $rg \
     --sp-object-id $spObjectId \
     --sp-secret $spSecret \
     --kubernetes-distro k3s \
-    --simulate-plc \
-    --include-dp
+    --simulate-plc 
 
 #############################
 #Arc for Kubernetes AML Extension

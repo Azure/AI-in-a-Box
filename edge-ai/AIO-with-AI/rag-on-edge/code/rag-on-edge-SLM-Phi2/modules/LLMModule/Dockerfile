@@ -1,6 +1,4 @@
-ARG CUDA_IMAGE="nvidia/cuda:12.0.1-devel-ubuntu22.04"
-#ARG N_THREADS=32
-FROM ${CUDA_IMAGE}
+FROM python:3.11
 
 # Set environment variables
 # ENV N_THREADS=32

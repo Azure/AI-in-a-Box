@@ -26,7 +26,7 @@ def check_password():
     if st.button("Login"):
         if password_entered():
             st.session_state.password_correct = True
-            st.experimental_rerun()
+            # st.experimental_rerun()
         else:
             st.error("😕 wrong username or password")
 

@@ -47,6 +47,7 @@ This deployment accelerator contains a minimal AIO (Azure IoT Operations/Kuberne
     - Microsoft.ContainerService
     - Microsoft.DeviceRegistry
     - Microsoft.ExtendedLocation
+    - Microsoft.IoTOperations
     - Microsoft.IoTOperationsDataProcessor
     - Microsoft.IoTOperationsMQ
     - Microsoft.IoTOperationsOrchestrator
@@ -56,6 +57,8 @@ This deployment accelerator contains a minimal AIO (Azure IoT Operations/Kuberne
     - Microsoft.ManagedIdentity
     - Microsoft.Network
 
+* Install latest version of [Bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install)
+
 * Install the following [Azure CLI Extensions](https://learn.microsoft.com/en-us/cli/azure/azure-cli-extensions-list): 
     * az extension add -n [azure-iot-ops](https://github.com/azure/azure-iot-ops-cli-extension) --allow-preview true 
     * az extension add -n [connectedk8s](https://github.com/Azure/azure-cli-extensions/tree/main/src/connectedk8s) 
@@ -63,8 +66,11 @@ This deployment accelerator contains a minimal AIO (Azure IoT Operations/Kuberne
     * az extension add -n [k8s-extension](https://github.com/Azure/azure-cli-extensions/tree/main/src/k8s-extension) 
     * az extension add -n [ml](https://github.com/Azure/azureml-examples)
 
-* Install latest version of [Bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install)
-* Prepare your Linux virtual machine or physical device for [IoT Edge](https://learn.microsoft.com/en-us/azure/iot-edge/how-to-provision-single-device-linux-symmetric)
+ * Ensure that the user or service principal you are using to deploy the accelerator has access to the Graph API in the target tenant. This is necessary because you will need to:
+    - Export **OBJECT_ID** = $(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
+    - Make sure you retrieve this value from a tenant where you have the necessary permissions to access the Graph API. 
+    - https://learn.microsoft.com/en-us/azure/azure-arc/kubernetes/custom-locations
+    - https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest
 
 ## Deployment Flow 
 
@@ -105,12 +111,13 @@ This deployment accelerator contains a minimal AIO (Azure IoT Operations/Kuberne
 
 
 ## Post Deployment
-Once your resources have been deployed you will need to do the following to get the notebooks up running in Azure ML Studio and your Edge Pod functioning properly:
+Once your resources have been deployed you will need to do the following to get the notebook(s) up running in Azure ML Studio and your Edge Kubernetes Pod to see the solution flows:
 
 * When running the notebooks in AML your user (jim@contoso.com for instance) won't have permission to alter the storage account or add data to the storage. Please ensure that you have been assigned both **Storage Blob Data Reader** and **Storage Blob Data Contributor** roles.
 
 * Run the Notebook(s) 
-    * 1-AutoML-ObjectDetection.ipynb
+    * ***[1-Img-Classification-Training.ipynb](../AIOK3s/notebooks/1-Img-Classification-Training.ipynb)***
+    * This notebook has been automatically uploaded to a folder named EdgeAI within your Azure ML workspace. Its purpose is to guide you through building a custom model in Azure ML, registering the model, and deploying it to a container or endpoint in your Arc-enabled Kubernetes cluster using the Azure ML Extension. Additionally, you can test the endpoint using a Postman collection available in the postman folder within the repository.
 
 ## Deployment Issues
  - export OBJECT_ID = $(az ad sp show --id bc313c14-388c-4e7d-a58e-70017303ee3b --query id -o tsv)
