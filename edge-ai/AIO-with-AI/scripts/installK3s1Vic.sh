@@ -17,6 +17,8 @@
 # $12 = Azure Service Principal Tenant ID
 # $13 = Azure Service Principal Object ID
 # $14 = Azure Service Principal App Object ID
+# $15 = Azure VM UserAssignedIdentity ClientId
+# $16 = Azure VM vmUserAssignedIdentity Name
 
 #  1   ${resourceGroup().name}
 #  2   ${arcK8sClusterName}
@@ -32,6 +34,8 @@
 #  12  ${subscription().tenantId}'
 #  13  ${spObjectId}
 #  14  ${spAppObjectId}
+#  15  ${vmUserAssignedIdentityClientID} 
+#  16  ${vmUserAssignedIdentityName}
 
 sudo apt-get update
 
@@ -49,6 +53,8 @@ spSecret=${11}
 tenantId=${12}
 spObjectId=${13}
 spAppObjectId=${14}
+vmUserAssignedIdentityClientID=${15}
+vmUserAssignedIdentityName=${16}
 
 
 #############################
@@ -69,6 +75,8 @@ echo "   spSecret: $spSecret"
 echo "   tenantId: $tenantId"
 echo "   spObjectId: $spObjectId"
 echo "   spAppObjectId: $spAppObjectId"
+echo "   vmUserAssignedIdentityClientID: $vmUserAssignedIdentityClientID"
+echo "   vmUserAssignedIdentityName: $vmUserAssignedIdentityName"
 
 # Injecting environment variables
 logpath=/var/log/deploymentscriptlog
@@ -280,15 +288,13 @@ sleep 30
 kubectl create namespace azureml-workloads
 kubectl get all -n azureml-workloads
 
-
+#create secret
 az acr login --name airstream 
 ACR_REGISTRY_ID=$(az acr show --name airstream --query "id" --output tsv)
-PASSWORD=$(az ad sp create-for-rbac --name aiobx-keyvault-sp --scopes $ACR_REGISTRY_ID --role acrpull --query "password" --output tsv)
+PASSWORD=$(az ad sp create-for-rbac --name $vmUserAssignedIdentityName --scopes $ACR_REGISTRY_ID --role acrpull --query "password" --output tsv)
+kubectl create secret docker-registry airstreamdata --docker-server=airstream.azurecr.io  --docker-username=$vmUserAssignedIdentityClientID --docker-password=$PASSWORD --namespace=azure-iot-operations
 
-#create secret
-kubectl create secret docker-registry airstreamdata --docker-server=airstream.azurecr.io  --docker-username=$spAppId --docker-password=$PASSWORD --namespace=azure-iot-operations
-
-#Deploy Azure IoT MQ - Dapr PubSub Component
+#Deploy Azure IoT MQ - Dapr PubSub Components
 #rag-on-edge-pubsub-broker: a pub/sub message broker for message passing between the components.
 kubectl apply -f https://raw.githubusercontent.com/Azure/AI-in-a-Box/refs/heads/aio-with-ai/edge-ai/AIO-with-AI/rag-on-edge/yaml/rag-mq-components-aio0p6.yaml
 

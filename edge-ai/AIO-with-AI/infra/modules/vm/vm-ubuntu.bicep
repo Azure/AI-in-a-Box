@@ -18,7 +18,9 @@ param adminUsername string
 @secure()
 param adminPasswordOrKey string
 param authenticationType string = 'password'
+param vmUserAssignedIdentityName string
 param vmUserAssignedIdentityID string
+param vmUserAssignedIdentityClientID string
 param vmUserAssignedIdentityPrincipalID string
 
 param subnetId string
@@ -146,6 +148,15 @@ module roleOnboarding '../identity/role.bicep' = {
   }
 }
 
+module roleAcrPull '../identity/role.bicep' = {
+  name: 'deployVMRole_AcrPull'
+  scope: resourceGroup()
+  params:{
+    principalId: vmUserAssignedIdentityPrincipalID
+    roleGuid: '7f951dda-4ed3-4680-a7ca-43fe172d538d' // Acro Pull
+  }
+}
+
 module roleK8sExtensionContributor '../identity/role.bicep' = {
   name: 'deployVMRole_K8sExtensionContributor'
   scope: resourceGroup()
@@ -186,7 +197,7 @@ resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
       fileUris: [
         '${scriptURI}${ShellScriptName}'
       ]
-      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId} ${keyVaultName} ${subscription().subscriptionId} ${spAppId} ${spSecret} ${subscription().tenantId} ${spObjectId} ${spAppObjectId}'
+      commandToExecute: 'sh ${ShellScriptName} ${resourceGroup().name} ${arcK8sClusterName} ${location} ${adminUsername} ${vmUserAssignedIdentityPrincipalID} ${customLocationRPSPID} ${keyVaultId} ${keyVaultName} ${subscription().subscriptionId} ${spAppId} ${spSecret} ${subscription().tenantId} ${spObjectId} ${spAppObjectId} ${vmUserAssignedIdentityClientID} ${vmUserAssignedIdentityName}'
     }
   }
   dependsOn: [
@@ -194,6 +205,7 @@ resource vmext 'Microsoft.Compute/virtualMachines/extensions@2023-09-01' = {
     roleK8sExtensionContributor
     roleContributor
     roleOwner
+    roleAcrPull
   ]
 }
 
