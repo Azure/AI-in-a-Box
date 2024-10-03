@@ -118,7 +118,7 @@ param adminPasswordOrKey string
 param authenticationType string
 
 
-@sys.description('URI for Custom K3s VM Script and Config')
+@sys.description('URI for K3s VM Configuraiton Script')
 //param scriptURI string = 'https://raw.githubusercontent.com/Azure/AI-in-a-Box/AIO-with-AI/edge-ai/AIO-with-AI/scripts/'
 param scriptURI string
 

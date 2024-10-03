@@ -260,6 +260,7 @@ kubectl apply -f https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/mai
 sleep 30
 wget -P /home/$adminUsername/cerebral https://raw.githubusercontent.com/Azure/arc_jumpstart_drops/main/sample_app/cerebral_genai/deployment/cerebral.yaml
 
+#Update the Cerebral application deployment file with the Azure OpenAI endpoint
 sed -i 's/<YOUR_OPENAI>/65b22c3cec9d449e881b54efc91e0db3/g' /home/$adminUsername/cerebral/cerebral.yaml
 sed -i 's#<AZURE OPEN AI ENDPOINT>#https://aistdioserviceeast.openai.azure.com/#g' /home/$adminUsername/cerebral/cerebral.yaml
 # sed -i 's/2024-03-01-preview/2024-03-15-preview/g' /home/$adminUsername/cerebral/cerebral.yaml

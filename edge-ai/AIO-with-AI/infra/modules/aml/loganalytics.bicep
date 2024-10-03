@@ -1,3 +1,9 @@
+/*region Header
+      Module Steps 
+      1 - Create Log Analytics workspace
+*/
+
+//Declare Parameters--------------------------------------------------------------------------------------------------------------------------
 metadata description = 'Creates a Log Analytics workspace.'
 param location string = resourceGroup().location
 param logAnalyticsName string
