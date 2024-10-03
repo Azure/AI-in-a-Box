@@ -178,7 +178,7 @@ sleep 60
 # Reference: https://learn.microsoft.com/en-us/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster?tabs=ubuntu#create-a-cluster
 # Reference: https://learn.microsoft.com/en-us/cli/azure/iot/ops?view=azure-cli-latest#az-iot-ops-init
 echo "Deploy IoT Operations Components"
-az extension add --upgrade --name azure-iot-ops --allow-preview true --yes
+az extension add --name azure-iot-ops --allow-preview true --version 0.6.0b4 --yes 
 
 #Increase user watch/instance limits:
 echo fs.inotify.max_user_instances=8192 | sudo tee -a /etc/sysctl.conf
@@ -199,7 +199,7 @@ az connectedk8s enable-features -g $rg \
 
 #Deploy Azure IoT Operations. This command takes several minutes to complete.
 #--simulate-plc -> Flag to enable a simulated PLC. Flag when set, will configure the OPC-UA broker installer to spin-up a PLC server.
-#--include-dp -> Flag when set, Include Data Processor in the IoT Operations deployment. https://learn.microsoft.com/en-us/azure/iot-operations/process-data/overview-data-processor ->By default, Data Processor isn't included in an Azure IoT Operations Preview deployment. If you plan to use Data Processor, you must include it when you deploy Azure IoT Operations Preview - you can't add it later. 
+#--Data Processors is included in the IoT Operations deployment. https://learn.microsoft.com/en-us/azure/iot-operations/process-data/overview-data-processor
 
 echo "Deploy Azure IoT Operations - Configure and deploy IoT Operations to the target Arc-enabled Cluster"
 az iot ops init -g $rg \

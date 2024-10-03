@@ -21,7 +21,8 @@ azProviders=(
     "Microsoft.Compute",
     "Microsoft.ContainerInstance",
     "Microsoft.ContainerService",
-    "Microsoft.DeviceRegistry"
+    "Microsoft.DeviceRegistry",
+    "Microsoft.EventHub",
     "Microsoft.ExtendedLocation",
     "Microsoft.IoTOperations",
     "Microsoft.IoTOperationsDataProcessor",
