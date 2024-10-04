@@ -15,17 +15,17 @@ param vmUserAssignedIdentityID string
 param vmUserAssignedIdentityPrincipalID string
 
 // Change the URL below with that of your notebook
-var urlNotebookImgML=      'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/1-Img-Classification-Training.ipynb'
-var urlImgTrainingScript=  'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/train.py'
-var urlImgUtilScript=      'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/utils.py'
-var urlImgConda=           'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/environment/conda.yaml'
-var urlImgSKClSampleReq=   'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringclassification/sample-request.json'
-var urlImgSKClScore=       'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringclassification/score.py'
-var urlImgSKClModel=       'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringclassification/sklearn_mnist_model.pkl'
-var urlImgSKRgSampleReq=   'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringregression/sample-request.json'
-var urlImgSKRgScore=       'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringregression/score.py'
-var urlImgSKRgModel=       'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/sklearn-model/onlinescoringregression/sklearn_regression_model.pkl'
-var urlNotebookAutoML=     'https://raw.githubusercontent.com/Azure/AI-in-a-Box/aio-with-ai/edge-ai/AIO-with-AI/notebooks/2-AutoML-ObjectDetection.ipynb'
+var urlNotebookImgML=      'https://raw.githubusercontent.com/Azure-Samples/edge-aio-in-a-box/main/notebooks/1-Img-Classification-Training.ipynb'
+var urlImgTrainingScript=  'https://raw.githubusercontent.com/Azure-Samples/edge-aio-in-a-box/main/notebooks/train.py'
+var urlImgUtilScript=      'https://raw.githubusercontent.com/Azure-Samples/edge-aio-in-a-box/main/notebooks/utils.py'
+var urlImgConda=           'https://raw.githubusercontent.com/Azure-Samples/edge-aio-in-a-box/main/notebooks/sklearn-model/environment/conda.yaml'
+var urlImgSKClSampleReq=   'https://raw.githubusercontent.com/Azure-Samples/edge-aio-in-a-box/main/notebooks/sklearn-model/onlinescoringclassification/sample-request.json'
+var urlImgSKClScore=       'https://raw.githubusercontent.com/Azure-Samples/edge-aio-in-a-box/main/notebooks/sklearn-model/onlinescoringclassification/score.py'
+var urlImgSKClModel=       'https://raw.githubusercontent.com/Azure-Samples/edge-aio-in-a-box/main/notebooks/sklearn-model/onlinescoringclassification/sklearn_mnist_model.pkl'
+var urlImgSKRgSampleReq=   'https://raw.githubusercontent.com/Azure-Samples/edge-aio-in-a-box/main/notebooks/sklearn-model/onlinescoringregression/sample-request.json'
+var urlImgSKRgScore=       'https://raw.githubusercontent.com/Azure-Samples/edge-aio-in-a-box/main/notebooks/sklearn-model/onlinescoringregression/score.py'
+var urlImgSKRgModel=       'https://raw.githubusercontent.com/Azure-Samples/edge-aio-in-a-box/main/notebooks/sklearn-model/onlinescoringregression/sklearn_regression_model.pkl'
+var urlNotebookAutoML=     'https://raw.githubusercontent.com/Azure-Samples/edge-aio-in-a-box/main/notebooks/2-AutoML-ObjectDetection.ipynb'
 
 var dataStoreName = 'workspaceworkingdirectory' // Note: name auto-created by ML Workspace, DO NOT CHANGE
 

@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "e4905b08-d00b-4faf-b53d-669d71cf478d",
-		"name": "Azure IoT Operations",
+		"name": "AIO",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "1872496"
 	},
@@ -31,7 +31,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:47011/api/v1/endpoint/k8s-endpoint-1234/score",
+					"raw": "http://localhost:47011/api/v1/endpoint/k8s-endpoint-09101145643044/score",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -41,7 +41,7 @@
 						"api",
 						"v1",
 						"endpoint",
-						"k8s-endpoint-1234",
+						"k8s-endpoint-09101145643044",
 						"score"
 					]
 				}
@@ -73,7 +73,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://104.211.33.62/api/v1/endpoint/k8s-endpoint-1234/score",
+					"raw": "http://104.211.33.62/api/v1/endpoint/k8s-endpoint-09101145643044/score",
 					"protocol": "http",
 					"host": [
 						"104",
@@ -85,7 +85,7 @@
 						"api",
 						"v1",
 						"endpoint",
-						"k8s-endpoint-1234",
+						"k8s-endpoint-09101145643044",
 						"score"
 					]
 				}
@@ -117,7 +117,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:47011/api/v1/endpoint/k8s-endpoint-1234/score",
+					"raw": "http://localhost:47011/api/v1/endpoint/k8s-endpoint-09110159179384/score",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -127,7 +127,7 @@
 						"api",
 						"v1",
 						"endpoint",
-						"k8s-endpoint-1234",
+						"k8s-endpoint-09110159179384",
 						"score"
 					]
 				}
@@ -159,7 +159,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://104.211.33.62/api/v1/endpoint/k8s-endpoint-1234/score",
+					"raw": "http://104.211.33.62/api/v1/endpoint/k8s-endpoint-09110159179384/score",
 					"protocol": "http",
 					"host": [
 						"104",
@@ -171,7 +171,7 @@
 						"api",
 						"v1",
 						"endpoint",
-						"k8s-endpoint-1234",
+						"k8s-endpoint-09110159179384",
 						"score"
 					]
 				}
